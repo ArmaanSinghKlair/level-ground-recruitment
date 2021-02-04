@@ -4,9 +4,17 @@
         <servlet-name>CandidateDashboardServlet</servlet-name>
         <servlet-class>servlets.CandidateDashboardServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CandidateCreateProfileServlet</servlet-name>
+        <servlet-class>servlets.CandidateCreateProfileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CandidateDashboardServlet</servlet-name>
         <url-pattern>/candidate-dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CandidateCreateProfileServlet</servlet-name>
+        <url-pattern>/create-profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
