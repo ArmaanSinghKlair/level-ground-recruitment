@@ -13,6 +13,21 @@
     </head>
     <body>
         <h1>Login Page</h1>
-        TODO
-    </body>
+       
+        <h2>Temporary Login Template (will change later):</h2>
+
+            Register User:<br/>
+            <form action="" method="POST">
+
+                <input type="text" name="username" placeholder="Email or Phone"><br/>
+                <input type="password" name="password" placeholder="Password"><br/>
+                <input type="submit" value="Agree & Join">
+                
+            </form>
+            
+            ---------- or ----------
+            <br/>
+            <a href="">Sign in</a>
+        
+   </body>
 </html>
