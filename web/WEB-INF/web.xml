@@ -21,9 +21,7 @@
             30
         </session-timeout>
     </session-config>
-    
     <welcome-file-list>
-        <welcome-file>/WEB-INF/loginPage.jsp</welcome-file>
+        <welcome-file>/WEB-INF/test-create-profile.jsp</welcome-file>
     </welcome-file-list>
-    
 </web-app>

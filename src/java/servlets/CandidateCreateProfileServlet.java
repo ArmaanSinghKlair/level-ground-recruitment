@@ -6,11 +6,12 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import services.AccountServices;
 
 /**
  *
@@ -21,11 +22,27 @@ public class CandidateCreateProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        this.getServletContext().getRequestDispatcher("/WEB-INF/test-create-profile.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String email = request.getParameter("email");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String phoneNo = request.getParameter("phoneNo");
+        HashMap<String,String> errMap = new AccountServices().createCandidateProfile(username, password, firstName, lastName, email, phoneNo);
+        
+        if(errMap == null){
+            request.setAttribute("finalMsg", "All good");
+        } else{
+            request.setAttribute("errMap",errMap);
+        }
+        
+        this.getServletContext().getRequestDispatcher("/WEB-INF/test-create-profile.jsp").forward(request, response);
     }
 
     
