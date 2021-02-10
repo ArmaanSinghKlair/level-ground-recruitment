@@ -5,13 +5,10 @@
  */
 package dataaccess;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import problemdomain.Candidate;
 import util.DBUtil;
 
@@ -26,7 +23,7 @@ public class DBoperations {
         
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
-        Query candidates = em.createNamedQuery("Candidate.findAll", Candidate.class);
+        TypedQuery<Candidate> candidates = em.createNamedQuery("Candidate.findAll", Candidate.class);
         
         try {
             List<Candidate> candidateList = candidates.getResultList();

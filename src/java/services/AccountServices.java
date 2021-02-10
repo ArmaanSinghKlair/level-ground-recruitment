@@ -18,7 +18,7 @@ public class AccountServices {
     
     public final HashMap<String,String> createCandidateProfile(String username,String password,String firstName,String lastName, String email, String phoneNo){
         HashMap<String,String> errMap;
-        errMap = ValidateCandidate.validateBasicCandidate(username, password, firstName, lastName, email, phoneNo);
+        errMap = ValidateCandidate.getErrorMapForAllfields(username, password, firstName, lastName, email, phoneNo, null, null, null, null, null, null);
         
         if(errMap != null)
             return errMap;
