@@ -9,6 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import problemdomain.Candidate;
+import util.DBUtil;
 
 /**
  *
@@ -16,32 +21,24 @@ import java.sql.SQLException;
  */
 public class DBoperations {
     
-    public String getCandidates()
-    {
-        String candidates = "";
-        String sql = "select * from lgrdb.candidate;";
+    public String getCandidates() {
+        String result="";
         
-        ConnectionPool cp = ConnectionPool.getInstance();
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
-        try
-        {
-            Connection conn = cp.getConnection();
-            PreparedStatement st = conn.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
+        Query candidates = em.createNamedQuery("Candidate.findAll", Candidate.class);
+        
+        try {
+            List<Candidate> candidateList = candidates.getResultList();
             
-            while(rs.next())
+            for (Candidate c: candidateList)
             {
-                candidates = candidates + rs.getString(3) + "," + rs.getString(4) + ";";
+                result = result + c.getCanUsername() + "," + c.getCanPassword() + ";";
             }
-            
-            rs.close();
-            st.close();
-            cp.freeConnection(conn);
-        } catch (SQLException ex)
-        {
-            ex.printStackTrace();
+        } finally {
+            em.close();
         }
         
-        return candidates;
+        return result;
     }
-}
+} 
