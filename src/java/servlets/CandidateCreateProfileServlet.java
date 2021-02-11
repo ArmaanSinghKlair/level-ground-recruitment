@@ -6,6 +6,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,12 +35,12 @@ public class CandidateCreateProfileServlet extends HttpServlet {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String phoneNo = request.getParameter("phoneNo");
-        HashMap<String,String> errMap = new AccountServices().createCandidateProfile(username, password, firstName, lastName, email, phoneNo);
+        ArrayList<String> errList = new AccountServices().createCandidateProfile(username, password, firstName, lastName, email, phoneNo);
         
-        if(errMap == null){
+        if(errList == null){
             request.setAttribute("finalMsg", "All good");
         } else{
-            request.setAttribute("errMap",errMap);
+            request.setAttribute("errList",errList);
         }
         
         this.getServletContext().getRequestDispatcher("/WEB-INF/test-create-profile.jsp").forward(request, response);

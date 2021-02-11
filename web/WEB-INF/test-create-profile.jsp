@@ -37,9 +37,9 @@
             
             <!-- LOOPING THROUGH ERRORS here, you can REUSE this line to LOOP-->
             <div style="color:red">
-                <c:if test="${errMap != null}">
-                    <c:forEach var="key" items="${errMap.keySet()}">
-                        <p>${errMap.get(key)}</p>
+                <c:if test="${errList != null}">
+                    <c:forEach var="error" items="${errList}">
+                        <p>${error}</p>
                     </c:forEach>
                 </c:if>
             </div>

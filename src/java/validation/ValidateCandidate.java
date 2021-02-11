@@ -5,6 +5,7 @@
  */
 package validation;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 import problemdomain.Candidate;
@@ -15,7 +16,7 @@ import problemdomain.Candidate;
  * @author 839645
  */
 public final class ValidateCandidate {
-    private static HashMap<String,String> errMap;
+    private static ArrayList<String> errList;
     private String canUsername;
     private String canPassword;
     private String canfirstName;
@@ -33,11 +34,11 @@ public final class ValidateCandidate {
      * Resets the hash map to an empty map
      */
     public static void startValidation(){
-        errMap = new HashMap<>();
+        errList = new ArrayList<>();
     }
     
     //Basic candidate validation
-    public static HashMap<String,String> getErrorMapForAllfields(String username, String password, String firstName, String lastName, String email, String phoneNo,String workHistory, String primaryEducation, String secondaryEducation, String certificates, String keySkills, String interestedRoles){
+    public static ArrayList<String> getErrorMapForAllfields(String username, String password, String firstName, String lastName, String email, String phoneNo,String workHistory, String primaryEducation, String secondaryEducation, String certificates, String keySkills, String interestedRoles){
         startValidation();
         put("canUsername",validateCanUsername(username));
         put("canPassword",validateCanPassword(password));
@@ -55,7 +56,7 @@ public final class ValidateCandidate {
     }
     private static void put(String name, String value){
         if(value != null)
-            errMap.put(name, value);
+            errList.add(value);
     }
     public static String validateCanUsername(String username){
         if(isEmpty(username))
@@ -154,11 +155,11 @@ public final class ValidateCandidate {
         return null;
     }
     
-    public static HashMap<String,String> getErrorMap(){
-        if(errMap.isEmpty())
+    public static ArrayList<String> getErrorMap(){
+        if(errList.isEmpty())
             return null;
         else
-            return errMap;
+            return errList;
     }
     private final static boolean isEmpty(String field){
         return field == null || field.trim().length() == 0;

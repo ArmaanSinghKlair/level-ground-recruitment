@@ -6,26 +6,30 @@
 package dataaccess;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import problemdomain.Candidate;
 import util.DBUtil;
 import util.PasswordUtil;
 
 public class AccountServicesDB {
-    public final HashMap<String,String> createCandidateProfile(String username,String password,String firstName,String lastName, String email, String phoneNo){
+    public final ArrayList<String> createCandidateProfile(String username,String password,String firstName,String lastName, String email, String phoneNo){
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        HashMap<String,String> errMap = new HashMap<>();
+        ArrayList<String> errList = new ArrayList<>();
 
         try{
             if(this.doesUserExist(em, "canUsername", username)){
-                errMap.put("canUsername", "Username already Exists");
-                return errMap;
+                errList.add("Username already Exists");
+                return errList;
             }
             Candidate c = new Candidate();
             c.setCanUsername(username);
@@ -40,8 +44,8 @@ public class AccountServicesDB {
             return null;
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, ex);
-            errMap.put("system", ex.getMessage());
-            return errMap;
+            errList.add("System error. Please check logs");
+            return errList;
         } finally{
             if(trans.isActive())
                 trans.rollback();
@@ -49,6 +53,38 @@ public class AccountServicesDB {
         }
     }
     
+    /**
+     * Authenticates a user. The trick here is to hash the input password before comparing it to the input password
+     * @param username Input username
+     * @param password Input password
+     * @return Arraylist of errors
+     */
+    public final ArrayList<String> authenticateCandidate(String username, String password) {
+        String result="";
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        TypedQuery<Candidate> candidates = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class).setParameter("canUsername", username);
+        ArrayList<String> errList = null;
+        try {
+            Candidate candidate = candidates.getSingleResult();
+            String hashedInputPassword = PasswordUtil.hashPassword(password);
+            System.out.println("INPUT = "+hashedInputPassword+" and db = "+candidate.getCanPassword());
+            if(hashedInputPassword.equals(candidate.getCanPassword())){
+                return null;
+            } else{
+                errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
+            }
+            
+        } catch(NoResultException e){
+                errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            em.close();
+        }
+        
+        return errList;
+
+    }
     /**
      * Checks to see if user exists -- does not alter the EntityManager in any way so em can passed by reference
      * @param em Entity Manager

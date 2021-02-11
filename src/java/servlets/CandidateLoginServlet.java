@@ -5,37 +5,29 @@
  */
 package servlets;
 
+import dataaccess.AccountServicesDB;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import problemdomain.Candidate;
-import dataaccess.DBoperations;
 import java.util.ArrayList;
+import services.AccountServices;
 
 /**
  *
  * @author 756887
  */
-@WebServlet(name = "CandidateLoginServlet", urlPatterns = {"/CandidateLoginServlet"})
+@WebServlet(name = "CandidateLoginServlet", urlPatterns = {"/candidate-login"})
 public class CandidateLoginServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    /*
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+      String username = request.getParameter("username");
+        String password = request.getParameter("password");    
+    
         
         
         
@@ -49,7 +41,7 @@ public class CandidateLoginServlet extends HttpServlet {
         } else
         {
             boolean found = false;
-            DBoperations dbops = new DBoperations();
+            AccountServicesDB dbops = new AccountServicesDB();
             String[] candidates = dbops.getCandidates().split(";");
             for (String candidate : candidates)
             {
@@ -73,46 +65,37 @@ public class CandidateLoginServlet extends HttpServlet {
                 request.setAttribute("message", "Incorrect login information!");
                 request.getRequestDispatcher("/WEB-INF/Login.jsp").forward(request, response);
             }
+            
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+*/
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            request.getRequestDispatcher("/WEB-INF/Login.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");    
+    
+        AccountServices service = new AccountServices();
+        ArrayList<String> errList = service.authenticateCandidate(username, password);
+        
+        if (errList == null)    // If ERROR LIST NULL, then NO ERRORS
+            {
+                /*request.setAttribute("message", "Welcome, " + username);
+                request.getRequestDispatcher("/WEB-INF/Homepage.jsp").forward(request, response);*/
+                //USER LOGGED IN 
+            } else
+            {
+                request.setAttribute("errList", errList);
+                request.getRequestDispatcher("/WEB-INF/Login.jsp").forward(request, response);
+            }
+    
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }
