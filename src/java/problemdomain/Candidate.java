@@ -8,6 +8,7 @@ package problemdomain;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,13 +20,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 815929
+ * @author Kane Imler
+ * @version 02/12/2021
  */
 @Entity
 @Table(name = "candidate")
@@ -39,12 +42,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Candidate.findByCanlastName", query = "SELECT c FROM Candidate c WHERE c.canlastName = :canlastName"),
     @NamedQuery(name = "Candidate.findByCanEmail", query = "SELECT c FROM Candidate c WHERE c.canEmail = :canEmail"),
     @NamedQuery(name = "Candidate.findByCanPhoneNo", query = "SELECT c FROM Candidate c WHERE c.canPhoneNo = :canPhoneNo"),
-    @NamedQuery(name = "Candidate.findByWorkHistory", query = "SELECT c FROM Candidate c WHERE c.workHistory = :workHistory"),
-    @NamedQuery(name = "Candidate.findByPrimaryEducation", query = "SELECT c FROM Candidate c WHERE c.primaryEducation = :primaryEducation"),
-    @NamedQuery(name = "Candidate.findBySecondaryEducation", query = "SELECT c FROM Candidate c WHERE c.secondaryEducation = :secondaryEducation"),
-    @NamedQuery(name = "Candidate.findByCertificates", query = "SELECT c FROM Candidate c WHERE c.certificates = :certificates"),
-    @NamedQuery(name = "Candidate.findByKeySkills", query = "SELECT c FROM Candidate c WHERE c.keySkills = :keySkills"),
-    @NamedQuery(name = "Candidate.findByInterestedRoles", query = "SELECT c FROM Candidate c WHERE c.interestedRoles = :interestedRoles"),
     @NamedQuery(name = "Candidate.findByPlaced", query = "SELECT c FROM Candidate c WHERE c.placed = :placed")})
 public class Candidate implements Serializable {
 
@@ -71,18 +68,6 @@ public class Candidate implements Serializable {
     private String canEmail;
     @Column(name = "can_phone_no")
     private String canPhoneNo;
-    @Column(name = "work_history")
-    private String workHistory;
-    @Column(name = "primary_education")
-    private String primaryEducation;
-    @Column(name = "secondary_education")
-    private String secondaryEducation;
-    @Column(name = "certificates")
-    private String certificates;
-    @Column(name = "key_skills")
-    private String keySkills;
-    @Column(name = "interested_roles")
-    private String interestedRoles;
     @Column(name = "placed")
     private Boolean placed;
     @JoinTable(name = "application", joinColumns = {
@@ -90,9 +75,20 @@ public class Candidate implements Serializable {
         @JoinColumn(name = "job_postingID", referencedColumnName = "job_postingID")})
     @ManyToMany
     private Collection<JobPosting> jobPostingCollection;
+    @JoinTable(name = "candidate_role", joinColumns = {
+        @JoinColumn(name = "candidateID", referencedColumnName = "candidateID")}, inverseJoinColumns = {
+        @JoinColumn(name = "roleID", referencedColumnName = "roleID")})
+    @ManyToMany
+    private Collection<Role> roleCollection;
     @JoinColumn(name = "advisorID", referencedColumnName = "advisorID")
     @ManyToOne
     private Advisor advisorID;
+    @OneToMany(mappedBy = "candidateID")
+    private Collection<Education> educationCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "candidate")
+    private Collection<CandidateSkill> candidateSkillCollection;
+    @OneToMany(mappedBy = "candidateID")
+    private Collection<WorkHistory> workHistoryCollection;
 
     public Candidate() {
     }
@@ -166,54 +162,6 @@ public class Candidate implements Serializable {
         this.canPhoneNo = canPhoneNo;
     }
 
-    public String getWorkHistory() {
-        return workHistory;
-    }
-
-    public void setWorkHistory(String workHistory) {
-        this.workHistory = workHistory;
-    }
-
-    public String getPrimaryEducation() {
-        return primaryEducation;
-    }
-
-    public void setPrimaryEducation(String primaryEducation) {
-        this.primaryEducation = primaryEducation;
-    }
-
-    public String getSecondaryEducation() {
-        return secondaryEducation;
-    }
-
-    public void setSecondaryEducation(String secondaryEducation) {
-        this.secondaryEducation = secondaryEducation;
-    }
-
-    public String getCertificates() {
-        return certificates;
-    }
-
-    public void setCertificates(String certificates) {
-        this.certificates = certificates;
-    }
-
-    public String getKeySkills() {
-        return keySkills;
-    }
-
-    public void setKeySkills(String keySkills) {
-        this.keySkills = keySkills;
-    }
-
-    public String getInterestedRoles() {
-        return interestedRoles;
-    }
-
-    public void setInterestedRoles(String interestedRoles) {
-        this.interestedRoles = interestedRoles;
-    }
-
     public Boolean getPlaced() {
         return placed;
     }
@@ -231,12 +179,48 @@ public class Candidate implements Serializable {
         this.jobPostingCollection = jobPostingCollection;
     }
 
+    @XmlTransient
+    public Collection<Role> getRoleCollection() {
+        return roleCollection;
+    }
+
+    public void setRoleCollection(Collection<Role> roleCollection) {
+        this.roleCollection = roleCollection;
+    }
+
     public Advisor getAdvisorID() {
         return advisorID;
     }
 
     public void setAdvisorID(Advisor advisorID) {
         this.advisorID = advisorID;
+    }
+
+    @XmlTransient
+    public Collection<Education> getEducationCollection() {
+        return educationCollection;
+    }
+
+    public void setEducationCollection(Collection<Education> educationCollection) {
+        this.educationCollection = educationCollection;
+    }
+
+    @XmlTransient
+    public Collection<CandidateSkill> getCandidateSkillCollection() {
+        return candidateSkillCollection;
+    }
+
+    public void setCandidateSkillCollection(Collection<CandidateSkill> candidateSkillCollection) {
+        this.candidateSkillCollection = candidateSkillCollection;
+    }
+
+    @XmlTransient
+    public Collection<WorkHistory> getWorkHistoryCollection() {
+        return workHistoryCollection;
+    }
+
+    public void setWorkHistoryCollection(Collection<WorkHistory> workHistoryCollection) {
+        this.workHistoryCollection = workHistoryCollection;
     }
 
     @Override

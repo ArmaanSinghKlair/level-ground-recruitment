@@ -24,7 +24,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author 815929
+ * @author Kane Imler
+ * @version 02/12/2021
  */
 @Entity
 @Table(name = "log")
