@@ -16,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import problemdomain.BusinessClient;
 import problemdomain.Candidate;
 import util.DBUtil;
 import util.PasswordUtil;
@@ -60,7 +61,6 @@ public class AccountServicesDB {
      * @return Arraylist of errors
      */
     public final ArrayList<String> authenticateCandidate(String username, String password) {
-        String result="";
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         TypedQuery<Candidate> candidates = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class).setParameter("canUsername", username);
         ArrayList<String> errList = null;
@@ -85,6 +85,39 @@ public class AccountServicesDB {
         return errList;
 
     }
+    
+    /**
+     * Authenticates a user. The trick here is to hash the input password before comparing it to the input password
+     * @param username Input username
+     * @param password Input password
+     * @return Arraylist of errors
+     */
+    public final ArrayList<String> authenticateBusinessClient(String username, String password) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        TypedQuery<BusinessClient> businessClients = em.createNamedQuery("BusinessClient.findByBusClientUsername", BusinessClient.class).setParameter("busClientUsername", username);
+        ArrayList<String> errList = null;
+        try {
+            BusinessClient businessClient = businessClients.getSingleResult();
+            String hashedInputPassword = PasswordUtil.hashPassword(password);
+            System.out.println("INPUT = "+hashedInputPassword+" and db = "+businessClient.getBusClientPassword());
+            if(hashedInputPassword.equals(businessClient.getBusClientPassword())){
+                return null;
+            } else{
+                errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
+            }
+            
+        } catch(NoResultException e){
+                errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            em.close();
+        }
+        
+        return errList;
+
+    }
+    
     /**
      * Checks to see if user exists -- does not alter the EntityManager in any way so em can passed by reference
      * @param em Entity Manager

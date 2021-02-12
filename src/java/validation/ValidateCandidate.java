@@ -70,8 +70,8 @@ public final class ValidateCandidate {
     public static String validateCanPassword(String password){
         if(isEmpty(password))
             return "Password cannot be empty";
-        else if(password.length() > 45)
-            return "Password cannot be more than 45 characters";
+        else if(password.length() > 100)
+            return "Password cannot be more than 100 characters";
         else 
             return null;
     }

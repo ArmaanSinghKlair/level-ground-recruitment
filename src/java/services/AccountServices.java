@@ -8,6 +8,7 @@ package services;
 import dataaccess.AccountServicesDB;
 import java.util.ArrayList;
 import java.util.HashMap;
+import validation.ValidateBusinessClient;
 import validation.ValidateCandidate;
 
 /**
@@ -30,7 +31,19 @@ public class AccountServices {
     public final ArrayList<String> authenticateCandidate(String username, String password) {
         ArrayList<String> errList = new ArrayList<>();
         add(errList,ValidateCandidate.validateCanUsername(username));       //Validate username and get errors IF ANY
-        add(errList,ValidateCandidate.validateCanPassword(password));       //Validate username and get errors IF ANY
+        add(errList,ValidateCandidate.validateCanPassword(password));       //Validate password and get errors IF ANY
+        
+        if(errList.isEmpty()){
+            return asdb.authenticateCandidate(username, password);
+        } else{
+            return errList;
+        }
+    }
+    
+    public final ArrayList<String> authenticateBusinessClient(String username, String password) {
+        ArrayList<String> errList = new ArrayList<>();
+        add(errList,ValidateBusinessClient.validateBusClientUsername(username));       //Validate username and get errors IF ANY
+        add(errList,ValidateBusinessClient.validateBusClientPassword(password));       //Validate password and get errors IF ANY
         
         if(errList.isEmpty()){
             return asdb.authenticateCandidate(username, password);
