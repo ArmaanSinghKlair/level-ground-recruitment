@@ -1,0 +1,16 @@
+.sign-tabs {
+  width: 50%;
+  padding-top: 50px;
+}
+
+.signin {
+  width: 50%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+.d-inline-flex {
+  display: -ms-inline-flexbox!important;
+  display: inline-flex!important;
+}
+
