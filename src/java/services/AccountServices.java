@@ -46,7 +46,7 @@ public class AccountServices {
         add(errList,ValidateBusinessClient.validateBusClientPassword(password));       //Validate password and get errors IF ANY
         
         if(errList.isEmpty()){
-            return asdb.authenticateCandidate(username, password);
+            return asdb.authenticateBusinessClient(username, password);
         } else{
             return errList;
         }
