@@ -52,7 +52,7 @@ public class BusinessClientTestServlet extends HttpServlet {
         jobList.add(jobPosting2);
         
         request.setAttribute("jobList", jobList);
-        request.getRequestDispatcher("/WEB-INF/businessClientPage.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/businessClientHome.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
