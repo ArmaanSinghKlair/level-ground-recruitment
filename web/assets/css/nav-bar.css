@@ -231,13 +231,12 @@
   }
 }
 
-#navcol-1 {
-  font-family: Montserrat, sans-serif;
-}
-
 @media (max-width: 768px) {
   #navcol-1 {
     font-size: .8em;
   }
+}
+
+body {
 }
 

@@ -1,16 +1,8 @@
-.sign-tabs {
-  width: 50%;
-  padding-top: 50px;
+body {
+  font-family: 'Montserrat';
 }
 
-.signin {
-  width: 50%;
-  margin: auto;
-  margin-top: 50px;
-}
-
-.d-inline-flex {
-  display: -ms-inline-flexbox!important;
-  display: inline-flex!important;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald';
 }
 

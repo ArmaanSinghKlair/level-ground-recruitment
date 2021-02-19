@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="assets/css/nav-bar.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     </head>
     <body>
         <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
@@ -33,6 +34,21 @@
             </div>
         </div>
     </nav>
+    <!-- Example of how to implement the alert -->
+    <c:choose>
+        <!-- Test condition can be string, int or any order validation method
+        coming from the server. it should be in request scope-->
+        <c:when test="${requestScope.success!=null}">
+            <!-- span tag holds the message that you want to show to the user 
+            This div represent the success message-->
+            <div class="alert alert-success" role="alert"><span>${requestScope.success}</span></div>
+        </c:when>
+        <c:when test="${requestScope.fail!=null}">
+            <!-- This div represent the unsuccessful message -->
+            <div class="alert alert-warning" role="alert"><span>${requestScope.fail}</span></div>
+        </c:when>
+    </c:choose>
+    
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
