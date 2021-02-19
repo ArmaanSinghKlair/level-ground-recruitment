@@ -18,6 +18,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
         <link rel="stylesheet" href="assets/css/nav-bar.css">
         <link rel="stylesheet" href="assets/css/default.css">
+        <link rel="stylesheet" href="assets/css/login.css">
+        <link rel="stylesheet" href="assets/css/signup.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
+
     </head>
     <body>
         <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
@@ -36,85 +40,127 @@
             </div>
         </nav>
 
-        <div class="container new-job-container shadow-sm p-3 mb-5">
+        <div class="tabs">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item" role="presentation" data-bss-hover-animate="pulse"><a class="nav-link active"
+                    role="tab" data-toggle="tab" href="#tab-1">Create Job</a></li>
+            <li class="nav-item" role="presentation" data-bss-hover-animate="pulse"><a class="nav-link" role="tab"
+                    data-toggle="tab" data-bss-hover-animate="pulse" href="#tab-2">Manage Jobs</a></li>
+        </ul>
+        <div class="tab-content">
 
-            <h5 class="text-left mb-4 font-weight-bold" id="new-job-title">New Job Posting</h5>
-            <form action="" method="POST">
 
-                <div class="form-group">
-                    <label for="newJobTitle" class="new-job-label">Title</label>
-                    <input type="text" class="form-control" id="newJobTitleInput" placeholder="Enter Title">
+            <div class="tab-pane active" role="tabpanel" id="tab-1">
+
+
+                <div class="container default-container">
+                    <div class="job-container">
+                        <h5 class="mb-4 font-weight-bold" id="new-job-title">New Job Posting</h5>
+                        <form action="" method="POST">
+
+                            <div class="form-group">
+                                <label for="newJobTitle" class="new-job-label">Title</label>
+                                <input class="form-control" id="newJobTitleInput" type="text" data-toggle="tooltip"
+                                    title="Test" placeholder="Enter Title">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="requirements" class="new-job-label">Requirements</label>
+                                <input class="form-control" id="requirementsInput" type="text"
+                                    placeholder="Enter Requirements">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="startDateInput" class="new-job-label">Start Date</label>
+                                <input class="form-control" type="date" value="" id="startDateInput">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="endDateInput" class="new-job-label">End Date</label>
+                                <input class="form-control" type="date" value="" id="endDateInput">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="statusSelect" class="new-job-label">Status</label>
+                                <select class="form-control" id="statusSelect">
+                                    <option>Full Time</option>
+                                    <option>Part Time</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descriptionTextArea" class="new-job-label">Description</label>
+                                <textarea class="form-control" id="textArea" row="3"></textarea>
+                            </div>
+
+                            <input class="default-button" type="submit" value="Submit"></button>
+                        </form>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label for="requirements" class="new-job-label">Requirements</label>
-                    <input type="text" class="form-control" id="requirementsInput" placeholder="Enter Requirements">
+
+
+            </div>
+
+
+            <div class="tab-pane" role="tabpanel" id="tab-2">
+
+                <div class="container default-container">
+                    <c:forEach var="job" items="${requestScope.jobList}">
+
+                        <div class="job-container">
+                            <h5 class="mb-4 font-weight-bold" id="new-job-title">*JOB TITLE*</h5>
+                            <form action="" method="POST">
+
+                                <div class="form-group">
+                                    <label for="newJobTitle" class="new-job-label">Title</label>
+                                    <input class="form-control" id="newJobTitleInput" type="text" data-toggle="tooltip"
+                                        title="Test" value="Web Developer" disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="requirements" class="new-job-label">Requirements</label>
+                                    <input class="form-control" id="requirementsInput" type="text" value="${job.requirements}"
+                                        disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="startDateInput" class="new-job-label">Start Date</label>
+                                    <input class="form-control" type="date" value="${job.startDate}" id="startDateInput" disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="endDateInput" class="new-job-label">End Date</label>
+                                    <input class="form-control" type="date" value="${job.endDate}" id="endDateInput" disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="statusSelect" class="new-job-label">Status</label>
+                                    <select class="form-control" id="statusSelect" disabled>
+                                        <option>Full Time</option>
+                                        <option>Part Time</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="descriptionTextArea" class="new-job-label">Description</label>
+                                    <textarea class="form-control" id="textArea" row="3" disabled>*DESCRIPTION*</textarea>
+                                </div>
+
+                                <input class="default-button" type="submit" value="Edit">
+                                <input class="default-button" type="submit" value="Submit"> <!--TODO: When edit button clicked, use JS to go into edit mode-->
+                                <input class="default-button" type="submit" value="Cancel">
+                            </form>
+                        </div>
+                    </c:forEach>
                 </div>
 
-                <div class="form-group">
-                    <label for="startDateInput" class="new-job-label">Start Date</label>
-                    <input class="form-control" type="date" value="" id="startDateInput">
-                </div>
-
-                <div class="form-group">
-                    <label for="endDateInput" class="new-job-label">End Date</label>
-                    <input class="form-control" type="date" value="" id="endDateInput">
-                </div>
-
-                <div class="form-group">
-                    <label for="statusSelect" class="new-job-label">Status</label>
-                    <select class="form-control" id="statusSelect">
-                        <option>Full Time</option>
-                        <option>Part Time</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="descriptionTextArea" class="new-job-label">Description</label>
-                    <textarea class="form-control" id="exampleTextArea" row="3"></textarea>
-                </div>
-
-                <button type="submit" class="default-button">Submit</button>
-            </form>
+            </div>
         </div>
-        <hr/>
+    </div>
 
 
 
-        <c:forEach var="job" items="${requestScope.jobList}">
-            <div class="container section-header">
-                *JOB TITLE*
-            </div>
-            <div class="container current-job-container shadow-sm p-3 mb-5" id="jobPosting">
 
-                <div class="row">
-                    <div class="col-md-4">
-
-                        <dt class="job-item-header col-sm-5">Job ID</dt>
-                        <dd class="col-sm-7">${job.jobpostingID}</dd>
-
-                        <dt class="job-item-header col-sm-5">Requirements</dt>
-                        <dd class="col-sm-7">${job.requirements}</dd>
-
-                        <dt class="job-item-header col-sm-5">Start Date</dt>
-                        <dd class="col-sm-7">${job.startDate}</dd>
-
-                        <dt class="job-item-header col-sm-5">End Date</dt>
-                        <dd class="col-sm-7">${job.endDate}</dd>
-
-                        <dt class="job-item-header col-sm-5">Status</dt>
-                        <dd class="col-sm-7">*STATUS*</dd>
-                    </div>
-
-                    <div class="col-md-6">
-                        <p class="job-description">*DESCRIPTION*</p>
-                    </div>
-                    <div class="col-md-1">
-                        <button type="button" class="default-button" onclick="openEditWindow()">Edit</button>
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
 
 
         <script>
