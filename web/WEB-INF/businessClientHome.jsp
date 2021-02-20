@@ -21,7 +21,8 @@
         <link rel="stylesheet" href="assets/css/login.css">
         <link rel="stylesheet" href="assets/css/signup.css">
         <link rel="stylesheet" href="assets/css/styles.css">
-        <script src="assets/js/job-edit.js">
+        <link rel=”stylesheet” href=”sweetalert.css”>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     </head>
     <body>
@@ -42,107 +43,51 @@
         </nav>
 
         <div class="tabs">
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item" role="presentation" data-bss-hover-animate="pulse">
-                <a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1" onclick="revertChanges()">Create
-                    Job</a>
-            </li>
-            <li class="nav-item" role="presentation" data-bss-hover-animate="pulse"><a class="nav-link" role="tab"
-                    data-toggle="tab" data-bss-hover-animate="pulse" href="#tab-2">Manage
-                    Jobs</a></li>
-        </ul>
-        <div class="tab-content">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation" data-bss-hover-animate="pulse">
+                    <a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1" onclick="revertChanges()">Create
+                        Job</a>
+                </li>
+                <li class="nav-item" role="presentation" data-bss-hover-animate="pulse"><a class="nav-link" role="tab"
+                                                                                           data-toggle="tab" data-bss-hover-animate="pulse" href="#tab-2">Manage
+                        Jobs</a></li>
+            </ul>
+            <div class="tab-content">
 
 
-            <div class="tab-pane active" role="tabpanel" id="tab-1">
+                <div class="tab-pane active" role="tabpanel" id="tab-1">
 
 
-                <div class="container default-container">
-                    <div class="job-container">
-                        <h5 class="mb-4 font-weight-bold" id="new-job-title">New Job Posting</h5>
-                        <form action="" method="POST">
-
-                            <div class="form-group">
-                                <label for="newJobTitle" class="new-job-label">Title</label>
-                                <input class="form-control" id="newJobTitleInput" type="text" data-toggle="tooltip"
-                                    title="Test" placeholder="Enter Title">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="requirements" class="new-job-label">Requirements</label>
-                                <input class="form-control" id="requirementsInput" type="text"
-                                    placeholder="Enter Requirements">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="startDateInput" class="new-job-label">Start Date</label>
-                                <input class="form-control" type="date" value="" id="startDateInput">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="endDateInput" class="new-job-label">End Date</label>
-                                <input class="form-control" type="date" value="" id="endDateInput">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="statusSelect" class="new-job-label">Status</label>
-                                <select class="form-control" id="statusSelect">
-                                    <option>Full Time</option>
-                                    <option>Part Time</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="descriptionTextArea" class="new-job-label">Description</label>
-                                <textarea class="form-control" id="textArea" row="3"></textarea>
-                            </div>
-
-                            <input class="default-button" type="submit" value="Submit"></button>
-                        </form>
-                    </div>
-                </div>
-
-
-            </div>
-
-
-            <div class="tab-pane" role="tabpanel" id="tab-2">
-
-                <div class="container default-container">
-                    <c:forEach var="job" items="${requestScope.jobList}">
-
+                    <div class="container default-container">
                         <div class="job-container">
-                            <h5 class="mb-4 font-weight-bold" id="new-job-title">*JOB TITLE*</h5>
-                            <button class="default-button" id="editButton" onclick="openJobEdit(1)">Edit</button>
-
-                            <form action="" method="POST" name="form${job.jobID}" class="job-forms">
+                            <h5 class="mb-4 font-weight-bold" id="new-job-title">New Job Posting</h5>
+                            <form action="" method="POST">
 
                                 <div class="form-group">
                                     <label for="newJobTitle" class="new-job-label">Title</label>
-                                    <input class="form-control" id="newJobTitleInput" name="1" type="text"
-                                        value="Web Developer" disabled>
+                                    <input class="form-control" id="newJobTitleInput" type="text" data-toggle="tooltip"
+                                           title="Test" placeholder="Enter Title">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="requirements" class="new-job-label">Requirements</label>
-                                    <input class="form-control" id="requirementsInput" name="1" type="text" disabled>
+                                    <input class="form-control" id="requirementsInput" type="text"
+                                           placeholder="Enter Requirements">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="startDateInput" class="new-job-label">Start Date</label>
-                                    <input class="form-control" type="date" value="" id="startDateInput" name="1"
-                                        disabled>
+                                    <input class="form-control" type="date" value="" id="startDateInput">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="endDateInput" class="new-job-label">End Date</label>
-                                    <input class="form-control" type="date" value="" id="endDateInput" name="1"
-                                        disabled>
+                                    <input class="form-control" type="date" value="" id="endDateInput">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="statusSelect" class="new-job-label">Status</label>
-                                    <select class="form-control" id="statusSelect" name="1" disabled>
+                                    <select class="form-control" id="statusSelect">
                                         <option>Full Time</option>
                                         <option>Part Time</option>
                                     </select>
@@ -150,34 +95,96 @@
 
                                 <div class="form-group">
                                     <label for="descriptionTextArea" class="new-job-label">Description</label>
-                                    <textarea class="form-control" id="textArea" row="3" name="1" disabled></textarea>
+                                    <textarea class="form-control" id="textArea" row="3"></textarea>
                                 </div>
 
-                                <div id="hiddenButtons" style="visibility:hidden;">
-                                    <input class="default-button" name="jobEditBtns" type="submit" value="Submit">
-                                    <input class="default-button" name="jobEditBtns" type="reset" value="Cancel" onclick="cancelJobEdit(1)">
-                                </div>
-
+                                <input class="default-button" type="submit" value="Submit"></button>
                             </form>
                         </div>
-                    </c:forEach>
+                    </div>
+
+
                 </div>
 
+
+                <div class="tab-pane" role="tabpanel" id="tab-2">
+
+                    <div class="container default-container">
+                        <c:forEach var="job" items="${requestScope.jobList}">
+
+                            <div class="job-container">  
+                                <h5 class="mb-4 font-weight-bold" id="new-job-title">*JOB TITLE*</h5>
+
+                                <form action="" method="POST" class="job-forms">
+
+                                    <div class="form-group">
+                                        <label for="newJobTitle" class="new-job-label">Title</label>
+                                        <input class="form-control" id="newJobTitleInput" type="text"
+                                               value="Web Developer" name="${job.jobpostingID}" disabled>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="requirements" class="new-job-label">Requirements</label>
+                                        <input class="form-control" id="requirementsInput" type="text" name="${job.jobpostingID}" disabled>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="startDateInput" class="new-job-label">Start Date</label>
+                                        <input class="form-control" type="date" value="" id="startDateInput" name="${job.jobpostingID}"
+                                               disabled>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="endDateInput" class="new-job-label">End Date</label>
+                                        <input class="form-control" type="date" value="" id="endDateInput" name="${job.jobpostingID}"
+                                               disabled>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="statusSelect" class="new-job-label">Status</label>
+                                        <select class="form-control" id="statusSelect" name="${job.jobpostingID}" disabled>
+                                            <option>Full Time</option>
+                                            <option>Part Time</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="descriptionTextArea" class="new-job-label">Description</label>
+                                        <textarea class="form-control" id="textArea" row="3" name="${job.jobpostingID}" disabled></textarea>
+                                    </div>
+
+                                    <div name="hiddenButtons" id="hiddenButtons${job.jobpostingID}" style="display:none;">
+                                        <input class="default-button" type="submit" value="Submit">
+                                        <input class="default-button" type="reset" value="Cancel" onclick="cancelJobEdit(${job.jobpostingID})">
+                                    </div>
+
+                                </form>
+
+                                <div name="editButtons" id="editButtons${job.jobpostingID}">
+                                    <button class="delete-button" onclick="confirmDelete(${job.jobpostingID})">Delete</button>
+                                    <button class="default-button" onclick="openJobEdit(${job.jobpostingID})">Edit</button>
+                                </div>
+
+                            </div>
+                        </c:forEach>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
 
 
 
 
 
 
-        
+
 
 
 
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/js/bs-init.js"></script>
+        <script src="assets/js/job-edit.js"></script>
     </body>
 </html>
