@@ -8,38 +8,9 @@ and open the template in the editor.
     Author     : kentp
 */
 
-
-/*=============================================*/
-/*VARIABLES*/
-/*=============================================*/
-
-:root
-{
-    /*TODO: These variables don't seem to work in NetBeans?*/
-
-    /*COLORS*/
-    --foreground-color: #F1FAEE; 
-    --background-color: #CDE2FF;
-    --secondary-color: #1D3557;
-    --primary-font-color: #457B9D;
-    --danger-color: #E63946;
-
-    --button-highlight-color: #2f546B;
-
-    /*FONTS*/
-
-    /*MISC*/
-}
-
-
 /*=============================================*/
 /*TYPE SELECTORS*/
 /*=============================================*/
-
-body
-{
-    background-color: white;
-}
 
 dt, dd 
 {
@@ -79,12 +50,27 @@ dt
     border: none;
 }
 
-.default-button:hover
+.delete-button
+{
+    background-color: #E63946;
+    color: white;
+    font-size: 14px;
+    padding: 10px 36px;
+    height: 40px;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+}
+
+.default-button .delete-button:hover
 {
     background-color: #2f546B;
 }
 
-.default-button:active
+.default-button .delete-button:active
 {
     background-color: #457B9D;
 }
