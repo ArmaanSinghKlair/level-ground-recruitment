@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="assets/css/login.css">
         <link rel="stylesheet" href="assets/css/signup.css">
         <link rel="stylesheet" href="assets/css/styles.css">
+        <script src="assets/js/job-edit.js">
 
     </head>
     <body>
@@ -42,10 +43,13 @@
 
         <div class="tabs">
         <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item" role="presentation" data-bss-hover-animate="pulse"><a class="nav-link active"
-                    role="tab" data-toggle="tab" href="#tab-1">Create Job</a></li>
+            <li class="nav-item" role="presentation" data-bss-hover-animate="pulse">
+                <a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1" onclick="revertChanges()">Create
+                    Job</a>
+            </li>
             <li class="nav-item" role="presentation" data-bss-hover-animate="pulse"><a class="nav-link" role="tab"
-                    data-toggle="tab" data-bss-hover-animate="pulse" href="#tab-2">Manage Jobs</a></li>
+                    data-toggle="tab" data-bss-hover-animate="pulse" href="#tab-2">Manage
+                    Jobs</a></li>
         </ul>
         <div class="tab-content">
 
@@ -109,33 +113,36 @@
 
                         <div class="job-container">
                             <h5 class="mb-4 font-weight-bold" id="new-job-title">*JOB TITLE*</h5>
-                            <form action="" method="POST">
+                            <button class="default-button" id="editButton" onclick="openJobEdit(1)">Edit</button>
+
+                            <form action="" method="POST" name="form${job.jobID}" class="job-forms">
 
                                 <div class="form-group">
                                     <label for="newJobTitle" class="new-job-label">Title</label>
-                                    <input class="form-control" id="newJobTitleInput" type="text" data-toggle="tooltip"
-                                        title="Test" value="Web Developer" disabled>
+                                    <input class="form-control" id="newJobTitleInput" name="1" type="text"
+                                        value="Web Developer" disabled>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="requirements" class="new-job-label">Requirements</label>
-                                    <input class="form-control" id="requirementsInput" type="text" value="${job.requirements}"
-                                        disabled>
+                                    <input class="form-control" id="requirementsInput" name="1" type="text" disabled>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="startDateInput" class="new-job-label">Start Date</label>
-                                    <input class="form-control" type="date" value="${job.startDate}" id="startDateInput" disabled>
+                                    <input class="form-control" type="date" value="" id="startDateInput" name="1"
+                                        disabled>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="endDateInput" class="new-job-label">End Date</label>
-                                    <input class="form-control" type="date" value="${job.endDate}" id="endDateInput" disabled>
+                                    <input class="form-control" type="date" value="" id="endDateInput" name="1"
+                                        disabled>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="statusSelect" class="new-job-label">Status</label>
-                                    <select class="form-control" id="statusSelect" disabled>
+                                    <select class="form-control" id="statusSelect" name="1" disabled>
                                         <option>Full Time</option>
                                         <option>Part Time</option>
                                     </select>
@@ -143,12 +150,14 @@
 
                                 <div class="form-group">
                                     <label for="descriptionTextArea" class="new-job-label">Description</label>
-                                    <textarea class="form-control" id="textArea" row="3" disabled>*DESCRIPTION*</textarea>
+                                    <textarea class="form-control" id="textArea" row="3" name="1" disabled></textarea>
                                 </div>
 
-                                <input class="default-button" type="submit" value="Edit">
-                                <input class="default-button" type="submit" value="Submit"> <!--TODO: When edit button clicked, use JS to go into edit mode-->
-                                <input class="default-button" type="submit" value="Cancel">
+                                <div id="hiddenButtons" style="visibility:hidden;">
+                                    <input class="default-button" name="jobEditBtns" type="submit" value="Submit">
+                                    <input class="default-button" name="jobEditBtns" type="reset" value="Cancel" onclick="cancelJobEdit(1)">
+                                </div>
+
                             </form>
                         </div>
                     </c:forEach>
@@ -163,23 +172,7 @@
 
 
 
-        <script>
-
-            function openEditWindow()
-            {
-                //document.getElementById("jobPosting").style.display = "block";
-                var jobPosting = document.getElementById("jobPosting");
-
-                jobPosting.
-                        alert("open edit window");
-            }
-
-            function closeEditWindow()
-            {
-                document.getElementById("jobPosting").style.display = "none";
-            }
-
-        </script>
+        
 
 
 
