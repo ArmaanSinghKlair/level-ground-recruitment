@@ -35,24 +35,42 @@ public class BusinessClientTestServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<JobPosting> jobList = new ArrayList<>();
-        JobPosting jobPosting = new JobPosting();
-        jobPosting.setJobpostingID(1);
-        jobPosting.setRequirements("Java");
-        jobPosting.setStartDate(new Date());
-        jobPosting.setEndDate(new Date());
-        
-        JobPosting jobPosting2 = new JobPosting();
-        jobPosting2.setJobpostingID(2);
-        jobPosting2.setRequirements("C++");
-        jobPosting2.setStartDate(new Date());
-        jobPosting2.setEndDate(new Date());
-        
-        jobList.add(jobPosting);
-        jobList.add(jobPosting2);
-        
-        request.setAttribute("jobList", jobList);
-        request.getRequestDispatcher("/WEB-INF/businessClientHome.jsp").forward(request, response);
+
+        String deleteID = request.getParameter("deleteID");
+
+        if (deleteID != null) {
+            ArrayList<JobPosting> jobList = new ArrayList<>();
+
+            JobPosting jobPosting2 = new JobPosting();
+            jobPosting2.setJobpostingID(2);
+            jobPosting2.setRequirements("C++");
+            jobPosting2.setStartDate(new Date());
+            jobPosting2.setEndDate(new Date());
+            jobList.add(jobPosting2);
+
+            request.setAttribute("jobList", jobList);
+            request.getRequestDispatcher("/WEB-INF/businessClientHome.jsp").forward(request, response);
+        } else {
+            ArrayList<JobPosting> jobList = new ArrayList<>();
+            JobPosting jobPosting = new JobPosting();
+            jobPosting.setJobpostingID(1);
+            jobPosting.setRequirements("Java");
+            jobPosting.setStartDate(new Date());
+            jobPosting.setEndDate(new Date());
+
+            JobPosting jobPosting2 = new JobPosting();
+            jobPosting2.setJobpostingID(2);
+            jobPosting2.setRequirements("C++");
+            jobPosting2.setStartDate(new Date());
+            jobPosting2.setEndDate(new Date());
+
+            jobList.add(jobPosting);
+            jobList.add(jobPosting2);
+
+            request.setAttribute("jobList", jobList);
+            request.getRequestDispatcher("/WEB-INF/businessClientHome.jsp").forward(request, response);
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -66,8 +84,7 @@ public class BusinessClientTestServlet extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
-    {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
