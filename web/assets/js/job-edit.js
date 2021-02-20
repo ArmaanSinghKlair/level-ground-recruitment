@@ -5,8 +5,8 @@
  */
 
 function openJobEdit(id) {
-    let hiddenButtons = document.getElementById("hiddenButtons");
-    let editButton = document.getElementById("editButton");
+    let hiddenButtons = document.getElementById("hiddenButtons" + id);
+    let editButtons = document.getElementById("editButtons" + id);
     let input = document.getElementsByName(id);
 
 
@@ -14,43 +14,73 @@ function openJobEdit(id) {
         input[i].disabled = false;
     }
 
-    hiddenButtons.style.visibility = "visible";
-    editButton.style.visibility = "hidden";
+    hiddenButtons.style.display = "block";
+    editButtons.style.display = "none";
 }
 
 function cancelJobEdit(id) {
-    let x = document.getElementById("hiddenButtons");
-    let y = document.getElementById("editButton");
-    let z = document.getElementsByName(id);
+    let hiddenButtons = document.getElementById("hiddenButtons" + id);
+    let editButtons = document.getElementById("editButtons" + id);
+    let input = document.getElementsByName(id);
 
-    for (let i = 0; i < z.length; i++) {
-        z[i].disabled = true;
+    for (let i = 0; i < input.length; i++) {
+        input[i].disabled = true;
     }
 
-    hiddenButtons.style.visibility = "hidden";
-    editButton.style.visibility = "visible";
+    hiddenButtons.style.display = "none";
+    editButtons.style.display = "block";
 }
 
-function revertChanges() 
+function revertChanges()
 {
     let forms = document.getElementsByClassName("job-forms");
 
     for (let i = 0; i < forms.length; i++) {
         forms[i].reset();
-        for (let j = 0; j < forms[i].elements.length; j++) {
+
+        //runs for elements length -2 because the last 2 are the submit/cancel buttons
+        for (let j = 0; j < forms[i].elements.length - 2; j++) {
             forms[i].elements[j].disabled = true;
         }
     }
 
-    let hiddenButtons = document.getElementById("hiddenButtons");
-    let editButton = document.getElementById("editButton");
-    hiddenButtons.style.visibility = "hidden";
-    editButton.style.visibility = "visible";
+    let hiddenButtons = document.getElementsByName("hiddenButtons");
+    let editButtons = document.getElementsByName("editButtons");
 
-    document.getElementsByName("jobEditBtns").forEach(element => {
-
-        element.removeAttribute("disabled");
+    hiddenButtons.forEach(element =>
+    {
+        element.style.display = "none";
     });
+
+    editButtons.forEach(element =>
+    {
+        element.style.display = "block";
+    });
+
+}
+
+function confirmDelete(id)
+{
+    swal({
+        title: "Delete Job Posting ID: " + id,
+        text: "Are you sure you want to delete this job?",
+        icon: "warning",
+        buttons: ["Cancel", "Delete"],
+        dangerMode: true,
+    })
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Job deleted", {
+                        icon: "success",
+                    }).then(function () 
+                    {
+                        window.location = "BusinessClientTestServlet?deleteID="+id;
+                    });
+                    
+                } else {
+                    swal("Job was not deleted");
+                }
+            });
 }
 
 
