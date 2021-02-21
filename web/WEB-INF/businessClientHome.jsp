@@ -21,7 +21,6 @@
         <link rel="stylesheet" href="assets/css/login.css">
         <link rel="stylesheet" href="assets/css/signup.css">
         <link rel="stylesheet" href="assets/css/styles.css">
-        <link rel=”stylesheet” href=”sweetalert.css”>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     </head>
@@ -59,7 +58,7 @@
 
 
                     <div class="container default-container">
-                        <div class="job-container">
+                        <div class="inner-container">
                             <h5 class="mb-4 font-weight-bold" id="new-job-title">New Job Posting</h5>
                             <form action="" method="POST">
 
@@ -98,7 +97,8 @@
                                     <textarea class="form-control" id="textArea" row="3"></textarea>
                                 </div>
 
-                                <input class="default-button" type="submit" value="Submit"></button>
+                                <input class="default-button" type="submit" value="Submit">
+                                <button class="default-button" style="display: none;"></button>
                             </form>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                     <div class="container default-container">
                         <c:forEach var="job" items="${requestScope.jobList}">
 
-                            <div class="job-container">  
+                            <div class="inner-container">  
                                 <h5 class="mb-4 font-weight-bold" id="new-job-title">*JOB TITLE*</h5>
 
                                 <form action="" method="POST" class="job-forms">
@@ -160,7 +160,7 @@
 
                                 </form>
 
-                                <div name="editButtons" id="editButtons${job.jobpostingID}">
+                                <div class="center-buttons" name="editButtons" id="editButtons${job.jobpostingID}">
                                     <button class="delete-button" onclick="confirmDelete(${job.jobpostingID})">Delete</button>
                                     <button class="default-button" onclick="openJobEdit(${job.jobpostingID})">Edit</button>
                                 </div>
