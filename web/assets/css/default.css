@@ -12,14 +12,10 @@ and open the template in the editor.
 /*TYPE SELECTORS*/
 /*=============================================*/
 
-dt, dd 
+label
 {
-    float: left
-}
-
-dt 
-{
-    clear:both
+    font-weight: 600;
+    color: #457B9D;
 }
 
 /*=============================================*/
@@ -34,6 +30,14 @@ dt
 /*=============================================*/
 /*Class SELECTORS*/
 /*=============================================*/
+
+.center-buttons
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
 
 .default-button
 {
@@ -75,24 +79,6 @@ dt
     background-color: #457B9D;
 }
 
-.section-header
-{
-    font-size: 25px;
-    margin-top: 50px;
-    margin-bottom: 5px;
-    color: white;
-}
-
-.header-font
-{
-    font-family: "Oswald", sans-serif;
-}
-
-.primary-font
-{
-    font-family: "Montserrat", sans-serif;
-}
-
 .default-container
 {
     background-color: #457B9D;   
@@ -101,7 +87,7 @@ dt
     padding: 25px;
 }
 
-.job-container
+.inner-container
 {
     width: 45%;
     margin: 0 auto;
