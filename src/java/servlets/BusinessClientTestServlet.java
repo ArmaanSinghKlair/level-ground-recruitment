@@ -8,14 +8,22 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import problemdomain.BusinessClient;
+import problemdomain.Candidate;
+import problemdomain.CandidateSkill;
+import problemdomain.Education;
 import problemdomain.JobPosting;
+import problemdomain.Role;
+import problemdomain.Skill;
+import problemdomain.WorkHistory;
 
 /**
  *
