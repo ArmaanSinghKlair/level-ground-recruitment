@@ -18,6 +18,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
         <link rel="stylesheet" href="assets/css/nav-bar.css">
         <link rel="stylesheet" href="assets/css/default.css">
+        <link rel="stylesheet" href="assets/css/login.css">
+        <link rel="stylesheet" href="assets/css/signup.css">
+        <link rel="stylesheet" href="assets/css/styles.css">
     </head>
     <body>
         <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
@@ -36,50 +39,69 @@
             </div>
         </nav>
 
-        <div class="container section-header">
-            Candidate #01
+        <div class="container default-container">
+
+            <c:forEach var="candidate" items="${requestScope.candidateList}">
+
+                <div class="inner-container">
+                    <h5 class="mb-4 font-weight-bold" id="new-job-title">Candidate #${candidate.candidateID}</h5>
+
+                    <div class="candidateProfile">
+                        <label for="workExperience">Work Experience</label>
+
+                        <ul>
+                            <c:forEach var="work" items="${candidate.workHistoryCollection}">
+                                <li>
+                                    ${work.company} ${work.startDate}
+                                </li>
+                            </c:forEach>
+                        </ul>
+
+                        <label for="education">Education</label>
+                        <ul>
+                            <c:forEach var="education" items="${candidate.educationCollection}">
+                                <li>
+                                    ${education.institution} ${education.subject} ${education.level}
+                                </li>
+                            </c:forEach>
+                        </ul>
+
+                        <label for="keySkills">Key Skills</label>
+                        <ul>
+                            <c:forEach var="skill" items="${candidate.candidateSkillCollection}">
+                                <li>
+                                    ${skill.skill.description}
+                                </li>
+                            </c:forEach>
+                        </ul>
+
+                        <label for="interestedRoles">Interested Roles</label>
+                        <ul>
+                            <c:forEach var="role" items="${candidate.roleCollection}">
+                                <li>
+                                    ${role.description}
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+
+                    <div class="center-buttons" id="editButtons${job.jobpostingID}">
+                        <button class="default-button">Hire</button>
+                        <button class="default-button">Interview</button>
+                    </div>
+
+                </div>
+
+            </c:forEach>
         </div>
-        <div class="container current-job-container shadow-sm p-3 mb-5">
-
-            <div class="row">
-                <div class="col-md-3">
-
-                    <dt class="job-item-header col-sm-6">Company</dt>
-                    <dd class="col-sm-6">Husky Energy</dd>
-
-                    <dt class="job-item-header col-sm-6">Posting Date</dt>
-                    <dd class="col-sm-6">2021-02-16</dd>
-
-                    <dt class="job-item-header col-sm-6">Start Date</dt>
-                    <dd class="col-sm-6">2021-02-17</dd>
-
-                    <dt class="job-item-header col-sm-6">End Date</dt>
-                    <dd class="col-sm-6">2021-02-18</dd>
-
-                    <dt class="job-item-header col-sm-6">Status</dt>
-                    <dd class="col-sm-6">Full Time</dd>
-                </div>
-
-                <div class="col-md-7">
-                    <p class="job-description border-dark">Design Beautiful websites using HTML, CSS, and JavaScript.
-                        Gain an expert knowledge of JS frameworks such as Angular, React, and Vue.</p>
-                </div>
-                <div class="col-md-1">
-                    <button type="submit" class="edit-button">Interview</button>
-                    <button type="submit" class="edit-button">Hire</button>
-                </div>
-            </div>
-        </div>
-
-    </div> 
 
 
 
 
 
 
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
-</body>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/bs-init.js"></script>
+    </body>
 </html>
