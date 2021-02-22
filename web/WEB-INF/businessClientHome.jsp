@@ -117,7 +117,7 @@
                 <div class="tab-pane" role="tabpanel" id="tab-2">
 
                     <c:choose>
-                        <c:when test="${requestScope.candidateList eq null}">
+                        <c:when test="${requestScope.jobList eq null}">
                             <div class="container default-container text-center mt-5 text-white">
                                 <h4>Job List is Empty</h4>
                             </div>
