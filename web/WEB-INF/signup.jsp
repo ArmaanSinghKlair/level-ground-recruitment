@@ -77,7 +77,7 @@
                         <div class="form-group"><input class="form-control" type="password" data-toggle="tooltip" data-bss-tooltip="" name="password" placeholder="Password" required="" minlength="8" maxlength="30" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Password"></div>
                         <div class="form-group"><input class="form-control" type="password" data-toggle="tooltip" data-bss-tooltip="" name="password-repeat" placeholder="Password (repeat)" required="" minlength="8" maxlength="30" pattern="&quot;^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$&quot;" title="Password repeat"></div>
                         <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip" data-bss-tooltip="" name="firstName" placeholder="First Name" required="" maxlength="45" title="First name"></div>
-                        <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip" data-bss-tooltip="" name="lastName" placeholder="First Name" required="" maxlength="45" title="Last name"></div>
+                        <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip" data-bss-tooltip="" name="lastName" placeholder="Last Name" required="" maxlength="45" title="Last name"></div>
                         <div class="form-group"><input class="form-control" type="email" data-toggle="tooltip" data-bss-tooltip="" name="email" placeholder="Email" required="" title="Email"></div>
                         <div class="form-group"><input class="form-control" type="tel" data-toggle="tooltip" data-bss-tooltip="" name="phoneNo" placeholder="Phone Number" title="Phone Number" maxlength="10" inputmode="tel"></div>
                         <div class="form-group">
