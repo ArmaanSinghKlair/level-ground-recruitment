@@ -6,7 +6,6 @@
 package problemdomain;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -23,12 +21,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Kane Imler
- * @version 02/12/2021
+ * @version 2/11/2021
  */
 @Entity
 @Table(name = "job_posting")
@@ -37,6 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "JobPosting.findAll", query = "SELECT j FROM JobPosting j"),
     @NamedQuery(name = "JobPosting.findByJobpostingID", query = "SELECT j FROM JobPosting j WHERE j.jobpostingID = :jobpostingID"),
     @NamedQuery(name = "JobPosting.findByRequirements", query = "SELECT j FROM JobPosting j WHERE j.requirements = :requirements"),
+    @NamedQuery(name = "JobPosting.findByTitle", query = "SELECT j FROM JobPosting j WHERE j.title = :title"),
+    @NamedQuery(name = "JobPosting.findByJopDescription", query = "SELECT j FROM JobPosting j WHERE j.jopDescription = :jopDescription"),
+    @NamedQuery(name = "JobPosting.findByJobStatus", query = "SELECT j FROM JobPosting j WHERE j.jobStatus = :jobStatus"),
     @NamedQuery(name = "JobPosting.findByStartDate", query = "SELECT j FROM JobPosting j WHERE j.startDate = :startDate"),
     @NamedQuery(name = "JobPosting.findByEndDate", query = "SELECT j FROM JobPosting j WHERE j.endDate = :endDate"),
     @NamedQuery(name = "JobPosting.findByApplicants", query = "SELECT j FROM JobPosting j WHERE j.applicants = :applicants")})
@@ -51,6 +51,13 @@ public class JobPosting implements Serializable {
     @Basic(optional = false)
     @Column(name = "requirements")
     private String requirements;
+    @Basic(optional = false)
+    @Column(name = "title")
+    private String title;
+    @Column(name = "jop_description")
+    private String jopDescription;
+    @Column(name = "job_status")
+    private String jobStatus;
     @Column(name = "start_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
@@ -59,8 +66,6 @@ public class JobPosting implements Serializable {
     private Date endDate;
     @Column(name = "applicants")
     private String applicants;
-    @ManyToMany(mappedBy = "jobPostingCollection")
-    private Collection<Candidate> candidateCollection;
     @JoinColumn(name = "business_clientID", referencedColumnName = "business_clientID")
     @OneToOne(optional = false)
     private BusinessClient businessclientID;
@@ -72,9 +77,10 @@ public class JobPosting implements Serializable {
         this.jobpostingID = jobpostingID;
     }
 
-    public JobPosting(Integer jobpostingID, String requirements) {
+    public JobPosting(Integer jobpostingID, String requirements, String title) {
         this.jobpostingID = jobpostingID;
         this.requirements = requirements;
+        this.title = title;
     }
 
     public Integer getJobpostingID() {
@@ -91,6 +97,30 @@ public class JobPosting implements Serializable {
 
     public void setRequirements(String requirements) {
         this.requirements = requirements;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getJopDescription() {
+        return jopDescription;
+    }
+
+    public void setJopDescription(String jopDescription) {
+        this.jopDescription = jopDescription;
+    }
+
+    public String getJobStatus() {
+        return jobStatus;
+    }
+
+    public void setJobStatus(String jobStatus) {
+        this.jobStatus = jobStatus;
     }
 
     public Date getStartDate() {
@@ -115,15 +145,6 @@ public class JobPosting implements Serializable {
 
     public void setApplicants(String applicants) {
         this.applicants = applicants;
-    }
-
-    @XmlTransient
-    public Collection<Candidate> getCandidateCollection() {
-        return candidateCollection;
-    }
-
-    public void setCandidateCollection(Collection<Candidate> candidateCollection) {
-        this.candidateCollection = candidateCollection;
     }
 
     public BusinessClient getBusinessclientID() {
