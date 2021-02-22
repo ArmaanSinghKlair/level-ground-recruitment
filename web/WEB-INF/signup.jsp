@@ -54,7 +54,7 @@
         <li class="nav-item" role="presentation" data-bss-hover-animate="pulse"><a class="nav-link active" role="tab" data-toggle="tab" data-bss-hover-animate="pulse" href="#tab-2">Sign Up</a></li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane active" role="tabpanel" id="tab-1">
+        <div class="tab-pane" role="tabpanel" id="tab-1">
             <div class="container login-clean" style="background: #457b9d;">
                 <form method="post" style="background: #f1faee;" action="<c:url value='/candidate-login'></c:url>">
                     <div class="illustration"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="color: #1d3557;">
@@ -67,7 +67,7 @@
                 </form>
             </div>
         </div>
-        <div class="tab-pane" role="tabpanel" id="tab-2">
+        <div class="tab-pane active" role="tabpanel" id="tab-2">
             <div class="container register-photo">
                 <div class="form-container">
                     <div class="image-holder"></div>
