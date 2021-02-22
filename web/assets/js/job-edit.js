@@ -7,11 +7,12 @@
 function openJobEdit(id) {
     let hiddenButtons = document.getElementById("hiddenButtons" + id);
     let editButtons = document.getElementById("editButtons" + id);
-    let input = document.getElementsByName(id);
+    let form = document.getElementById("jobForm" + id);
 
-
-    for (let i = 0; i < input.length; i++) {
-        input[i].disabled = false;
+    //runs for elements length -2 because the last 2 are the submit/cancel buttons
+    for (let i = 0; i < form.elements.length - 2; i++)
+    {
+        form.elements[i].disabled = false;
     }
 
     hiddenButtons.style.display = "block";
@@ -21,10 +22,12 @@ function openJobEdit(id) {
 function cancelJobEdit(id) {
     let hiddenButtons = document.getElementById("hiddenButtons" + id);
     let editButtons = document.getElementById("editButtons" + id);
-    let input = document.getElementsByName(id);
+    let form = document.getElementById("jobForm" + id);
 
-    for (let i = 0; i < input.length; i++) {
-        input[i].disabled = true;
+    //runs for elements length -2 because the last 2 are the submit/cancel buttons
+    for (let i = 0; i < form.elements.length - 2; i++)
+    {
+        form.elements[i].disabled = true;
     }
 
     hiddenButtons.style.display = "none";
@@ -44,18 +47,18 @@ function revertChanges()
         }
     }
 
-    let hiddenButtons = document.getElementsByName("hiddenButtons");
-    let editButtons = document.getElementsByName("editButtons");
+    let hiddenButtons = document.getElementsByClassName("hiddenButtons");
+    let editButtons = document.getElementsByClassName("editButtons");
 
-    hiddenButtons.forEach(element =>
+    for(let i = 0; i < hiddenButtons.length; i++)
     {
-        element.style.display = "none";
-    });
+        hiddenButtons[i].style.display = "none";
+    }
 
-    editButtons.forEach(element =>
+    for(let i = 0; i < editButtons.length; i++)
     {
-        element.style.display = "block";
-    });
+        editButtons[i].style.display = "block";
+    }
 
 }
 
@@ -72,11 +75,11 @@ function confirmDelete(id)
                 if (willDelete) {
                     swal("Job deleted", {
                         icon: "success",
-                    }).then(function () 
+                    }).then(function ()
                     {
-                        window.location = "BusinessClientTestServlet?deleteID="+id;
+                        window.location = "BusinessClientTestServlet?deleteID=" + id;
                     });
-                    
+
                 } else {
                     swal("Job was not deleted");
                 }
