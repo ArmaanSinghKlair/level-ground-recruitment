@@ -31,11 +31,18 @@
                 </a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav mr-auto flex-md-shrink-0">
-                        <li class="nav-item"><a class="nav-link active" data-bs-hover-animate="pulse" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" data-bs-hover-animate="pulse" href="#">Home</a></li>
                         <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="#">Candidate List</a></li>
                     </ul>
                     <span class="d-md-flex flex-md-shrink-0 justify-content-md-center align-items-md-center navbar-text actions"> 
-                        <a class="btn btn-primary action-button" role="button" data-bs-hover-animate="pulse" href="login.html">Business Client</a>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle action-button" type="button" id="dropdownMenuButton" data-bs-hover-animate="pulse" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Business Client
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Sign Out</a>
+                            </div>
+                        </div>    
                     </span>
                 </div>
             </div>
@@ -109,66 +116,72 @@
 
                 <div class="tab-pane" role="tabpanel" id="tab-2">
 
-                    <div class="container default-container">
-                        <c:forEach var="job" items="${requestScope.jobList}">
-
-                            <div class="inner-container">  
-                                <h5 class="mb-4 font-weight-bold" id="new-job-title">*JOB TITLE*</h5>
-
-                                <form action="" method="POST" class="job-forms">
-
-                                    <div class="form-group">
-                                        <label for="newJobTitle" class="new-job-label">Title</label>
-                                        <input class="form-control" id="newJobTitleInput" type="text"
-                                               value="Web Developer" name="${job.jobpostingID}" disabled>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="requirements" class="new-job-label">Requirements</label>
-                                        <input class="form-control" id="requirementsInput" type="text" name="${job.jobpostingID}" disabled>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="startDateInput" class="new-job-label">Start Date</label>
-                                        <input class="form-control" type="date" value="" id="startDateInput" name="${job.jobpostingID}"
-                                               disabled>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="endDateInput" class="new-job-label">End Date</label>
-                                        <input class="form-control" type="date" value="" id="endDateInput" name="${job.jobpostingID}"
-                                               disabled>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="statusSelect" class="new-job-label">Status</label>
-                                        <select class="form-control" id="statusSelect" name="${job.jobpostingID}" disabled>
-                                            <option>Full Time</option>
-                                            <option>Part Time</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="descriptionTextArea" class="new-job-label">Description</label>
-                                        <textarea class="form-control" id="textArea" row="3" name="${job.jobpostingID}" disabled></textarea>
-                                    </div>
-
-                                    <div name="hiddenButtons" id="hiddenButtons${job.jobpostingID}" style="display:none;">
-                                        <input class="default-button" type="submit" value="Submit">
-                                        <input class="default-button" type="reset" value="Cancel" onclick="cancelJobEdit(${job.jobpostingID})">
-                                    </div>
-
-                                </form>
-
-                                <div class="center-buttons" name="editButtons" id="editButtons${job.jobpostingID}">
-                                    <button class="delete-button" onclick="confirmDelete(${job.jobpostingID})">Delete</button>
-                                    <button class="default-button" onclick="openJobEdit(${job.jobpostingID})">Edit</button>
-                                </div>
-
+                    <c:choose>
+                        <c:when test="${requestScope.candidateList eq null}">
+                            <div class="container default-container text-center mt-5 text-white">
+                                <h4>Job List is Empty</h4>
                             </div>
-                        </c:forEach>
-                    </div>
+                        </c:when>
+                        <c:otherwise>
+                            <div class="container default-container">
+                                <c:forEach var="job" items="${requestScope.jobList}">
 
+                                    <div class="inner-container">  
+                                        <h5 class="mb-4 font-weight-bold" id="new-job-title">*JOB TITLE*</h5>
+
+                                        <form action="" method="POST" class="job-forms" id="jobForm${job.jobpostingID}">
+
+                                            <div class="form-group">
+                                                <label for="newJobTitle" class="new-job-label">Title</label>
+                                                <input class="form-control" id="newJobTitleInput" type="text"
+                                                       value="Web Developer" disabled>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="requirements" class="new-job-label">Requirements</label>
+                                                <input class="form-control" id="requirementsInput" type="text" disabled>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="startDateInput" class="new-job-label">Start Date</label>
+                                                <input class="form-control" type="date" value="" id="startDateInput" disabled>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="endDateInput" class="new-job-label">End Date</label>
+                                                <input class="form-control" type="date" value="" id="endDateInput" disabled>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="statusSelect" class="new-job-label">Status</label>
+                                                <select class="form-control" id="statusSelect" disabled>
+                                                    <option>Full Time</option>
+                                                    <option>Part Time</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="descriptionTextArea" class="new-job-label">Description</label>
+                                                <textarea class="form-control" id="textArea" row="3" disabled></textarea>
+                                            </div>
+
+                                            <div class="hiddenButtons" id="hiddenButtons${job.jobpostingID}" style="display:none;">
+                                                <input class="default-button" type="submit" value="Submit">
+                                                <input class="default-button" type="reset" value="Cancel" onclick="cancelJobEdit(${job.jobpostingID})">
+                                            </div>
+
+                                        </form>
+
+                                        <div class="editButtons" id="editButtons${job.jobpostingID}">
+                                            <button class="delete-button" onclick="confirmDelete(${job.jobpostingID})">Delete</button>
+                                            <button class="default-button" onclick="openJobEdit(${job.jobpostingID})">Edit</button>
+                                        </div>
+
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
