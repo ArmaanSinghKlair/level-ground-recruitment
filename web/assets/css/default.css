@@ -31,14 +31,6 @@ label
 /*Class SELECTORS*/
 /*=============================================*/
 
-.center-buttons
-{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-}
-
 .default-button
 {
     background-color: #1D3557;
