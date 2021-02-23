@@ -54,19 +54,19 @@
             </div>
         </nav>
         <!-- Example of how to implement the alert -->
-        <c:choose>
+        <%--<c:choose>--%>
             <!-- Test condition can be string, int or any order validation method
             coming from the server. it should be in request scope-->
-            <c:when test="${requestScope.success!=null}">
+            <%--<c:when test="${requestScope.success!=null}">--%>
                 <!-- span tag holds the message that you want to show to the user 
                 This div represent the success message-->
-                <div class="alert alert-success" role="alert"><span>${requestScope.success}</span></div>
-                    </c:when>
-                    <c:when test="${requestScope.fail!=null}">
+                <!--<div class="alert alert-success" role="alert"><span>${requestScope.success}</span></div>-->
+                    <%--</c:when>--%>
+                    <%--<c:when test="${requestScope.fail!=null}">--%>
                 <!-- This div represent the unsuccessful message -->
-                <div class="alert alert-warning" role="alert"><span>${requestScope.fail}</span></div>
-                    </c:when>
-                </c:choose>
+                <!--<div class="alert alert-warning" role="alert"><span>${requestScope.fail}</span></div>-->
+                    <%--</c:when>--%>
+                <%--</c:choose>--%>
 
         <div class="tabs">
             <ul class="nav nav-tabs" role="tablist">

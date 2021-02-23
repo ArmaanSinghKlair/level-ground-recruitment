@@ -41,7 +41,7 @@
         </div>
     </nav>
     <!-- Example of how to implement the alert -->
-<c:choose>
+<%--<c:choose>
     <!-- Test condition can be string, int or any order validation method
     coming from the server. it should be in request scope-->
     <c:when test="${requestScope.success!=null}">
@@ -53,7 +53,7 @@
         <!-- This div represent the unsuccessful message -->
         <div class="alert alert-warning" role="alert"><span>${requestScope.fail}</span></div>
     </c:when>
-</c:choose>
+</c:choose>--%>
 
     <div class="container-md">
         <div class="row text-left head-row">
