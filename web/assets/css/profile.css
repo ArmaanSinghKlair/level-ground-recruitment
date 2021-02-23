@@ -1,0 +1,38 @@
+.modify-btns > i {
+  padding-right: 5px;
+  font-size: 1.5em;
+}
+
+.far.fa-edit {
+  color: #457b9d;
+}
+
+.far.fa-window-close {
+  color: #e63946;
+}
+
+form {
+  padding: 15px;
+  border-radius: 2px;
+  border-bottom: 1px dotted #a8dadc ;
+}
+
+.sections {
+  background: #f1faee;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.head-row {
+  background: #f1faee;
+  padding: 10px;
+  margin: 1;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.info-form {
+  border-bottom-style: none;
+}
+
