@@ -22,57 +22,10 @@ import services.AccountServices;
 @WebServlet(name = "CandidateLoginServlet", urlPatterns = {"/candidate-login"})
 public class CandidateLoginServlet extends HttpServlet {
 
-    /*
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-      String username = request.getParameter("username");
-        String password = request.getParameter("password");    
-    
-        
-        
-        
-        if (username == null || password == null)
-        {
-            request.getRequestDispatcher("/WEB-INF/Login.jsp").forward(request, response);
-        } else if (username.equals("") || password.equals(""))
-        {
-            request.setAttribute("message", "Both username and password are required!");
-            request.getRequestDispatcher("/WEB-INF/Login.jsp").forward(request, response);
-        } else
-        {
-            boolean found = false;
-            AccountServicesDB dbops = new AccountServicesDB();
-            String[] candidates = dbops.getCandidates().split(";");
-            for (String candidate : candidates)
-            {
-                if (!candidate.equals(""))
-                {
-                    String canUsername = candidate.substring(0, candidate.indexOf(","));
-                    String canPassword = candidate.substring(candidate.lastIndexOf(",")+1);
-                    if (canUsername.equals(username) && canPassword.equals(password))
-                    {
-                        found = true;
-                    }
-                }
-
-            }
-            if (found)
-            {
-                request.setAttribute("message", "Welcome, " + username);
-                request.getRequestDispatcher("/WEB-INF/Homepage.jsp").forward(request, response);
-            } else
-            {
-                request.setAttribute("message", "Incorrect login information!");
-                request.getRequestDispatcher("/WEB-INF/Login.jsp").forward(request, response);
-            }
-            
-        }
-    }
-*/
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            request.getRequestDispatcher("/WEB-INF/Login.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
     }
 
 

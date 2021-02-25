@@ -35,7 +35,7 @@
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" data-bss-hover-animate="pulse" href="#">Services</a>
                             <div class="dropdown-menu"><a class="dropdown-item" href="profile.html">Profile</a><a class="dropdown-item" href="#">Contact us</a><a class="dropdown-item" href="#">About</a></div>
                         </li>
-                    </ul><span class="d-md-flex flex-md-shrink-0 justify-content-md-center align-items-md-center navbar-text actions"> <a data-bss-hover-animate="pulse" class="login" href="login.html">Log In</a><a class="btn btn-primary action-button" role="button" data-bss-hover-animate="pulse" href="login.html">Sign Up</a></span>
+                    </ul><span class="d-md-flex flex-md-shrink-0 justify-content-md-center align-items-md-center navbar-text actions"> <a data-bss-hover-animate="pulse" class="login" href="<c:url value='/candidate-login' />">Log In</a><a class="btn btn-primary action-button" role="button" data-bss-hover-animate="pulse" href="login.html">Sign Up</a></span>
                 </div>
             </div>
         </nav>
