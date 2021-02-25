@@ -18,10 +18,11 @@ import validation.ValidateCandidate;
 public class AccountServices {
     private final AccountServicesDB asdb= new AccountServicesDB();
     
-    public final ArrayList<String> createCandidateProfile(String username,String password,String firstName,String lastName, String email, String phoneNo){
+    public final ArrayList<String> createCandidateProfile(String username,String password, String password_repeat,String firstName,String lastName, String email, String phoneNo){
         ArrayList<String> errList;
         errList = ValidateCandidate.getErrorMapForSignup(username, password, firstName, lastName, email, phoneNo);
-        
+        if(!password.trim().equals(password_repeat.trim()))
+            errList.add("Password doesn\'t match confirm-password");
         if(errList != null)
             return errList;
         else

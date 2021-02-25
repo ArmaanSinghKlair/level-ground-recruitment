@@ -37,7 +37,7 @@ public class CandidateCreateProfileServlet extends HttpServlet {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String phoneNo = request.getParameter("phoneNo");
-        ArrayList<String> errList = new AccountServices().createCandidateProfile(username, password, firstName, lastName, email, phoneNo);
+        ArrayList<String> errList = new AccountServices().createCandidateProfile(username, password, password_repeat,firstName, lastName, email, phoneNo);
         
         if(errList == null){
             

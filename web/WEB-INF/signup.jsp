@@ -69,7 +69,7 @@
                 <%--</c:choose>--%>
                 <c:if test="${requestScope.fail == true}">
                     <div class="alert alert-warning" role="alert">
-                        <c:forEach var="error" items="${requestScope.errList}"><div>${error}</div></c:forEach>
+                        <c:forEach var="error" items="${requestScope.errList}"><div>&#9888; ${error}</div></c:forEach>
                     </div>
                 </c:if>
                 <c:if test="${requestScope.success == true}">
@@ -129,7 +129,7 @@
                                                                title="Password"></div>
                                 <div class="form-group"><input class="form-control" type="password" data-toggle="tooltip"
                                                                data-bss-tooltip="" name="password-repeat"
-                                                               placeholder="Password (repeat)" required="" minlength="8"
+                                                               placeholder="Confirm password" required="" minlength="8"
                                                                maxlength="30"
                                                                title="Password repeat"></div>
                                 <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"
