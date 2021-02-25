@@ -54,6 +54,18 @@ public final class ValidateCandidate {
         put("interestedRoles", validateInterestedRoles(interestedRoles));
         return getErrorMap();
     }
+    
+    public static ArrayList<String> getErrorMapForSignup(String username, String password, String firstName, String lastName, String email, String phoneNo){
+        startValidation();
+        put("canUsername",validateCanUsername(username));
+        put("canPassword",validateCanPassword(password));
+        put("canfirstName",validateCanfirstName(firstName));
+        put("canlastName", validateCanlastName(lastName));
+        put("canEmail",validateCanEmail(email));
+        put("canPhoneNo",validateCanPhoneNo(phoneNo));
+        return getErrorMap();
+    }
+    
     private static void put(String name, String value){
         if(value != null)
             errList.add(value);
@@ -61,8 +73,8 @@ public final class ValidateCandidate {
     public static String validateCanUsername(String username){
         if(isEmpty(username))
             return "Username cannot be empty";
-        else if(username.trim().length() > 45)
-            return "Username cannot be more than 45 characters";
+        else if(username.trim().length() > 10)
+            return "Username cannot be more than 10 characters";
         else 
             return null;
     }
@@ -70,7 +82,7 @@ public final class ValidateCandidate {
     public static String validateCanPassword(String password){
         if(isEmpty(password))
             return "Password cannot be empty";
-        else if(password.length() > 100)
+        else if(password.length() > 1)
             return "Password cannot be more than 100 characters";
         else 
             return null;

@@ -20,7 +20,7 @@ public class AccountServices {
     
     public final ArrayList<String> createCandidateProfile(String username,String password,String firstName,String lastName, String email, String phoneNo){
         ArrayList<String> errList;
-        errList = ValidateCandidate.getErrorMapForAllfields(username, password, firstName, lastName, email, phoneNo, null, null, null, null, null, null);
+        errList = ValidateCandidate.getErrorMapForSignup(username, password, firstName, lastName, email, phoneNo);
         
         if(errList != null)
             return errList;

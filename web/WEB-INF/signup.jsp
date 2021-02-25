@@ -25,7 +25,7 @@
         <link rel="stylesheet" href="assets/css/styles.css">
     </head>
 
-    <body>
+    <body onload="<c:if test='${requestScope.currentTab == "signup"}'>document.getElementById('signup-tab-cta').click()</c:if>">
         <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
             <div class="container-fluid"><a
                     class="navbar-brand d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center"
@@ -67,16 +67,25 @@
                 <!--<div class="alert alert-warning" role="alert"><span>${requestScope.fail}</span></div>-->
                     <%--</c:when>--%>
                 <%--</c:choose>--%>
-
+                <c:if test="${requestScope.fail == true}">
+                    <div class="alert alert-warning" role="alert">
+                        <c:forEach var="error" items="${requestScope.errList}"><div>${error}</div></c:forEach>
+                    </div>
+                </c:if>
+                <c:if test="${requestScope.success == true}">
+                    <div class="alert alert-success" role="alert">
+                        <span><c:out value="${sucessMessage}" /></span>
+                    </div>
+                </c:if>
         <div class="tabs">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item" role="presentation" data-bss-hover-animate="pulse"><a class="nav-link active" role="tab"
                                                                                            data-toggle="tab" href="#tab-1">Log
                         In</a></li>
-                <li class="nav-item" role="presentation" data-bss-hover-animate="pulse"><a class="nav-link" role="tab"
-                                                                                           data-toggle="tab"
+                <li class="nav-item" role="presentation" data-bss-hover-animate="pulse"><a class='nav-link' role="tab"
+                                                                                           data-toggle="tab" id="signup-tab-cta"
                                                                                            data-bss-hover-animate="pulse"
-                                                                                           href="#tab-2">Sign Up</a></li>
+                                                                                           href="#tab-2" onLoad>Sign Up</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade show active" role="tabpanel" id="tab-1">
@@ -92,7 +101,7 @@
                                 </svg>
                             </div>
                             <div class="form-group"><input class="form-control" type="text" name="username"
-                                                           placeholder="Username"></div>
+                                                           placeholder="Username" value="<c:out value='${lastCandidate.canUsername}' default=''/>"></div>
                             <div class="form-group"><input class="form-control" type="password" name="password"
                                                            placeholder="Password"></div>
                             <div class="form-group">
@@ -100,41 +109,41 @@
                             </div>
                             <a class="forgot" href="#">Forgot your email or password?</a>
                         </form>
+                            
+                            
                     </div>
                 </div>
                 <div class="tab-pane fade" role="tabpanel" id="tab-2">
                     <div class="container register-photo">
                         <div class="form-container">
                             <div class="image-holder"></div>
-                            <form method="post">
+                            <form action="<c:url value='/create-profile'></c:url>"  method="post">
                                 <h2 class="text-center"><strong>Create</strong> an account.</h2>
                                 <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"
                                                                data-bss-tooltip="" name="username" placeholder="Username"
                                                                autofocus="" required="" minlength="4" maxlength="30"
-                                                               title="Username"></div>
+                                                               title="Username" value="<c:out value='${lastCandidate.canUsername}' default=''/>"></div>
                                 <div class="form-group"><input class="form-control" type="password" data-toggle="tooltip"
                                                                data-bss-tooltip="" name="password" placeholder="Password"
                                                                required="" minlength="8" maxlength="30"
-                                                               pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
                                                                title="Password"></div>
                                 <div class="form-group"><input class="form-control" type="password" data-toggle="tooltip"
                                                                data-bss-tooltip="" name="password-repeat"
                                                                placeholder="Password (repeat)" required="" minlength="8"
                                                                maxlength="30"
-                                                               pattern="&quot;^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$&quot;"
                                                                title="Password repeat"></div>
                                 <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"
                                                                data-bss-tooltip="" name="firstName" placeholder="First Name"
-                                                               required="" maxlength="45" title="First name"></div>
+                                                               required="" maxlength="45" title="First name" value="<c:out value='${lastCandidate.canfirstName}' default=''/>"></div>
                                 <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"
-                                                               data-bss-tooltip="" name="lastName" placeholder="First Name"
-                                                               required="" maxlength="45" title="Last name"></div>
+                                                               data-bss-tooltip="" name="lastName" placeholder="Last Name"
+                                                               required="" maxlength="45" title="Last name" value="<c:out value='${lastCandidate.canlastName}' default=''/>"></div>
                                 <div class="form-group"><input class="form-control" type="email" data-toggle="tooltip"
                                                                data-bss-tooltip="" name="email" placeholder="Email" required=""
-                                                               title="Email"></div>
+                                                               title="Email" value="<c:out value='${lastCandidate.canEmail}' default=''/>"></div>
                                 <div class="form-group"><input class="form-control" type="tel" data-toggle="tooltip"
                                                                data-bss-tooltip="" name="phoneNo" placeholder="Phone Number"
-                                                               title="Phone Number" maxlength="10" inputmode="tel"></div>
+                                                               title="Phone Number" maxlength="10" inputmode="tel" value="<c:out value='${lastCandidate.canPhoneNo}' default=''/>"></div>
                                 <div class="form-group">
                                     <div class="form-check"><label class="form-check-label"><input class="form-check-input"
                                                                                                    type="checkbox">I agree to
@@ -150,7 +159,7 @@
                 </div>
             </div>
         </div>
-        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/jquery.min.js" ></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/js/bs-init.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>

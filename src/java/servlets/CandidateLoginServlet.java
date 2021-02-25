@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import problemdomain.Candidate;
 import services.AccountServices;
 
 /**
@@ -38,17 +39,20 @@ public class CandidateLoginServlet extends HttpServlet {
         AccountServices service = new AccountServices();
         ArrayList<String> errList = service.authenticateCandidate(username, password);
         
-        if (errList == null)    // If ERROR LIST NULL, then NO ERRORS
-            {
-                /*request.setAttribute("message", "Welcome, " + username);
-                request.getRequestDispatcher("/WEB-INF/Homepage.jsp").forward(request, response);*/
-                //USER LOGGED IN 
-            } else
-            {
-                request.setAttribute("errList", errList);
-                request.getRequestDispatcher("/WEB-INF/Login.jsp").forward(request, response);
-            }
-    
+     
+         if(errList == null){
+            request.setAttribute("success",true);
+            request.setAttribute("sucessMessage", "Logged In successfully");
+        } else{
+            Candidate candidate = new Candidate();
+            candidate.setCanUsername(username);
+            request.setAttribute("lastCandidate", candidate);
+            request.setAttribute("fail",true);
+            request.setAttribute("errList",errList);
+        }
+         
+                request.getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
+
     }
 
 }

@@ -7,11 +7,11 @@ package servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import problemdomain.Candidate;
 import services.AccountServices;
 
 /**
@@ -23,7 +23,8 @@ public class CandidateCreateProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/test-create-profile.jsp").forward(request, response);
+        request.setAttribute("currentTab", "signup");
+        this.getServletContext().getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
     }
 
     @Override
@@ -31,6 +32,7 @@ public class CandidateCreateProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String password_repeat = request.getParameter("password-repeat");
         String email = request.getParameter("email");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
@@ -38,12 +40,23 @@ public class CandidateCreateProfileServlet extends HttpServlet {
         ArrayList<String> errList = new AccountServices().createCandidateProfile(username, password, firstName, lastName, email, phoneNo);
         
         if(errList == null){
-            request.setAttribute("finalMsg", "All good");
+            
+            request.setAttribute("success",true);
+            request.setAttribute("sucessMessage", "Account created successfully");
         } else{
+            Candidate candidate = new Candidate();
+            candidate.setCanUsername(username);
+            candidate.setCanEmail(email);
+            candidate.setCanfirstName(firstName);
+            candidate.setCanlastName(lastName);
+            candidate.setCanPhoneNo(phoneNo);
+            request.setAttribute("lastCandidate", candidate);
+            request.setAttribute("fail",true);
             request.setAttribute("errList",errList);
         }
         
-        this.getServletContext().getRequestDispatcher("/WEB-INF/test-create-profile.jsp").forward(request, response);
+        request.setAttribute("currentTab", "signup");
+        this.getServletContext().getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
     }
 
     
