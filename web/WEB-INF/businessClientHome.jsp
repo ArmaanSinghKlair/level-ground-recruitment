@@ -51,12 +51,10 @@
         <div class="tabs">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item" role="presentation" data-bss-hover-animate="pulse">
-                    <a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1" onclick="revertChanges()">Create
-                        Job</a>
+                    <a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1" onclick="revertChanges()">Create Job</a>
                 </li>
-                <li class="nav-item" role="presentation" data-bss-hover-animate="pulse"><a class="nav-link" role="tab"
-                                                                                           data-toggle="tab" data-bss-hover-animate="pulse" href="#tab-2">Manage
-                        Jobs</a></li>
+                <li class="nav-item" role="presentation" data-bss-hover-animate="pulse">
+                    <a class="nav-link" role="tab" data-toggle="tab" data-bss-hover-animate="pulse" href="#tab-2">Manage Jobs</a></li>
             </ul>
             <div class="tab-content">
 
@@ -64,8 +62,8 @@
                 <div class="tab-pane active" role="tabpanel" id="tab-1">
 
 
-                    <div class="container default-container">
-                        <div class="inner-container">
+                    <div class="container default-container rounded">
+                        <div class="inner-container shadow p-3 mb-5 rounded">
                             <h5 class="mb-4 font-weight-bold" id="new-job-title">New Job Posting</h5>
                             <form action="" method="POST">
 
@@ -118,16 +116,16 @@
 
                     <c:choose>
                         <c:when test="${requestScope.jobList eq null}">
-                            <div class="container default-container text-center mt-5 text-white">
-                                <h4>Job List is Empty</h4>
+                            <div class="container default-container rounded">
+                                <h4 id="empty-list-title">Job List is Empty</h4>
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <div class="container default-container">
+                            <div class="container default-container rounded">
                                 <c:forEach var="job" items="${requestScope.jobList}">
 
-                                    <div class="inner-container">  
-                                        <h5 class="mb-4 font-weight-bold" id="new-job-title">*JOB TITLE*</h5>
+                                    <div class="inner-container shadow p-3 mb-5 rounded">  
+                                        <h5 class="mb-4 font-weight-bold" id="new-job-title">Job #${job.jobpostingID}</h5>
 
                                         <form action="" method="POST" class="job-forms" id="jobForm${job.jobpostingID}">
 
