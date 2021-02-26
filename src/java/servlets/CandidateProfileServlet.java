@@ -16,20 +16,19 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author 839645
  */
-public class CandidateDashboardServlet extends HttpServlet {
+public class CandidateProfileServlet extends HttpServlet {
 
-  
-  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String url = "/WEB-INF/candidate.jsp";
+        this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
 
-  
+
 }

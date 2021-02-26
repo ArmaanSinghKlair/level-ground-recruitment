@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 import problemdomain.Candidate;
 import services.AccountServices;
 
@@ -43,6 +44,9 @@ public class CandidateLoginServlet extends HttpServlet {
          if(errList == null){
             request.setAttribute("success",true);
             request.setAttribute("sucessMessage", "Logged In successfully");
+            HttpSession session = request.getSession();
+            session.setAttribute("loggedIn", true);
+            session.setAttribute("username", username);
         } else{
             Candidate candidate = new Candidate();
             candidate.setCanUsername(username);

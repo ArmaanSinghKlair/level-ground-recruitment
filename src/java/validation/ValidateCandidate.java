@@ -73,8 +73,8 @@ public final class ValidateCandidate {
     public static String validateCanUsername(String username){
         if(isEmpty(username))
             return "Username cannot be empty";
-        else if(username.trim().length() > 10)
-            return "Username cannot be more than 10 characters";
+        else if(username.trim().length() > 45)
+            return "Username cannot be more than 45 characters";
         else 
             return null;
     }
@@ -82,7 +82,7 @@ public final class ValidateCandidate {
     public static String validateCanPassword(String password){
         if(isEmpty(password))
             return "Password cannot be empty";
-        else if(password.length() > 1)
+        else if(password.length() > 100)
             return "Password cannot be more than 100 characters";
         else 
             return null;
