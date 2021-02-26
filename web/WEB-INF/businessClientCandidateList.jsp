@@ -40,7 +40,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#">Sign Out</a>
                             </div>
-                        </div>
+                        </div>    
                     </span>
                 </div>
             </div>
@@ -49,21 +49,19 @@
 
         <div class="tabs">
             <ul class="nav nav-tabs" role="tablist"></ul>
-        </div>
-
-        <c:choose>
+            <c:choose>
 
             <c:when test="${requestScope.candidateList eq null}">
                 <div class="container default-container text-center mt-5 text-white">
-                    <h4>Candidate List is Empty</h4>
+                    <h4 id="empty-list-title">Candidate List is Empty</h4>
                 </div>
             </c:when>
 
             <c:otherwise>
-                <div class="container default-container">
+                <div class="container default-container rounded">
                     <c:forEach var="candidate" items="${requestScope.candidateList}">
 
-                        <div class="inner-container">
+                        <div class="inner-container shadow p-3 mb-5 rounded">
                             <h5 class="mb-4 font-weight-bold" id="new-job-title">Candidate #${candidate.candidateID}</h5>
 
                             <div class="candidateProfile">
@@ -116,6 +114,9 @@
                 </div>
             </c:otherwise>
         </c:choose>
+        </div>
+
+        
 
 
 
