@@ -125,6 +125,23 @@ public class AccountServicesDB {
 
     }
     
+    public final Candidate getCandidateByUsername(String username){
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try{
+            if(!doesUserExist(em,"canUsername",username)){
+                return null;
+            }
+            TypedQuery<Candidate> q = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class);
+            q.setParameter("canUsername", username);
+            
+            Candidate c = q.getSingleResult();
+            return c;
+        }catch(Exception e){
+            return null;
+        }finally{
+            em.close();
+        }
+    }
     /**
      * Checks to see if user exists -- does not alter the EntityManager in any way so em can passed by reference
      * @param em Entity Manager

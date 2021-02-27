@@ -54,8 +54,8 @@ public class AccountServices {
         }
     }
     
-    public final Candidate getAllCandidateDetails(String username){
-        return null;
+    public final Candidate getCandidateByUsername(String username){
+        return asdb.getCandidateByUsername(username);
     }
     private final boolean isEmpty(String field){
         return field == null || field.trim().length() == 0;
