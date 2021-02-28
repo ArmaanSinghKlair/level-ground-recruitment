@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="assets/css/styles.css">
     </head>
 
-    <body>
+    <body onload="<c:if test='${requestScope.currentTab != null}'>document.getElementById('${requestScope.currentTab.trim()}').click()</c:if>">
         <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
             <div class="container-fluid"><a class="navbar-brand d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center" href="index.html"><img class="logo" src="assets/img/logo.png">
                     <h4 class="brand-name">Level Ground Recruitment</h4>
@@ -33,7 +33,7 @@
                         <li class="nav-item"><a class="nav-link active" data-bss-hover-animate="pulse" href="index.html">Home</a></li>
                         <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="#">Job Posting</a></li>
                         <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" data-bss-hover-animate="pulse" href="#">Services</a>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="profile.html">Profile</a><a class="dropdown-item" href="#">Contact us</a><a class="dropdown-item" href="#">About</a></div>
+                            <div class="dropdown-menu"><a class="dropdown-item" href="<c:url value='/candidate-profile'/>">Profile</a><a class="dropdown-item" href="#">Contact us</a><a class="dropdown-item" href="#">About</a></div>
                         </li>
                     </ul><span class="d-md-flex flex-md-shrink-0 justify-content-md-center align-items-md-center navbar-text actions"> <a data-bss-hover-animate="pulse" class="login" href="<c:url value='/candidate-login' />">Log In</a><a class="btn btn-primary action-button" role="button" data-bss-hover-animate="pulse" href="<c:url value='/create-profile' />">Sign Up</a></span>
                 </div>

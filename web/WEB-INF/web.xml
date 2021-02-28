@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <servlet>
-        <servlet-name>CandidateDashboardServlet</servlet-name>
-        <servlet-class>servlets.CandidateDashboardServlet</servlet-class>
-    </servlet>
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>filters.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <servlet-name>CandidateProfileServlet</servlet-name>
+    </filter-mapping>
     <servlet>
         <servlet-name>CandidateCreateProfileServlet</servlet-name>
         <servlet-class>servlets.CandidateCreateProfileServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>CandidateDashboardServlet</servlet-name>
-        <url-pattern>/candidate-dashboard</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>CandidateProfileServlet</servlet-name>
+        <servlet-class>servlets.CandidateProfileServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CandidateCreateProfileServlet</servlet-name>
         <url-pattern>/create-profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CandidateProfileServlet</servlet-name>
+        <url-pattern>/candidate-profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

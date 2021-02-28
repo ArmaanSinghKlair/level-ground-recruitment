@@ -34,7 +34,7 @@
                     <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="#">Job Posting</a></li>
                     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" data-bss-hover-animate="pulse" href="#">Services</a>
-                        <div class="dropdown-menu"><a class="dropdown-item" href="profile.html">Profile</a><a class="dropdown-item" href="#">Contact us</a><a class="dropdown-item" href="#">About</a></div>
+                        <div class="dropdown-menu"><a class="dropdown-item" href="<c:url value="/candidate-profile"/>">Profile</a><a class="dropdown-item" href="#">Contact us</a><a class="dropdown-item" href="#">About</a></div>
                     </li>
                 </ul><span class="d-md-flex flex-md-shrink-0 justify-content-md-center align-items-md-center navbar-text actions"> <a data-bss-hover-animate="pulse" class="login" href="login.html">Log In</a><a class="btn btn-primary action-button" role="button" data-bss-hover-animate="pulse" href="login.html">Sign Up</a></span>
             </div>
@@ -58,8 +58,8 @@
     <div class="container-md">
         <div class="row text-left head-row">
             <div class="col m-auto">
-                <h3>Name Here</h3>
-                <p>Status</p>
+                <h3><c:out value="${candidate.canfirstName} ${candidate.canlastName}"/></h3>
+                <p>Status: ${candidate.placed ? 'Placed' : "Not placed yet"}</p>
             </div>
         </div>
         <div class="row head-row">
@@ -69,8 +69,8 @@
                 <form data-aos="fade-up" class="info-form">
                     <div class="form-group">
                         <p>About:</p>
-                        <p>Email:</p>
-                        <p>Phone Number:&nbsp;</p>
+                        <p>Email: <c:out value="${candidate.canEmail}"/></p>
+                        <p>Phone Number: <c:out value="${candidate.canPhoneNo}"/></p>
                     </div>
                     <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
                         <div class="btn-group" role="group"><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="submit" title="Delete"><i class="far fa-window-close" data-bss-hover-animate="pulse"></i></button><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="button" title="Edit"><i class="far fa-edit" data-bss-hover-animate="pulse"></i></button></div>
@@ -80,102 +80,54 @@
             <div class="col-12 col-md-5 offset-md-2 sections">
                 <h4>Education</h4>
                 <hr>
-                <form data-aos="fade-up">
-                    <div class="form-group">
-                        <h6>Institution</h6>
-                        <p>level</p>
-                        <p>Subject</p>
-                        <p>Start date - End date</p>
-                    </div>
-                    <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
-                        <div class="btn-group" role="group"><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="submit" title="Delete"><i class="far fa-window-close" data-bss-hover-animate="pulse"></i></button><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="button" title="Edit"><i class="far fa-edit" data-bss-hover-animate="pulse"></i></button></div>
-                    </div>
-                </form>
-                <form data-aos="fade-up">
-                    <div class="form-group">
-                        <h6>Institution</h6>
-                        <p>level</p>
-                        <p>Subject</p>
-                        <p>Start date - End date</p>
-                    </div>
-                    <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
-                        <div class="btn-group" role="group"><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="submit" title="Delete"><i class="far fa-window-close" data-bss-hover-animate="pulse"></i></button><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="button" title="Edit"><i class="far fa-edit" data-bss-hover-animate="pulse"></i></button></div>
-                    </div>
-                </form>
+                <c:forEach var="education" items="${candidate.educationCollection}">
+                    <form data-aos="fade-up">
+                        <div class="form-group">
+                            <h6>${education.institution}</h6>
+                            <p>${education.level}</p>
+                            <p>${education.subject}</p>
+                            <p>${education.startDate} - ${education.endDate}</p>
+                        </div>
+                        <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
+                            <div class="btn-group" role="group"><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="submit" title="Delete"><i class="far fa-window-close" data-bss-hover-animate="pulse"></i></button><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="button" title="Edit"><i class="far fa-edit" data-bss-hover-animate="pulse"></i></button></div>
+                        </div>
+                    </form>
+                </c:forEach>
             </div>
         </div>
         <div class="row row-cols-2 row-cols-sm-1 head-row">
             <div class="col-12 col-md-5 sections">
                 <h4>Work History</h4>
                 <hr>
-                <form data-aos="fade-up">
-                    <div class="form-group">
-                        <h6>Company</h6>
-                        <p>Title:&nbsp;</p>
-                        <p>Start Date:</p>
-                        <p>End Date:</p>
-                        <p>Reference:</p>
-                    </div>
-                    <div class="d-flex d-sm-flex d-xl-flex justify-content-end modify-btns">
-                        <div class="btn-group" role="group"><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="submit" title="Delete"><i class="far fa-window-close" data-bss-hover-animate="pulse"></i></button><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="button" title="Edit"><i class="far fa-edit" data-bss-hover-animate="pulse"></i></button></div>
-                    </div>
-                </form>
-                <form data-aos="fade-up">
-                    <div class="form-group">
-                        <h6>Company</h6>
-                        <p>Title:&nbsp;</p>
-                        <p>Start Date:</p>
-                        <p>End Date:</p>
-                        <p>Reference:</p>
-                    </div>
-                    <div class="d-flex d-sm-flex d-xl-flex justify-content-end justify-content-sm-end justify-content-xl-end modify-btns">
-                        <div class="btn-group" role="group"><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="submit" title="Delete"><i class="far fa-window-close" data-bss-hover-animate="pulse"></i></button><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="button" title="Edit"><i class="far fa-edit" data-bss-hover-animate="pulse"></i></button></div>
-                    </div>
-                </form>
+                <c:forEach var="workHistory" items="${candidate.workHistoryCollection}">
+                    <form data-aos="fade-up">
+                        <div class="form-group">
+                            <h6>${workHistory.company}</h6>
+                            <p>${workHistory.title}</p>
+                            <p>${workHistory.startDate}</p>
+                            <p>${workHistory.endDate}</p>
+                            <p>${workHistory.reference}</p>
+                        </div>
+                        <div class="d-flex d-sm-flex d-xl-flex justify-content-end modify-btns">
+                            <div class="btn-group" role="group"><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="submit" title="Delete"><i class="far fa-window-close" data-bss-hover-animate="pulse"></i></button><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="button" title="Edit"><i class="far fa-edit" data-bss-hover-animate="pulse"></i></button></div>
+                        </div>
+                    </form>
+                </c:forEach>
+                
             </div>
             <div class="col-12 col-md-5 offset-md-2 sections">
                 <h4>Skills</h4>
                 <hr>
+                <c:forEach var="candidateSkill" items="${candidate.candidateSkillCollection}">
                 <form class="form-inline justify-content-between" data-aos="fade-up">
-                    <div class="form-group">
-                        <p>Description</p>
+                    <div class="form-group" style="width:100%">
+                        <p>${candidateSkill.skill.description}</p>
                     </div>
                     <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
                         <div class="btn-group" role="group"><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="submit" title="Delete"><i class="far fa-window-close" data-bss-hover-animate="pulse"></i></button><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="button" title="Edit"><i class="far fa-edit" data-bss-hover-animate="pulse"></i></button></div>
                     </div>
                 </form>
-                <form class="form-inline justify-content-between" data-aos="fade-up">
-                    <div class="form-group">
-                        <p>Description</p>
-                    </div>
-                    <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
-                        <div class="btn-group" role="group"><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="submit" title="Delete"><i class="far fa-window-close" data-bss-hover-animate="pulse"></i></button><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="button" title="Edit"><i class="far fa-edit" data-bss-hover-animate="pulse"></i></button></div>
-                    </div>
-                </form>
-                <form class="form-inline justify-content-between" data-aos="fade-up">
-                    <div class="form-group">
-                        <p>Description</p>
-                    </div>
-                    <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
-                        <div class="btn-group" role="group"><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="submit" title="Delete"><i class="far fa-window-close" data-bss-hover-animate="pulse"></i></button><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="button" title="Edit"><i class="far fa-edit" data-bss-hover-animate="pulse"></i></button></div>
-                    </div>
-                </form>
-                <form class="form-inline justify-content-between" data-aos="fade-up">
-                    <div class="form-group">
-                        <p>Description</p>
-                    </div>
-                    <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
-                        <div class="btn-group" role="group"><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="submit" title="Delete"><i class="far fa-window-close" data-bss-hover-animate="pulse"></i></button><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="button" title="Edit"><i class="far fa-edit" data-bss-hover-animate="pulse"></i></button></div>
-                    </div>
-                </form>
-                <form class="form-inline justify-content-between" data-aos="fade-up">
-                    <div class="form-group">
-                        <p>Description</p>
-                    </div>
-                    <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
-                        <div class="btn-group" role="group"><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="submit" title="Delete"><i class="far fa-window-close" data-bss-hover-animate="pulse"></i></button><button class="btn btn-lg" data-toggle="tooltip" data-bss-tooltip="" type="button" title="Edit"><i class="far fa-edit" data-bss-hover-animate="pulse"></i></button></div>
-                    </div>
-                </form>
+                </c:forEach>
             </div>
         </div>
     </div>

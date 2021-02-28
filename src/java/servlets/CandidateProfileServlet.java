@@ -11,25 +11,31 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import problemdomain.Candidate;
+import services.AccountServices;
 
 /**
  *
  * @author 839645
  */
-public class CandidateDashboardServlet extends HttpServlet {
+public class CandidateProfileServlet extends HttpServlet {
 
-  
-  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String url = "/WEB-INF/candidate.jsp";
+        AccountServices accService =new AccountServices();
+        HttpSession sess = request.getSession(false);
+        Candidate c = accService.getCandidateByUsername((String)sess.getAttribute("username"));
+        request.setAttribute("candidate", c);
+        this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
 
-  
+
 }

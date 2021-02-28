@@ -8,6 +8,7 @@ package services;
 import dataaccess.AccountServicesDB;
 import java.util.ArrayList;
 import java.util.HashMap;
+import problemdomain.Candidate;
 import validation.ValidateBusinessClient;
 import validation.ValidateCandidate;
 
@@ -53,6 +54,9 @@ public class AccountServices {
         }
     }
     
+    public final Candidate getCandidateByUsername(String username){
+        return asdb.getCandidateByUsername(username);
+    }
     private final boolean isEmpty(String field){
         return field == null || field.trim().length() == 0;
     }
