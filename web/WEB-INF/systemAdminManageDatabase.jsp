@@ -31,8 +31,8 @@
                     </a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navcol-1">
                         <ul class="nav navbar-nav mr-auto flex-md-shrink-0">
-                            <li class="nav-item"><a class="nav-link active" data-bs-hover-animate="pulse" href="#">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="#">Manage Database</a></li>
+                            <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="#">Home</a></li>
+                            <li class="nav-item"><a class="nav-link active" data-bs-hover-animate="pulse" href="#">Manage Database</a></li>
                         </ul>
                         <span class="d-md-flex flex-md-shrink-0 justify-content-md-center align-items-md-center navbar-text actions"> 
                             <div class="dropdown">
@@ -72,125 +72,58 @@
 
                 <div class="tab-pane active" role="tabpanel" id="tab-1">
 
-
-                    <div class="container default-container rounded">
-
-                        <div class="inner-container shadow p-3 mb-5 rounded">
-                            <h5 class="mb-4 font-weight-bold" id="new-job-title">Candidate #${candidate.candidateID}</h5>
-
-                            <div class="candidateProfile">
-                                <label for="workExperience">Work Experience</label>
-
-                                <ul>
-                                    <c:forEach var="work" items="${candidate.workHistoryCollection}">
-                                        <li>
-                                            ${work.company} ${work.startDate}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-
-                                <label for="education">Education</label>
-                                <ul>
-                                    <c:forEach var="education" items="${candidate.educationCollection}">
-                                        <li>
-                                            ${education.institution} ${education.subject} ${education.level}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-
-                                <label for="keySkills">Key Skills</label>
-                                <ul>
-                                    <c:forEach var="skill" items="${candidate.candidateSkillCollection}">
-                                        <li>
-                                            ${skill.skill.description}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-
-                                <label for="interestedRoles">Interested Roles</label>
-                                <ul>
-                                    <c:forEach var="role" items="${candidate.roleCollection}">
-                                        <li>
-                                            ${role.description}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-                            </div>
-
-                            <div class="center-buttons" id="editButtons${job.jobpostingID}">
-                                <button class="delete-button">Delete</button>
-                            </div>
-
-                        </div>
-                        <c:forEach var="candidate" items="${requestScope.candidateList}">
-
-
-
-                        </c:forEach>
-                    </div>
-
                     <c:choose>
 
                         <c:when test="${requestScope.candidateList eq null}">
-                            <div class="container default-container text-center mt-5 text-white">
+                            <div class="container default-container">
                                 <h4 id="empty-list-title">Candidate List is Empty</h4>
                             </div>
                         </c:when>
 
                         <c:otherwise>
-                            <div class="container default-container rounded">
+                            <div class="container default-container">
 
-                                <div class="inner-container shadow p-3 mb-5 rounded">
-                                    <h5 class="mb-4 font-weight-bold" id="new-job-title">Candidate #${candidate.candidateID}</h5>
-
-                                    <div class="candidateProfile">
-                                        <label for="workExperience">Work Experience</label>
-
-                                        <ul>
-                                            <c:forEach var="work" items="${candidate.workHistoryCollection}">
-                                                <li>
-                                                    ${work.company} ${work.startDate}
-                                                </li>
-                                            </c:forEach>
-                                        </ul>
-
-                                        <label for="education">Education</label>
-                                        <ul>
-                                            <c:forEach var="education" items="${candidate.educationCollection}">
-                                                <li>
-                                                    ${education.institution} ${education.subject} ${education.level}
-                                                </li>
-                                            </c:forEach>
-                                        </ul>
-
-                                        <label for="keySkills">Key Skills</label>
-                                        <ul>
-                                            <c:forEach var="skill" items="${candidate.candidateSkillCollection}">
-                                                <li>
-                                                    ${skill.skill.description}
-                                                </li>
-                                            </c:forEach>
-                                        </ul>
-
-                                        <label for="interestedRoles">Interested Roles</label>
-                                        <ul>
-                                            <c:forEach var="role" items="${candidate.roleCollection}">
-                                                <li>
-                                                    ${role.description}
-                                                </li>
-                                            </c:forEach>
-                                        </ul>
-                                    </div>
-
-                                    <div class="center-buttons" id="editButtons${job.jobpostingID}">
-                                        <button class="default-button">Hire</button>
-                                        <button class="default-button">Interview</button>
-                                    </div>
-
-                                </div>
                                 <c:forEach var="candidate" items="${requestScope.candidateList}">
 
+                                    <div class="inner-container shadow p-3 mb-5">
+                                        <h5 class="container-header">Candidate #${candidate.candidateID}</h5>
 
+                                        <dl>
+                                            <dt class="section-label">Work Experience</dt>
+                                            <c:forEach var="work" items="${candidate.workHistoryCollection}">
+                                                <dd>
+                                                    ${work.company} ${work.startDate}
+                                                <dd>
+                                            </c:forEach>
+
+                                            <dt class="section-label">Education</dt>
+                                            <c:forEach var="education" items="${candidate.educationCollection}">
+                                                <dd>
+                                                    ${education.institution} ${education.subject} ${education.level}
+                                                </dd>
+                                            </c:forEach>
+
+                                            <dt class="section-label">Key Skills</dt>
+                                            <c:forEach var="skill" items="${candidate.candidateSkillCollection}">
+                                                <dd>
+                                                    ${skill.skill.description}
+                                                </dd>
+                                            </c:forEach>
+
+                                            <dt class="section-label">Interested Roles</dt>
+                                            <c:forEach var="role" items="${candidate.roleCollection}">
+                                                <dd>
+                                                    ${role.description}
+                                                </dd>
+                                            </c:forEach>
+
+                                        </dl>
+
+                                        <div>
+                                            <button class="default-button delete-button">Delete</button>
+                                        </div>
+
+                                    </div>
 
                                 </c:forEach>
                             </div>
@@ -203,143 +136,44 @@
 
                 <div class="tab-pane" role="tabpanel" id="tab-2">
 
-
-                    <div class="container default-container rounded">
-
-                        <div class="inner-container shadow p-3 mb-5 rounded">
-                            <h5 class="mb-4 font-weight-bold" id="new-job-title">Job Posting #${candidate.candidateID}</h5>
-
-                            <div class="candidateProfile">
-                                <label for="workExperience">Company</label>
-
-                                <ul>
-                                    <c:forEach var="work" items="${candidate.workHistoryCollection}">
-                                        <li>
-                                            ${work.company} ${work.startDate}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-
-                                <label for="education">Requirements</label>
-                                <ul>
-                                    <c:forEach var="education" items="${candidate.educationCollection}">
-                                        <li>
-                                            ${education.institution} ${education.subject} ${education.level}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-
-                                <label for="keySkills">Start Date</label>
-                                <ul>
-                                    <c:forEach var="skill" items="${candidate.candidateSkillCollection}">
-                                        <li>
-                                            ${skill.skill.description}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-
-                                <label for="interestedRoles">End Date</label>
-                                <ul>
-                                    <c:forEach var="role" items="${candidate.roleCollection}">
-                                        <li>
-                                            ${role.description}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-
-                                <label for="interestedRoles">Status</label>
-                                <p style="margin-top: 0px;">Full Time</p>
-                                <ul>
-                                    
-                                    <c:forEach var="role" items="${candidate.roleCollection}">
-                                        <li>
-                                            ${role.description}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-
-                                <label for="interestedRoles">Description</label>
-                                <p style="overflow: auto;">
-                                    asafoiasdfoihasifhsadfoihadfiofdasfsdjaifoijasdfaosidfhoiashdfasiofdhasdoifhioashdfsadfihsadofh
-                                    iasjdfoiashdfohasdfoiashdfhoiasdfih
-                                    ihasdoifhasdfhasodifasdifhasdfh
-                                    \oihasdofhasdfhoiasdfahsidfhsdfoih
-                                </p>
-
-                                <c:forEach var="role" items="${candidate.roleCollection}">
-                                    <p>${test}</p>
-                                </c:forEach>
-                            </div>
-
-                            <div class="center-buttons" id="editButtons${job.jobpostingID}">
-                                <button class="delete-button">Delete</button>
-                            </div>
-
-                        </div>
-                        <c:forEach var="candidate" items="${requestScope.candidateList}">
-
-
-
-                        </c:forEach>
-                    </div>
-
                     <c:choose>
 
-                        <c:when test="${requestScope.candidateList eq null}">
-                            <div class="container default-container text-center mt-5 text-white">
-                                <h4 id="empty-list-title">Candidate List is Empty</h4>
+                        <c:when test="${requestScope.jobList eq null}">
+                            <div class="container default-container">
+                                <h4 id="empty-list-title">Job List is Empty</h4>
                             </div>
                         </c:when>
 
                         <c:otherwise>
-                            <div class="container default-container rounded">
-                                <c:forEach var="candidate" items="${requestScope.candidateList}">
+                            <div class="container default-container">
+                                <c:forEach var="job" items="${requestScope.jobList}">
 
-                                    <div class="inner-container shadow p-3 mb-5 rounded">
-                                        <h5 class="mb-4 font-weight-bold" id="new-job-title">Candidate #${candidate.candidateID}</h5>
+                                    <div class="inner-container shadow p-3 mb-5">
+                                        <h5 class="container-header">Job Posting #${job.jobpostingID}</h5>
 
-                                        <div class="candidateProfile">
-                                            <label for="workExperience">Work Experience</label>
+                                        <dl>
+                                            <dt class="section-label">Title</dt>
+                                            <dd>${job.title}</dd>
 
-                                            <ul>
-                                                <c:forEach var="work" items="${candidate.workHistoryCollection}">
-                                                    <li>
-                                                        ${work.company} ${work.startDate}
-                                                    </li>
-                                                </c:forEach>
-                                            </ul>
+                                            <dt class="section-label">Requirements</dt>
+                                            <dd>${job.requirements}</dd>
 
-                                            <label for="education">Education</label>
-                                            <ul>
-                                                <c:forEach var="education" items="${candidate.educationCollection}">
-                                                    <li>
-                                                        ${education.institution} ${education.subject} ${education.level}
-                                                    </li>
-                                                </c:forEach>
-                                            </ul>
+                                            <dt class="section-label">Start Date</dt>
+                                            <dd>${job.startDate}</dd>
 
-                                            <label for="keySkills">Key Skills</label>
-                                            <ul>
-                                                <c:forEach var="skill" items="${candidate.candidateSkillCollection}">
-                                                    <li>
-                                                        ${skill.skill.description}
-                                                    </li>
-                                                </c:forEach>
-                                            </ul>
+                                            <dt class="section-label">End Date</dt>
+                                            <dd>${job.endDate}</dd>
 
-                                            <label for="interestedRoles">Interested Roles</label>
-                                            <ul>
-                                                <c:forEach var="role" items="${candidate.roleCollection}">
-                                                    <li>
-                                                        ${role.description}
-                                                    </li>
-                                                </c:forEach>
-                                            </ul>
-                                        </div>
+                                            <dt class="section-label">Status</dt>
+                                            <dd>${job.jobStatus}</dd>
+
+                                            <dt class="section-label">Description</dt>
+                                            <dd style="word-wrap: break-word;">${job.jobDescription}</dd>
+
+                                        </dl>
 
                                         <div class="center-buttons" id="editButtons${job.jobpostingID}">
-                                            <button class="default-button">Hire</button>
-                                            <button class="default-button">Interview</button>
+                                            <button class="default-button delete-button">Delete</button>
                                         </div>
 
                                     </div>
