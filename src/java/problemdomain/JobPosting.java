@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "JobPosting.findByJobpostingID", query = "SELECT j FROM JobPosting j WHERE j.jobpostingID = :jobpostingID"),
     @NamedQuery(name = "JobPosting.findByRequirements", query = "SELECT j FROM JobPosting j WHERE j.requirements = :requirements"),
     @NamedQuery(name = "JobPosting.findByTitle", query = "SELECT j FROM JobPosting j WHERE j.title = :title"),
-    @NamedQuery(name = "JobPosting.findByJopDescription", query = "SELECT j FROM JobPosting j WHERE j.jopDescription = :jopDescription"),
+    @NamedQuery(name = "JobPosting.findByjobDescription", query = "SELECT j FROM JobPosting j WHERE j.jobDescription = :jobDescription"),
     @NamedQuery(name = "JobPosting.findByJobStatus", query = "SELECT j FROM JobPosting j WHERE j.jobStatus = :jobStatus"),
     @NamedQuery(name = "JobPosting.findByStartDate", query = "SELECT j FROM JobPosting j WHERE j.startDate = :startDate"),
     @NamedQuery(name = "JobPosting.findByEndDate", query = "SELECT j FROM JobPosting j WHERE j.endDate = :endDate"),
@@ -54,8 +54,8 @@ public class JobPosting implements Serializable {
     @Basic(optional = false)
     @Column(name = "title")
     private String title;
-    @Column(name = "jop_description")
-    private String jopDescription;
+    @Column(name = "job_description")
+    private String jobDescription;
     @Column(name = "job_status")
     private String jobStatus;
     @Column(name = "start_date")
@@ -107,12 +107,12 @@ public class JobPosting implements Serializable {
         this.title = title;
     }
 
-    public String getJopDescription() {
-        return jopDescription;
+    public String getjobDescription() {
+        return jobDescription;
     }
 
-    public void setJopDescription(String jopDescription) {
-        this.jopDescription = jopDescription;
+    public void setjobDescription(String jobDescription) {
+        this.jobDescription = jobDescription;
     }
 
     public String getJobStatus() {
