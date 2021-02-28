@@ -23,6 +23,18 @@
         <link rel="stylesheet" href="assets/css/styles.css">
     </head>
     <body>
+
+        <!--
+            ***NAVBAR SECTION***
+                
+            Most of this code is reused from Amir's jsp page to keep things consistent.
+            I've renamed the different tabs appropriately
+                
+            Lastly, I've condensed the login/signup buttons into one button that displays the user's type (in this case, Business Client).
+            This button has a drop-down menu for signing out.
+            
+            Currently there is no functionality to access different tabs on this navbar section
+        -->
         <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
             <div class="container"><a class="navbar-brand d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center" href="index.html"><img class="logo" src="assets/img/logo.png">
                     <h4 class="brand-name">Level Ground Recruitment</h4>
@@ -46,77 +58,89 @@
             </div>
         </nav>
 
+        <!--
+           ***ALERT SECTION***
+           displays alerts. The code is the same as in the signup.jsp page
+        -->
+        <c:if test="${requestScope.fail == true}">
+            <div class="alert alert-warning" role="alert">
+                <c:forEach var="error" items="${requestScope.errList}"><div>&#9888; ${error}</div></c:forEach>
+                </div>
+        </c:if>
+        <c:if test="${requestScope.success == true}">
+            <div class="alert alert-success" role="alert">
+                <span><c:out value="${sucessMessage}" /></span>
+            </div>
+        </c:if>
 
+
+        <!--
+            ***MAIN SECTION***
+          
+            I'm still using the tab approach to keep the page alignment consistent but this page only has 1 tab
+            
+        -->
         <div class="tabs">
             <ul class="nav nav-tabs" role="tablist"></ul>
             <c:choose>
 
-            <c:when test="${requestScope.candidateList eq null}">
-                <div class="container default-container text-center mt-5 text-white">
-                    <h4 id="empty-list-title">Candidate List is Empty</h4>
-                </div>
-            </c:when>
+                <c:when test="${requestScope.candidateList eq null}">
+                    <div class="container default-container">
+                        <h4 id="empty-list-title">Candidate List is Empty</h4>
+                    </div>
+                </c:when>
 
-            <c:otherwise>
-                <div class="container default-container rounded">
-                    <c:forEach var="candidate" items="${requestScope.candidateList}">
+                <c:otherwise>
+                    <div class="container default-container">
+                        <c:forEach var="candidate" items="${requestScope.candidateList}">
 
-                        <div class="inner-container shadow p-3 mb-5 rounded">
-                            <h5 class="mb-4 font-weight-bold" id="new-job-title">Candidate #${candidate.candidateID}</h5>
+                            <div class="inner-container shadow p-3 mb-5">
+                                <h5 class="container-header">Candidate #${candidate.candidateID}</h5>
 
-                            <div class="candidateProfile">
-                                <label for="workExperience">Work Experience</label>
-
-                                <ul>
+                                <dl>
+                                    <dt class="section-label">Work Experience</dt>
                                     <c:forEach var="work" items="${candidate.workHistoryCollection}">
-                                        <li>
+                                        <dd>
                                             ${work.company} ${work.startDate}
-                                        </li>
+                                        </dd>
                                     </c:forEach>
-                                </ul>
 
-                                <label for="education">Education</label>
-                                <ul>
+                                    <dt class="section-label">Education</dt>
                                     <c:forEach var="education" items="${candidate.educationCollection}">
-                                        <li>
+                                        <dd>
                                             ${education.institution} ${education.subject} ${education.level}
-                                        </li>
+                                        </dd>
                                     </c:forEach>
-                                </ul>
 
-                                <label for="keySkills">Key Skills</label>
-                                <ul>
+                                    <dt class="section-label">Key Skills</dt>
                                     <c:forEach var="skill" items="${candidate.candidateSkillCollection}">
-                                        <li>
+                                        <dd>
                                             ${skill.skill.description}
-                                        </li>
+                                        </dd>
                                     </c:forEach>
-                                </ul>
 
-                                <label for="interestedRoles">Interested Roles</label>
-                                <ul>
+                                    <dt class="section-label">Interested Roles</dt>
                                     <c:forEach var="role" items="${candidate.roleCollection}">
-                                        <li>
+                                        <dd>
                                             ${role.description}
-                                        </li>
+                                        </dd>
                                     </c:forEach>
-                                </ul>
+                                </dl>
+
+                                <div>
+                                    <button class="default-button primary-button">Hire</button>
+                                    <button class="default-button primary-button">Interview</button>
+                                </div>
+
                             </div>
 
-                            <div class="center-buttons" id="editButtons${job.jobpostingID}">
-                                <button class="default-button">Hire</button>
-                                <button class="default-button">Interview</button>
-                            </div>
-
-                        </div>
-
-                    </c:forEach>
-                </div>
-            </c:otherwise>
-        </c:choose>
+                        </c:forEach>
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
 
-        
+
 
 
 
