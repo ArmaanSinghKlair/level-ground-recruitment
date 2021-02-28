@@ -114,7 +114,7 @@ create table lgrdb.job_posting
     business_clientID int                                not null,
     requirements      varchar(255)                       not null,
     title             varchar(100)                       not null,
-    jop_description   varchar(255)                       null,
+    job_description   varchar(255)                       null,
 	job_status        varchar(30)                        null,
     start_date        datetime default CURRENT_TIMESTAMP null,
     end_date          datetime                           null,
