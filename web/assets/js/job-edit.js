@@ -77,7 +77,10 @@ function confirmDelete(id)
                         icon: "success",
                     }).then(function ()
                     {
-                        window.location = "BusinessClientTestServlet?deleteID=" + id;
+                        //TODO: Add servlet name where the delete request will be sent to
+                        //Once deleted, show alert on page saying job deleted
+                        //Redirect user back to manage job posting tab
+                        window.location = "<servlet name>?deleteID=" + id;
                     });
 
                 } else {
