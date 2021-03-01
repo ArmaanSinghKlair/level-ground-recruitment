@@ -5,16 +5,19 @@
 
 .far.fa-edit {
   color: #457b9d;
+  font-size: 1.5em;
 }
 
 .far.fa-window-close {
   color: #e63946;
+  font-size: 1.5em;
 }
 
 form {
   padding: 15px;
   border-radius: 2px;
   border-bottom: 1px dotted #a8dadc ;
+  margin: 0;
 }
 
 .sections {
@@ -34,5 +37,23 @@ form {
 
 .info-form {
   border-bottom-style: none;
+}
+
+.ignore {
+  border-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.btn.btn-lg {
+  font-size: 1.5em;
+}
+
+.btn.btn-outline-success {
+  border-style: none;
+}
+
+.btn.btn-outline-success > i {
+  font-size: 1.5em;
 }
 
