@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import problemdomain.Candidate;
-import java.util.Locale;
 import validation.ValidateBusinessClient;
 import validation.ValidateCandidate;
 import validation.ValidateJobPosting;
@@ -50,7 +49,7 @@ public class AccountServices {
     
     public final ArrayList<String> createJobPosting(String title,String requirements,String sDate,String eDate, String status, String description){
         ArrayList<String> errList = new ArrayList<>();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date startDate = format.parse(sDate);
             Date endDate = format.parse(eDate);
