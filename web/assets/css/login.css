@@ -80,3 +80,8 @@ hr {
   background: #a8dadc;
 }
 
+.form-group.login-as {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+

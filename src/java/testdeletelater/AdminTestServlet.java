@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package testdeletelater;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import problemdomain.Candidate;
 import problemdomain.CandidateSkill;
 import problemdomain.Education;
+import problemdomain.JobPosting;
 import problemdomain.Role;
 import problemdomain.Skill;
 import problemdomain.WorkHistory;
@@ -25,8 +26,8 @@ import problemdomain.WorkHistory;
  *
  * @author kentp
  */
-@WebServlet(name = "BusinessClientCandidateTest", urlPatterns = {"/BusinessClientCandidateTest"})
-public class BusinessClientCandidateTest extends HttpServlet {
+@WebServlet(name = "AdminTestServlet", urlPatterns = {"/AdminTestServlet"})
+public class AdminTestServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,6 +40,34 @@ public class BusinessClientCandidateTest extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        ArrayList<JobPosting> jobList = createTestJobPosting();
+        ArrayList<Candidate> candidateList = createTestCandidateList();
+
+        request.setAttribute("jobList", jobList);
+        request.setAttribute("candidateList", candidateList);
+        request.getRequestDispatcher("/WEB-INF/systemAdminManageDatabase.jsp").forward(request, response);
+    }
+
+    private ArrayList<JobPosting> createTestJobPosting() {
+        ArrayList<JobPosting> result = new ArrayList<>();
+
+        JobPosting jobPosting = new JobPosting();
+        jobPosting.setJobpostingID(1);
+        jobPosting.setRequirements("Java");
+        jobPosting.setStartDate(new Date());
+        jobPosting.setEndDate(new Date());
+        jobPosting.setTitle("Web Developer");
+        jobPosting.setjobDescription("Create Beautiful Websites with HTML, CSS, and JavaScript.");
+        jobPosting.setJobStatus("Full Time");
+
+        result.add(jobPosting);
+
+        return result;
+    }
+
+    private ArrayList<Candidate> createTestCandidateList() {
+
         Candidate candidate = new Candidate();
         candidate.setCandidateID(1);
 
@@ -76,12 +105,10 @@ public class BusinessClientCandidateTest extends HttpServlet {
         candidate.setCandidateSkillCollection(skillList);
         candidate.setRoleCollection(roleList);
 
-        ArrayList<Candidate> candidateList = new ArrayList<>();
-        candidateList.add(candidate);
+        ArrayList<Candidate> result = new ArrayList<>();
+        result.add(candidate);
 
-        request.setAttribute("candidateList", candidateList);
-        request.getRequestDispatcher("/WEB-INF/businessClientCandidateList.jsp").forward(request, response);
-
+        return result;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

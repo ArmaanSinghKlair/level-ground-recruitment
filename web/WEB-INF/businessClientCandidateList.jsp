@@ -23,6 +23,18 @@
         <link rel="stylesheet" href="assets/css/styles.css">
     </head>
     <body>
+
+        <!--
+            ***NAVBAR SECTION***
+                
+            Most of this code is reused from Amir's jsp page to keep things consistent.
+            I've renamed the different tabs appropriately
+                
+            Lastly, I've condensed the login/signup buttons into one button that displays the user's type (in this case, Business Client).
+            This button has a drop-down menu for signing out.
+            
+            Currently there is no functionality to access different tabs on this navbar section
+        -->
         <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
             <div class="container"><a class="navbar-brand d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center" href="index.html"><img class="logo" src="assets/img/logo.png">
                     <h4 class="brand-name">Level Ground Recruitment</h4>
@@ -40,82 +52,95 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#">Sign Out</a>
                             </div>
-                        </div>
+                        </div>    
                     </span>
                 </div>
             </div>
         </nav>
 
+        <!--
+           ***ALERT SECTION***
+           displays alerts. The code is the same as in the signup.jsp page
+        -->
+        <c:if test="${requestScope.fail == true}">
+            <div class="alert alert-warning" role="alert">
+                <c:forEach var="error" items="${requestScope.errList}"><div>&#9888; ${error}</div></c:forEach>
+                </div>
+        </c:if>
+        <c:if test="${requestScope.success == true}">
+            <div class="alert alert-success" role="alert">
+                <span><c:out value="${sucessMessage}" /></span>
+            </div>
+        </c:if>
 
+
+        <!--
+            ***MAIN SECTION***
+          
+            I'm still using the tab approach to keep the page alignment consistent but this page only has 1 tab
+            
+        -->
         <div class="tabs">
             <ul class="nav nav-tabs" role="tablist"></ul>
+            <c:choose>
+
+                <c:when test="${requestScope.candidateList eq null}">
+                    <div class="container default-container">
+                        <h4 id="empty-list-title">Candidate List is Empty</h4>
+                    </div>
+                </c:when>
+
+                <c:otherwise>
+                    <div class="container default-container">
+                        <c:forEach var="candidate" items="${requestScope.candidateList}">
+
+                            <div class="inner-container shadow p-3 mb-5">
+                                <h5 class="container-header">Candidate #${candidate.candidateID}</h5>
+
+                                <dl>
+                                    <dt class="section-label">Work Experience</dt>
+                                    <c:forEach var="work" items="${candidate.workHistoryCollection}">
+                                        <dd>
+                                            ${work.company} ${work.startDate}
+                                        </dd>
+                                    </c:forEach>
+
+                                    <dt class="section-label">Education</dt>
+                                    <c:forEach var="education" items="${candidate.educationCollection}">
+                                        <dd>
+                                            ${education.institution} ${education.subject} ${education.level}
+                                        </dd>
+                                    </c:forEach>
+
+                                    <dt class="section-label">Key Skills</dt>
+                                    <c:forEach var="skill" items="${candidate.candidateSkillCollection}">
+                                        <dd>
+                                            ${skill.skill.description}
+                                        </dd>
+                                    </c:forEach>
+
+                                    <dt class="section-label">Interested Roles</dt>
+                                    <c:forEach var="role" items="${candidate.roleCollection}">
+                                        <dd>
+                                            ${role.description}
+                                        </dd>
+                                    </c:forEach>
+                                </dl>
+
+                                <div>
+                                    <button class="default-button primary-button">Hire</button>
+                                    <button class="default-button primary-button">Interview</button>
+                                </div>
+
+                            </div>
+
+                        </c:forEach>
+                    </div>
+                </c:otherwise>
+            </c:choose>
         </div>
 
-        <c:choose>
 
-            <c:when test="${requestScope.candidateList eq null}">
-                <div class="container default-container text-center mt-5 text-white">
-                    <h4>Candidate List is Empty</h4>
-                </div>
-            </c:when>
-
-            <c:otherwise>
-                <div class="container default-container">
-                    <c:forEach var="candidate" items="${requestScope.candidateList}">
-
-                        <div class="inner-container">
-                            <h5 class="mb-4 font-weight-bold" id="new-job-title">Candidate #${candidate.candidateID}</h5>
-
-                            <div class="candidateProfile">
-                                <label for="workExperience">Work Experience</label>
-
-                                <ul>
-                                    <c:forEach var="work" items="${candidate.workHistoryCollection}">
-                                        <li>
-                                            ${work.company} ${work.startDate}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-
-                                <label for="education">Education</label>
-                                <ul>
-                                    <c:forEach var="education" items="${candidate.educationCollection}">
-                                        <li>
-                                            ${education.institution} ${education.subject} ${education.level}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-
-                                <label for="keySkills">Key Skills</label>
-                                <ul>
-                                    <c:forEach var="skill" items="${candidate.candidateSkillCollection}">
-                                        <li>
-                                            ${skill.skill.description}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-
-                                <label for="interestedRoles">Interested Roles</label>
-                                <ul>
-                                    <c:forEach var="role" items="${candidate.roleCollection}">
-                                        <li>
-                                            ${role.description}
-                                        </li>
-                                    </c:forEach>
-                                </ul>
-                            </div>
-
-                            <div class="center-buttons" id="editButtons${job.jobpostingID}">
-                                <button class="default-button">Hire</button>
-                                <button class="default-button">Interview</button>
-                            </div>
-
-                        </div>
-
-                    </c:forEach>
-                </div>
-            </c:otherwise>
-        </c:choose>
 
 
 

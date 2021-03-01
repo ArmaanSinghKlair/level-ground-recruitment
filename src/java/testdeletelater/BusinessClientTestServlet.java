@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package testdeletelater;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -62,15 +62,19 @@ public class BusinessClientTestServlet extends HttpServlet {
             ArrayList<JobPosting> jobList = new ArrayList<>();
             JobPosting jobPosting = new JobPosting();
             jobPosting.setJobpostingID(1);
-            jobPosting.setRequirements("Java");
+            jobPosting.setRequirements("HTML, CSS, JavaScript");
             jobPosting.setStartDate(new Date());
             jobPosting.setEndDate(new Date());
+            jobPosting.setTitle("Web Developer");
+            jobPosting.setjobDescription("Create Beautiful Websites with HTML, CSS, and JavaScript.");
+            jobPosting.setJobStatus("Full Time");
 
             JobPosting jobPosting2 = new JobPosting();
             jobPosting2.setJobpostingID(2);
             jobPosting2.setRequirements("C++");
             jobPosting2.setStartDate(new Date());
             jobPosting2.setEndDate(new Date());
+            jobPosting.setJobStatus("Part Time");
 
             jobList.add(jobPosting);
             jobList.add(jobPosting2);
@@ -78,6 +82,8 @@ public class BusinessClientTestServlet extends HttpServlet {
             request.setAttribute("jobList", jobList);
             request.getRequestDispatcher("/WEB-INF/businessClientHome.jsp").forward(request, response);
         }
+        
+        
 
     }
 

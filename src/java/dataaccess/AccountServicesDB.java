@@ -30,10 +30,15 @@ public class AccountServicesDB {
         ArrayList<String> errList = new ArrayList<>();
 
         try{
+            //Checking to see if User already exists
             if(this.doesUserExist(em, "canUsername", username)){
                 errList.add("Username already Exists");
                 return errList;
+            }  else if(doesUserExist(em,"canEmail",email)){
+                errList.add("Email already exists");
+                return errList;
             }
+            
             Candidate c = new Candidate();
             c.setCanUsername(username);
             c.setCanEmail(email);
@@ -65,7 +70,7 @@ public class AccountServicesDB {
             JobPosting jp = new JobPosting();
             jp.setRequirements(requirements);
             jp.setTitle(title);
-            jp.setJopDescription(description);
+            jp.setjobDescription(description);
             jp.setJobStatus(status);
             jp.setStartDate(startDate);
             jp.setEndDate(endDate);
@@ -95,6 +100,7 @@ public class AccountServicesDB {
         TypedQuery<Candidate> candidates = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class).setParameter("canUsername", username);
         ArrayList<String> errList = null;
         try {
+                  
             Candidate candidate = candidates.getSingleResult();
             String hashedInputPassword = PasswordUtil.hashPassword(password);
             System.out.println("INPUT = "+hashedInputPassword+" and db = "+candidate.getCanPassword());
@@ -127,6 +133,7 @@ public class AccountServicesDB {
         TypedQuery<BusinessClient> businessClients = em.createNamedQuery("BusinessClient.findByBusClientUsername", BusinessClient.class).setParameter("busClientUsername", username);
         ArrayList<String> errList = null;
         try {
+    
             BusinessClient businessClient = businessClients.getSingleResult();
             String hashedInputPassword = PasswordUtil.hashPassword(password);
             System.out.println("INPUT = "+hashedInputPassword+" and db = "+businessClient.getBusClientPassword());
@@ -148,6 +155,23 @@ public class AccountServicesDB {
 
     }
     
+    public final Candidate getCandidateByUsername(String username){
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try{
+            if(!doesUserExist(em,"canUsername",username)){
+                return null;
+            }
+            TypedQuery<Candidate> q = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class);
+            q.setParameter("canUsername", username);
+            
+            Candidate c = q.getSingleResult();
+            return c;
+        }catch(Exception e){
+            return null;
+        }finally{
+            em.close();
+        }
+    }
     /**
      * Checks to see if user exists -- does not alter the EntityManager in any way so em can passed by reference
      * @param em Entity Manager
