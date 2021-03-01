@@ -108,7 +108,9 @@
                         </form>
                     </div>
                     <hr>
-                    <form data-aos="fade-up">
+
+                    <c:forEach var="education" items="${candidate.educationCollection}">
+                        <form data-aos="fade-up">
                             <div class="form-group">
                                 <h6>${education.institution}</h6>
                                 <p>${education.level}</p>
@@ -118,7 +120,6 @@
                             <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
                                 <div class="btn-group" role="group">
 
-                                    <input type="submit" class="btn" data-toggle="tooltip" value="Delete">
                                     <button class="btn" data-toggle="tooltip" type="submit" title="Delete" name="deleteBtn" value="deleteEducation"><i
                                             class="far fa-window-close"></i></button>
                                     <button class="btn" data-toggle="tooltip" type="submit" title="Edit" name="editBtn" value="editEducation"><i
@@ -126,8 +127,6 @@
                                 </div>
                             </div>
                         </form>
-                    <c:forEach var="education" items="${candidate.educationCollection}">
-                        
                     </c:forEach>
                 </div>
             </div>
