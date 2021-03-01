@@ -12,7 +12,6 @@ import problemdomain.BusinessClient;
 
 /**
  * To use this class, first call the startValidation, do your validation and then call getErrorMap
- * Another alternalte for basic validation is to simply call validateBasicCandidate
  * @author 839645
  */
 public final class ValidateBusinessClient {
@@ -25,15 +24,15 @@ public final class ValidateBusinessClient {
         errList = new ArrayList<>();
     }
     
-    //Basic candidate validation
+    //Basic business client validation
     public static ArrayList<String> getErrorMapForAllfields(String username, String password, String firstName, String lastName, String email, String phoneNo){
         startValidation();
-        put("canUsername",validateBusClientUsername(username));
-        put("canPassword",validateBusClientPassword(password));
-        put("canfirstName",validateBusClientfirstName(firstName));
-        put("canlastName", validateBusClientlastName(lastName));
-        put("canEmail",validateBusClientEmail(email));
-        put("canPhoneNo",validateBusClientPhoneNo(phoneNo));
+        put("busClientUsername",validateBusClientUsername(username));
+        put("busClientPassword",validateBusClientPassword(password));
+        put("busClientFirstName",validateBusClientfirstName(firstName));
+        put("busClientLastName", validateBusClientlastName(lastName));
+        put("busClientEmail",validateBusClientEmail(email));
+        put("busClientPhoneNo",validateBusClientPhoneNo(phoneNo));
         return getErrorMap();
     }
     private static void put(String name, String value){

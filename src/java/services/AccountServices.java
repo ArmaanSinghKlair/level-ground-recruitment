@@ -6,10 +6,15 @@
 package services;
 
 import dataaccess.AccountServicesDB;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import validation.ValidateBusinessClient;
 import validation.ValidateCandidate;
+import validation.ValidateJobPosting;
 
 /**
  *
@@ -23,10 +28,11 @@ public class AccountServices {
         errList = ValidateCandidate.getErrorMapForSignup(username, password, firstName, lastName, email, phoneNo);
         if(!password.trim().equals(password_repeat.trim()))
             errList.add("Password doesn\'t match confirm-password");
-        if(errList != null)
+        if(errList != null){
             return errList;
-        else
+        } else{
             return asdb.createCandidateProfile(username, password, firstName, lastName, email, phoneNo);
+        }
     }
     
     public final ArrayList<String> authenticateCandidate(String username, String password) {
@@ -39,6 +45,29 @@ public class AccountServices {
         } else{
             return errList;
         }
+    }
+    
+    public final ArrayList<String> createJobPosting(String title,String requirements,String sDate,String eDate, String status, String description){
+        ArrayList<String> errList = new ArrayList<>();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+        try {
+            Date startDate = format.parse(sDate);
+            Date endDate = format.parse(eDate);
+            
+            errList = ValidateJobPosting.getErrorMapForAllfields(title, requirements, startDate, endDate, status, description);
+            
+            if(errList != null){
+                return errList;
+            } else{
+                return asdb.createJobPosting(title, requirements, startDate, endDate, status, description);
+            }
+        } catch (ParseException e)
+        {
+            errList.add("error parsing date");
+        }
+        
+        return errList;
+        
     }
     
     public final ArrayList<String> authenticateBusinessClient(String username, String password) {

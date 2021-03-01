@@ -8,6 +8,7 @@ package dataaccess;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -18,6 +19,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import problemdomain.BusinessClient;
 import problemdomain.Candidate;
+import problemdomain.JobPosting;
 import util.DBUtil;
 import util.PasswordUtil;
 
@@ -44,6 +46,34 @@ public class AccountServicesDB {
             trans.commit();
             return null;
         } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, ex);
+            errList.add("System error. Please check logs");
+            return errList;
+        } finally{
+            if(trans.isActive())
+                trans.rollback();
+            em.close();
+        }
+    }
+    
+    public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description){
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        ArrayList<String> errList = new ArrayList<>();
+
+        try{
+            JobPosting jp = new JobPosting();
+            jp.setRequirements(requirements);
+            jp.setTitle(title);
+            jp.setJopDescription(description);
+            jp.setJobStatus(status);
+            jp.setStartDate(startDate);
+            jp.setEndDate(endDate);
+            trans.begin();
+                em.persist(jp);
+            trans.commit();
+            return null;
+        } catch (Exception ex) {
             Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, ex);
             errList.add("System error. Please check logs");
             return errList;
