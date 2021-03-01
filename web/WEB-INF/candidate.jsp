@@ -46,10 +46,9 @@
                     </div>
                 </li>
             </ul>
-            <span class="d-md-flex flex-md-shrink-0 justify-content-md-center align-items-md-center navbar-text actions"> <a
-                    data-bss-hover-animate="pulse" class="login" href="login.html">Log In</a><a
-                    class="btn btn-primary action-button" role="button" data-bss-hover-animate="pulse"
-                    href="login.html">Sign Up</a></span>
+            <span class="d-md-flex flex-md-shrink-0 justify-content-md-center align-items-md-center navbar-text actions"><a
+                    class="login" href="">Profile</a><a class="btn btn-primary action-button" role="button"
+                                                        href="">Logout</a></span>
         </div>
     </div>
 </nav>
