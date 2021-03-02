@@ -92,6 +92,7 @@ create table lgrdb.job_posting
     start_date        datetime default CURRENT_TIMESTAMP null,
     end_date          datetime                           null,
     applicants        varchar(255)                       null,
+    job_description   text                               null,
     constraint business_clientID_UNIQUE
         unique (business_clientID),
     constraint FK_JOB_POSTING_BUSINESS_CLIENT
@@ -179,7 +180,7 @@ create index FK_CAN_SKILL_SKILL_idx
 
 create table lgrdb.work_history
 (
-    work_history_id int auto_increment
+    work_hisotry_id int auto_increment
         primary key,
     candidateID     int          null,
     company         varchar(100) not null,
@@ -193,5 +194,4 @@ create table lgrdb.work_history
 
 create index FK_WORK_HISTORY_CANDIDATE_idx
     on lgrdb.work_history (candidateID);
-
 
