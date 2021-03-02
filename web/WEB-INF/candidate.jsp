@@ -65,6 +65,8 @@
         <span><c:out value="${sucessMessage}"/></span>
     </div>
 </c:if>
+                            
+                            
 <div class="container-md">
     <div class="row text-left head-row">
         <div class="col m-auto">
@@ -154,7 +156,10 @@
             </div>
             <hr>
             <c:forEach var="education" items="${candidate.educationCollection}">
-                <form data-aos="fade-up">
+                <form data-aos="fade-up" action="<c:url value='/candidate-profile'/>" method="post">
+                    <input type="hidden" name="form_name" value="education"/>
+                    <input type="hidden" name="id" value="${education.educationID}"/>
+                    <input type="hidden" name="action" value="profilePageAction" />
                     <div class="form-group">
                         <h6>${education.institution}</h6>
                         <p>${education.level}</p>
@@ -163,10 +168,9 @@
                     </div>
                     <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
                         <div class="btn-group" role="group">
-                            <button class="btn" data-toggle="tooltip" type="submit" title="Delete"><i
+                            <button class="btn" data-toggle="tooltip" type="submit" name="submit" value="delete" title="Delete"><i
                                     class="far fa-window-close"></i></button>
-                            <button class="btn" data-toggle="tooltip" type="submit" title="Edit" name="editBtn"
-                                    value="editEducation"><i
+                            <button class="btn" data-toggle="tooltip" type="submit" name="submit" value="edit"  title="Edit"><i
                                     class="far fa-edit"></i></button>
                         </div>
                     </div>
@@ -219,7 +223,10 @@
             </div>
             <hr>
             <c:forEach var="workHistory" items="${candidate.workHistoryCollection}">
-                <form data-aos="fade-up">
+                <form data-aos="fade-up" action="<c:url value='/candidate-profile'/>" method="POST">
+                    <input type="hidden" name="form_name" value="workHistory"/>
+                    <input type="hidden" name="id" value="${workHistory.workHistoryId}"/>
+                    <input type="hidden" name="action" value="profilePageAction" />
                     <div class="form-group">
                         <h6>${workHistory.company}</h6>
                         <p>${workHistory.title}</p>
@@ -229,8 +236,7 @@
                     </div>
                     <div class="d-flex d-sm-flex d-xl-flex justify-content-end modify-btns">
                         <div class="btn-group" role="group">
-                            <button class="btn" data-toggle="tooltip" type="submit" title="Delete" name="deleteBtn"
-                                    value="deleteWorkHistory"><i
+                            <button class="btn" data-toggle="tooltip" type="submit" name="submit" value="delete" title="Delete"><i
                                     class="far fa-window-close"></i></button>
                             <button class="btn" data-toggle="tooltip" type="submit" title="Edit" name="editBtn"
                                     value="editWorkHistory"><i
@@ -273,14 +279,16 @@
             </div>
             <hr>
             <c:forEach var="candidateSkill" items="${candidate.candidateSkillCollection}">
-                <form class="form-inline justify-content-between" data-aos="fade-up">
+                <form class="form-inline justify-content-between" data-aos="fade-up" action="<c:url value='/candidate-profile'/>" method="POST">
+                    <input type="hidden" name="form_name" value="skills"/>
+                    <input type="hidden" name="id" value=""/>
+                    <input type="hidden" name="action" value="profilePageAction" />
                     <div class="form-group" style="width:100%">
                         <p>${candidateSkill.skill.description}</p>
                     </div>
                     <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
                         <div class="btn-group" role="group">
-                            <button class="btn" data-toggle="tooltip" type="submit" title="Delete" name="deleteBtn"
-                                    value="deleteSkill"><i
+                            <button class="btn" data-toggle="tooltip" type="submit" name="submit" value="delete" title="Delete"><i
                                     class="far fa-window-close"></i></button>
                             <button class="btn" data-toggle="tooltip" type="submit" title="Edit" name="editBtn"
                                     value="editSkill"><i

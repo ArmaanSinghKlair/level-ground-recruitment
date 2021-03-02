@@ -179,7 +179,7 @@ create index FK_CAN_SKILL_SKILL_idx
 
 create table lgrdb.work_history
 (
-    work_hisotry_id int auto_increment
+    work_history_id int auto_increment
         primary key,
     candidateID     int          null,
     company         varchar(100) not null,
@@ -193,4 +193,5 @@ create table lgrdb.work_history
 
 create index FK_WORK_HISTORY_CANDIDATE_idx
     on lgrdb.work_history (candidateID);
+
 
