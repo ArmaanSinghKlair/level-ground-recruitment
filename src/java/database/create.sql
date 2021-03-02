@@ -1,29 +1,3 @@
-#================================ drop tables===========================
-drop table lgrdb.application cascade;
-
-drop table lgrdb.candidate_role cascade;
-
-drop table lgrdb.candidate_skill cascade;
-
-drop table lgrdb.education cascade;
-
-drop table lgrdb.job_posting cascade;
-
-drop table lgrdb.business_client cascade;
-
-drop table lgrdb.log cascade;
-
-drop table lgrdb.role cascade;
-
-drop table lgrdb.skill cascade;
-
-drop table lgrdb.work_history cascade;
-
-drop table lgrdb.candidate cascade;
-
-drop table lgrdb.advisor cascade;
-
-#================================ create tables===========================
 create table lgrdb.advisor
 (
     advisorID         int auto_increment,
@@ -186,17 +160,21 @@ create table lgrdb.skill
 
 create table lgrdb.candidate_skill
 (
-    candidateID int      not null,
-    skillID     int      not null,
-    added_date  datetime null,
-    primary key (candidateID, skillID),
-    constraint FK_CANDIDATE_SKILLS_CANDIDATE
+    can_skillID int auto_increment
+        primary key,
+    candidateID int  null,
+    skillID     int  null,
+    added_date  date null,
+    constraint FK_CAN_SKILL_CAN
         foreign key (candidateID) references lgrdb.candidate (candidateID),
-    constraint FK_CANDIDATE_SKILLS_SKILL
+    constraint FK_CAN_SKILL_SKILL
         foreign key (skillID) references lgrdb.skill (skillID)
 );
 
-create index FK_CANDIDATE_SKILLS_SKILL_idx
+create index FK_CAN_SKILL_CAN_idx
+    on lgrdb.candidate_skill (candidateID);
+
+create index FK_CAN_SKILL_SKILL_idx
     on lgrdb.candidate_skill (skillID);
 
 create table lgrdb.work_history
