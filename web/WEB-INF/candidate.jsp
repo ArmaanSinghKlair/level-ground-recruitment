@@ -281,10 +281,10 @@
             <c:forEach var="candidateSkill" items="${candidate.candidateSkillList}">
                 <form class="form-inline justify-content-between" data-aos="fade-up" action="<c:url value='/candidate-profile'/>" method="POST">
                     <input type="hidden" name="form_name" value="skills"/>
-                    <input type="hidden" name="id" value=""/>
+                    <input type="hidden" name="id" value="${candidateSkill.canskillID}"/>
                     <input type="hidden" name="action" value="profilePageAction" />
                     <div class="form-group" style="width:100%">
-                        <p>${candidateSkill.skill.description}</p>
+                        <p>${candidateSkill.skillID.description}</p>
                     </div>
                     <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
                         <div class="btn-group" role="group">

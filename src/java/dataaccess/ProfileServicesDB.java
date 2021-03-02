@@ -85,7 +85,10 @@ public final class ProfileServicesDB {
                 }
                 break;
             case "skills":
-                //returnObj = CandidateSkill.class;
+                returnObj = em.find(CandidateSkill.class, id);
+                if(!((CandidateSkill)returnObj).getCandidateID().getCanUsername().equals(username)){
+                    error = false;
+                }
                 break;
         }
         return error;
@@ -94,11 +97,12 @@ public final class ProfileServicesDB {
     private Class getFeatureClass(String form_name){
         switch(form_name){
             case "skills":
-                return null;
+                return CandidateSkill.class;
             case "workHistory":
                 return WorkHistory.class;
             case "education":
                 return Education.class;
+                
         }
         return null;
     }
