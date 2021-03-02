@@ -155,7 +155,7 @@
                 </button>
             </div>
             <hr>
-            <c:forEach var="education" items="${candidate.educationCollection}">
+            <c:forEach var="education" items="${candidate.educationList}">
                 <form data-aos="fade-up" action="<c:url value='/candidate-profile'/>" method="post">
                     <input type="hidden" name="form_name" value="education"/>
                     <input type="hidden" name="id" value="${education.educationID}"/>
@@ -222,7 +222,7 @@
                         value="addWork"><i class="fas fa-plus-circle" data-bss-hover-animate="pulse"></i></button>
             </div>
             <hr>
-            <c:forEach var="workHistory" items="${candidate.workHistoryCollection}">
+            <c:forEach var="workHistory" items="${candidate.workHistoryList}">
                 <form data-aos="fade-up" action="<c:url value='/candidate-profile'/>" method="POST">
                     <input type="hidden" name="form_name" value="workHistory"/>
                     <input type="hidden" name="id" value="${workHistory.workHistoryId}"/>
@@ -278,7 +278,7 @@
                         class="fas fa-plus-circle" data-bss-hover-animate="pulse" value="addSkill"></i></button>
             </div>
             <hr>
-            <c:forEach var="candidateSkill" items="${candidate.candidateSkillCollection}">
+            <c:forEach var="candidateSkill" items="${candidate.candidateSkillList}">
                 <form class="form-inline justify-content-between" data-aos="fade-up" action="<c:url value='/candidate-profile'/>" method="POST">
                     <input type="hidden" name="form_name" value="skills"/>
                     <input type="hidden" name="id" value=""/>

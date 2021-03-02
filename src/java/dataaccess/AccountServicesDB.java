@@ -77,8 +77,8 @@ public class AccountServicesDB {
         try{
             JobPosting jp = new JobPosting();
             jp.setRequirements(requirements);
-            jp.setTitle(title);
-            jp.setjobDescription(description);
+            jp.setJobTitle(title);
+            jp.setJobDescription(description);
             jp.setJobStatus(status);
             jp.setStartDate(startDate);
             jp.setEndDate(endDate);

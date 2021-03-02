@@ -6,9 +6,8 @@
 package problemdomain;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,8 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Kane Imler
- * @version 02/12/2021
+ * @author 839645
  */
 @Entity
 @Table(name = "candidate")
@@ -74,21 +72,21 @@ public class Candidate implements Serializable {
         @JoinColumn(name = "candidateID", referencedColumnName = "candidateID")}, inverseJoinColumns = {
         @JoinColumn(name = "job_postingID", referencedColumnName = "job_postingID")})
     @ManyToMany
-    private Collection<JobPosting> jobPostingCollection;
+    private List<JobPosting> jobPostingList;
     @JoinTable(name = "candidate_role", joinColumns = {
         @JoinColumn(name = "candidateID", referencedColumnName = "candidateID")}, inverseJoinColumns = {
         @JoinColumn(name = "roleID", referencedColumnName = "roleID")})
     @ManyToMany
-    private Collection<Role> roleCollection;
+    private List<Role> roleList;
     @JoinColumn(name = "advisorID", referencedColumnName = "advisorID")
     @ManyToOne
     private Advisor advisorID;
     @OneToMany(mappedBy = "candidateID")
-    private Collection<Education> educationCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "candidate")
-    private Collection<CandidateSkill> candidateSkillCollection;
+    private List<Education> educationList;
     @OneToMany(mappedBy = "candidateID")
-    private Collection<WorkHistory> workHistoryCollection;
+    private List<CandidateSkill> candidateSkillList;
+    @OneToMany(mappedBy = "candidateID")
+    private List<WorkHistory> workHistoryList;
 
     public Candidate() {
     }
@@ -171,21 +169,21 @@ public class Candidate implements Serializable {
     }
 
     @XmlTransient
-    public Collection<JobPosting> getJobPostingCollection() {
-        return jobPostingCollection;
+    public List<JobPosting> getJobPostingList() {
+        return jobPostingList;
     }
 
-    public void setJobPostingCollection(Collection<JobPosting> jobPostingCollection) {
-        this.jobPostingCollection = jobPostingCollection;
+    public void setJobPostingList(List<JobPosting> jobPostingList) {
+        this.jobPostingList = jobPostingList;
     }
 
     @XmlTransient
-    public Collection<Role> getRoleCollection() {
-        return roleCollection;
+    public List<Role> getRoleList() {
+        return roleList;
     }
 
-    public void setRoleCollection(Collection<Role> roleCollection) {
-        this.roleCollection = roleCollection;
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
     }
 
     public Advisor getAdvisorID() {
@@ -197,30 +195,30 @@ public class Candidate implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Education> getEducationCollection() {
-        return educationCollection;
+    public List<Education> getEducationList() {
+        return educationList;
     }
 
-    public void setEducationCollection(Collection<Education> educationCollection) {
-        this.educationCollection = educationCollection;
-    }
-
-    @XmlTransient
-    public Collection<CandidateSkill> getCandidateSkillCollection() {
-        return candidateSkillCollection;
-    }
-
-    public void setCandidateSkillCollection(Collection<CandidateSkill> candidateSkillCollection) {
-        this.candidateSkillCollection = candidateSkillCollection;
+    public void setEducationList(List<Education> educationList) {
+        this.educationList = educationList;
     }
 
     @XmlTransient
-    public Collection<WorkHistory> getWorkHistoryCollection() {
-        return workHistoryCollection;
+    public List<CandidateSkill> getCandidateSkillList() {
+        return candidateSkillList;
     }
 
-    public void setWorkHistoryCollection(Collection<WorkHistory> workHistoryCollection) {
-        this.workHistoryCollection = workHistoryCollection;
+    public void setCandidateSkillList(List<CandidateSkill> candidateSkillList) {
+        this.candidateSkillList = candidateSkillList;
+    }
+
+    @XmlTransient
+    public List<WorkHistory> getWorkHistoryList() {
+        return workHistoryList;
+    }
+
+    public void setWorkHistoryList(List<WorkHistory> workHistoryList) {
+        this.workHistoryList = workHistoryList;
     }
 
     @Override

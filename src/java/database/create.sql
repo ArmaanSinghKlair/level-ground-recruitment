@@ -1,3 +1,29 @@
+drop table lgrdb.application cascade;
+
+drop table lgrdb.candidate_role cascade;
+
+drop table lgrdb.candidate_skill cascade;
+
+drop table lgrdb.education cascade;
+
+drop table lgrdb.job_posting cascade;
+
+drop table lgrdb.business_client cascade;
+
+drop table lgrdb.log cascade;
+
+drop table lgrdb.role cascade;
+
+drop table lgrdb.skill cascade;
+
+drop table lgrdb.work_history cascade;
+
+drop table lgrdb.candidate cascade;
+
+drop table lgrdb.advisor cascade;
+
+
+
 create table lgrdb.advisor
 (
     advisorID         int auto_increment,
@@ -88,6 +114,9 @@ create table lgrdb.job_posting
     job_postingID     int auto_increment
         primary key,
     business_clientID int                                not null,
+    job_title         text                               null,
+    job_status        varchar(45)                        null,
+    job_description   text                               null,
     requirements      varchar(255)                       not null,
     start_date        datetime default CURRENT_TIMESTAMP null,
     end_date          datetime                           null,
@@ -179,7 +208,7 @@ create index FK_CAN_SKILL_SKILL_idx
 
 create table lgrdb.work_history
 (
-    work_history_id int auto_increment
+    work_hisotry_id int auto_increment
         primary key,
     candidateID     int          null,
     company         varchar(100) not null,
@@ -193,5 +222,3 @@ create table lgrdb.work_history
 
 create index FK_WORK_HISTORY_CANDIDATE_idx
     on lgrdb.work_history (candidateID);
-
-

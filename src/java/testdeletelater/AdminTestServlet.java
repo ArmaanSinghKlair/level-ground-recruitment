@@ -57,8 +57,8 @@ public class AdminTestServlet extends HttpServlet {
         jobPosting.setRequirements("Java");
         jobPosting.setStartDate(new Date());
         jobPosting.setEndDate(new Date());
-        jobPosting.setTitle("Web Developer");
-        jobPosting.setjobDescription("Create Beautiful Websites with HTML, CSS, and JavaScript.");
+        jobPosting.setJobTitle("Web Developer");
+        jobPosting.setJobDescription("Create Beautiful Websites with HTML, CSS, and JavaScript.");
         jobPosting.setJobStatus("Full Time");
 
         result.add(jobPosting);
@@ -93,17 +93,17 @@ public class AdminTestServlet extends HttpServlet {
         CandidateSkill candidateSkill = new CandidateSkill();
         Skill skill = new Skill();
         skill.setDescription("Java");
-        candidateSkill.setSkill(skill);
+        candidateSkill.setSkillID(skill);
         skillList.add(candidateSkill);
 
         Role role = new Role();
         role.setDescription("Web Developer");
         roleList.add(role);
 
-        candidate.setWorkHistoryCollection(workList);
-        candidate.setEducationCollection(educationList);
-        candidate.setCandidateSkillCollection(skillList);
-        candidate.setRoleCollection(roleList);
+        candidate.setWorkHistoryList(workList);
+        candidate.setEducationList(educationList);
+        candidate.setCandidateSkillList(skillList);
+        candidate.setRoleList(roleList);
 
         ArrayList<Candidate> result = new ArrayList<>();
         result.add(candidate);

@@ -64,17 +64,17 @@ public class BusinessClientCandidateTest extends HttpServlet {
         CandidateSkill candidateSkill = new CandidateSkill();
         Skill skill = new Skill();
         skill.setDescription("Java");
-        candidateSkill.setSkill(skill);
+        candidateSkill.setSkillID(skill);
         skillList.add(candidateSkill);
 
         Role role = new Role();
         role.setDescription("Web Developer");
         roleList.add(role);
 
-        candidate.setWorkHistoryCollection(workList);
-        candidate.setEducationCollection(educationList);
-        candidate.setCandidateSkillCollection(skillList);
-        candidate.setRoleCollection(roleList);
+        candidate.setWorkHistoryList(workList);
+        candidate.setEducationList(educationList);
+        candidate.setCandidateSkillList(skillList);
+        candidate.setRoleList(roleList);
 
         ArrayList<Candidate> candidateList = new ArrayList<>();
         candidateList.add(candidate);

@@ -65,8 +65,8 @@ public class BusinessClientTestServlet extends HttpServlet {
             jobPosting.setRequirements("HTML, CSS, JavaScript");
             jobPosting.setStartDate(new Date());
             jobPosting.setEndDate(new Date());
-            jobPosting.setTitle("Web Developer");
-            jobPosting.setjobDescription("Create Beautiful Websites with HTML, CSS, and JavaScript.");
+            jobPosting.setJobTitle("Web Developer");
+            jobPosting.setJobDescription("Create Beautiful Websites with HTML, CSS, and JavaScript.");
             jobPosting.setJobStatus("Full Time");
 
             JobPosting jobPosting2 = new JobPosting();

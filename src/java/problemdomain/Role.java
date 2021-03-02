@@ -6,7 +6,7 @@
 package problemdomain;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,8 +20,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Kane Imler
- * @version 02/12/2021
+ * @author 839645
  */
 @Entity
 @Table(name = "role")
@@ -39,8 +38,8 @@ public class Role implements Serializable {
     private Integer roleID;
     @Column(name = "description")
     private String description;
-    @ManyToMany(mappedBy = "roleCollection")
-    private Collection<Candidate> candidateCollection;
+    @ManyToMany(mappedBy = "roleList")
+    private List<Candidate> candidateList;
 
     public Role() {
     }
@@ -66,12 +65,12 @@ public class Role implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Candidate> getCandidateCollection() {
-        return candidateCollection;
+    public List<Candidate> getCandidateList() {
+        return candidateList;
     }
 
-    public void setCandidateCollection(Collection<Candidate> candidateCollection) {
-        this.candidateCollection = candidateCollection;
+    public void setCandidateList(List<Candidate> candidateList) {
+        this.candidateList = candidateList;
     }
 
     @Override

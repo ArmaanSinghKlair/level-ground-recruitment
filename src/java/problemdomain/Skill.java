@@ -6,9 +6,8 @@
 package problemdomain;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,8 +20,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Kane Imler
- * @version 02/12/2021
+ * @author 839645
  */
 @Entity
 @Table(name = "skill")
@@ -41,8 +39,8 @@ public class Skill implements Serializable {
     @Basic(optional = false)
     @Column(name = "description")
     private String description;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "skill")
-    private Collection<CandidateSkill> candidateSkillCollection;
+    @OneToMany(mappedBy = "skillID")
+    private List<CandidateSkill> candidateSkillList;
 
     public Skill() {
     }
@@ -73,12 +71,12 @@ public class Skill implements Serializable {
     }
 
     @XmlTransient
-    public Collection<CandidateSkill> getCandidateSkillCollection() {
-        return candidateSkillCollection;
+    public List<CandidateSkill> getCandidateSkillList() {
+        return candidateSkillList;
     }
 
-    public void setCandidateSkillCollection(Collection<CandidateSkill> candidateSkillCollection) {
-        this.candidateSkillCollection = candidateSkillCollection;
+    public void setCandidateSkillList(List<CandidateSkill> candidateSkillList) {
+        this.candidateSkillList = candidateSkillList;
     }
 
     @Override

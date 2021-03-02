@@ -6,7 +6,7 @@
 package problemdomain;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,8 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Kane Imler
- * @version 02/12/2021
+ * @author 839645
  */
 @Entity
 @Table(name = "advisor")
@@ -61,11 +60,11 @@ public class Advisor implements Serializable {
     @Column(name = "advisor_Email")
     private String advisorEmail;
     @OneToMany(mappedBy = "advisorID")
-    private Collection<BusinessClient> businessClientCollection;
+    private List<BusinessClient> businessClientList;
     @OneToMany(mappedBy = "advisorID")
-    private Collection<Candidate> candidateCollection;
+    private List<Candidate> candidateList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "advisorID")
-    private Collection<Log> logCollection;
+    private List<Log> logList;
 
     public Advisor() {
     }
@@ -132,30 +131,30 @@ public class Advisor implements Serializable {
     }
 
     @XmlTransient
-    public Collection<BusinessClient> getBusinessClientCollection() {
-        return businessClientCollection;
+    public List<BusinessClient> getBusinessClientList() {
+        return businessClientList;
     }
 
-    public void setBusinessClientCollection(Collection<BusinessClient> businessClientCollection) {
-        this.businessClientCollection = businessClientCollection;
-    }
-
-    @XmlTransient
-    public Collection<Candidate> getCandidateCollection() {
-        return candidateCollection;
-    }
-
-    public void setCandidateCollection(Collection<Candidate> candidateCollection) {
-        this.candidateCollection = candidateCollection;
+    public void setBusinessClientList(List<BusinessClient> businessClientList) {
+        this.businessClientList = businessClientList;
     }
 
     @XmlTransient
-    public Collection<Log> getLogCollection() {
-        return logCollection;
+    public List<Candidate> getCandidateList() {
+        return candidateList;
     }
 
-    public void setLogCollection(Collection<Log> logCollection) {
-        this.logCollection = logCollection;
+    public void setCandidateList(List<Candidate> candidateList) {
+        this.candidateList = candidateList;
+    }
+
+    @XmlTransient
+    public List<Log> getLogList() {
+        return logList;
+    }
+
+    public void setLogList(List<Log> logList) {
+        this.logList = logList;
     }
 
     @Override
