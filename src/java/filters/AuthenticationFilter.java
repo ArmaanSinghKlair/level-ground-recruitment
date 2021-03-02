@@ -42,13 +42,12 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession(false);
-        
-        if(session == null || session.getAttribute("loggedIn") == null || ((boolean)session.getAttribute("loggedIn")) == false){
-            httpRequest.setAttribute("errList", new ArrayList<>(Arrays.asList("You must be logged in to access that page")));
-            httpRequest.setAttribute("fail",true);
-            this.filterConfig.getServletContext().getRequestDispatcher("/WEB-INF/signup.jsp").forward(httpRequest, httpResponse);
-            return;
-        }
+//        if(session == null || session.getAttribute("loggedIn") == null || ((boolean)session.getAttribute("loggedIn")) == false){
+//            httpRequest.setAttribute("errList", new ArrayList<>(Arrays.asList("You must be logged in to access that page")));
+//            httpRequest.setAttribute("fail",true);
+//            this.filterConfig.getServletContext().getRequestDispatcher("/WEB-INF/signup.jsp").forward(httpRequest, httpResponse);
+//            return;
+//        }
        
     }    
     

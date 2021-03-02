@@ -18,6 +18,7 @@
           href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,600,600i,800,800i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="assets/css/nav-bar.css">
@@ -77,24 +78,24 @@
         <div class="col-12 col-md-5 sections">
             <div class="d-flex flex-row justify-content-between align-items-baseline">
                 <h4>Info</h4>
-                <form class="ignore">
-                    <div class="form-group">
-                        <button class="btn btn-outline-success" type="submit"><i class="fas fa-plus-circle"
-                                                                                 value="addInfo"></i></button>
-                    </div>
-                </form>
             </div>
             <hr>
             <form data-aos="fade-up" class="info-form">
                 <div class="form-group">
-                    <p>About:</p>
-                    <p>Email: <c:out value="${candidate.canEmail}"/></p>
-                    <p>Phone Number: <c:out value="${candidate.canPhoneNo}"/></p>
+                    <h6>About:</h6>
+                    <h6>Email:</h6>
+                    <p>
+                        <c:out value="${candidate.canEmail}"/>
+                    </p>
+                    <h6>Phone Number:</h6>
+                    <p>
+                        <c:out value="${candidate.canPhoneNo}"/>
+                    </p>
                 </div>
                 <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
                     <div class="btn-group" role="group">
-                        <button class="btn" data-toggle="tooltip" type="submit" title="Edit"><i class="far fa-edit"></i>
-                        </button>
+                        <button class="btn" data-toggle="tooltip" data-bss-tooltip="" type="submit" title="Edit"><i
+                                class="far fa-edit" data-bss-hover-animate="pulse"></i></button>
                     </div>
                 </div>
             </form>
@@ -102,12 +103,56 @@
         <div class="col-12 col-md-5 offset-md-2 sections">
             <div class="d-flex flex-row justify-content-between align-items-baseline">
                 <h4>Education</h4>
-                <form class="ignore">
-                    <div class="form-group">
-                        <button class="btn btn-outline-success" type="submit"><i class="fas fa-plus-circle"
-                                                                                 value="addEducation"></i></button>
+                <div class="wrapper">
+                    <div class="edu popup">
+                        <div class="border rounded popup-content">
+                            <button class="btn btn-primary close" type="button"><i class="icon ion-close-round"></i>
+                            </button>
+                            <h3>Add New Education</h3>
+                            <form class="ignore popup-form">
+                                <div class="form-row d-flex justify-content-around">
+                                    <div class="col-md-6"><label class="col-form-label">Institution</label></div>
+                                    <div class="col-md-6"><input class="form-control" type="text" name="institution"
+                                                                 autofocus="" title="Institution"></div>
+                                </div>
+                                <div class="form-row d-flex justify-content-around align-items-center">
+                                    <div class="col-md-6 form-row"><label class="col-form-label">Education Level</label>
+                                    </div>
+                                    <div class="col-md-6 form-row"><select class="form-control level-slc"
+                                                                           name="education-lvl">
+                                        <optgroup label="University">
+                                            <option value="diploma" selected="">Diploma</option>
+                                            <option value="bachelor">Bachelor</option>
+                                            <option value="master">Master</option>
+                                            <option value="phd">Ph.D</option>
+                                        </optgroup>
+                                    </select></div>
+                                </div>
+                                <div class="form-row d-flex justify-content-around">
+                                    <div class="col-md-6"><label class="col-form-label">Subject</label></div>
+                                    <div class="col-md-6"><input class="form-control" type="text" name="subject"></div>
+                                </div>
+                                <div class="form-row d-flex justify-content-around">
+                                    <div class="col-md-6"><label class="col-form-label">Start Date</label></div>
+                                    <div class="col-md-6"><input class="form-control" name="start-date"
+                                                                 title="Institution" type="date"></div>
+                                </div>
+                                <div class="form-row d-flex justify-content-around">
+                                    <div class="col-md-6"><label class="col-form-label">End Date</label></div>
+                                    <div class="col-md-6"><input class="form-control" name="start-date"
+                                                                 title="Institution" type="date"></div>
+                                </div>
+                                <div class="btn-group d-flex popup-btns" role="group">
+                                    <button class="btn btn-secondary" type="reset">Reset</button>
+                                    <button class="btn btn-success" type="submit">Add</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </form>
+                </div>
+                <button class="btn btn-outline-success open-edu" data-bss-hover-animate="pulse" type="submit"><i
+                        class="fas fa-plus-circle open" data-bss-hover-animate="pulse" value="addEducation"></i>
+                </button>
             </div>
             <hr>
             <c:forEach var="education" items="${candidate.educationCollection}">
@@ -137,12 +182,44 @@
         <div class="col-12 col-md-5 sections">
             <div class="d-flex flex-row justify-content-between align-items-baseline">
                 <h4>Work History</h4>
-                <form class="ignore">
-                    <div class="form-group">
-                        <button class="btn btn-outline-success" type="submit" value="addWork"><i
-                                class="fas fa-plus-circle"></i></button>
+                <div class="popup work">
+                    <div class="border rounded popup-content">
+                        <button class="btn btn-primary close" type="button"><i class="icon ion-close-round"></i>
+                        </button>
+                        <h3>Add New Work History</h3>
+                        <form class="ignore popup-form">
+                            <div class="form-row d-flex justify-content-around">
+                                <div class="col-md-6"><label class="col-form-label">Company</label></div>
+                                <div class="col-md-6"><input class="form-control" type="text" name="company"
+                                                             autofocus="" title="Institution"></div>
+                            </div>
+                            <div class="form-row d-flex justify-content-around">
+                                <div class="col-md-6"><label class="col-form-label">Subject</label></div>
+                                <div class="col-md-6"><input class="form-control" type="text" name="subject"></div>
+                            </div>
+                            <div class="form-row d-flex justify-content-around">
+                                <div class="col-md-6"><label class="col-form-label">Start Date</label></div>
+                                <div class="col-md-6"><input class="form-control" name="start-date" title="Institution"
+                                                             type="date"></div>
+                            </div>
+                            <div class="form-row d-flex justify-content-around">
+                                <div class="col-md-6"><label class="col-form-label">End Date</label></div>
+                                <div class="col-md-6"><input class="form-control" name="start-date" title="Institution"
+                                                             type="date"></div>
+                            </div>
+                            <div class="form-row d-flex justify-content-around">
+                                <div class="col-md-6"><label class="col-form-label">Reference</label></div>
+                                <div class="col-md-6"><input class="form-control" type="email" name="reference"></div>
+                            </div>
+                            <div class="btn-group d-flex popup-btns" role="group">
+                                <button class="btn btn-secondary" type="reset">Reset</button>
+                                <button class="btn btn-success" type="submit">Add</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
+                <button class="btn btn-outline-success open-work" data-bss-hover-animate="pulse" type="submit"
+                        value="addWork"><i class="fas fa-plus-circle" data-bss-hover-animate="pulse"></i></button>
             </div>
             <hr>
             <c:forEach var="workHistory" items="${candidate.workHistoryCollection}">
@@ -161,7 +238,8 @@
                         <div class="btn-group" role="group">
                             <button class="btn" data-toggle="tooltip" type="submit" name="submit" value="delete" title="Delete"><i
                                     class="far fa-window-close"></i></button>
-                            <button class="btn" data-toggle="tooltip" type="submit" title="Edit"><i
+                            <button class="btn" data-toggle="tooltip" type="submit" title="Edit" name="editBtn"
+                                    value="editWorkHistory"><i
                                     class="far fa-edit"></i></button>
                         </div>
                     </div>
@@ -172,12 +250,32 @@
         <div class="col-12 col-md-5 offset-md-2 sections">
             <div class="d-flex flex-row justify-content-between align-items-baseline">
                 <h4>Skills</h4>
-                <form class="ignore">
-                    <div class="form-group">
-                        <button class="btn btn-outline-success" type="submit"><i class="fas fa-plus-circle"
-                                                                                 value="addSkill"></i></button>
+                <div class="popup skill">
+                    <div class="border rounded popup-content">
+                        <button class="btn btn-primary close" type="button"><i class="icon ion-close-round"></i>
+                        </button>
+                        <h3>Add New Skill</h3>
+                        <form class="ignore popup-form">
+                            <div class="form-row d-flex justify-content-around align-items-center">
+                                <div class="col"><select class="form-control level-slc" name="education-lvl">
+                                    <optgroup label="Soft Skill">
+                                        <option value="diploma" selected="">Communication</option>
+                                        <option value="bachelor">Team work</option>
+                                    </optgroup>
+                                    <optgroup label="Software">
+                                        <option value="">Office</option>
+                                    </optgroup>
+                                </select></div>
+                            </div>
+                            <div class="btn-group d-flex popup-btns" role="group">
+                                <button class="btn btn-secondary" type="reset">Reset</button>
+                                <button class="btn btn-success" type="submit">Add</button>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
+                <button class="btn btn-outline-success open-skill" data-bss-hover-animate="pulse" type="submit"><i
+                        class="fas fa-plus-circle" data-bss-hover-animate="pulse" value="addSkill"></i></button>
             </div>
             <hr>
             <c:forEach var="candidateSkill" items="${candidate.candidateSkillCollection}">
@@ -192,7 +290,8 @@
                         <div class="btn-group" role="group">
                             <button class="btn" data-toggle="tooltip" type="submit" name="submit" value="delete" title="Delete"><i
                                     class="far fa-window-close"></i></button>
-                            <button class="btn" data-toggle="tooltip" type="submit" title="Edit"><i
+                            <button class="btn" data-toggle="tooltip" type="submit" title="Edit" name="editBtn"
+                                    value="editSkill"><i
                                     class="far fa-edit"></i></button>
                         </div>
                     </div>
@@ -205,6 +304,7 @@
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/bs-init.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="assets/js/popup.js"></script>
 </body>
 
 </html>
