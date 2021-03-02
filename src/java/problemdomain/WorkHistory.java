@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "WorkHistory.findAll", query = "SELECT w FROM WorkHistory w"),
-    @NamedQuery(name = "WorkHistory.findByWorkHisotryId", query = "SELECT w FROM WorkHistory w WHERE w.workHistoryId = :workHistoryId"),
+    @NamedQuery(name = "WorkHistory.findByWorkHistoryId", query = "SELECT w FROM WorkHistory w WHERE w.workHistoryId = :workHistoryId"),
     @NamedQuery(name = "WorkHistory.findByCompany", query = "SELECT w FROM WorkHistory w WHERE w.company = :company"),
     @NamedQuery(name = "WorkHistory.findByTitle", query = "SELECT w FROM WorkHistory w WHERE w.title = :title"),
     @NamedQuery(name = "WorkHistory.findByStartDate", query = "SELECT w FROM WorkHistory w WHERE w.startDate = :startDate"),

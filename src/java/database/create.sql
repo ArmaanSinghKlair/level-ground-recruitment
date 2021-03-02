@@ -217,3 +217,4 @@ create table lgrdb.work_history
 create index FK_WORK_HISTORY_CANDIDATE_idx
     on lgrdb.work_history (candidateID);
 
+

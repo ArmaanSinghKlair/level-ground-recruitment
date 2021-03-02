@@ -22,9 +22,17 @@ import util.DBUtil;
 import util.PasswordUtil;
 
 public class AccountServicesDB {
+    private EntityManager em;
+    private EntityTransaction trans;
+    
+    private void initialize(){
+        em =DBUtil.getEmFactory().createEntityManager();
+        trans = em.getTransaction();
+    }
+    
     public final ArrayList<String> createCandidateProfile(String username,String password,String firstName,String lastName, String email, String phoneNo){
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
+        initialize();
+        
         ArrayList<String> errList = new ArrayList<>();
 
         try{
@@ -66,14 +74,13 @@ public class AccountServicesDB {
      * @return Arraylist of errors
      */
     public final ArrayList<String> authenticateCandidate(String username, String password) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        initialize();
         TypedQuery<Candidate> candidates = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class).setParameter("canUsername", username);
         ArrayList<String> errList = null;
         try {
                   
             Candidate candidate = candidates.getSingleResult();
             String hashedInputPassword = PasswordUtil.hashPassword(password);
-            System.out.println("INPUT = "+hashedInputPassword+" and db = "+candidate.getCanPassword());
             if(hashedInputPassword.equals(candidate.getCanPassword())){
                 return null;
             } else{
@@ -99,7 +106,7 @@ public class AccountServicesDB {
      * @return Arraylist of errors
      */
     public final ArrayList<String> authenticateBusinessClient(String username, String password) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        initialize();
         TypedQuery<BusinessClient> businessClients = em.createNamedQuery("BusinessClient.findByBusClientUsername", BusinessClient.class).setParameter("busClientUsername", username);
         ArrayList<String> errList = null;
         try {
@@ -126,7 +133,7 @@ public class AccountServicesDB {
     }
     
     public final Candidate getCandidateByUsername(String username){
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        initialize();
         try{
             if(!doesUserExist(em,"canUsername",username)){
                 return null;
