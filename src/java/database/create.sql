@@ -80,6 +80,8 @@ create table lgrdb.candidate
     placed        tinyint(1)   null,
     constraint can_email_UNIQUE
         unique (can_email),
+    constraint can_password_UNIQUE
+        unique (can_password),
     constraint can_username_UNIQUE
         unique (can_username),
     constraint FK_CANDIDATE_ADVISOR
@@ -113,9 +115,6 @@ create table lgrdb.job_posting
         primary key,
     business_clientID int                                not null,
     requirements      varchar(255)                       not null,
-    title             varchar(100)                       not null,
-    job_description   varchar(255)                       null,
-	job_status        varchar(30)                        null,
     start_date        datetime default CURRENT_TIMESTAMP null,
     end_date          datetime                           null,
     applicants        varchar(255)                       null,
@@ -202,7 +201,7 @@ create index FK_CANDIDATE_SKILLS_SKILL_idx
 
 create table lgrdb.work_history
 (
-    work_history_id int auto_increment
+    work_hisotry_id int auto_increment
         primary key,
     candidateID     int          null,
     company         varchar(100) not null,
