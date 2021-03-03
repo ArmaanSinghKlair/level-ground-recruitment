@@ -94,8 +94,8 @@
                 </div>
                 <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
                     <div class="btn-group" role="group">
-                        <button class="btn" data-toggle="tooltip" data-bss-tooltip="" type="submit" title="Edit"><i
-                                class="far fa-edit" data-bss-hover-animate="pulse"></i></button>
+                        <div class="btn-group" role="group"><a class="btn" role="button" data-toggle="tooltip" data-bss-tooltip="" title="Edit"
+                                href="<c:url value="/candidate-profile-edit"/>"><i class="far fa-edit" data-bss-hover-animate="pulse"></i></a></div>
                     </div>
                 </div>
             </form>
