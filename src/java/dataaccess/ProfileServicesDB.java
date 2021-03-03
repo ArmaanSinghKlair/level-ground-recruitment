@@ -9,8 +9,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.servlet.http.HttpServletRequest;
+import problemdomain.Candidate;
 import problemdomain.CandidateSkill;
 import problemdomain.Education;
+import problemdomain.Skill;
 import problemdomain.WorkHistory;
 import util.DBUtil;
 
@@ -26,6 +29,79 @@ public final class ProfileServicesDB {
         em =DBUtil.getEmFactory().createEntityManager();
         trans = em.getTransaction();
     }
+    
+    public final ArrayList<Skill> getAllSkills(){
+        initialize();
+        try{
+            ArrayList<Skill> skills = new ArrayList(em.createNamedQuery("Skill.findAll",Skill.class).getResultList());
+            return skills;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public final ArrayList<String> add(HttpServletRequest request, String username){
+        initialize();
+        try{
+            trans.begin();
+            // Gets appropriate feature depending upon form parameters
+            Object feature = getNewFeature(request, username);
+            // Checking to see if its null
+            if(feature != null)
+                em.persist(feature);
+            trans.commit();
+        } finally{
+            em.close();
+        }
+        return null;
+    }
+    
+    private Object getNewFeature(HttpServletRequest request, String username){
+        String form_name = request.getParameter("form_name");
+        // Required for fetching required data 
+        AccountServicesDB asdb = new AccountServicesDB();
+        Candidate c = asdb.getCandidateByUsername(username);
+
+        switch(form_name){
+            case "skills":
+                String skillID = request.getParameter("id");                
+                CandidateSkill skill = new CandidateSkill();
+                
+                // Adds a Candidate to Candidate_skill
+                skill.setCandidateID(c);
+                
+                
+                // Adds a Skill to Candidate_skill
+                Skill actualSkill = asdb.getSkillById(skillID);
+                skill.setSkillID(actualSkill);
+                
+                
+                // Adds an integer skillID
+                c.getCandidateSkillList().add(skill);
+                return skill;
+                
+            case "education":
+                Education edu = (Education) request.getAttribute("education");
+                
+                // Adds a Candidate to Candidate_skill
+                edu.setCandidateID(c);
+                c.getEducationList().add(edu);
+               
+                return edu;
+            case "workHistory":
+                WorkHistory wh = (WorkHistory) request.getAttribute("workHistory");
+                
+                // Adds a Candidate to Candidate_skill
+                wh.setCandidateID(c);
+                c.getWorkHistoryList().add(wh);
+               
+                return wh;
+        }
+        return null;
+    }
+    
+   
+    // Deletes a profile feature ie. work history, skill etc
     public final ArrayList<String> delete(String form_name, String id, String username){
         initialize();
         ArrayList<String> errList = new ArrayList<>();
@@ -106,5 +182,8 @@ public final class ProfileServicesDB {
         }
         return null;
     }
+    
+    
+    
     
 }

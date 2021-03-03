@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import problemdomain.Candidate;
+import problemdomain.Skill;
 import services.AccountServices;
 import services.ProfileServices;
 
@@ -28,9 +29,17 @@ public class CandidateProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         String url = "/WEB-INF/candidate.jsp";
         AccountServices accService =new AccountServices();
+        ProfileServices ps = new ProfileServices();
+        
         HttpSession sess = request.getSession(false);
+        
+        // Get candidate
         Candidate c = accService.getCandidateByUsername((String)sess.getAttribute("username"));
         request.setAttribute("candidate", c);
+        
+        // Get skills
+        ArrayList<Skill> skills = ps.getAllSkills();
+        request.setAttribute("skills", skills);
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
@@ -45,21 +54,29 @@ public class CandidateProfileServlet extends HttpServlet {
         ArrayList<String> errList=new ArrayList<>();
         
         if(action != null && action.equals("profilePageAction")){
-            errList = ps.profilePageAction(request.getParameter("submit"), request.getParameter("form_name"), request.getParameter("id"), (String)sess.getAttribute("username"));
+            errList = ps.profilePageAction(request, (String)sess.getAttribute("username"));
         } else{
             errList.add("Unknown error occured. Please reload and try again");
         }
         
+        // Generate success message depending upon the type of request OR give a list of errors
         if(errList == null || errList.isEmpty()){
             request.setAttribute("success",true);
-            request.setAttribute("sucessMessage", getSuccessMessage(action));
+            request.setAttribute("sucessMessage", getSuccessMessage(request.getParameter("submit")));
         } else{
             request.setAttribute("fail",true);
             request.setAttribute("errList",errList);
         }
         
         //Load back updated User
+        // Get candidate
         Candidate c = accService.getCandidateByUsername((String)sess.getAttribute("username"));
+        request.setAttribute("candidate", c);
+        
+        // Get skills
+        ArrayList<Skill> skills = ps.getAllSkills();
+        request.setAttribute("skills", skills);
+        
         request.setAttribute("candidate", c);
         request.getRequestDispatcher("/WEB-INF/candidate.jsp").forward(request, response);
 
@@ -71,12 +88,15 @@ public class CandidateProfileServlet extends HttpServlet {
      * @param request Request object used to get certain parameters
      * @return Success Message
      */
-    private final String getSuccessMessage(String page){
+    private final String getSuccessMessage(String submit){
         String str = "";
-        switch(page){
-            case "profilePageAction":
+        switch(submit){
+            case "delete":
                 str = "Item deleted successfully";
                 break;  
+            case "add":
+                str = "Item added successfully";
+                break;
         }
         return str;
     }

@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -26,7 +28,8 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
-<body>
+<body onload="<c:if
+        test='${requestScope.currentTab != null}'>document.getElementById('${requestScope.currentTab.trim()}').click()</c:if>">
 <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
     <div class="container-fluid"><a
             class="navbar-brand d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center"
@@ -53,14 +56,14 @@
         </div>
     </div>
 </nav>
-<c:if test="${requestScope.fail == true}">
+<c:if test="${requestScope.fail == true && requestScope.currentTab == null}">
     <div class="alert alert-warning" role="alert">
         <c:forEach var="error" items="${requestScope.errList}">
             <div>&#9888; ${error}</div>
         </c:forEach>
     </div>
 </c:if>
-<c:if test="${requestScope.success == true}">
+<c:if test="${requestScope.success == true && requestScope.currentTab == null}">
     <div class="alert alert-success" role="alert">
         <span><c:out value="${sucessMessage}"/></span>
     </div>
@@ -105,15 +108,25 @@
                 <h4>Education</h4>
                 <div class="wrapper">
                     <div class="edu popup">
+                        <!-- ERRORS SHOWN FOR THIS TAB HERE-->
+                        <c:if test="${requestScope.fail == true && requestScope.currentTab.equals('add-education-cta')}">
+                            <div class="alert alert-warning" role="alert">
+                                <c:forEach var="error" items="${requestScope.errList}">
+                                    <div>&#9888; ${error}</div>
+                                </c:forEach>
+                            </div>
+                        </c:if>
                         <div class="border rounded popup-content">
                             <button class="btn btn-primary close" type="button"><i class="icon ion-close-round"></i>
                             </button>
                             <h3>Add New Education</h3>
-                            <form class="ignore popup-form">
+                            <form class="ignore popup-form" action="<c:url value='/candidate-profile'/>" method="post">
+                            <input type="hidden" name="form_name" value="education"/>
+                            <input type="hidden" name="action" value="profilePageAction" />
                                 <div class="form-row d-flex justify-content-around">
                                     <div class="col-md-6"><label class="col-form-label">Institution</label></div>
                                     <div class="col-md-6"><input class="form-control" type="text" name="institution"
-                                                                 autofocus="" title="Institution"></div>
+                                                                 autofocus="" title="Institution" value="${requestScope.education.institution}" autocomplete="off"></div>
                                 </div>
                                 <div class="form-row d-flex justify-content-around align-items-center">
                                     <div class="col-md-6 form-row"><label class="col-form-label">Education Level</label>
@@ -121,36 +134,37 @@
                                     <div class="col-md-6 form-row"><select class="form-control level-slc"
                                                                            name="education-lvl">
                                         <optgroup label="University">
-                                            <option value="diploma" selected="">Diploma</option>
-                                            <option value="bachelor">Bachelor</option>
-                                            <option value="master">Master</option>
-                                            <option value="phd">Ph.D</option>
+                                            <option value="Diploma" selected="">Diploma</option>
+                                            <option value="Bachelor">Bachelor</option>
+                                            <option value="Master">Master</option>
+                                            <option value="Ph.D">Ph.D</option>
+                                            <option value="High School Diploma">High School Diploma</option>
                                         </optgroup>
                                     </select></div>
                                 </div>
                                 <div class="form-row d-flex justify-content-around">
                                     <div class="col-md-6"><label class="col-form-label">Subject</label></div>
-                                    <div class="col-md-6"><input class="form-control" type="text" name="subject"></div>
+                                    <div class="col-md-6"><input class="form-control" type="text" name="subject"  autocomplete="off" value="${requestScope.education.subject}"></div>
                                 </div>
                                 <div class="form-row d-flex justify-content-around">
-                                    <div class="col-md-6"><label class="col-form-label">Start Date</label></div>
-                                    <div class="col-md-6"><input class="form-control" name="start-date"
-                                                                 title="Institution" type="date"></div>
+                                    <div class="col-md-6"><label class="col-form-label"> Start Date</label></div>
+                                    <div class="col-md-6"><input class="form-control" name="start-date" value="<fmt:formatDate value="${requestScope.education.startDate}" type="date" pattern="yyyy-MM-dd" />"
+                                                                 title="Institution" type="date"></div> 
                                 </div>
                                 <div class="form-row d-flex justify-content-around">
                                     <div class="col-md-6"><label class="col-form-label">End Date</label></div>
-                                    <div class="col-md-6"><input class="form-control" name="start-date"
-                                                                 title="Institution" type="date"></div>
+                                    <div class="col-md-6"><input class="form-control" name="end-date" value="<fmt:formatDate value="${requestScope.education.endDate}" type="date" pattern="yyyy-MM-dd" />"
+                                                                 title="Institution" type="date" ></div>
                                 </div>
                                 <div class="btn-group d-flex popup-btns" role="group">
                                     <button class="btn btn-secondary" type="reset">Reset</button>
-                                    <button class="btn btn-success" type="submit">Add</button>
+                                    <button class="btn btn-success" type="submit" name="submit" value="add">Add</button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-outline-success open-edu" data-bss-hover-animate="pulse" type="submit"><i
+                <button class="btn btn-outline-success open-edu" data-bss-hover-animate="pulse" type="submit" id="add-education-cta"><i
                         class="fas fa-plus-circle open" data-bss-hover-animate="pulse" value="addEducation"></i>
                 </button>
             </div>
@@ -164,7 +178,16 @@
                         <h6>${education.institution}</h6>
                         <p>${education.level}</p>
                         <p>${education.subject}</p>
-                        <p>${education.startDate} - ${education.endDate}</p>
+                        <p><fmt:formatDate value="${education.startDate}" type="date" pattern="yyyy-MM-dd" /> &rarr; 
+                            <c:choose>
+                                <c:when  test="${education.endDate !=null}">
+                                    <fmt:formatDate value="${education.endDate}" type="date" pattern="yyyy-MM-dd" />
+                                </c:when>
+                                <c:otherwise>
+                                    current
+                                </c:otherwise>
+                            </c:choose>
+                            </p>
                     </div>
                     <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
                         <div class="btn-group" role="group">
@@ -178,33 +201,46 @@
             </c:forEach>
         </div>
     </div>
+
+    <!-- Popups here -->                                                                 
     <div class="row row-cols-2 row-cols-sm-1 head-row">
         <div class="col-12 col-md-5 sections">
             <div class="d-flex flex-row justify-content-between align-items-baseline">
                 <h4>Work History</h4>
                 <div class="popup work">
+                    <!-- ERRORS SHOWN FOR THIS TAB HERE-->
+                        <c:if test="${requestScope.fail == true && requestScope.currentTab.equals('add-workHistory-cta')}">
+                            <div class="alert alert-warning" role="alert">
+                                <c:forEach var="error" items="${requestScope.errList}">
+                                    <div>&#9888; ${error}</div>
+                                </c:forEach>
+                            </div>
+                        </c:if>
+                    
                     <div class="border rounded popup-content">
                         <button class="btn btn-primary close" type="button"><i class="icon ion-close-round"></i>
                         </button>
                         <h3>Add New Work History</h3>
-                        <form class="ignore popup-form">
+                        <form class="ignore popup-form" action="<c:url value='/candidate-profile'/>" method="post">
+                            <input type="hidden" name="form_name" value="workHistory"/>
+                            <input type="hidden" name="action" value="profilePageAction" />
                             <div class="form-row d-flex justify-content-around">
                                 <div class="col-md-6"><label class="col-form-label">Company</label></div>
                                 <div class="col-md-6"><input class="form-control" type="text" name="company"
-                                                             autofocus="" title="Institution"></div>
+                                                             autofocus="" title="Institution" value="${requestScope.workHistory.company}"></div>
                             </div>
                             <div class="form-row d-flex justify-content-around">
-                                <div class="col-md-6"><label class="col-form-label">Subject</label></div>
-                                <div class="col-md-6"><input class="form-control" type="text" name="subject"></div>
+                                <div class="col-md-6"><label class="col-form-label">Title</label></div>
+                                <div class="col-md-6"><input class="form-control" type="text" name="title" value="${requestScope.workHistory.title}"></div>
                             </div>
                             <div class="form-row d-flex justify-content-around">
                                 <div class="col-md-6"><label class="col-form-label">Start Date</label></div>
-                                <div class="col-md-6"><input class="form-control" name="start-date" title="Institution"
+                                <div class="col-md-6"><input class="form-control" name="start-date" title="Institution" value="<fmt:formatDate value="${requestScope.workHistory.startDate}" type="date" pattern="yyyy-MM-dd" />"
                                                              type="date"></div>
                             </div>
                             <div class="form-row d-flex justify-content-around">
                                 <div class="col-md-6"><label class="col-form-label">End Date</label></div>
-                                <div class="col-md-6"><input class="form-control" name="start-date" title="Institution"
+                                <div class="col-md-6"><input class="form-control" name="end-date" title="Institution" value="<fmt:formatDate value="${requestScope.workHistory.endDate}" type="date" pattern="yyyy-MM-dd" />"
                                                              type="date"></div>
                             </div>
                             <div class="form-row d-flex justify-content-around">
@@ -213,12 +249,12 @@
                             </div>
                             <div class="btn-group d-flex popup-btns" role="group">
                                 <button class="btn btn-secondary" type="reset">Reset</button>
-                                <button class="btn btn-success" type="submit">Add</button>
+                                <button class="btn btn-success" type="submit" name="submit" value="add">Add</button>
                             </div>
                         </form>
                     </div>
                 </div>
-                <button class="btn btn-outline-success open-work" data-bss-hover-animate="pulse" type="submit"
+                <button class="btn btn-outline-success open-work" data-bss-hover-animate="pulse" type="submit" id="add-workHistory-cta"
                         value="addWork"><i class="fas fa-plus-circle" data-bss-hover-animate="pulse"></i></button>
             </div>
             <hr>
@@ -230,9 +266,17 @@
                     <div class="form-group">
                         <h6>${workHistory.company}</h6>
                         <p>${workHistory.title}</p>
-                        <p>${workHistory.startDate}</p>
-                        <p>${workHistory.endDate}</p>
-                        <p>${workHistory.reference}</p>
+                        <p> <p><fmt:formatDate value="${workHistory.startDate}" type="date" pattern="yyyy-MM-dd" /> &rarr; 
+                            <c:choose>
+                                <c:when  test="${workHistory.endDate !=null}">
+                                    <fmt:formatDate value="${workHistory.endDate}" type="date" pattern="yyyy-MM-dd" />
+                                </c:when>
+                                <c:otherwise>
+                                    current
+                                </c:otherwise>
+                            </c:choose>
+                            </p></p>
+                        <p>Reference: ${workHistory.reference}</p>
                     </div>
                     <div class="d-flex d-sm-flex d-xl-flex justify-content-end modify-btns">
                         <div class="btn-group" role="group">
@@ -255,26 +299,25 @@
                         <button class="btn btn-primary close" type="button"><i class="icon ion-close-round"></i>
                         </button>
                         <h3>Add New Skill</h3>
-                        <form class="ignore popup-form">
+                        <form class="ignore popup-form" action="<c:url value='/candidate-profile'/>" method="post">
+                            <input type="hidden" name="form_name" value="skills"/>
+                            <input type="hidden" name="action" value="profilePageAction" />
                             <div class="form-row d-flex justify-content-around align-items-center">
-                                <div class="col"><select class="form-control level-slc" name="education-lvl">
-                                    <optgroup label="Soft Skill">
-                                        <option value="diploma" selected="">Communication</option>
-                                        <option value="bachelor">Team work</option>
-                                    </optgroup>
-                                    <optgroup label="Software">
-                                        <option value="">Office</option>
-                                    </optgroup>
+                                <div class="col"><select class="form-control level-slc" name="id">
+                                        <c:forEach var="skill" items="${skills}">
+                                            <option value="${skill.skillID}" <c:if test='${skills.get(0)==skill}'>selected=""</c:if>>${skill.description}</option>
+                                        </c:forEach>
+                                       
                                 </select></div>
                             </div>
                             <div class="btn-group d-flex popup-btns" role="group">
                                 <button class="btn btn-secondary" type="reset">Reset</button>
-                                <button class="btn btn-success" type="submit">Add</button>
+                                <button class="btn btn-success" type="submit" name="submit" value="add">Add</button>
                             </div>
                         </form>
                     </div>
                 </div>
-                <button class="btn btn-outline-success open-skill" data-bss-hover-animate="pulse" type="submit"><i
+                <button class="btn btn-outline-success open-skill" data-bss-hover-animate="pulse" type="submit" id="add-skills-cta"><i
                         class="fas fa-plus-circle" data-bss-hover-animate="pulse" value="addSkill"></i></button>
             </div>
             <hr>

@@ -20,6 +20,7 @@ import javax.persistence.TypedQuery;
 import problemdomain.BusinessClient;
 import problemdomain.Candidate;
 import problemdomain.JobPosting;
+import problemdomain.Skill;
 import util.DBUtil;
 import util.PasswordUtil;
 
@@ -172,8 +173,28 @@ public class AccountServicesDB {
             q.setParameter("canUsername", username);
             
             Candidate c = q.getSingleResult();
+            em.refresh(c);
             return c;
         }catch(Exception e){
+            return null;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public final Skill getSkillById(String id){
+        initialize();
+        try{
+            if(!this.doesSkillExist(id)){
+                return null;
+            }
+            TypedQuery<Skill> q = em.createNamedQuery("Skill.findBySkillID", Skill.class);
+            q.setParameter("skillID", Integer.parseInt(id));
+            
+            Skill s = q.getSingleResult();
+            return s;
+        }catch(Exception e){
+            System.out.println(e.getMessage());
             return null;
         }finally{
             em.close();
@@ -189,5 +210,12 @@ public class AccountServicesDB {
     public final boolean doesUserExist(EntityManager em,String attributeName, String attributeValue){
         List<Candidate> q = em.createNamedQuery("Candidate.findBy"+attributeName.substring(0, 1).toUpperCase()+ attributeName.substring(1), Candidate.class).setParameter(attributeName, attributeValue).getResultList();
         return q != null && !q.isEmpty();
+    }
+    
+    public boolean doesSkillExist(String id){
+        if(em == null || !em.isOpen())
+            initialize();
+        
+        return em.find(Skill.class, Integer.parseInt(id)) != null;
     }
 }

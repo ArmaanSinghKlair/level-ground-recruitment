@@ -26,9 +26,13 @@ public class AccountServices {
     public final ArrayList<String> createCandidateProfile(String username,String password, String password_repeat,String firstName,String lastName, String email, String phoneNo){
         ArrayList<String> errList;
         errList = ValidateCandidate.getErrorMapForSignup(username, password, firstName, lastName, email, phoneNo);
+        
+        if(errList == null){
+            errList = new ArrayList<>();
+        }
         if(!password.trim().equals(password_repeat.trim()))
             errList.add("Password doesn\'t match confirm-password");
-        if(errList != null){
+        if(errList.size() > 0){
             return errList;
         } else{
             return asdb.createCandidateProfile(username, password, firstName, lastName, email, phoneNo);
