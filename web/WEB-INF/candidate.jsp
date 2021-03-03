@@ -245,7 +245,7 @@
                             </div>
                             <div class="form-row d-flex justify-content-around">
                                 <div class="col-md-6"><label class="col-form-label">Reference</label></div>
-                                <div class="col-md-6"><input class="form-control" type="email" name="reference"></div>
+                                <div class="col-md-6"><input class="form-control" type="email" name="reference" value="${requestScope.workHistory.reference}"></div>
                             </div>
                             <div class="btn-group d-flex popup-btns" role="group">
                                 <button class="btn btn-secondary" type="reset">Reset</button>
@@ -295,6 +295,15 @@
             <div class="d-flex flex-row justify-content-between align-items-baseline">
                 <h4>Skills</h4>
                 <div class="popup skill">
+                     <!-- ERRORS SHOWN FOR THIS TAB HERE-->
+                        <c:if test="${requestScope.fail == true && requestScope.currentTab.equals('add-skills-cta')}">
+                            <div class="alert alert-warning" role="alert">
+                                <c:forEach var="error" items="${requestScope.errList}">
+                                    <div>&#9888; ${error}</div>
+                                </c:forEach>
+                            </div>
+                        </c:if>
+                     
                     <div class="border rounded popup-content">
                         <button class="btn btn-primary close" type="button"><i class="icon ion-close-round"></i>
                         </button>

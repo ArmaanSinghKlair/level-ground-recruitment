@@ -19,6 +19,9 @@ import problemdomain.CandidateSkill;
 import problemdomain.Education;
 import problemdomain.Skill;
 import problemdomain.WorkHistory;
+import validation.ValidateEducation;
+import validation.ValidateSkill;
+import validation.ValidateWorkHistory;
 
 
 /**
@@ -53,7 +56,7 @@ public final class ProfileServices {
               
               // If no errors
               if(errList.isEmpty()){
-                  errList = psdb.add(request, username);
+                errList = psdb.add(request, username);
               }
             break;
         }
@@ -75,28 +78,14 @@ public final class ProfileServices {
         
         switch(form_name){
             case "skills":
-                String skillID = request.getParameter("id");
-                int ID = Integer.parseInt(skillID);
-                // Getting to check whether user already has this skill
-                Candidate c = asdb.getCandidateByUsername(username);                
-                
-                if(this.isEmpty(skillID)){
-                    errList.add("Skill is required");
-                }else{
-                    // Checks to see if candidate already has this skill
-                    for(CandidateSkill sk: c.getCandidateSkillList()){
-                        if(sk.getSkillID().getSkillID() == ID){
-                            errList.add("You already added this skill");
-                            break;
-                        }
-                    }
-                    // Checks if skill exists in the DATABASE
-                    if(!asdb.doesSkillExist(skillID)){
-                        errList.add("Selected skill does not exist");
-                    }
+                errList.addAll(ValidateSkill.getErrorMapForAllfields(request.getParameter("id"), username));
+                // Generate success message depending upon the type of request OR give a list of errors
+                if(errList.isEmpty()){
+                    request.setAttribute("sucessMessage", "Skill added successfully");
+                } else{
+                    request.setAttribute("currentTab", "add-skills-cta");
                 }
-                
-                
+               
                 break;
                 
             case "education":
@@ -105,45 +94,12 @@ public final class ProfileServices {
                 String subject = request.getParameter("subject");
                 String start_date = request.getParameter("start-date");
                 String end_date = request.getParameter("end-date");
-                Date start=null;
-                Date end=null;
 
-                // Parsing Dates
-                 try {
-                    start =new SimpleDateFormat("yyyy-MM-dd").parse(start_date);
-                    
-                    // Since END_DATE is optional
-                    if(end_date.trim().length() > 0){
-                        end = new SimpleDateFormat("yyyy-MM-dd").parse(end_date);
-                        if(start.compareTo(end) >=  0){
-                            errList.add("Start date must be before end date");
-                        }
-                    }
-                } catch (ParseException ex) {
-                    errList.add("Invalid Date Format");
-                }
-                 
-                 // Checking empty fields
-                 if(isEmpty(institution.trim()) || isEmpty(education_lvl.trim()) || isEmpty(subject.trim()) || isEmpty(start_date))
-                        errList.add("All fields required");
+                errList.addAll(ValidateEducation.getErrorMapForAllfields(institution, education_lvl, subject, start_date, end_date));
                 
-                    
-             // Prepare education object here itself, if error then used in jsp if NO ERROR, used in data access class
-                    Education edu = new Education();
-                    edu.setInstitution(institution);
-                    edu.setLevel(education_lvl);
-                    edu.setEndDate(end);
-                    edu.setStartDate(start);
-                    edu.setSubject(subject);
-                    
-                    request.setAttribute("education", edu);
+                // Prepare education object here itself, if error then used in jsp if NO ERROR, used in data access class
+                ValidateEducation.prepareResponse(request, institution, education_lvl, subject);
 
-                
-                // Do this if ANY ERRORS
-                if(!errList.isEmpty()){
-                    request.setAttribute("currentTab", "add-education-cta");
-                }
-                
                 break;
                 
                 case "workHistory":
@@ -152,47 +108,9 @@ public final class ProfileServices {
                 String start_date_work = request.getParameter("start-date");
                 String end_date_work = request.getParameter("end-date");
                 String reference = request.getParameter("reference");
-                Date start_date_format=null;
-                Date end_date_format=null;
 
-                // Parsing Dates
-                 try {
-                    start_date_format =new SimpleDateFormat("yyyy-MM-dd").parse(start_date_work);
-                    
-                    // Since END_DATE is optional
-                    if(end_date_work.trim().length() > 0){
-                        end_date_format = new SimpleDateFormat("yyyy-MM-dd").parse(end_date_work);
-                        
-                        // Checking if start date is before end date
-                        if(start_date_format.compareTo(end_date_format) >=  0){
-                            errList.add("Start date must be before end date");
-                        }
-                    }
-                } catch (ParseException ex) {
-                    errList.add("Invalid Date Format");
-                }
-                 
-                 // Checking empty fields
-                 if(isEmpty(company.trim()) || isEmpty(title.trim()) || isEmpty(start_date_work.trim()))
-                        errList.add("All fields required");
-                
-                    
-             // Prepare education object here itself, if error then used in jsp if NO ERROR, used in data access class
-                    WorkHistory wh = new WorkHistory();
-                    wh.setCompany(company);
-                    wh.setTitle(title);
-                    wh.setStartDate(start_date_format);
-                    wh.setEndDate(end_date_format);
-                    wh.setReference(reference);
-                    
-                    request.setAttribute("workHistory", wh);
-
-                
-                // Do this if ANY ERRORS
-                if(!errList.isEmpty()){
-                    request.setAttribute("currentTab", "add-workHistory-cta");
-                }
-                
+                errList.addAll(ValidateWorkHistory.getErrorMapForAllfields(company, title, start_date_work, end_date_work, reference));
+                 ValidateWorkHistory.prepareResponse(request, company, title, reference);
                 break;
 
         }

@@ -37,23 +37,7 @@ public final class ValidateCandidate {
         errList = new ArrayList<>();
     }
     
-    //Basic candidate validation
-    public static ArrayList<String> getErrorMapForAllfields(String username, String password, String firstName, String lastName, String email, String phoneNo,String workHistory, String primaryEducation, String secondaryEducation, String certificates, String keySkills, String interestedRoles){
-        startValidation();
-        put("canUsername",validateCanUsername(username));
-        put("canPassword",validateCanPassword(password));
-        put("canfirstName",validateCanfirstName(firstName));
-        put("canlastName", validateCanlastName(lastName));
-        put("canEmail",validateCanEmail(email));
-        put("canPhoneNo",validateCanPhoneNo(phoneNo));
-        put("workHistory",validateWorkHistory(workHistory));
-        put("primaryEducation", validatePrimaryEducation(primaryEducation));
-        put("secondaryEducation", validateSecondaryEducation(secondaryEducation));
-        put("certificates", validateCertificates(certificates));
-        put("keySkills", validateKeySkills(keySkills));
-        put("interestedRoles", validateInterestedRoles(interestedRoles));
-        return getErrorMap();
-    }
+
     
     public static ArrayList<String> getErrorMapForSignup(String username, String password, String firstName, String lastName, String email, String phoneNo){
         startValidation();
