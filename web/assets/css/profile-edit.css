@@ -79,11 +79,11 @@ a {
   border-radius: 5px;
 }
 
-.wrapper {
+.wrapper-edit {
   display: none;
 }
 
-.wrapper.active-popup {
+.wrapper-edit.active-popup {
   position: fixed;
   top: 0;
   bottom: 0;
