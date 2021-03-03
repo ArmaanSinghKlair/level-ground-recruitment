@@ -67,3 +67,42 @@ a {
   font-size: 30px;
 }
 
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  background-color: white;
+  width: 500px;
+  border-radius: 5px;
+}
+
+.wrapper {
+  display: none;
+}
+
+.wrapper.active-popup {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.4);
+  display: block;
+  z-index: 2;
+}
+
+.popup-content {
+  padding: 20px;
+}
+
+.popup-form {
+  padding: 10px;
+}
+
+.warming-txt {
+  font-size: 10px;
+}
+
