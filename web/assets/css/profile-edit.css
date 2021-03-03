@@ -1,0 +1,69 @@
+.tab-content.edit-content {
+  width: 100%;
+  background: #f1faee;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.nav.nav-tabs.edit-items {
+  padding: 10px;
+  background: #f1faee;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+a {
+  color: #457b9d;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.edit-form {
+  padding-top: 10px;
+}
+
+.btn-group.form-btns {
+  width: 100%;
+  /*padding-top: 60px;*/
+}
+
+.subhead {
+  padding-bottom: 20px;
+}
+
+.btn-group {
+  padding-bottom: 15px;
+  width: 100%;
+}
+
+.form-group.save-btns {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  /*height: 100%;*/
+}
+
+.btn.succ {
+  background: #457b9d;
+  color: #f1faee;
+}
+
+.card-header {
+  background: #1d3557;
+}
+
+.header-btn {
+  text-decoration: none;
+  color: #f1faee;
+}
+
+.header-btn:hover {
+  text-decoration: none;
+  color: #a8dadc;
+}
+
+.display-4 {
+  font-size: 30px;
+}
+
