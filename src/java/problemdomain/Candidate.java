@@ -68,11 +68,6 @@ public class Candidate implements Serializable {
     private String canPhoneNo;
     @Column(name = "placed")
     private Boolean placed;
-    @JoinTable(name = "application", joinColumns = {
-        @JoinColumn(name = "candidateID", referencedColumnName = "candidateID")}, inverseJoinColumns = {
-        @JoinColumn(name = "job_postingID", referencedColumnName = "job_postingID")})
-    @ManyToMany
-    private List<JobPosting> jobPostingList;
     @JoinTable(name = "candidate_role", joinColumns = {
         @JoinColumn(name = "candidateID", referencedColumnName = "candidateID")}, inverseJoinColumns = {
         @JoinColumn(name = "roleID", referencedColumnName = "roleID")})
@@ -83,6 +78,8 @@ public class Candidate implements Serializable {
     private Advisor advisorID;
     @OneToMany(mappedBy = "candidateID")
     private List<Education> educationList;
+    @OneToMany(mappedBy = "candidateID")
+    private List<Application> applicationList;
     @OneToMany(mappedBy = "candidateID")
     private List<CandidateSkill> candidateSkillList;
     @OneToMany(mappedBy = "candidateID")
@@ -169,15 +166,6 @@ public class Candidate implements Serializable {
     }
 
     @XmlTransient
-    public List<JobPosting> getJobPostingList() {
-        return jobPostingList;
-    }
-
-    public void setJobPostingList(List<JobPosting> jobPostingList) {
-        this.jobPostingList = jobPostingList;
-    }
-
-    @XmlTransient
     public List<Role> getRoleList() {
         return roleList;
     }
@@ -201,6 +189,15 @@ public class Candidate implements Serializable {
 
     public void setEducationList(List<Education> educationList) {
         this.educationList = educationList;
+    }
+
+    @XmlTransient
+    public List<Application> getApplicationList() {
+        return applicationList;
+    }
+
+    public void setApplicationList(List<Application> applicationList) {
+        this.applicationList = applicationList;
     }
 
     @XmlTransient
