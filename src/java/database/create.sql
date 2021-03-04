@@ -100,14 +100,15 @@ create table lgrdb.job_posting
 (
     job_postingID     int auto_increment
         primary key,
-    business_clientID int          not null,
-    job_title         text         null,
-    job_status        varchar(45)  null,
-    job_description   text         null,
-    requirements      text         null,
-    start_date        date         null,
-    end_date          date         null,
-    applicants        varchar(255) null,
+    business_clientID int                                not null,
+    job_title         text                               not null,
+    post_date         datetime default CURRENT_TIMESTAMP null,
+    job_status        varchar(45)                        not null,
+    job_description   text                               not null,
+    requirements      text                               null,
+    start_date        date                               null,
+    end_date          date                               null,
+    applicants        int                                null,
     constraint business_clientID_UNIQUE
         unique (business_clientID),
     constraint FK_JOB_POSTING_BUSINESS_CLIENT
