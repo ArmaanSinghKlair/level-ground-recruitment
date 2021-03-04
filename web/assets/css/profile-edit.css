@@ -68,7 +68,7 @@ a {
 }
 
 .popup {
-  /*display: none;*/
+  display: none;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -80,7 +80,7 @@ a {
 }
 
 .wrapper {
-  /*display: none;*/
+  display: none;
 }
 
 .wrapper.active-popup {
