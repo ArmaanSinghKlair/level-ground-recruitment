@@ -20,6 +20,10 @@
         <servlet-name>CandidateProfileEdit</servlet-name>
         <servlet-class>servlets.CandidateProfileEditServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CandidateJobPosting</servlet-name>
+        <servlet-class>servlets.CandidateJobPostingServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CandidateCreateProfileServlet</servlet-name>
         <url-pattern>/create-profile</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>CandidateProfileEdit</servlet-name>
         <url-pattern>/candidate-profile-edit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CandidateJobPosting</servlet-name>
+        <url-pattern>/candidate-job-posting</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse" id="navcol-1">
             <ul class="navbar-nav mr-auto flex-md-shrink-0">
                 <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="#">Job Posting</a></li>
+                <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="<c:url value="/candidate-job-posting"/>">Job Posting</a></li>
                 <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false"
                                                  data-toggle="dropdown" data-bss-hover-animate="pulse"
                                                  href="#">Services</a>
