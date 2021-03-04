@@ -68,7 +68,7 @@ a {
 }
 
 .popup {
-  display: none;
+  /*display: none;*/
   position: fixed;
   top: 50%;
   left: 50%;
@@ -79,11 +79,11 @@ a {
   border-radius: 5px;
 }
 
-.wrapper-edit {
-  display: none;
+.wrapper {
+  /*display: none;*/
 }
 
-.wrapper-edit.active-popup {
+.wrapper.active-popup {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -104,5 +104,9 @@ a {
 
 .warming-txt {
   font-size: 10px;
+}
+
+.btn.btn-primary.btn-block.close {
+  padding-bottom: 10px;
 }
 

@@ -82,7 +82,6 @@ form {
   background: rgba(0,0,0,0.4);
   display: block;
   z-index: 2;
-  backdrop-filter: blur(2px);
 }
 
 .form-row {
