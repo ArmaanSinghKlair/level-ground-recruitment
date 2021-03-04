@@ -48,7 +48,7 @@
                 </li>
             </ul>
             <span class="d-md-flex flex-md-shrink-0 justify-content-md-center align-items-md-center navbar-text actions"> <a
-                    data-bss-hover-animate="pulse" class="login" href="<c:url value='/candidate-login' />">Log In</a><a
+                    data-bss-hover-animate="pulse" class="login" href="<c:url value='/login' />">Log In</a><a
                     class="btn btn-primary action-button" role="button" data-bss-hover-animate="pulse"
                     href="<c:url value='/create-profile' />">Sign Up</a></span>
         </div>
@@ -80,7 +80,7 @@
     <div class="tab-content">
         <div class="tab-pane fade show active" role="tabpanel" id="tab-1">
             <div class="container login-clean">
-                <form method="post" style="background: #f1faee;" action="<c:url value='/candidate-login'></c:url>">
+                <form method="post" style="background: #f1faee;" action="<c:url value='/login'></c:url>">
                     <div class="illustration">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none"
                              style="color: #1d3557;">

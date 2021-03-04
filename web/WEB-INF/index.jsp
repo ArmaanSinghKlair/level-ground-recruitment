@@ -48,7 +48,7 @@
                 </li>
             </ul>
             <span class="d-md-flex flex-md-shrink-0 justify-content-md-center align-items-md-center navbar-text actions"> <a
-                    data-bss-hover-animate="pulse" class="login" href="<c:url value='/candidate-login' />">Log In</a><a
+                    data-bss-hover-animate="pulse" class="login" href="<c:url value='/login' />">Log In</a><a
                     class="btn btn-primary action-button" role="button" data-bss-hover-animate="pulse"
                     href="<c:url value='/create-profile' />">Sign Up</a></span>
         </div>

@@ -10,7 +10,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import problemdomain.Candidate;
 import validation.ValidateBusinessClient;
 import validation.ValidateCandidate;
@@ -22,6 +21,13 @@ import validation.ValidateJobPosting;
  */
 public class AccountServices {
     private final AccountServicesDB asdb= new AccountServicesDB();
+    private final ArrayList<String> userTypes = new ArrayList<>();
+    
+    public AccountServices(){
+        userTypes.add("admin");
+        userTypes.add("candidate");
+        userTypes.add("businessClient");
+    }
     
     public final ArrayList<String> createCandidateProfile(String username,String password, String password_repeat,String firstName,String lastName, String email, String phoneNo){
         ArrayList<String> errList;
@@ -39,13 +45,19 @@ public class AccountServices {
         }
     }
     
-    public final ArrayList<String> authenticateCandidate(String username, String password) {
+    public final ArrayList<String> authenticate(String username, String password,String userType) {
         ArrayList<String> errList = new ArrayList<>();
-        add(errList,ValidateCandidate.validateCanUsername(username));       //Validate username and get errors IF ANY
-        add(errList,ValidateCandidate.validateCanPassword(password));       //Validate password and get errors IF ANY
+        
+        if(isEmpty(username) || isEmpty(password) || isEmpty(userType))
+            errList.add("All fields required");
+        if(!userTypes.contains(userType.trim()))
+            errList.add("Invalid User type");
         
         if(errList.isEmpty()){
-            return asdb.authenticateCandidate(username, password);
+            
+            return asdb.authenticate(username, password, userType);  
+            
+            
         } else{
             return errList;
         }

@@ -21,8 +21,8 @@ import services.AccountServices;
  *
  * @author 756887
  */
-@WebServlet(name = "CandidateLoginServlet", urlPatterns = {"/candidate-login"})
-public class CandidateLoginServlet extends HttpServlet {
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
+public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,9 +36,10 @@ public class CandidateLoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");    
-    
+        String userType = request.getParameter("userType");
+        
         AccountServices service = new AccountServices();
-        ArrayList<String> errList = service.authenticateCandidate(username, password);
+        ArrayList<String> errList = service.authenticate(username, password, userType);
         
      
          if(errList == null){
