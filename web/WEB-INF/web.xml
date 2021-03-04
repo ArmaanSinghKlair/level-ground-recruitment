@@ -8,6 +8,10 @@
         <filter-name>AuthenticationFilter</filter-name>
         <servlet-name>CandidateProfileServlet</servlet-name>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <servlet-name>JobPostingSearch</servlet-name>
+    </filter-mapping>
     <servlet>
         <servlet-name>CandidateCreateProfileServlet</servlet-name>
         <servlet-class>servlets.CandidateCreateProfileServlet</servlet-class>
@@ -24,6 +28,10 @@
         <servlet-name>CandidateJobPosting</servlet-name>
         <servlet-class>servlets.CandidateJobPostingServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>JobPostingSearch</servlet-name>
+        <servlet-class>servlets.JobPostingSearch</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CandidateCreateProfileServlet</servlet-name>
         <url-pattern>/create-profile</url-pattern>
@@ -39,6 +47,10 @@
     <servlet-mapping>
         <servlet-name>CandidateJobPosting</servlet-name>
         <url-pattern>/candidate-job-posting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>JobPostingSearch</servlet-name>
+        <url-pattern>/job-posting-search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
