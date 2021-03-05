@@ -1,15 +1,12 @@
-import SearchBar from './SearchBar.js';
 import SearchStateReducer from './SearchStateReducer.js';
-import SearchResults from './SearchResults.js';
+import { SearchStateManager, searchQueryInitialState } from './SearchStateManager.js';
+import SearchBarContainer from './SearchBarContainer.js';
 
 function App() {
-
     return React.createElement(
-        'div',
-        { className: 'search-bar' },
-        'Hello',
-        React.createElement(SearchBar, null),
-        React.createElement(SearchResults, null)
+        SearchStateManager,
+        { initialState: searchQueryInitialState, reducer: SearchStateReducer },
+        React.createElement(SearchBarContainer, null)
     );
 }
 

@@ -51,7 +51,7 @@ public class AccountServicesDB {
             }
             
             Candidate c = new Candidate();
-            c.setCanUsername(username);
+            c.setCanUsername(username.toLowerCase());
             c.setCanEmail(email);
             c.setCanPassword(PasswordUtil.hashPassword(password));
             c.setCanfirstName(firstName);

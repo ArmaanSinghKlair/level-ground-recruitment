@@ -38,6 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "JobPosting.findByJobpostingID", query = "SELECT j FROM JobPosting j WHERE j.jobpostingID = :jobpostingID"),
     @NamedQuery(name = "JobPosting.findByPostDate", query = "SELECT j FROM JobPosting j WHERE j.postDate = :postDate"),
     @NamedQuery(name = "JobPosting.findByJobStatus", query = "SELECT j FROM JobPosting j WHERE j.jobStatus = :jobStatus"),
+    @NamedQuery(name = "JobPosting.findByWage", query = "SELECT j FROM JobPosting j WHERE j.wage = :wage"),
+    @NamedQuery(name = "JobPosting.findByLocation", query = "SELECT j FROM JobPosting j WHERE j.location = :location"),
     @NamedQuery(name = "JobPosting.findByStartDate", query = "SELECT j FROM JobPosting j WHERE j.startDate = :startDate"),
     @NamedQuery(name = "JobPosting.findByEndDate", query = "SELECT j FROM JobPosting j WHERE j.endDate = :endDate"),
     @NamedQuery(name = "JobPosting.findByApplicants", query = "SELECT j FROM JobPosting j WHERE j.applicants = :applicants")})
@@ -66,6 +68,11 @@ public class JobPosting implements Serializable {
     @Lob
     @Column(name = "requirements")
     private String requirements;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "wage")
+    private Double wage;
+    @Column(name = "location")
+    private String location;
     @Column(name = "start_date")
     @Temporal(TemporalType.DATE)
     private Date startDate;
@@ -140,6 +147,22 @@ public class JobPosting implements Serializable {
 
     public void setRequirements(String requirements) {
         this.requirements = requirements;
+    }
+
+    public Double getWage() {
+        return wage;
+    }
+
+    public void setWage(Double wage) {
+        this.wage = wage;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public Date getStartDate() {

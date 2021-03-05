@@ -21,7 +21,9 @@
         <link rel="stylesheet" href="assets/css/job-posting.css">
         <link rel="stylesheet" href="assets/css/nav-bar.css">
         <link rel="stylesheet" href="assets/css/styles.css">
-        
+        <link rel="stylesheet" href="react-inject-scripts/css/SearchBar.css?id=123">
+         <!-- Axios -->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <title>Candidate Job Posting</title>
     </head>
     <body>
@@ -69,57 +71,8 @@
                 <div class="col-md-10 offset-md-1 search-column" id="searchBar">
                 </div>
             </div>
-            <div class="row result-row">
-                <div class="col-md-10 offset-md-1 result-column">
-                    <h5 class="text-center text-muted">Found <strong>10 </strong>matches</h5>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10 offset-md-1"></div>
-                <div class="col">
-                    <div role="tablist" id="accordion-1">
-                        <div class="card">
-                            <div role="tab" class="card-header">
-                                <div class="d-md-flex justify-content-md-between align-items-md-baseline job-header">
-                                    <h1 class="display-4">Job Title</h1>
-                                    <p class="text-muted">Posted on: 01 Jan, 2020</p>
-                                </div>
-                                <div class="d-md-flex justify-content-md-between align-items-md-baseline job-status">
-                                    <p class="lead">Status</p>
-                                    <p class="text-muted">Expires on: 01 Jan, 2020</p>
-                                </div>
-                                <h3 class="d-flex justify-content-end mb-0"><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="#accordion-1 .item-1" class="more-btn"><i class="icon ion-android-more-horizontal"></i></a></h3>
-                            </div>
-                            <div role="tabpanel" data-parent="#accordion-1" class="collapse show item-1">
-                                <div class="card-body">
-                                    <div class="shadow job-post">
-                                        <hr />
-                                        <div>
-                                            <h4>Description</h4>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Venenatis cras sed felis eget velit aliquet sagittis id. Diam phasellus vestibulum lorem sed risus ultricies. Sit amet dictum sit amet justo donec enim. Egestas dui id ornare arcu odio ut.<br /></p>
-                                            <hr />
-                                        </div>
-                                        <div>
-                                            <h4>Requirements</h4>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Venenatis cras sed felis eget velit aliquet sagittis id. Diam phasellus vestibulum lorem sed risus ultricies. Sit amet dictum sit amet justo donec enim. Egestas dui id ornare arcu odio ut.<br /></p>
-                                            <hr />
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5 d-flex justify-content-between align-items-baseline"><i class="fas fa-location-arrow icons"></i>
-                                                <p>Location</p>
-                                            </div>
-                                            <div class="col-md-5 offset-md-1 d-flex justify-content-between align-items-baseline"><i class="far fa-money-bill-alt icons"></i>
-                                                <p>$50,000 year</p>
-                                            </div>
-                                        </div>
-                                        <form class="d-flex justify-content-end"><button class="btn apply-btn" type="submit">Apply Now</button></form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
+            
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta2/js/bootstrap.bundle.min.js"></script>
@@ -131,9 +84,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
         <script src="assets/js/popup.js"></script>
         
-        <!-- Axios -->
-        <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
-         <!-- Load React. -->
+       
+<!-- Load React. -->
          <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
          <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 

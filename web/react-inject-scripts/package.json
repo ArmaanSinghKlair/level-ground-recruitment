@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.13.8",
+    "@babel/polyfill": "^7.12.1",
+    "axios": "^0.21.1",
     "babel-cli": "^6.26.0",
-    "babel-preset-react-app": "^3.1.2"
+    "babel-preset-react-app": "^3.1.2",
+    "babel-runtime": "^6.26.0"
   }
 }

@@ -261,7 +261,7 @@
             <c:forEach var="workHistory" items="${candidate.workHistoryList}">
                 <form data-aos="fade-up" action="<c:url value='/candidate-profile'/>" method="POST">
                     <input type="hidden" name="form_name" value="workHistory"/>
-                    <input type="hidden" name="id" value="${workHistory.workHistoryId}"/>
+                    <input type="hidden" name="id" value="${workHistory.workhistoryID}"/>
                     <input type="hidden" name="action" value="profilePageAction" />
                     <div class="form-group">
                         <h6>${workHistory.company}</h6>

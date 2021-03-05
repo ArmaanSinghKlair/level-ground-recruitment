@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "WorkHistory.findAll", query = "SELECT w FROM WorkHistory w"),
-    @NamedQuery(name = "WorkHistory.findByWorkhisotryID", query = "SELECT w FROM WorkHistory w WHERE w.workhisotryID = :workhisotryID"),
+    @NamedQuery(name = "WorkHistory.findByWorkhistoryID", query = "SELECT w FROM WorkHistory w WHERE w.workhistoryID = :workhistoryID"),
     @NamedQuery(name = "WorkHistory.findByCompany", query = "SELECT w FROM WorkHistory w WHERE w.company = :company"),
     @NamedQuery(name = "WorkHistory.findByTitle", query = "SELECT w FROM WorkHistory w WHERE w.title = :title"),
     @NamedQuery(name = "WorkHistory.findByStartDate", query = "SELECT w FROM WorkHistory w WHERE w.startDate = :startDate"),
@@ -43,8 +43,8 @@ public class WorkHistory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "work_hisotryID")
-    private Integer workhisotryID;
+    @Column(name = "work_historyID")
+    private Integer workhistoryID;
     @Basic(optional = false)
     @Column(name = "company")
     private String company;
@@ -67,23 +67,23 @@ public class WorkHistory implements Serializable {
     public WorkHistory() {
     }
 
-    public WorkHistory(Integer workhisotryID) {
-        this.workhisotryID = workhisotryID;
+    public WorkHistory(Integer workhistoryID) {
+        this.workhistoryID = workhistoryID;
     }
 
-    public WorkHistory(Integer workhisotryID, String company, String title, Date startDate) {
-        this.workhisotryID = workhisotryID;
+    public WorkHistory(Integer workhistoryID, String company, String title, Date startDate) {
+        this.workhistoryID = workhistoryID;
         this.company = company;
         this.title = title;
         this.startDate = startDate;
     }
 
-    public Integer getWorkhisotryID() {
-        return workhisotryID;
+    public Integer getWorkhistoryID() {
+        return workhistoryID;
     }
 
-    public void setWorkhisotryID(Integer workhisotryID) {
-        this.workhisotryID = workhisotryID;
+    public void setWorkhistoryID(Integer workhistoryID) {
+        this.workhistoryID = workhistoryID;
     }
 
     public String getCompany() {
@@ -137,7 +137,7 @@ public class WorkHistory implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (workhisotryID != null ? workhisotryID.hashCode() : 0);
+        hash += (workhistoryID != null ? workhistoryID.hashCode() : 0);
         return hash;
     }
 
@@ -148,7 +148,7 @@ public class WorkHistory implements Serializable {
             return false;
         }
         WorkHistory other = (WorkHistory) object;
-        if ((this.workhisotryID == null && other.workhisotryID != null) || (this.workhisotryID != null && !this.workhisotryID.equals(other.workhisotryID))) {
+        if ((this.workhistoryID == null && other.workhistoryID != null) || (this.workhistoryID != null && !this.workhistoryID.equals(other.workhistoryID))) {
             return false;
         }
         return true;
@@ -156,7 +156,7 @@ public class WorkHistory implements Serializable {
 
     @Override
     public String toString() {
-        return "problemdomain.WorkHistory[ workhisotryID=" + workhisotryID + " ]";
+        return "problemdomain.WorkHistory[ workhistoryID=" + workhistoryID + " ]";
     }
     
 }

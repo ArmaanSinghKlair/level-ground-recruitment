@@ -1,15 +1,12 @@
-import SearchBar from './SearchBar.js'
 import SearchStateReducer from './SearchStateReducer.js'
-import SearchResults from './SearchResults.js'
+import {SearchStateManager,searchQueryInitialState} from './SearchStateManager.js'
+import SearchBarContainer from './SearchBarContainer.js'
 
-function App() {
-
+function App() {    
     return (
-        <div className="search-bar">
-            Hello
-            <SearchBar/>
-            <SearchResults />
-        </div>
+        <SearchStateManager initialState={searchQueryInitialState} reducer={SearchStateReducer}>
+            <SearchBarContainer />
+        </SearchStateManager>
     )
 }
 

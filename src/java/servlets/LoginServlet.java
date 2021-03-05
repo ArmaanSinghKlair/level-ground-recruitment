@@ -48,6 +48,7 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("loggedIn", true);
             session.setAttribute("username", username);
+            session.setAttribute("userType", userType);
         } else{
             Candidate candidate = new Candidate();
             candidate.setCanUsername(username);

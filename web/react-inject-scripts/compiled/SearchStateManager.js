@@ -1,9 +1,10 @@
 export var searchQueryInitialState = {
-    minSalary: null,
-    location: null,
-    title: null,
-    status: null,
-    results: null
+    sal: null,
+    loc: null,
+    ti: null,
+    stat: null,
+    pn: 1,
+    searchStart: false
 };
 var SearchContext = React.createContext(searchQueryInitialState);
 

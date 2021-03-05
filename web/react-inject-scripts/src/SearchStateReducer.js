@@ -5,9 +5,10 @@ export const SearchStateActions = {
 export default function SearchStateReducer(state, action){
     switch(action.type){
         case SearchStateActions.INSERT_VALUE:
+         
             return {
-                ...action.payload,
-                ...state
+                ...state,
+                ...action.payload
             }
         break;
     }

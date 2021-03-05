@@ -101,7 +101,7 @@ create table lgrdb.job_posting
     job_postingID     int auto_increment
         primary key,
     business_clientID int                                not null,
-    job_title         text                               not null,
+    job_title         varchar(100)                       not null,
     post_date         datetime default CURRENT_TIMESTAMP null,
     job_status        varchar(45)                        not null,
     job_description   text                               not null,
@@ -111,8 +111,6 @@ create table lgrdb.job_posting
     start_date        date                               null,
     end_date          date                               null,
     applicants        int                                null,
-    constraint business_clientID_UNIQUE
-        unique (business_clientID),
     constraint FK_JOB_POSTING_BUSINESS_CLIENT
         foreign key (business_clientID) references lgrdb.business_client (business_clientID)
 );
@@ -203,7 +201,7 @@ create index FK_CAN_SKILL_SKILL_idx
 
 create table lgrdb.work_history
 (
-    work_hisotryID int auto_increment
+    work_historyID int auto_increment
         primary key,
     candidateID    int          null,
     company        varchar(100) not null,

@@ -27,7 +27,7 @@ public class CandidateAuthentication implements Authentication{
 
     @Override
     public ArrayList<String> authenticate(String username, String password) throws NoResultException, NoSuchAlgorithmException {
-        TypedQuery<Candidate> query = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class).setParameter("canUsername", username);
+        TypedQuery<Candidate> query = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class).setParameter("canUsername", username.toLowerCase());
         Candidate candidate = query.getSingleResult();
         ArrayList<String> errList = new ArrayList<>();
         
