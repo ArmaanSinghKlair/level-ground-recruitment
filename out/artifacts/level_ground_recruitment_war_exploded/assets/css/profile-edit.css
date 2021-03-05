@@ -1,0 +1,112 @@
+.tab-content.edit-content {
+  width: 100%;
+  background: #f1faee;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.nav.nav-tabs.edit-items {
+  padding: 10px;
+  background: #f1faee;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+a {
+  color: #457b9d;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.edit-form {
+  padding-top: 10px;
+}
+
+.btn-group.form-btns {
+  width: 100%;
+  /*padding-top: 60px;*/
+}
+
+.subhead {
+  padding-bottom: 20px;
+}
+
+.btn-group {
+  padding-bottom: 15px;
+  width: 100%;
+}
+
+.form-group.save-btns {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  /*height: 100%;*/
+}
+
+.btn.succ {
+  background: #457b9d;
+  color: #f1faee;
+}
+
+.card-header {
+  background: #1d3557;
+}
+
+.header-btn {
+  text-decoration: none;
+  color: #f1faee;
+}
+
+.header-btn:hover {
+  text-decoration: none;
+  color: #a8dadc;
+}
+
+.display-4 {
+  font-size: 30px;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  background-color: white;
+  width: 500px;
+  border-radius: 5px;
+}
+
+.wrapper {
+  display: none;
+}
+
+.wrapper.active-popup {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.4);
+  display: block;
+  z-index: 2;
+}
+
+.popup-content {
+  padding: 20px;
+}
+
+.popup-form {
+  padding: 10px;
+}
+
+.warming-txt {
+  font-size: 10px;
+}
+
+.btn.btn-primary.btn-block.close {
+  padding-bottom: 10px;
+}
+

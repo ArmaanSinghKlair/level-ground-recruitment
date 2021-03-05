@@ -4,6 +4,7 @@ export default function SearchResults(_ref) {
     var rowCount = _ref.rowCount,
         rows = _ref.rows;
 
+
     return React.createElement(
         "div",
         { className: "search-results" },

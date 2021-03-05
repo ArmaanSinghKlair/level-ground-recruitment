@@ -1,46 +1,95 @@
+import CandidateSingleJob from './CandidateSingleJob.js'
+import ENV from './ENV.js';
 
 function SearchResult({row}) {
+    const [expanded, setExpanded] = React.useState(false);
+    const [curRow, setCurRow] = React.useState(null);
+
+    React.useEffect(()=>{
+        if(expanded){
+            CandidateSingleJob(row.jobpostingID, function(res){
+                setCurRow(res.data)
+            })
+            
+        }
+    },[expanded])
     return (
-        <div class="search-result">
-            <div class="row">
-                <div class="col-md-10 offset-md-1"></div>
-                <div class="col">
+        <div className="search-result">
+           <div className="row">
+                <div className="col">
                     <div role="tablist" id="accordion-1">
-                        <div class="card">
-                            <div role="tab" class="card-header">
-                                <div class="d-md-flex justify-content-md-between align-items-md-baseline job-header">
-                                    <h1 class="display-4">{row.jobTitle}</h1>
-                                    <p class="text-muted">Posted on: {row.postDate}</p>
+                        <div className="card">
+                            <div className="card-header" role="tab">
+                                <div className="d-md-flex justify-content-md-between align-items-md-baseline job-header">
+                                    <h1 className="display-4">{row.jobTitle}</h1>
+                                    <p className="text-muted">Posted on: {new Date(row.postDate).toDateString()}</p>
                                 </div>
-                                <div class="d-md-flex justify-content-md-between align-items-md-baseline job-status">
-                                    <p class="lead">{row.jobStatus}</p>
-                                    <p class="text-muted">Expires on: {row.endDate == null ? 'Not specified': row.endDate}</p>
+                                <div className="d-md-flex justify-content-md-between align-items-md-baseline job-status">
+                                    <p className="lead">{row.jobStatus}</p>
+                                    <p className="text-muted">Expires on: {row.endDate==null?"Not specified":new Date(row.endDate).toDateString()}</p>
                                 </div>
-                                <h3 class="d-flex justify-content-end mb-0"><a data-toggle="collapse" aria-expanded="true" aria-controls="accordion-1 .item-1" href="#accordion-1 .item-1" class="more-btn"><i class="icon ion-android-more-horizontal"></i></a></h3>
+                                <h3 className="d-flex justify-content-end mb-0" onClick={()=>setExpanded(true)}><a data-bs-toggle="collapse" aria-expanded="true"
+                                                                            aria-controls="accordion-1 .item-1"
+                                                                            href="#accordion-1 .item-1"
+                                                                            className="more-btn accordion-button"></a></h3>
                             </div>
-                            <div role="tabpanel" data-parent="#accordion-1" class="collapse item-1">
-                                <div class="card-body">
-                                    <div class="shadow job-post">
+                            <div className="collapse  item-1" role="tabpanel" data-bs-parent="#accordion-1">
+                                <div className="card-body">
+                                    <div className="shadow job-post">
                                         <hr />
-                                        <div>
-                                            <h4>Description</h4>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Venenatis cras sed felis eget velit aliquet sagittis id. Diam phasellus vestibulum lorem sed risus ultricies. Sit amet dictum sit amet justo donec enim. Egestas dui id ornare arcu odio ut.<br /></p>
-                                            <hr />
-                                        </div>
-                                        <div>
-                                            <h4>Requirements</h4>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Venenatis cras sed felis eget velit aliquet sagittis id. Diam phasellus vestibulum lorem sed risus ultricies. Sit amet dictum sit amet justo donec enim. Egestas dui id ornare arcu odio ut.<br /></p>
-                                            <hr />
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5 d-flex justify-content-between align-items-baseline"><i class="fas fa-location-arrow icons"></i>
-                                                <p>Location</p>
+                                            <div>
+                                                <h4>Description</h4>
+                                                    {curRow == null
+                                                ?
+                                                    <div className="empty-row">
+                                                        <img src={ENV.CONTEXT_PATH+"/react-inject-scripts/assets/loading.gif"} />
+                                                    </div>
+                                                :
+                                                    <p>{curRow.jobDescription}</p>
+                                                    }
+                                                <br />
+                                                <hr />
                                             </div>
-                                            <div class="col-md-5 offset-md-1 d-flex justify-content-between align-items-baseline"><i class="far fa-money-bill-alt icons"></i>
-                                                <p>$50,000 year</p>
+                                            <div>
+                                                <h4>Requirements</h4>
+                                                {curRow == null
+                                                ?
+                                                    <div className="empty-row">
+                                                        <img src={ENV.CONTEXT_PATH+"/react-inject-scripts/assets/loading.gif"} />
+                                                    </div>
+                                                :
+                                                    <p>{curRow.requirements}</p>
+                                                    }
+                                                <hr />
                                             </div>
-                                        </div>
-                                        <form class="d-flex justify-content-end"><button class="btn apply-btn" type="submit">Apply Now</button></form>
+
+                                            <div className="row">
+                                                <div className="col-md-5 d-flex justify-content-between align-items-baseline"><i
+                                                        className="fas fa-location-arrow icons"></i>
+                                                    {curRow == null
+                                                ?
+                                                    <div className="empty-row">
+                                                        <img src={ENV.CONTEXT_PATH+"/react-inject-scripts/assets/loading.gif"} />
+                                                    </div>
+                                                :
+                                                    <p>{curRow.location}</p>
+                                                    }
+                                                </div>
+                                                <div className="col-md-5 offset-md-1 d-flex justify-content-between align-items-baseline">
+                                                    <i className="far fa-money-bill-alt icons"></i>
+                                                    {curRow == null
+                                                ?
+                                                    <div className="empty-row">
+                                                        <img src={ENV.CONTEXT_PATH+"/react-inject-scripts/assets/loading.gif"} />
+                                                    </div>
+                                                :
+                                                    <p>${curRow.wage} yearly</p>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <form className="d-flex justify-content-end">
+                                                <button className="btn apply-btn" type="submit">Apply Now</button>
+                                            </form>
                                     </div>
                                 </div>
                             </div>
@@ -49,6 +98,7 @@ function SearchResult({row}) {
                 </div>
             </div>
         </div>
+        
     )
 }
 

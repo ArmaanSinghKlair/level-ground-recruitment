@@ -2,7 +2,6 @@ import CandidateAllJobs from './CandidateAllJobs.js'
 import SearchResults from './SearchResults.js'
 import SearchBar from './SearchBar.js'
 import SearchContext from './SearchStateManager.js'
-import {SearchStateActions} from './SearchStateReducer.js';
 
 function SearchBarContainer() {
     const [searchState, dispatch] = React.useContext(SearchContext);
@@ -10,9 +9,9 @@ function SearchBarContainer() {
     React.useEffect(()=>{
         if(searchState.searchStart){
             CandidateAllJobs(searchState, function(res){
-                console.log(res)
                 setRows(res.data.data);
                 setRowCount(res.data.rowCount);
+                setError(null);
             })
             
         }

@@ -1,6 +1,7 @@
 import SearchResult from './SearchResult.js';
 
 export default function SearchResults({rowCount, rows}) {
+
     return (
         <div className="search-results">
             {
