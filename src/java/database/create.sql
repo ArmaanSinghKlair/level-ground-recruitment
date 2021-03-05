@@ -106,6 +106,8 @@ create table lgrdb.job_posting
     job_status        varchar(45)                        not null,
     job_description   text                               not null,
     requirements      text                               null,
+    wage              double                             null,
+    location          varchar(45)                        null,
     start_date        date                               null,
     end_date          date                               null,
     applicants        int                                null,
