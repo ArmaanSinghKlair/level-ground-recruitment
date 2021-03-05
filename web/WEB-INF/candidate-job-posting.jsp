@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="assets/css/job-posting.css">
         <link rel="stylesheet" href="assets/css/nav-bar.css">
         <link rel="stylesheet" href="assets/css/styles.css">
+        
         <title>Candidate Job Posting</title>
     </head>
     <body>
@@ -65,8 +66,7 @@
 
         <div class="container">
             <div class="row search-row">
-                <div class="col-md-10 offset-md-1 search-column">
-                    <h1>Search</h1>
+                <div class="col-md-10 offset-md-1 search-column" id="searchBar">
                 </div>
             </div>
             <div class="row result-row">
@@ -130,6 +130,17 @@
         <script src="assets/js/bs-init.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
         <script src="assets/js/popup.js"></script>
+        
+        <!-- Axios -->
+        <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+         <!-- Load React. -->
+         <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+        <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+        <script src="react-inject-scripts/compiled/App.js" type="module"></script>
+        <noscript>Javascript must be enabled to search jobs</noscript>
     </body>
 
 </html>

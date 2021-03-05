@@ -6,3 +6,5 @@
 /nbproject/genfiles.properties
 .idea
 /dist/
+/web/react-inject-scripts/node_modules/
+/web/react-inject-scripts/node_modules/*
