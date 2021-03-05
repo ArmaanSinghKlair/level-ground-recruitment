@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="level-ground-recruitmentPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>problemdomain.Log_1</class>
+    <class>problemdomain.JobPosting_1</class>
+    <class>problemdomain.BusinessClient_1</class>
+    <class>problemdomain.Advisor_1</class>
+    <class>problemdomain.Candidate_1</class>
+    <class>problemdomain.Log</class>
+    <class>problemdomain.BusinessClient</class>
+    <class>problemdomain.Candidate</class>
+    <class>problemdomain.Role</class>
+    <class>problemdomain.WorkHistory</class>
+    <class>problemdomain.CandidateSkill</class>
+    <class>problemdomain.Education</class>
+    <class>problemdomain.JobPosting</class>
+    <class>problemdomain.Advisor</class>
+    <class>problemdomain.Skill</class>
+    <class>problemdomain.Application</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <non-jta-data-source>java:/comp/env/jdbc/lgrdb</non-jta-data-source>
+  </persistence-unit>
+</persistence>

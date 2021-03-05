@@ -1,0 +1,141 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb. 16, 2021, 11:23:04 a.m.
+    Author     : kentp
+*/
+
+/*=============================================*/
+/*VARIABLES
+/*=============================================*/
+
+:root
+{
+    /*COLORS*/
+    --foreground-color: #F1FAEE;
+    --background-color: #457B9D;
+    --danger-color: #E63946;
+    --navbar-color: #1D3557;
+    --secondary-color: #A8DADC;
+
+    /*MISC*/
+    --border-round: 5px;
+}
+
+
+
+/*=============================================*/
+/*TYPE SELECTORS
+/*=============================================*/
+
+dd
+{
+    margin-bottom: 20px;
+}
+
+/*=============================================*/
+/*ID SELECTORS
+/*=============================================*/
+
+#empty-list-title
+{
+    color: white;
+    text-align: center;
+}
+
+/*=============================================*/
+/*Class SELECTORS
+/*=============================================*/
+
+.default-container
+{
+    background-color: var(--background-color);   
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 25px;
+    border-radius: var(--border-round);
+}
+
+.inner-container
+{
+    width: 50%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    background-color: var(--foreground-color);
+    border-radius: var(--border-round);
+}
+
+.section-label
+{
+    font-weight: 600;
+    color: var(--background-color);
+}
+
+.container-header
+{
+    color: var(--background-color);
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+/*=============================================*/
+/* Buttons
+/*=============================================*/
+
+.default-button
+{
+    font-size: 14px;
+    padding: 10px 36px;
+    height: 40px;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+}
+
+.primary-button
+{
+    background-color: var(--navbar-color);
+    color: var(--foreground-color);
+}
+
+.primary-button:hover
+{
+    background-color: var(--background-color);
+}
+
+.primary-button:active
+{
+    background-color: var(--secondary-color);
+}
+
+.delete-button
+{
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.delete-button:hover
+{
+    background-color: #b81723;
+}
+
+.delete-button:active
+{
+    background-color: #ec6973;
+}
+
+.upload-button
+{
+    /*TODO: Optional*/
+}
+
+/*=============================================*/
+/* Media Queries
+/*=============================================*/

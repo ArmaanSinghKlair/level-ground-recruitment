@@ -1,0 +1,81 @@
+.container {
+  background: #f1faee;
+  border-radius: 5px;
+}
+
+.display-4 {
+  font-size: 30px;
+}
+
+.job-post {
+  /*border: 1px solid #457b9d;*/
+  padding: 20px;
+  border-radius: 5px;
+}
+
+@media (min-width: 768px) {
+  .job-post {
+    margin: 10px;
+  }
+}
+
+.job-post:hover {
+  /*box-shadow: 0px 0px 5px #457b9d;*/
+}
+
+.btn.apply-btn {
+  background: #457b9d;
+  color: #f1faee;
+}
+
+.btn.apply-btn:hover {
+  background: #1d3557;
+}
+
+.icons {
+  font-size: 20px;
+}
+
+.row.result-row {
+  margin: 20px;
+  box-shadow: 0px 0px 0px;
+}
+
+.col.result-column {
+  margin: 0;
+  padding: 0;
+}
+
+.result-column h5 {
+  margin: 0;
+}
+
+hr {
+  background: #a8dadc;
+}
+
+form {
+  padding-top: 10px;
+}
+
+#open-arrow {
+  color: #1d3557;
+}
+
+.card-header {
+  background: var(--light);
+}
+
+#accordion-1 {
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.card {
+  margin-top: 10px;
+}
+
+.more-btn {
+  color: #457b9d;
+}
+
