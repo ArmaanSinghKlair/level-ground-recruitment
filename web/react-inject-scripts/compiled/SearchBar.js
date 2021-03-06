@@ -34,6 +34,7 @@ function SearchBar(_ref) {
             setError("Salary cannot be negative");
             return;
         } else {
+
             if (salaryRef.current.value != null && salaryRef.current.value != "") payload.sal = salaryRef.current.value;
         }
 
@@ -65,7 +66,7 @@ function SearchBar(_ref) {
         { className: 'search-bar' },
         React.createElement(
             'div',
-            { className: 'row' },
+            { className: 'search-bar__row' },
             React.createElement(
                 'select',
                 { name: 'searchType', ref: searchTypeRef },
@@ -91,7 +92,7 @@ function SearchBar(_ref) {
         ),
         React.createElement(
             'div',
-            { className: 'row' },
+            { className: 'search-bar__row' },
             React.createElement(
                 'select',
                 { name: 'jobType', ref: jobTypeRef },
@@ -112,7 +113,7 @@ function SearchBar(_ref) {
         ),
         React.createElement(
             'div',
-            { className: 'row tag-row' },
+            { className: 'search-bar__row tag-row' },
             Object.keys(searchState).filter(function (key) {
                 return searchState[key] != null && ignoredTags.indexOf(key) == -1;
             }).map(function (key, i) {

@@ -5,7 +5,7 @@
     justify-content: space-between;
     align-items: stretch;
 }
-.search-bar .row > *{
+.search-bar__row > *{
     margin:0 1vmax;
 
 }
@@ -13,7 +13,7 @@
     flex-grow: 1;
 }
 
-.search-bar .row{
+.search-bar__row{
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -49,4 +49,8 @@
     display: grid;
     place-items: center;
     padding: 2vmax;
+}
+
+.empty-result img{
+    width: 2rem;
 }

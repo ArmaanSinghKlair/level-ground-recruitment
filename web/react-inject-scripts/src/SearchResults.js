@@ -1,6 +1,9 @@
 import SearchResult from './SearchResult.js';
+import SearchContext from './SearchStateManager.js';
+import {SearchStateActions} from './SearchStateReducer.js';
 
-export default function SearchResults({rowCount, rows}) {
+export default function SearchResults({rowCount, rows, setSuccess, setError, hasMore}) {
+    const [searchState, dispatch] = React.useContext(SearchContext);
 
     return (
         <div className="search-results">
@@ -10,6 +13,7 @@ export default function SearchResults({rowCount, rows}) {
                 <div className="row result-row">
                     <div className="col-md-10 offset-md-1 result-column">
                         <h5 className="text-center text-muted">Found <strong>{rowCount} </strong>matches</h5>
+                        <h6 className="text-center" style={{margin:"1vmax 0"}}>Page {searchState.pn}</h6>
                     </div>
                 </div>
             : 
@@ -25,7 +29,29 @@ export default function SearchResults({rowCount, rows}) {
               Jobs appear here</div>
                 :
                 (rowCount>0 && rows != null)?
-                rows.map((row,i)=><SearchResult row={row} key={i}/>)       
+                <div>
+                    <div className="pagination-container">
+                        {searchState.pn > 1? 
+                        <button onClick={()=>dispatch({
+                            type: SearchStateActions.INSERT_VALUE,
+                            payload: {
+                                pn: searchState.pn-1,
+                                searchStart: true
+                            }
+                        })}>Prev</button>
+                        : null}
+                        {hasMore ?
+                        <button onClick={()=>dispatch({
+                            type: SearchStateActions.INSERT_VALUE,
+                            payload: {
+                                pn: searchState.pn+1,
+                                searchStart: true
+                            }
+                        })}>Next</button>
+                         : null}
+                    </div>
+                {rows.map((row,i)=><SearchResult row={row} key={i} setSuccess={setSuccess} setError={setError} index={i}/>)}    
+                </div>   
                 :
                 <div className="empty-result">⚠ No jobs found</div>
 

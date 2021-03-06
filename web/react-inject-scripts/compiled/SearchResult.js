@@ -1,10 +1,15 @@
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+import CandidateApplyJob from './CandidateApplyJob.js';
 import CandidateSingleJob from './CandidateSingleJob.js';
+
 import ENV from './ENV.js';
 
 function SearchResult(_ref) {
-    var row = _ref.row;
+    var row = _ref.row,
+        setSuccess = _ref.setSuccess,
+        setError = _ref.setError,
+        index = _ref.index;
 
     var _React$useState = React.useState(false),
         _React$useState2 = _slicedToArray(_React$useState, 2),
@@ -23,6 +28,24 @@ function SearchResult(_ref) {
             });
         }
     }, [expanded]);
+
+    function applyJob() {
+        CandidateApplyJob(row.jobpostingID, function (data) {
+            if (data.querySuccessfull) {
+                setSuccess("Applied to job");
+                setError(null);
+                window.scrollTo(0, 0);
+            } else {
+                setSuccess(null);
+                var err = "";
+                data.errors.forEach(function (e) {
+                    err += " " + e;
+                });
+                setError(err);
+                window.scrollTo(0, 0);
+            }
+        });
+    }
     return React.createElement(
         'div',
         { className: 'search-result' },
@@ -34,7 +57,7 @@ function SearchResult(_ref) {
                 { className: 'col' },
                 React.createElement(
                     'div',
-                    { role: 'tablist', id: 'accordion-1' },
+                    { role: 'tablist', id: 'accordion-' + index },
                     React.createElement(
                         'div',
                         { className: 'card' },
@@ -77,14 +100,14 @@ function SearchResult(_ref) {
                                         return setExpanded(true);
                                     } },
                                 React.createElement('a', { 'data-bs-toggle': 'collapse', 'aria-expanded': 'true',
-                                    'aria-controls': 'accordion-1 .item-1',
-                                    href: '#accordion-1 .item-1',
+                                    'aria-controls': 'accordion-' + index + ' .item-1',
+                                    href: '#accordion-' + index + ' .item-1',
                                     className: 'more-btn accordion-button' })
                             )
                         ),
                         React.createElement(
                             'div',
-                            { className: 'collapse  item-1', role: 'tabpanel', 'data-bs-parent': '#accordion-1' },
+                            { className: 'collapse  item-1', role: 'tabpanel', 'data-bs-parent': '#accordion-' + index },
                             React.createElement(
                                 'div',
                                 { className: 'card-body' },
@@ -102,7 +125,7 @@ function SearchResult(_ref) {
                                         ),
                                         curRow == null ? React.createElement(
                                             'div',
-                                            { className: 'empty-row' },
+                                            { className: 'empty-result' },
                                             React.createElement('img', { src: ENV.CONTEXT_PATH + "/react-inject-scripts/assets/loading.gif" })
                                         ) : React.createElement(
                                             'p',
@@ -122,7 +145,7 @@ function SearchResult(_ref) {
                                         ),
                                         curRow == null ? React.createElement(
                                             'div',
-                                            { className: 'empty-row' },
+                                            { className: 'empty-result' },
                                             React.createElement('img', { src: ENV.CONTEXT_PATH + "/react-inject-scripts/assets/loading.gif" })
                                         ) : React.createElement(
                                             'p',
@@ -141,7 +164,7 @@ function SearchResult(_ref) {
                                                 className: 'fas fa-location-arrow icons' }),
                                             curRow == null ? React.createElement(
                                                 'div',
-                                                { className: 'empty-row' },
+                                                { className: 'empty-result' },
                                                 React.createElement('img', { src: ENV.CONTEXT_PATH + "/react-inject-scripts/assets/loading.gif" })
                                             ) : React.createElement(
                                                 'p',
@@ -155,7 +178,7 @@ function SearchResult(_ref) {
                                             React.createElement('i', { className: 'far fa-money-bill-alt icons' }),
                                             curRow == null ? React.createElement(
                                                 'div',
-                                                { className: 'empty-row' },
+                                                { className: 'empty-result' },
                                                 React.createElement('img', { src: ENV.CONTEXT_PATH + "/react-inject-scripts/assets/loading.gif" })
                                             ) : React.createElement(
                                                 'p',
@@ -167,11 +190,13 @@ function SearchResult(_ref) {
                                         )
                                     ),
                                     React.createElement(
-                                        'form',
+                                        'div',
                                         { className: 'd-flex justify-content-end' },
                                         React.createElement(
                                             'button',
-                                            { className: 'btn apply-btn', type: 'submit' },
+                                            { className: 'btn apply-btn', onClick: function onClick() {
+                                                    return applyJob();
+                                                } },
                                             'Apply Now'
                                         )
                                     )

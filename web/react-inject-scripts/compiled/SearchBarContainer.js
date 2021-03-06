@@ -4,6 +4,7 @@ import CandidateAllJobs from './CandidateAllJobs.js';
 import SearchResults from './SearchResults.js';
 import SearchBar from './SearchBar.js';
 import SearchContext from './SearchStateManager.js';
+import { SearchStateActions } from './SearchStateReducer.js';
 
 function SearchBarContainer() {
     var _React$useContext = React.useContext(SearchContext),
@@ -14,9 +15,11 @@ function SearchBarContainer() {
     React.useEffect(function () {
         if (searchState.searchStart) {
             CandidateAllJobs(searchState, function (res) {
+                console.log(res.data);
                 setRows(res.data.data);
                 setRowCount(res.data.rowCount);
                 setError(null);
+                setHasMore(res.data.hasMore);
             });
         }
     }, [searchState]);
@@ -36,6 +39,16 @@ function SearchBarContainer() {
         error = _React$useState6[0],
         setError = _React$useState6[1];
 
+    var _React$useState7 = React.useState(null),
+        _React$useState8 = _slicedToArray(_React$useState7, 2),
+        success = _React$useState8[0],
+        setSuccess = _React$useState8[1];
+
+    var _React$useState9 = React.useState(false),
+        _React$useState10 = _slicedToArray(_React$useState9, 2),
+        hasMore = _React$useState10[0],
+        setHasMore = _React$useState10[1];
+
     return React.createElement(
         'div',
         { className: 'search-bar-container' },
@@ -45,8 +58,17 @@ function SearchBarContainer() {
             '\u26A0 ',
             error
         ) : null,
+        success != null ? React.createElement(
+            'div',
+            { 'class': 'alert alert-success', role: 'alert' },
+            React.createElement(
+                'span',
+                null,
+                success
+            )
+        ) : null,
         React.createElement(SearchBar, { setError: setError }),
-        React.createElement(SearchResults, { rowCount: rowCount, rows: rows })
+        React.createElement(SearchResults, { rowCount: rowCount, rows: rows, setSuccess: setSuccess, setError: setError, hasMore: hasMore })
     );
 }
 

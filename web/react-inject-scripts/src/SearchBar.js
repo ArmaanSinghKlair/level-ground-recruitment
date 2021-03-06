@@ -25,6 +25,7 @@ function SearchBar({setError}) {
             setError("Salary cannot be negative");
             return;
         } else{
+            
             if(salaryRef.current.value != null && salaryRef.current.value != "")
                 payload.sal= salaryRef.current.value
             
@@ -58,7 +59,7 @@ function SearchBar({setError}) {
 
     return (
         <div className="search-bar">
-            <div className="row">
+            <div className="search-bar__row">
             <select name="searchType" ref={searchTypeRef}>
                 <option value="ti">Title</option>
                 <option value="loc">Location</option>
@@ -67,7 +68,7 @@ function SearchBar({setError}) {
             <div className="search-bar__button" onClick={()=>handleSearch()}><img src={ENV.CONTEXT_PATH+"/react-inject-scripts/assets/search.svg"} /></div>
             </div>
 
-            <div className="row">
+            <div className="search-bar__row">
                 <select name="jobType" ref={jobTypeRef}>
                     <option>Job Type</option>
                     {
@@ -78,7 +79,7 @@ function SearchBar({setError}) {
                 <input type="number" min="0" placeholder="Salary Per year" ref={salaryRef}/>
             </div>
 
-            <div className="row tag-row">
+            <div className="search-bar__row tag-row">
                 {
                     Object.keys(searchState).filter(key=>searchState[key] != null && ignoredTags.indexOf(key)==-1).map((key,i)=>{
                         return <Tag name={key} value={searchState[key]} onClick={()=>handleTagClick(key)} key={i} />

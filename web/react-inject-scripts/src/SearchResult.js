@@ -1,10 +1,12 @@
+import CandidateApplyJob from './CandidateApplyJob.js';
 import CandidateSingleJob from './CandidateSingleJob.js'
+
 import ENV from './ENV.js';
 
-function SearchResult({row}) {
+function SearchResult({row, setSuccess, setError, index}) {
     const [expanded, setExpanded] = React.useState(false);
     const [curRow, setCurRow] = React.useState(null);
-
+    
     React.useEffect(()=>{
         if(expanded){
             CandidateSingleJob(row.jobpostingID, function(res){
@@ -13,11 +15,29 @@ function SearchResult({row}) {
             
         }
     },[expanded])
+
+    function applyJob(){
+        CandidateApplyJob(row.jobpostingID, function(data){
+            if(data.querySuccessfull){
+                setSuccess("Applied to job")
+                setError(null)
+                window.scrollTo(0,0)
+            }else{
+                setSuccess(null)
+                let err =""
+                data.errors.forEach(e=>{
+                    err +=" "+e
+                })
+                setError(err)
+                window.scrollTo(0,0)
+            }
+        })
+    }
     return (
         <div className="search-result">
            <div className="row">
                 <div className="col">
-                    <div role="tablist" id="accordion-1">
+                    <div role="tablist" id={`accordion-${index}`}>
                         <div className="card">
                             <div className="card-header" role="tab">
                                 <div className="d-md-flex justify-content-md-between align-items-md-baseline job-header">
@@ -29,11 +49,11 @@ function SearchResult({row}) {
                                     <p className="text-muted">Expires on: {row.endDate==null?"Not specified":new Date(row.endDate).toDateString()}</p>
                                 </div>
                                 <h3 className="d-flex justify-content-end mb-0" onClick={()=>setExpanded(true)}><a data-bs-toggle="collapse" aria-expanded="true"
-                                                                            aria-controls="accordion-1 .item-1"
-                                                                            href="#accordion-1 .item-1"
+                                                                            aria-controls={`accordion-${index} .item-1`}
+                                                                            href={`#accordion-${index} .item-1`}
                                                                             className="more-btn accordion-button"></a></h3>
                             </div>
-                            <div className="collapse  item-1" role="tabpanel" data-bs-parent="#accordion-1">
+                            <div className="collapse  item-1" role="tabpanel" data-bs-parent={`#accordion-${index}`}>
                                 <div className="card-body">
                                     <div className="shadow job-post">
                                         <hr />
@@ -41,7 +61,7 @@ function SearchResult({row}) {
                                                 <h4>Description</h4>
                                                     {curRow == null
                                                 ?
-                                                    <div className="empty-row">
+                                                    <div className="empty-result">
                                                         <img src={ENV.CONTEXT_PATH+"/react-inject-scripts/assets/loading.gif"} />
                                                     </div>
                                                 :
@@ -54,7 +74,7 @@ function SearchResult({row}) {
                                                 <h4>Requirements</h4>
                                                 {curRow == null
                                                 ?
-                                                    <div className="empty-row">
+                                                    <div className="empty-result">
                                                         <img src={ENV.CONTEXT_PATH+"/react-inject-scripts/assets/loading.gif"} />
                                                     </div>
                                                 :
@@ -68,7 +88,7 @@ function SearchResult({row}) {
                                                         className="fas fa-location-arrow icons"></i>
                                                     {curRow == null
                                                 ?
-                                                    <div className="empty-row">
+                                                    <div className="empty-result">
                                                         <img src={ENV.CONTEXT_PATH+"/react-inject-scripts/assets/loading.gif"} />
                                                     </div>
                                                 :
@@ -79,7 +99,7 @@ function SearchResult({row}) {
                                                     <i className="far fa-money-bill-alt icons"></i>
                                                     {curRow == null
                                                 ?
-                                                    <div className="empty-row">
+                                                    <div className="empty-result">
                                                         <img src={ENV.CONTEXT_PATH+"/react-inject-scripts/assets/loading.gif"} />
                                                     </div>
                                                 :
@@ -87,9 +107,9 @@ function SearchResult({row}) {
                                                     }
                                                 </div>
                                             </div>
-                                            <form className="d-flex justify-content-end">
-                                                <button className="btn apply-btn" type="submit">Apply Now</button>
-                                            </form>
+                                            <div className="d-flex justify-content-end">
+                                                <button className="btn apply-btn" onClick={()=>applyJob()}>Apply Now</button>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
