@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import services.JobPostingServices;
 
 /**
  *
@@ -22,7 +23,18 @@ public class CandidateJobPostingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/candidate-job-posting.jsp").forward(request, response);
+        String action = request.getParameter("act");
+        if(action != null){
+            switch(action){
+                case "apply":
+                    new JobPostingServices().applyForJob(request, response);
+                break;
+            }
+            return;
+        }else{
+            request.getRequestDispatcher("/WEB-INF/candidate-job-posting.jsp").forward(request, response);
+
+        }
 
     }
 

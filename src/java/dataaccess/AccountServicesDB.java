@@ -22,6 +22,8 @@ import problemdomain.BusinessClient;
 import problemdomain.Candidate;
 import problemdomain.JobPosting;
 import problemdomain.Skill;
+import strategies.authentication.Authentication;
+import strategies.authentication.CandidateAuthentication;
 import util.DBUtil;
 import util.PasswordUtil;
 
@@ -50,7 +52,7 @@ public class AccountServicesDB {
             }
             
             Candidate c = new Candidate();
-            c.setCanUsername(username);
+            c.setCanUsername(username.toLowerCase());
             c.setCanEmail(email);
             c.setCanPassword(PasswordUtil.hashPassword(password));
             c.setCanfirstName(firstName);
@@ -105,20 +107,12 @@ public class AccountServicesDB {
      * @param password Input password
      * @return Arraylist of errors
      */
-    public final ArrayList<String> authenticateCandidate(String username, String password) {
+    public final ArrayList<String> authenticate(String username, String password, String userType) {
         initialize();
-        TypedQuery<Candidate> candidates = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class).setParameter("canUsername", username);
         ArrayList<String> errList = null;
         try {
-                  
-            Candidate candidate = candidates.getSingleResult();
-            String hashedInputPassword = PasswordUtil.hashPassword(password);
-            if(hashedInputPassword.equals(candidate.getCanPassword())){
-                return null;
-            } else{
-                errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
-            }
-            
+            Authentication auth = getAuthObject(userType);
+            errList = auth.authenticate(username, password);            
         } catch(NoResultException e){
                 errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
         } catch (NoSuchAlgorithmException ex) {
@@ -131,6 +125,14 @@ public class AccountServicesDB {
 
     }
     
+    private Authentication getAuthObject(String userType){
+        switch(userType){
+                case "candidate":
+                    return new CandidateAuthentication(em);
+                
+            }   
+        return null;
+    }
     /**
      * Authenticates a user. The trick here is to hash the input password before comparing it to the input password
      * @param username Input username

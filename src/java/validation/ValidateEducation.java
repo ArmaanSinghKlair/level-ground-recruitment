@@ -69,11 +69,12 @@ public class ValidateEducation {
         edu.setEndDate(end);
         edu.setStartDate(start);
         edu.setSubject(subject);
-        request.setAttribute("education", edu);
         
         // Do this if ANY ERRORS
         if(!errList.isEmpty()){
             request.setAttribute("currentTab", "add-education-cta");
+            request.setAttribute("education", edu);
+
         }
 
     }

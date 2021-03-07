@@ -140,7 +140,7 @@ create table job_posting
     job_postingID     int auto_increment
         primary key,
     business_clientID int                                not null,
-    job_title         text                               not null,
+    job_title         varchar(100)                       not null,
     post_date         datetime default CURRENT_TIMESTAMP null,
     job_status        varchar(45)                        not null,
     job_description   text                               not null,

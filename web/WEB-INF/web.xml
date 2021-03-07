@@ -32,6 +32,14 @@
         <servlet-name>JobPostingSearch</servlet-name>
         <servlet-class>servlets.JobPostingSearch</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomePageServlet</servlet-name>
+        <servlet-class>servlets.HomePageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProfileNavigationServlet</servlet-name>
+        <servlet-class>servlets.ProfileNavigationServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CandidateCreateProfileServlet</servlet-name>
         <url-pattern>/create-profile</url-pattern>
@@ -50,7 +58,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>JobPostingSearch</servlet-name>
-        <url-pattern>/job-posting-search</url-pattern>
+        <url-pattern>/job-search</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomePageServlet</servlet-name>
+        <url-pattern>/application-home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileNavigationServlet</servlet-name>
+        <url-pattern>/profile-navigation</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

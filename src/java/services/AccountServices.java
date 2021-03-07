@@ -10,7 +10,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import problemdomain.Candidate;
 import validation.ValidateAdvisor;
 import validation.ValidateBusinessClient;
@@ -23,6 +22,13 @@ import validation.ValidateJobPosting;
  */
 public class AccountServices {
     private final AccountServicesDB asdb= new AccountServicesDB();
+    private final ArrayList<String> userTypes = new ArrayList<>();
+    
+    public AccountServices(){
+        userTypes.add("admin");
+        userTypes.add("candidate");
+        userTypes.add("businessClient");
+    }
     
     public final ArrayList<String> createCandidateProfile(String username,String password, String password_repeat,String firstName,String lastName, String email, String phoneNo){
         ArrayList<String> errList;
@@ -40,32 +46,42 @@ public class AccountServices {
         }
     }
     
-    public final ArrayList<String> authenticateCandidate(String username, String password) {
+    public final ArrayList<String> authenticate(String username, String password,String userType) {
         ArrayList<String> errList = new ArrayList<>();
-        add(errList,ValidateCandidate.validateCanUsername(username));       //Validate username and get errors IF ANY
-        add(errList,ValidateCandidate.validateCanPassword(password));       //Validate password and get errors IF ANY
+        
+        if(isEmpty(username) || isEmpty(password) || isEmpty(userType))
+            errList.add("All fields required");
+        if(!userTypes.contains(userType.trim()))
+            errList.add("Invalid User type");
         
         if(errList.isEmpty()){
-            return asdb.authenticateCandidate(username, password);
+            
+            return asdb.authenticate(username, password, userType);  
+            
+            
         } else{
             return errList;
         }
     }
     
-    public final ArrayList<String> createJobPosting(String title,String requirements,String sDate,String eDate, String status, String description){
+    public final ArrayList<String> createJobPosting(String title,String requirements,String sDate,String eDate, String status, String description, String sWage, String location){
         ArrayList<String> errList = new ArrayList<>();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date startDate = format.parse(sDate);
             Date endDate = format.parse(eDate);
+            Double wage = Double.parseDouble(sWage);
             
-            errList = ValidateJobPosting.getErrorMapForAllfields(title, requirements, startDate, endDate, status, description);
+            errList = ValidateJobPosting.getErrorMapForAllfields(title, requirements, startDate, endDate, status, description, wage, location);
             
             if(errList != null){
                 return errList;
             } else{
                 return asdb.createJobPosting(title, requirements, startDate, endDate, status, description);
             }
+        } catch (NumberFormatException e)
+        {
+            errList.add("error parsing wage");
         } catch (ParseException e)
         {
             errList.add("error parsing date");

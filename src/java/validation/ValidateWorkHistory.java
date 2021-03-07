@@ -69,12 +69,12 @@ public final class ValidateWorkHistory {
                     wh.setEndDate(end);
                     wh.setReference(reference);
                     
-                    request.setAttribute("workHistory", wh);
 
                 
                 // Do this if ANY ERRORS
                 if(!errList.isEmpty()){
                     request.setAttribute("currentTab", "add-workHistory-cta");
+                    request.setAttribute("workHistory", wh);
                 }
                 
     }

@@ -7,18 +7,9 @@ package services;
 
 import dataaccess.AccountServicesDB;
 import dataaccess.ProfileServicesDB;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
-import problemdomain.Candidate;
-import problemdomain.CandidateSkill;
-import problemdomain.Education;
 import problemdomain.Skill;
-import problemdomain.WorkHistory;
 import validation.ValidateEducation;
 import validation.ValidateSkill;
 import validation.ValidateWorkHistory;
