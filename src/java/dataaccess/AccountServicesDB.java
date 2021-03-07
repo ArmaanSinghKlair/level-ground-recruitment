@@ -112,7 +112,7 @@ public class AccountServicesDB {
         ArrayList<String> errList = null;
         try {
             Authentication auth = getAuthObject(userType);
-            errList = auth.authenticate(username, password);            
+            errList = auth.authenticate(username, password);
         } catch(NoResultException e){
                 errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
         } catch (NoSuchAlgorithmException ex) {
