@@ -78,7 +78,7 @@ public class AccountServicesDB {
         EntityTransaction trans = em.getTransaction();
         ArrayList<String> errList = new ArrayList<>();
 
-        try{
+        try {
             JobPosting jp = new JobPosting();
             jp.setRequirements(requirements);
             jp.setJobTitle(title);
