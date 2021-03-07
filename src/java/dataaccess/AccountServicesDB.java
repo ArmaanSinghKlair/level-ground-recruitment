@@ -17,6 +17,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
+import problemdomain.Advisor;
 import problemdomain.BusinessClient;
 import problemdomain.Candidate;
 import problemdomain.JobPosting;
@@ -146,6 +147,38 @@ public class AccountServicesDB {
             String hashedInputPassword = PasswordUtil.hashPassword(password);
             System.out.println("INPUT = "+hashedInputPassword+" and db = "+businessClient.getBusClientPassword());
             if(hashedInputPassword.equals(businessClient.getBusClientPassword())){
+                return null;
+            } else{
+                errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
+            }
+            
+        } catch(NoResultException e){
+                errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            em.close();
+        }
+        
+        return errList;
+
+    }
+    
+    /**
+     * Authenticates a user. The trick here is to hash the input password before comparing it to the input password
+     * @param username Input username
+     * @param password Input password
+     * @return Arraylist of errors
+     */
+    public final ArrayList<String> authenticateAdvisor(String username, String password) {
+        initialize();
+        TypedQuery<Advisor> advisors = em.createNamedQuery("Advisor.findByAdvisorUsername", Advisor.class).setParameter("advisorUsername", username);
+        ArrayList<String> errList = null;
+        try {
+                  
+            Advisor advisor = advisors.getSingleResult();
+            String hashedInputPassword = PasswordUtil.hashPassword(password);
+            if(hashedInputPassword.equals(advisor.getAdvisorPassword())){
                 return null;
             } else{
                 errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));

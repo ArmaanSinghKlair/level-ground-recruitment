@@ -25,7 +25,7 @@ public class ValidateJobPosting {
         errList = new ArrayList<>();
     }
     
-    //Basic business client validation
+    //Basic job posting validation
     public static ArrayList<String> getErrorMapForAllfields(String title, String requirements, Date startDate, Date endDate, String status, String description){
         startValidation();
         put("jobTitle",validateJobTitle(title));
@@ -52,7 +52,7 @@ public class ValidateJobPosting {
     public static String validateJobRequirements(String requirements){
         if(isEmpty(requirements))
             return "Requirements cannot be empty";
-        else if(requirements.length() > 100)
+        else if(requirements.length() > 400)
             return "Requirements cannot be more than 100 characters";
         else 
             return null;
@@ -88,7 +88,7 @@ public class ValidateJobPosting {
     public static String validateJobDescription(String description){
         if(isEmpty(description))
             return "Description cannot be empty";
-        else if(description.length() > 100)
+        else if(description.length() > 400)
             return "Description cannot be more than 100 characters";
         else 
             return null;

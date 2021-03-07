@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import problemdomain.Candidate;
+import validation.ValidateAdvisor;
 import validation.ValidateBusinessClient;
 import validation.ValidateCandidate;
 import validation.ValidateJobPosting;
@@ -81,6 +82,18 @@ public class AccountServices {
         
         if(errList.isEmpty()){
             return asdb.authenticateBusinessClient(username, password);
+        } else{
+            return errList;
+        }
+    }
+    
+    public final ArrayList<String> authenticateAdvisor(String username, String password) {
+        ArrayList<String> errList = new ArrayList<>();
+        add(errList,ValidateAdvisor.validateAdvisorUsername(username));       //Validate username and get errors IF ANY
+        add(errList,ValidateAdvisor.validateAdvisorPassword(password));       //Validate password and get errors IF ANY
+        
+        if(errList.isEmpty()){
+            return asdb.authenticateAdvisor(username, password);
         } else{
             return errList;
         }
