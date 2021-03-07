@@ -13,9 +13,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="react-inject-scripts/css/SearchBar.css?id=12">
         <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta2/css/bootstrap.min.css">
+              href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta2/css/bootstrap.min.css">
         <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,600,600i,800,800i">
+              href="https://fonts.googleapis.com/css?family=Montserrat:200,200i,300,300i,400,400i,600,600i,800,800i">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
@@ -24,57 +24,22 @@
         <link rel="stylesheet" href="assets/css/job-posting.css">
         <link rel="stylesheet" href="assets/css/nav-bar.css">
         <link rel="stylesheet" href="assets/css/styles.css">
-         <!-- Axios -->
+        <!-- Axios -->
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <title>Candidate Job Posting</title>
     </head>
     <body>
-        <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
-            <div class="container-fluid"><a
-                    class="navbar-brand d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center"
-                    href="index.html"><img class="logo" src="assets/img/logo.png">
-                    <h4 class="brand-name">Level Ground Recruitment</h4>
-                </a>
-                <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-                        class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navcol-1">
-                    <ul class="navbar-nav mr-auto flex-md-shrink-0">
-                        <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" data-bss-hover-animate="pulse" href="<c:url value="/candidate-job-posting"/>">Job Posting</a></li>
-                        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" aria-expanded="false"
-                                                         data-toggle="dropdown" data-bss-hover-animate="pulse"
-                                                         href="#">Services</a>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="<c:url value="/candidate-profile"/>">Profile</a><a
-                                    class="dropdown-item" href="#">Contact us</a><a class="dropdown-item" href="#">About</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <span class="d-md-flex flex-md-shrink-0 justify-content-md-center align-items-md-center navbar-text actions"><a
-                            class="login" href="">Profile</a><a class="btn btn-primary action-button" role="button"
-                            href="">Logout</a></span>
-                </div>
-            </div>
-        </nav>
-        <c:if test="${requestScope.fail == true && requestScope.currentTab == null}">
-            <div class="alert alert-warning" role="alert">
-                <c:forEach var="error" items="${requestScope.errList}">
-                    <div>&#9888; ${error}</div>
-                </c:forEach>
-            </div>
-        </c:if>
-        <c:if test="${requestScope.success == true && requestScope.currentTab == null}">
-            <div class="alert alert-success" role="alert">
-                <span><c:out value="${sucessMessage}"/></span>
-            </div>
-        </c:if>
+
+        <%@include file="/WEB-INF/jspf/navbar.jspf"%>
+        <%@include file="/WEB-INF/jspf/alert.jspf"%>
 
         <div class="container">
             <div class="row search-row">
                 <div class="col-md-10 offset-md-1 search-column" id="searchBar">
                 </div>
             </div>
-            
-            
+
+
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta2/js/bootstrap.bundle.min.js"></script>
@@ -82,18 +47,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
 
-       
-<!-- Load React. -->
-         <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+        <!-- Load React. -->
+        <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
         <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
         <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
         <script src="react-inject-scripts/compiled/App.js" type="module"></script>
         <noscript>Javascript must be enabled to search jobs</noscript>
     </body>
-
-</html>
-</body>
-
 </html>
