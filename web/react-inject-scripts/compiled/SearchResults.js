@@ -70,7 +70,7 @@ export default function SearchResults(_ref) {
                                     searchStart: true
                                 }
                             });
-                        } },
+                        }, className: 'paginate-button prev' },
                     'Prev'
                 ) : null,
                 hasMore ? React.createElement(
@@ -83,7 +83,7 @@ export default function SearchResults(_ref) {
                                     searchStart: true
                                 }
                             });
-                        } },
+                        }, className: 'paginate-button next' },
                     'Next'
                 ) : null
             ),

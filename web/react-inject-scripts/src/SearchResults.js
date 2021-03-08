@@ -38,7 +38,7 @@ export default function SearchResults({rowCount, rows, setSuccess, setError, has
                                 pn: searchState.pn-1,
                                 searchStart: true
                             }
-                        })}>Prev</button>
+                        })} className="paginate-button prev">Prev</button>
                         : null}
                         {hasMore ?
                         <button onClick={()=>dispatch({
@@ -47,7 +47,7 @@ export default function SearchResults({rowCount, rows, setSuccess, setError, has
                                 pn: searchState.pn+1,
                                 searchStart: true
                             }
-                        })}>Next</button>
+                        })} className="paginate-button next">Next</button>
                          : null}
                     </div>
                 {rows.map((row,i)=><SearchResult row={row} key={i} setSuccess={setSuccess} setError={setError} index={i}/>)}    

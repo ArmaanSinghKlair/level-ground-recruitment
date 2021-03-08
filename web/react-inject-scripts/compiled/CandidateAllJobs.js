@@ -12,7 +12,7 @@ export default function CandidateAllJobs(state, doAfter) {
         axios.get(ENV.CONTEXT_PATH + "/job-search", {
             withCredentials: true,
             params: Object.assign({
-                pl: 10,
+                pl: 1,
                 pn: state.pn
             }, param)
         }).then(function (res) {
