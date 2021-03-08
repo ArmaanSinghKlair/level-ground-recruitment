@@ -25,8 +25,8 @@ public class ValidateJobPosting {
         errList = new ArrayList<>();
     }
     
-    //Basic business client validation
-    public static ArrayList<String> getErrorMapForAllfields(String title, String requirements, Date startDate, Date endDate, String status, String description){
+    //Basic job posting validation
+    public static ArrayList<String> getErrorMapForAllfields(String title, String requirements, Date startDate, Date endDate, String status, String description, Double wage, String location){
         startValidation();
         put("jobTitle",validateJobTitle(title));
         put("jobRequirements",validateJobRequirements(requirements));
@@ -34,6 +34,8 @@ public class ValidateJobPosting {
         put("jobEndDate", validateJobEndDate(startDate, endDate));
         put("jobStatus",validateJobStatus(status));
         put("jobDescription",validateJobDescription(description));
+        put("jobWage",validateJobWage(wage));
+        put("jobLocation",validateJobLocation(location));
         return getErrorMap();
     }
     private static void put(String name, String value){
@@ -52,8 +54,8 @@ public class ValidateJobPosting {
     public static String validateJobRequirements(String requirements){
         if(isEmpty(requirements))
             return "Requirements cannot be empty";
-        else if(requirements.length() > 100)
-            return "Requirements cannot be more than 100 characters";
+        else if(requirements.length() > 400)
+            return "Requirements cannot be more than 400 characters";
         else 
             return null;
     }
@@ -88,8 +90,26 @@ public class ValidateJobPosting {
     public static String validateJobDescription(String description){
         if(isEmpty(description))
             return "Description cannot be empty";
-        else if(description.length() > 100)
-            return "Description cannot be more than 100 characters";
+        else if(description.length() > 400)
+            return "Description cannot be more than 400 characters";
+        else 
+            return null;
+    }
+    
+    public static String validateJobWage(Double wage){
+        if(wage == 0)
+            return "Wage cannot be empty";
+        else if(wage < 0)
+            return "Wage cannot be negative";
+        else 
+            return null;
+    }
+    
+    public static String validateJobLocation(String location){
+        if(isEmpty(location))
+            return "Location cannot be empty";
+        else if(location.length() > 45)
+            return "Location cannot be more than 45 characters";
         else 
             return null;
     }

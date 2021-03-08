@@ -25,39 +25,9 @@
 
     </head>
     <body onload="<c:if test='${requestScope.currentTab == "signup"}'>document.getElementById('signup-tab-cta').click()</c:if>">
-            <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
-                <div class="container"><a class="navbar-brand d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center" href="index.html"><img class="logo" src="assets/img/logo.png">
-                        <h4 class="brand-name">Level Ground Recruitment</h4>
-                    </a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navcol-1">
-                        <ul class="nav navbar-nav mr-auto flex-md-shrink-0">
-                            <li class="nav-item"><a class="nav-link" data-bs-hover-animate="pulse" href="#">Home</a></li>
-                            <li class="nav-item"><a class="nav-link active" data-bs-hover-animate="pulse" href="#">Manage Database</a></li>
-                        </ul>
-                        <span class="d-md-flex flex-md-shrink-0 justify-content-md-center align-items-md-center navbar-text actions"> 
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle action-button" type="button" id="dropdownMenuButton" data-bs-hover-animate="pulse" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    System Administrator
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Sign Out</a>
-                                </div>
-                            </div>    
-                        </span>
-                    </div>
-                </div>
-            </nav>
 
-        <c:if test="${requestScope.fail == true}">
-            <div class="alert alert-warning" role="alert">
-                <c:forEach var="error" items="${requestScope.errList}"><div>&#9888; ${error}</div></c:forEach>
-                </div>
-        </c:if>
-        <c:if test="${requestScope.success == true}">
-            <div class="alert alert-success" role="alert">
-                <span><c:out value="${sucessMessage}" /></span>
-            </div>
-        </c:if>
+        <%@include file="/WEB-INF/jspf/navbar.jspf"%>
+        <%@include file="/WEB-INF/jspf/alert.jspf"%>
 
         <div class="tabs">
             <ul class="nav nav-tabs" role="tablist">
@@ -94,7 +64,7 @@
                                                 <dd>
                                                     ${work.company} ${work.startDate}
                                                 <dd>
-                                            </c:forEach>
+                                                </c:forEach>
 
                                             <dt class="section-label">Education</dt>
                                             <c:forEach var="education" items="${candidate.educationCollection}">
