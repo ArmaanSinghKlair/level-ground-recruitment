@@ -10,28 +10,28 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
-import problemdomain.Candidate;
+import problemdomain.Advisor;
 import util.PasswordUtil;
 
 /**
  *
  * @author 839645
  */
-public class CandidateAuthentication implements Authentication{
+public class AdvisorAuthentication implements Authentication{
     
     private final EntityManager em;
-    public CandidateAuthentication(EntityManager em){
+    public AdvisorAuthentication(EntityManager em){
         this.em = em;
     }
 
     @Override
     public ArrayList<String> authenticate(String username, String password) throws NoResultException, NoSuchAlgorithmException {
-        TypedQuery<Candidate> query = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class).setParameter("canUsername", username.toLowerCase());
-        Candidate candidate = query.getSingleResult();
+        TypedQuery<Advisor> query = em.createNamedQuery("Advisor.findByAdvisorUsername", Advisor.class).setParameter("advisorUsername", username.toLowerCase());
+        Advisor admin = query.getSingleResult();
         ArrayList<String> errList = new ArrayList<>();
         
         String hashedInputPassword = PasswordUtil.hashPassword(password);
-        if(hashedInputPassword.equals(candidate.getCanPassword())){
+        if(hashedInputPassword.equals(admin.getAdvisorPassword())){
             return null;
         } else{
             errList.add("Invalid Username or password");

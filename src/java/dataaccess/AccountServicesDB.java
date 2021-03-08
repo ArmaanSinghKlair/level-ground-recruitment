@@ -21,7 +21,9 @@ import problemdomain.BusinessClient;
 import problemdomain.Candidate;
 import problemdomain.JobPosting;
 import problemdomain.Skill;
+import strategies.authentication.AdvisorAuthentication;
 import strategies.authentication.Authentication;
+import strategies.authentication.BusinessClientAuthentication;
 import strategies.authentication.CandidateAuthentication;
 import util.DBUtil;
 import util.PasswordUtil;
@@ -128,7 +130,10 @@ public class AccountServicesDB {
         switch(userType){
                 case "candidate":
                     return new CandidateAuthentication(em);
-                
+                case "businessClient":
+                    return new BusinessClientAuthentication(em);
+                case "admin":
+                    return new AdvisorAuthentication(em);
             }   
         return null;
     }

@@ -30,44 +30,6 @@ create table lgrdb.advisor
 alter table lgrdb.advisor
     add primary key (advisorID);
 
-create table lgrdb.business_client
-(
-    business_clientID    int auto_increment
-        primary key,
-    advisorID            int          null,
-    bus_client_username  varchar(45)  not null,
-    bus_client_password  varchar(64)  not null,
-    bus_client_firstName varchar(45)  not null,
-    bus_client_lastName  varchar(45)  not null,
-    bus_client_email     varchar(255) not null,
-    bus_client_phone     varchar(10)  null,
-    bus_client_payment   varchar(255) not null,
-    constraint bus_client_email_UNIQUE
-        unique (bus_client_email),
-    constraint bus_client_username_UNIQUE
-        unique (bus_client_username),
-    constraint FK_BUSINESS_CLIENT_ADVISOR
-        foreign key (advisorID) references lgrdb.advisor (advisorID)
-);
-
-create table advisor
-(
-    advisorID         int auto_increment,
-    advisor_username  varchar(45) not null,
-    advisor_password  varchar(64) not null,
-    advisor_firstName varchar(45) not null,
-    advisor_lastName  varchar(45) not null,
-    advisor_Email     varchar(45) not null,
-    constraint advisorID_UNIQUE
-        unique (advisorID),
-    constraint advisor_Email_UNIQUE
-        unique (advisor_Email),
-    constraint advisor_username_UNIQUE
-        unique (advisor_username)
-);
-
-alter table advisor
-    add primary key (advisorID);
 
 create table business_client
 (
