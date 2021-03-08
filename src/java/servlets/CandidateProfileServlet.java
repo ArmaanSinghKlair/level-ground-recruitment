@@ -27,19 +27,8 @@ public class CandidateProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "/WEB-INF/candidate.jsp";
-        AccountServices accService =new AccountServices();
-        ProfileServices ps = new ProfileServices();
-        
-        HttpSession sess = request.getSession(false);
-        
-        // Get candidate
-        Candidate c = accService.getCandidateByUsername((String)sess.getAttribute("username"));
-        request.setAttribute("candidate", c);
-        
-        // Get skills
-        ArrayList<Skill> skills = ps.getAllSkills();
-        request.setAttribute("skills", skills);
+        String url = "/profile-navigation";
+       
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
@@ -67,7 +56,13 @@ public class CandidateProfileServlet extends HttpServlet {
             request.setAttribute("fail",true);
             request.setAttribute("errList",errList);
         }
-        
+        String submit = request.getParameter("submit");
+
+        // If user deleted 
+        if(submit != null && submit.equals("deleteCandidate")){
+            response.sendRedirect(request.getContextPath()+"/login");
+            return;
+        }
         //Load back updated User
         // Get candidate
         Candidate c = accService.getCandidateByUsername((String)sess.getAttribute("username"));
@@ -78,7 +73,12 @@ public class CandidateProfileServlet extends HttpServlet {
         request.setAttribute("skills", skills);
         
         request.setAttribute("candidate", c);
-        request.getRequestDispatcher("/WEB-INF/candidate.jsp").forward(request, response);
+        String url = "/WEB-INF/candidate.jsp";
+        
+        if(submit != null && submit.equals("edit")){
+                url ="/WEB-INF/candidate-profile-edit.jsp";
+        } 
+        request.getRequestDispatcher(url).forward(request, response);
 
     }
 
@@ -97,6 +97,10 @@ public class CandidateProfileServlet extends HttpServlet {
             case "add":
                 str = "Item added successfully";
                 break;
+            case "edit":
+                str = "Item edited successfully";
+            case "deleteCandidate":
+                str = "User deleted successfully";
         }
         return str;
     }

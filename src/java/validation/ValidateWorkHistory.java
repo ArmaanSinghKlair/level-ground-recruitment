@@ -78,6 +78,22 @@ public final class ValidateWorkHistory {
                 }
                 
     }
+    public static void prepareResponseForEdit(HttpServletRequest request, String company, String title, String reference){
+         // Prepare education object here itself, if error then used in jsp if NO ERROR, used in data access class
+                    WorkHistory wh = new WorkHistory();
+                    wh.setCompany(company);
+                    wh.setTitle(title);
+                    wh.setStartDate(start);
+                    wh.setEndDate(end);
+                    wh.setReference(reference);
+                    wh.setWorkhistoryID(Integer.parseInt((String)request.getParameter("id")));
+
+                
+               
+                    request.setAttribute("currentTab", "edit-workHistory-cta");
+                    request.setAttribute("workHistory", wh);
+
+    }
       private final static boolean isEmpty(String field){
         return field == null || field.trim().length() == 0;
     }

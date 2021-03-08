@@ -5,10 +5,15 @@
  */
 package validation;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
+import javax.servlet.http.HttpServletRequest;
 import problemdomain.Candidate;
+import services.AccountServices;
+import util.PasswordUtil;
 
 /**
  * To use this class, first call the startValidation, do your validation and then call getErrorMap
@@ -17,19 +22,6 @@ import problemdomain.Candidate;
  */
 public final class ValidateCandidate {
     private static ArrayList<String> errList;
-    private String canUsername;
-    private String canPassword;
-    private String canfirstName;
-    private String canlastName;
-    private String canEmail;
-    private String canPhoneNo;
-    private String workHistory;
-    private String primaryEducation;
-    private String secondaryEducation;
-    private String certificates;
-    private String keySkills;
-    private String interestedRoles;
-    
     /**
      * Resets the hash map to an empty map
      */
@@ -43,6 +35,15 @@ public final class ValidateCandidate {
         startValidation();
         put("canUsername",validateCanUsername(username));
         put("canPassword",validateCanPassword(password));
+        put("canfirstName",validateCanfirstName(firstName));
+        put("canlastName", validateCanlastName(lastName));
+        put("canEmail",validateCanEmail(email));
+        put("canPhoneNo",validateCanPhoneNo(phoneNo));
+        return getErrorMap();
+    }
+    public static ArrayList<String> getErrorMapForEdit(String username, String firstName, String lastName, String email, String phoneNo){
+        startValidation();
+        put("canUsername",validateCanUsername(username));
         put("canfirstName",validateCanfirstName(firstName));
         put("canlastName", validateCanlastName(lastName));
         put("canEmail",validateCanEmail(email));
@@ -150,10 +151,39 @@ public final class ValidateCandidate {
        else 
         return null;
     }
-    
+    public static ArrayList<String> validateCurrentPassword(String username, String password){
+        ArrayList<String> errList = new AccountServices().authenticate(username, password, "candidate");
+        if(errList == null)
+            errList = new ArrayList<>();
+        return errList;
+    }
+    public static void prepareResponseForEdit(HttpServletRequest request, String password, String firstName, String lastName, String email, String phoneNo, boolean withPassword){
+        try {
+            Candidate c = new AccountServices().getCandidateByUsername(request.getParameter("username"));
+            if(withPassword)
+            c.setCanPassword(PasswordUtil.hashPassword(password));
+            c.setCanEmail(email);
+            c.setCanPhoneNo(phoneNo);
+            c.setCanfirstName(firstName);
+            c.setCanlastName(lastName);
+            
+            if(request.getParameter("placed") != null &&request.getParameter("placed").equals("yes"))
+                c.setPlaced(true);
+            else
+                c.setPlaced(false);
+        
+            request.setAttribute("candidate", c);
+            if(errList != null && !errList.isEmpty()){
+                request.setAttribute("errList", errList);
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ValidateCandidate.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+    }
     public static ArrayList<String> getErrorMap(){
         if(errList.isEmpty())
-            return null;
+            return new ArrayList<>();
         else
             return errList;
     }

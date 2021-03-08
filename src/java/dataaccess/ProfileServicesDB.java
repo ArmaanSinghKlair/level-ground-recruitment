@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
 import problemdomain.Candidate;
 import problemdomain.CandidateSkill;
@@ -55,6 +56,21 @@ public final class ProfileServicesDB {
         }
         return null;
     }
+    public final ArrayList<String> edit(HttpServletRequest request, String username){
+        initialize();
+        try{
+            trans.begin();
+            // Gets appropriate feature depending upon form parameters
+            Object feature = getNewFeature(request, username);
+            // Checking to see if its null
+            if(feature != null)
+                em.merge(feature);
+            trans.commit();
+        } finally{
+            em.close();
+        }
+        return null;
+    }
     
     private Object getNewFeature(HttpServletRequest request, String username){
         String form_name = request.getParameter("form_name");
@@ -84,18 +100,23 @@ public final class ProfileServicesDB {
                 Education edu = (Education) request.getAttribute("education");
                 
                 // Adds a Candidate to Candidate_skill
+
                 edu.setCandidateID(c);
                 c.getEducationList().add(edu);
                
                 return edu;
             case "workHistory":
                 WorkHistory wh = (WorkHistory) request.getAttribute("workHistory");
-                
                 // Adds a Candidate to Candidate_skill
                 wh.setCandidateID(c);
                 c.getWorkHistoryList().add(wh);
                
                 return wh;
+            case "profile":
+                return (Candidate) request.getAttribute("candidate");
+               
+                
+                
         }
         return null;
     }
@@ -136,6 +157,27 @@ public final class ProfileServicesDB {
         }
         
         return errList;
+    }
+    
+     public final boolean deleteCandidate(String username){
+        initialize();        
+        try{
+            TypedQuery<Candidate> q = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class);
+            q.setParameter("canUsername", username);            
+            Candidate c = q.getSingleResult();
+            trans.begin();
+            em.remove(c);
+            trans.commit();
+        } catch(Exception e){
+            return false;
+        } finally{
+            if(trans.isActive()){
+                trans.rollback();
+            }
+            em.close();
+        }
+        
+        return true;
     }
     
      /**

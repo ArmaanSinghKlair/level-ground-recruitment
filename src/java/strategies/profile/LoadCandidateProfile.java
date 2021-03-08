@@ -3,15 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package strategies.profile;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import problemdomain.Candidate;
 import problemdomain.Skill;
@@ -20,14 +15,13 @@ import services.ProfileServices;
 
 /**
  *
- * @author AmirS
+ * @author 839645
  */
-public class CandidateProfileEditServlet extends HttpServlet {
+public class LoadCandidateProfile implements LoadProfile{
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-                AccountServices accService =new AccountServices();
+    public void loadProfile(HttpServletRequest request) {
+        AccountServices accService =new AccountServices();
         ProfileServices ps = new ProfileServices();
         
         HttpSession sess = request.getSession(false);
@@ -39,11 +33,8 @@ public class CandidateProfileEditServlet extends HttpServlet {
         // Get skills
         ArrayList<Skill> skills = ps.getAllSkills();
         request.setAttribute("skills", skills);
-                request.getRequestDispatcher("/WEB-INF/candidate-profile-edit.jsp").forward(request, response);
-    }
+        request.setAttribute("url", "/WEB-INF/candidate.jsp");
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
     }
+    
 }

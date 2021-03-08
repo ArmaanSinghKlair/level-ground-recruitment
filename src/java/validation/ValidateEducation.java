@@ -73,9 +73,27 @@ public class ValidateEducation {
         // Do this if ANY ERRORS
         if(!errList.isEmpty()){
             request.setAttribute("currentTab", "add-education-cta");
-            request.setAttribute("education", edu);
 
         }
+                    request.setAttribute("education", edu);
+
+
+    }
+    
+    public static void prepareResponseForEdit(HttpServletRequest request, String institution, String education_lvl, String subject){
+        Education edu = new Education();
+        edu.setInstitution(institution);
+        edu.setLevel(education_lvl);
+        edu.setEndDate(end);
+        edu.setStartDate(start);
+        edu.setSubject(subject);
+        edu.setEducationID(Integer.parseInt((String)request.getParameter("id")));
+        // Do this if ANY ERRORS
+        if(!errList.isEmpty()){
+            request.setAttribute("currentTab", "edit-education-cta");
+
+        }
+                    request.setAttribute("education", edu);
 
     }
     private final static boolean isEmpty(String field){

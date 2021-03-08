@@ -9,7 +9,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,8 +19,10 @@ import javax.persistence.TypedQuery;
 import problemdomain.Advisor;
 import problemdomain.BusinessClient;
 import problemdomain.Candidate;
+import problemdomain.Education;
 import problemdomain.JobPosting;
 import problemdomain.Skill;
+import problemdomain.WorkHistory;
 import strategies.authentication.AdvisorAuthentication;
 import strategies.authentication.Authentication;
 import strategies.authentication.BusinessClientAuthentication;
@@ -76,8 +77,7 @@ public class AccountServicesDB {
     }
     
     public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description){
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
+        initialize();
         ArrayList<String> errList = new ArrayList<>();
 
         try {
@@ -101,6 +101,53 @@ public class AccountServicesDB {
                 trans.rollback();
             em.close();
         }
+    }
+    
+    public final String doesEducationExist(String username, String ID){
+        String err = null;
+        try{
+            Education e = em.find(Education.class, Integer.parseInt(ID));
+            if(e==null){
+                err = "Education does not exist";
+            }else{
+                if(username != null){
+                    Candidate c = em.createNamedQuery("Candidate.findByCanUsername",Candidate.class).setParameter("canUsername", username).getSingleResult();
+                    if(!c.getEducationList().contains(e)){
+                        return "This education record does not belong to you";
+                    }
+                }
+            }
+            
+        }finally{
+            em.close();
+            if(trans.isActive())
+                trans.rollback();
+            return err;
+        }
+        
+    }
+    public final String doesWorkHistoryExist(String username, String ID){
+        String err = null;
+        try{
+            WorkHistory e = em.find(WorkHistory.class, Integer.parseInt(ID));
+            if(e==null){
+                err = "Work History does not exist";
+            }else{
+                if(username != null){
+                    Candidate c = em.createNamedQuery("Candidate.findByCanUsername",Candidate.class).setParameter("canUsername", username).getSingleResult();
+                    if(!c.getWorkHistoryList().contains(e)){
+                        return "This work history record does not belong to you";
+                    }
+                }
+            }
+            
+        }finally{
+            em.close();
+            if(trans.isActive())
+                trans.rollback();
+            return err;
+        }
+        
     }
     
     /**
@@ -234,7 +281,6 @@ public class AccountServicesDB {
             Skill s = q.getSingleResult();
             return s;
         }catch(Exception e){
-            System.out.println(e.getMessage());
             return null;
         }finally{
             em.close();

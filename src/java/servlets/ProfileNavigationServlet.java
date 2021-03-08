@@ -6,13 +6,14 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import problemdomain.Skill;
+import services.ProfileServices;
 
 /**
  *
@@ -32,27 +33,17 @@ public class ProfileNavigationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
-        String userType = session.getAttribute("userType").toString();
-
-        System.out.println("test");
-
-        if (userType != null && !userType.equals("")) {
-            switch (userType) {
-                case "candidate":
-                    request.getRequestDispatcher("/candidate-profile").forward(request, response);
-                    break;
-                case "businessClient":
-                    request.getRequestDispatcher("/business-client-profile").forward(request, response);
-                    break;
-                case "admin":
-                    request.getRequestDispatcher("/admin-profile").forward(request, response);
-                    break;
-                default:
-                    //request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-                    break;
-            }
-        }
+        ProfileServices ps = new ProfileServices();
+        // Load all variables necessary and also the next URL
+        ps.loadProfile(request);
+        //System.out.println((List)request.getAttribute("skills")).size());
+        request.getServletContext().getRequestDispatcher((String)request.getAttribute("url")).forward(request, response);
+        /*
+        /candidate-profile
+        /business-client-profile
+        /admin-profile
+        */
+        
     }
 
     /**
