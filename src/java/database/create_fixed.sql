@@ -66,8 +66,6 @@ create table lgrdb.candidate
     placed        tinyint(1)   null,
     constraint can_email_UNIQUE
         unique (can_email),
-    constraint can_password_UNIQUE
-        unique (can_password),
     constraint can_username_UNIQUE
         unique (can_username),
     constraint FK_CANDIDATE_ADVISOR
