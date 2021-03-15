@@ -55,6 +55,8 @@ public final class ValidateCandidate {
         if(value != null)
             errList.add(value);
     }
+    
+    //This checks that the username is not empty or too long
     public static String validateCanUsername(String username){
         if(isEmpty(username))
             return "Username cannot be empty";
@@ -64,6 +66,7 @@ public final class ValidateCandidate {
             return null;
     }
     
+    //This checks that the password is not empty or too long
     public static String validateCanPassword(String password){
         if(isEmpty(password))
             return "Password cannot be empty";
@@ -73,6 +76,7 @@ public final class ValidateCandidate {
             return null;
     }
     
+    //This checks that the first name is not empty or too long
     public static String validateCanfirstName(String firstName){
         if(isEmpty(firstName))
             return "First name cannot be empty";
@@ -82,6 +86,7 @@ public final class ValidateCandidate {
             return null;
     }
     
+    //This checks that the last name is not empty or too long
     public static String validateCanlastName(String lastName){
         if(isEmpty(lastName))
             return "Last name cannot be empty";
@@ -91,6 +96,7 @@ public final class ValidateCandidate {
             return null;
     }
     
+    //This checks that the email is not empty or too long. It also checks that it is in the correct email format
     public static String validateCanEmail(String email){
         if(isEmpty(email))
             return "Email cannot be empty";
@@ -102,6 +108,7 @@ public final class ValidateCandidate {
             return null;
     }
     
+    //This checks that the phone number is not empty or too long. It also checks that it is in the correct phone number format
     public static String validateCanPhoneNo(String phoneNo){
         if(isEmpty(phoneNo))
             return "Phone no cannot be empty";
@@ -113,6 +120,7 @@ public final class ValidateCandidate {
             return null;
     }
     
+    //This checks that the work history is not empty or too long
     public static String validateWorkHistory(String workHistory){
        if(!isEmpty(workHistory) && workHistory.trim().length() > 255)
             return "Work history cannot be more than 255 characters";    
@@ -120,6 +128,7 @@ public final class ValidateCandidate {
         return null;
     }
     
+    //This checks that the primary education is not empty or too long
     public static String validatePrimaryEducation(String primaryEducation){
        if(!isEmpty(primaryEducation) && primaryEducation.trim().length() > 255)
             return "Primary education cannot be more than 255 characters";   
@@ -127,24 +136,31 @@ public final class ValidateCandidate {
         return null;
     }
     
+    //This checks that the secondary education is not empty or too long
     public static String validateSecondaryEducation(String secondaryEducation){
        if(!isEmpty(secondaryEducation) && secondaryEducation.trim().length() > 255)
             return "Secondary education cannot be more than 255 characters"; 
        else 
         return null;
     }
+    
+    //This checks that the certificates are not empty or too long
     public static String validateCertificates(String certificates){
        if(!isEmpty(certificates) && certificates.trim().length() > 255)
             return "Certificates cannot be more than 255 characters"; 
        else 
         return null;
     }
+    
+    //This checks that the key skills are not empty or too long
     public static String validateKeySkills(String keySkills){
        if(!isEmpty(keySkills) && keySkills.trim().length() > 255)
             return "Key skills cannot be more than 255 characters";    
        else 
         return null;
     }
+    
+    //This checks that the interested roles are not empty or too long
     public static String validateInterestedRoles(String interestedRoles){
        if(!isEmpty(interestedRoles) && interestedRoles.trim().length() > 255)
             return "Interested Roles cannot be more than 255 characters";

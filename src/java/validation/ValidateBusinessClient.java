@@ -39,6 +39,8 @@ public final class ValidateBusinessClient {
         if(value != null)
             errList.add(value);
     }
+    
+    //This checks that the username is not empty or too long
     public static String validateBusClientUsername(String username){
         if(isEmpty(username))
             return "Username cannot be empty";
@@ -48,6 +50,7 @@ public final class ValidateBusinessClient {
             return null;
     }
     
+    //This checks that the password is not empty or too long
     public static String validateBusClientPassword(String password){
         if(isEmpty(password))
             return "Password cannot be empty";
@@ -57,6 +60,7 @@ public final class ValidateBusinessClient {
             return null;
     }
     
+    //This checks that the first name is not empty or too long
     public static String validateBusClientfirstName(String firstName){
         if(isEmpty(firstName))
             return "First name cannot be empty";
@@ -66,6 +70,7 @@ public final class ValidateBusinessClient {
             return null;
     }
     
+    //This checks that the last name is not empty or too long
     public static String validateBusClientlastName(String lastName){
         if(isEmpty(lastName))
             return "Last name cannot be empty";
@@ -75,6 +80,7 @@ public final class ValidateBusinessClient {
             return null;
     }
     
+    //This checks that the email is not empty or too long. It also checks that it is in the correct email format
     public static String validateBusClientEmail(String email){
         if(isEmpty(email))
             return "Email cannot be empty";
@@ -86,6 +92,7 @@ public final class ValidateBusinessClient {
             return null;
     }
     
+    //This checks that the phone number is not empty or too long. It also checks that it is in the correct phone number format
     public static String validateBusClientPhoneNo(String phoneNo){
         if(isEmpty(phoneNo))
             return "Phone no cannot be empty";

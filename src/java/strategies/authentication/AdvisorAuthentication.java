@@ -14,7 +14,8 @@ import problemdomain.Advisor;
 import util.PasswordUtil;
 
 /**
- *
+ * This class Authenticates an advisors login information
+ * 
  * @author 839645
  */
 public class AdvisorAuthentication implements Authentication{

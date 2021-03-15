@@ -14,7 +14,8 @@ import problemdomain.Candidate;
 import util.PasswordUtil;
 
 /**
- *
+ * This class authenticates a candidates login information
+ * 
  * @author 839645
  */
 public class CandidateAuthentication implements Authentication{
