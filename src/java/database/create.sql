@@ -30,31 +30,32 @@ create table lgrdb.advisor
 alter table lgrdb.advisor
     add primary key (advisorID);
 
-
-create table business_client
+create table lgrdb.business_client
 (
-    business_clientID    int auto_increment
+    business_clientID      int auto_increment
         primary key,
-    advisorID            int          null,
-    bus_client_username  varchar(45)  not null,
-    bus_client_password  varchar(64)  not null,
-    bus_client_firstName varchar(45)  not null,
-    bus_client_lastName  varchar(45)  not null,
-    bus_client_email     varchar(255) not null,
-    bus_client_phone     varchar(10)  null,
-    bus_client_payment   varchar(255) not null,
+    advisorID              int          null,
+    bus_client_username    varchar(45)  not null,
+    bus_client_password    varchar(64)  not null,
+    bus_client_name        varchar(50)  not null,
+    bus_client_description text         null,
+    bus_client_address     varchar(255) not null,
+    bus_client_email       varchar(255) not null,
+    bus_client_phone       varchar(10)  null,
+    bus_client_website     varchar(255) null,
+    bus_client_payment     varchar(255) not null,
     constraint bus_client_email_UNIQUE
         unique (bus_client_email),
     constraint bus_client_username_UNIQUE
         unique (bus_client_username),
     constraint FK_BUSINESS_CLIENT_ADVISOR
-        foreign key (advisorID) references advisor (advisorID)
+        foreign key (advisorID) references lgrdb.advisor (advisorID)
 );
 
 create index FK_BUSINESS_CLIENT_ADVISOR_idx
-    on business_client (advisorID);
+    on lgrdb.business_client (advisorID);
 
-create table candidate
+create table lgrdb.candidate
 (
     candidateID   int auto_increment
         primary key,
@@ -73,13 +74,13 @@ create table candidate
     constraint can_username_UNIQUE
         unique (can_username),
     constraint FK_CANDIDATE_ADVISOR
-        foreign key (advisorID) references advisor (advisorID)
+        foreign key (advisorID) references lgrdb.advisor (advisorID)
 );
 
 create index FK_CANDIDATE_ADVISOR_idx
-    on candidate (advisorID);
+    on lgrdb.candidate (advisorID);
 
-create table education
+create table lgrdb.education
 (
     educationID int auto_increment
         primary key,
@@ -91,18 +92,18 @@ create table education
     end_date    datetime             null,
     type        tinyint(1) default 1 not null,
     constraint FK_EDUCATION_CANDIDATE
-        foreign key (candidateID) references candidate (candidateID)
+        foreign key (candidateID) references lgrdb.candidate (candidateID)
 );
 
 create index FK_EDUCATION_CANDIDATE_idx
-    on education (candidateID);
+    on lgrdb.education (candidateID);
 
-create table job_posting
+create table lgrdb.job_posting
 (
     job_postingID     int auto_increment
         primary key,
-    business_clientID int                                not null,
-    job_title         varchar(100)                       not null,
+    business_clientID int                                null,
+    job_title         text                               not null,
     post_date         datetime default CURRENT_TIMESTAMP null,
     job_status        varchar(45)                        not null,
     job_description   text                               not null,
@@ -112,11 +113,11 @@ create table job_posting
     start_date        date                               null,
     end_date          date                               null,
     applicants        int                                null,
-    constraint FK_JOB_POSTING_BUSINESS_CLIENT
-        foreign key (business_clientID) references business_client (business_clientID)
+    constraint FK_JOB_P_BUS_CLIENT
+        foreign key (business_clientID) references lgrdb.business_client (business_clientID)
 );
 
-create table application
+create table lgrdb.application
 (
     applicationID int auto_increment
         primary key,
@@ -124,21 +125,21 @@ create table application
     job_postingID int               null,
     status        tinyint default 0 null,
     constraint FK_APPLICAITON_JP
-        foreign key (job_postingID) references job_posting (job_postingID),
+        foreign key (job_postingID) references lgrdb.job_posting (job_postingID),
     constraint FK_APPLICATION_CAN
-        foreign key (candidateID) references candidate (candidateID)
+        foreign key (candidateID) references lgrdb.candidate (candidateID)
 );
 
 create index FK_APPLICAITON_JP_idx
-    on application (job_postingID);
+    on lgrdb.application (job_postingID);
 
 create index FK_APPLICATION_CAN_idx
-    on application (candidateID);
+    on lgrdb.application (candidateID);
 
-create index FK_JOB_POSTING_BUSINESS_CLIENT_idx
-    on job_posting (business_clientID);
+create index FK_JOB_P_BUS_CLIENT_idx
+    on lgrdb.job_posting (business_clientID);
 
-create table log
+create table lgrdb.log
 (
     logID       int auto_increment
         primary key,
@@ -147,41 +148,41 @@ create table log
     logout_date timestamp                           null,
     description varchar(255)                        null,
     constraint FK_log_advisor
-        foreign key (advisorID) references advisor (advisorID)
+        foreign key (advisorID) references lgrdb.advisor (advisorID)
 );
 
 create index advisorID_idx
-    on log (advisorID);
+    on lgrdb.log (advisorID);
 
-create table role
+create table lgrdb.role
 (
     roleID      int          not null
         primary key,
     description varchar(255) null
 );
 
-create table candidate_role
+create table lgrdb.candidate_role
 (
     candidateID int not null,
     roleID      int not null,
     primary key (candidateID, roleID),
     constraint FK_CANDIDATE_ROLE_CANDIDATE
-        foreign key (candidateID) references candidate (candidateID),
+        foreign key (candidateID) references lgrdb.candidate (candidateID),
     constraint FK_CANDIDATE_ROLE_ROLE
-        foreign key (roleID) references role (roleID)
+        foreign key (roleID) references lgrdb.role (roleID)
 );
 
 create index FK_CANDIDATE_ROLE_ROLE_idx
-    on candidate_role (roleID);
+    on lgrdb.candidate_role (roleID);
 
-create table skill
+create table lgrdb.skill
 (
     skillID     int          not null
         primary key,
     description varchar(255) not null
 );
 
-create table candidate_skill
+create table lgrdb.candidate_skill
 (
     can_skillID int auto_increment
         primary key,
@@ -189,18 +190,18 @@ create table candidate_skill
     skillID     int  null,
     added_date  date null,
     constraint FK_CAN_SKILL_CAN
-        foreign key (candidateID) references candidate (candidateID),
+        foreign key (candidateID) references lgrdb.candidate (candidateID),
     constraint FK_CAN_SKILL_SKILL
-        foreign key (skillID) references skill (skillID)
+        foreign key (skillID) references lgrdb.skill (skillID)
 );
 
 create index FK_CAN_SKILL_CAN_idx
-    on candidate_skill (candidateID);
+    on lgrdb.candidate_skill (candidateID);
 
 create index FK_CAN_SKILL_SKILL_idx
-    on candidate_skill (skillID);
+    on lgrdb.candidate_skill (skillID);
 
-create table work_history
+create table lgrdb.work_history
 (
     work_historyID int auto_increment
         primary key,
@@ -211,8 +212,9 @@ create table work_history
     end_date       datetime     null,
     reference      varchar(255) null,
     constraint FK_WORK_HISTORY_CANDIDATE
-        foreign key (candidateID) references candidate (candidateID)
+        foreign key (candidateID) references lgrdb.candidate (candidateID)
 );
 
 create index FK_WORK_HISTORY_CANDIDATE_idx
-    on work_history (candidateID);
+    on lgrdb.work_history (candidateID);
+
