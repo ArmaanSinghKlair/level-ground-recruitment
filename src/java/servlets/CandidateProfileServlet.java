@@ -60,8 +60,7 @@ public class CandidateProfileServlet extends HttpServlet {
 
         // If user deleted 
         if(submit != null && submit.equals("deleteCandidate")){
-            response.sendRedirect(request.getContextPath()+"/login");
-            return;
+            request.getServletContext().getRequestDispatcher("/login").forward(request, response);
         }
         //Load back updated User
         // Get candidate
@@ -78,7 +77,7 @@ public class CandidateProfileServlet extends HttpServlet {
         if(submit != null && submit.equals("edit")){
                 url ="/WEB-INF/candidate-profile-edit.jsp";
         } 
-        request.getRequestDispatcher(url).forward(request, response);
+        request.getServletContext().getRequestDispatcher(url).forward(request, response);
 
     }
 

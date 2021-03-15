@@ -45,6 +45,8 @@ public final class ProfileServices {
                 HttpSession sess = request.getSession(false);
                 if(psdb.deleteCandidate(username)){
                     sess.invalidate();
+                    request.setAttribute("sucessMessage", "Account removed permanently");
+                    request.setAttribute("success",true);
                 }
             case "delete":
               errList = psdb.delete(form_name, id, username);  
