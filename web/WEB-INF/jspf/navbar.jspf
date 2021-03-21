@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page pageEncoding="UTF-8" %>
 <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
-<link rel="stylesheet" href="assets/css/popup.css">
+<link rel="stylesheet" href="assets/css/navbar-popup.css">
 
 <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
     <div class="container-fluid"><a
