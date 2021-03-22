@@ -286,6 +286,45 @@ public class AccountServicesDB {
             em.close();
         }
     }
+    
+    public final BusinessClient getBusinessClientByUsername(String username){
+        initialize();
+        try{
+            if(!doesUserExist(em,"busClientUsername",username)){
+                return null;
+            }
+            TypedQuery<BusinessClient> q = em.createNamedQuery("BusinessClient.findByBusClientUsername", BusinessClient.class);
+            q.setParameter("busClientUsername", username);
+            
+            BusinessClient bc = q.getSingleResult();
+            em.refresh(bc);
+            return bc;
+        }catch(Exception e){
+            return null;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public final Advisor getAdvisorByUsername(String username){
+        initialize();
+        try{
+            if(!doesUserExist(em,"advisorUsername",username)){
+                return null;
+            }
+            TypedQuery<Advisor> q = em.createNamedQuery("Advisor.findByAdvisorUsername", Advisor.class);
+            q.setParameter("advisorUsername", username);
+            
+            Advisor a = q.getSingleResult();
+            em.refresh(a);
+            return a;
+        }catch(Exception e){
+            return null;
+        }finally{
+            em.close();
+        }
+    }
+    
     /**
      * Checks to see if user exists -- does not alter the EntityManager in any way so em can passed by reference
      * @param em Entity Manager

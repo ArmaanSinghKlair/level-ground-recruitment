@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "BusinessClient.findByBusclientlastName", query = "SELECT b FROM BusinessClient b WHERE b.busclientlastName = :busclientlastName"),
     @NamedQuery(name = "BusinessClient.findByBusClientEmail", query = "SELECT b FROM BusinessClient b WHERE b.busClientEmail = :busClientEmail"),
     @NamedQuery(name = "BusinessClient.findByBusClientPhone", query = "SELECT b FROM BusinessClient b WHERE b.busClientPhone = :busClientPhone"),
-    @NamedQuery(name = "BusinessClient.findByBusClientPayment", query = "SELECT b FROM BusinessClient b WHERE b.busClientPayment = :busClientPayment")})
+    @NamedQuery(name = "BusinessClient.findByBusClientPayment", query = "SELECT b FROM BusinessClient b WHERE b.busClientPayment = :busClientPayment"),
+    @NamedQuery(name = "BusinessClient.findByAdvisorID", query = "SELECT b FROM BusinessClient b WHERE b.advisorID = :advisorID")})
 public class BusinessClient implements Serializable {
 
     private static final long serialVersionUID = 1L;

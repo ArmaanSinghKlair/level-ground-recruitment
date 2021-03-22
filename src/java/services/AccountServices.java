@@ -10,6 +10,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import problemdomain.Advisor;
+import problemdomain.BusinessClient;
 import problemdomain.Candidate;
 import validation.ValidateAdvisor;
 import validation.ValidateBusinessClient;
@@ -118,6 +120,15 @@ public class AccountServices {
     public final Candidate getCandidateByUsername(String username){
         return asdb.getCandidateByUsername(username);
     }
+    
+    public final BusinessClient getBusinessClientByUsername(String username){
+        return asdb.getBusinessClientByUsername(username);
+    }
+    
+    public final Advisor getAdvisorByUsername(String username){
+        return asdb.getAdvisorByUsername(username);
+    }
+    
     private final boolean isEmpty(String field){
         return field == null || field.trim().length() == 0;
     }

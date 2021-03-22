@@ -19,13 +19,13 @@ import services.AccountServices;
  *
  * @author 756887
  */
-@WebServlet(name = "BusinessClientHome", urlPatterns = {"/BusinessClientHome"})
-public class BusinessClientHome extends HttpServlet {
+@WebServlet(name = "BusinessClientProfileServlet", urlPatterns = {"/BusinessClientProfileServlet"})
+public class BusinessClientProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            request.getRequestDispatcher("/WEB-INF/BusinessClientHome.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/BusinessClientProfileServlet.jsp").forward(request, response);
     }
 
 
@@ -55,5 +55,4 @@ public class BusinessClientHome extends HttpServlet {
             }
     
     }
-
 }

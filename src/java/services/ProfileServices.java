@@ -10,7 +10,10 @@ import dataaccess.ProfileServicesDB;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import problemdomain.BusinessClient;
+import problemdomain.JobPosting;
 import problemdomain.Skill;
+import strategies.profile.LoadBusinessClientProfile;
 import strategies.profile.LoadCandidateProfile;
 import strategies.profile.LoadProfile;
 import validation.ValidateCandidate;
@@ -218,11 +221,26 @@ public final class ProfileServices {
         switch(userType){
             case "candidate":
                 p = new LoadCandidateProfile();
+                break;
+            case "businessClient":
+                p = new LoadBusinessClientProfile();
+                break;
+            case "admin":
+                
+                break;
         }
         p.loadProfile(request);
     }
     public final ArrayList<Skill> getAllSkills(){
         return psdb.getAllSkills();
+    }
+    
+    public final ArrayList<JobPosting> getClientJobPostings(int id) {
+        return psdb.getClientJobPostings(id);
+    }
+    
+    public final ArrayList<BusinessClient> getBusClientsByAdvisorID(int id) {
+        return psdb.getBusClientsByAdvisorID(id);
     }
 
     private final boolean isEmpty(String field){
