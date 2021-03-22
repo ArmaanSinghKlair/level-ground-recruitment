@@ -21,109 +21,132 @@ import validation.ValidateJobPosting;
  * @author 839645
  */
 public class AccountServices {
-    private final AccountServicesDB asdb= new AccountServicesDB();
+
+    private final AccountServicesDB asdb = new AccountServicesDB();
     private final ArrayList<String> userTypes = new ArrayList<>();
-    
-    public AccountServices(){
+
+    public AccountServices() {
         userTypes.add("admin");
         userTypes.add("candidate");
         userTypes.add("businessClient");
     }
-    
-    public final ArrayList<String> createCandidateProfile(String username,String password, String password_repeat,String firstName,String lastName, String email, String phoneNo){
+
+    public final ArrayList<String> createCandidateProfile(String username, String password, String password_repeat, String firstName, String lastName, String email, String phoneNo) {
         ArrayList<String> errList;
         errList = ValidateCandidate.getErrorMapForSignup(username, password, firstName, lastName, email, phoneNo);
-        
-        if(errList == null){
+
+        if (errList == null) {
             errList = new ArrayList<>();
         }
-        if(!password.trim().equals(password_repeat.trim()))
+        if (!password.trim().equals(password_repeat.trim())) {
             errList.add("Password doesn\'t match confirm-password");
-        if(errList.size() > 0){
+        }
+        if (errList.size() > 0) {
             return errList;
-        } else{
+        } else {
             return asdb.createCandidateProfile(username, password, firstName, lastName, email, phoneNo);
         }
     }
-    
-    public final ArrayList<String> authenticate(String username, String password,String userType) {
+
+    public final ArrayList<String> createBusinessClientProfile(String username, String password, String password_repeat, String firstName, String lastName, String company, String email, String phoneNo) {
+        ArrayList<String> errList;
+        errList = ValidateBusinessClient.getErrorMapForAllfields(username, password, firstName, lastName, company, email, phoneNo);
+
+        if (errList == null) {
+            errList = new ArrayList<>();
+        }
+        if (!password.trim().equals(password_repeat.trim())) {
+            errList.add("Password doesn\'t match confirm-password");
+        }
+        if (errList.size() > 0) {
+            return errList;
+        } else {
+            return asdb.createBusinessClientProfile(username, password, firstName, lastName, company, email, phoneNo);
+        }
+    }
+
+    public final ArrayList<String> authenticate(String username, String password, String userType) {
         ArrayList<String> errList = new ArrayList<>();
-        
-        if(isEmpty(username) || isEmpty(password) || isEmpty(userType))
+
+        if (isEmpty(username) || isEmpty(password) || isEmpty(userType)) {
             errList.add("All fields required");
-        if(!userTypes.contains(userType.trim()))
+        }
+
+        System.out.println(userTypes + "," + userType);
+
+        if (!userTypes.contains(userType.trim())) {
             errList.add("Invalid User type");
-        
-        if(errList.isEmpty()){
-            
-            return asdb.authenticate(username, password, userType);  
-            
-            
-        } else{
+        }
+
+        if (errList.isEmpty()) {
+
+            return asdb.authenticate(username, password, userType);
+
+        } else {
             return errList;
         }
     }
-    
-    public final ArrayList<String> createJobPosting(String title,String requirements,String sDate,String eDate, String status, String description, String sWage, String location){
+
+    public final ArrayList<String> createJobPosting(String title, String requirements, String sDate, String eDate, String status, String description, String sWage, String location) {
         ArrayList<String> errList = new ArrayList<>();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date startDate = format.parse(sDate);
             Date endDate = format.parse(eDate);
             Double wage = Double.parseDouble(sWage);
-            
+
             errList = ValidateJobPosting.getErrorMapForAllfields(title, requirements, startDate, endDate, status, description, wage, location);
-            
-            if(errList != null){
+
+            if (errList != null) {
                 return errList;
-            } else{
+            } else {
                 return asdb.createJobPosting(title, requirements, startDate, endDate, status, description);
             }
-        } catch (NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             errList.add("error parsing wage");
-        } catch (ParseException e)
-        {
+        } catch (ParseException e) {
             errList.add("error parsing date");
         }
-        
+
         return errList;
-        
+
     }
-    
+
     public final ArrayList<String> authenticateBusinessClient(String username, String password) {
         ArrayList<String> errList = new ArrayList<>();
-        add(errList,ValidateBusinessClient.validateBusClientUsername(username));       //Validate username and get errors IF ANY
-        add(errList,ValidateBusinessClient.validateBusClientPassword(password));       //Validate password and get errors IF ANY
-        
-        if(errList.isEmpty()){
+        add(errList, ValidateBusinessClient.validateBusClientUsername(username));       //Validate username and get errors IF ANY
+        add(errList, ValidateBusinessClient.validateBusClientPassword(password));       //Validate password and get errors IF ANY
+
+        if (errList.isEmpty()) {
             return asdb.authenticateBusinessClient(username, password);
-        } else{
+        } else {
             return errList;
         }
     }
-    
+
     public final ArrayList<String> authenticateAdvisor(String username, String password) {
         ArrayList<String> errList = new ArrayList<>();
-        add(errList,ValidateAdvisor.validateAdvisorUsername(username));       //Validate username and get errors IF ANY
-        add(errList,ValidateAdvisor.validateAdvisorPassword(password));       //Validate password and get errors IF ANY
-        
-        if(errList.isEmpty()){
+        add(errList, ValidateAdvisor.validateAdvisorUsername(username));       //Validate username and get errors IF ANY
+        add(errList, ValidateAdvisor.validateAdvisorPassword(password));       //Validate password and get errors IF ANY
+
+        if (errList.isEmpty()) {
             return asdb.authenticateAdvisor(username, password);
-        } else{
+        } else {
             return errList;
         }
     }
-    
-    public final Candidate getCandidateByUsername(String username){
+
+    public final Candidate getCandidateByUsername(String username) {
         return asdb.getCandidateByUsername(username);
     }
-    private final boolean isEmpty(String field){
+
+    private final boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;
     }
-    
-    private final void add(ArrayList<String> errList, String value){
-        if(value != null)
+
+    private final void add(ArrayList<String> errList, String value) {
+        if (value != null) {
             errList.add(value);
+        }
     }
 }
