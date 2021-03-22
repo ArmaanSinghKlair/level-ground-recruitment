@@ -34,5 +34,6 @@ public class LoadBusinessClientProfile implements LoadProfile {
         // Get job postings
         ArrayList<JobPosting> jobPostings = ps.getClientJobPostings(bc.getBusinessclientID());
         request.setAttribute("jobPostings", jobPostings);
+        request.setAttribute("url", "/WEB-INF/business-client-profile.jsp");
     }
 }

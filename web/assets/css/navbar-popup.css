@@ -1,0 +1,53 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar. 15, 2021, 11:41:15 a.m.
+    Author     : kentp
+*/
+
+/****************************************
+Popup elements (copied from profile.css)
+*****************************************/
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  background-color: white;
+  width: 500px;
+  border-radius: 5px;
+}
+
+.wrapper {
+  display: none;
+}
+
+.wrapper.active {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.4);
+  display: block;
+  z-index: 2;
+}
+
+.ignore {
+  border-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.popup-content {
+  padding: 20px;
+}
+
+.popup-form {
+  padding: 20px;
+}

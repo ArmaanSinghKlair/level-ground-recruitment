@@ -31,29 +31,30 @@ import util.DBUtil;
 import util.PasswordUtil;
 
 public class AccountServicesDB {
+
     private EntityManager em;
     private EntityTransaction trans;
-    
-    private void initialize(){
-        em =DBUtil.getEmFactory().createEntityManager();
+
+    private void initialize() {
+        em = DBUtil.getEmFactory().createEntityManager();
         trans = em.getTransaction();
     }
-    
-    public final ArrayList<String> createCandidateProfile(String username,String password,String firstName,String lastName, String email, String phoneNo){
+
+    public final ArrayList<String> createCandidateProfile(String username, String password, String firstName, String lastName, String email, String phoneNo) {
         initialize();
-        
+
         ArrayList<String> errList = new ArrayList<>();
 
-        try{
+        try {
             //Checking to see if User already exists
-            if(this.doesUserExist(em, "canUsername", username)){
+            if (this.doesCandidateExist(em, "canUsername", username)) {
                 errList.add("Username already Exists");
                 return errList;
-            }  else if(doesUserExist(em,"canEmail",email)){
+            } else if (doesCandidateExist(em, "canEmail", email)) {
                 errList.add("Email already exists");
                 return errList;
             }
-            
+
             Candidate c = new Candidate();
             c.setCanUsername(username.toLowerCase());
             c.setCanEmail(email);
@@ -62,21 +63,61 @@ public class AccountServicesDB {
             c.setCanlastName(lastName);
             c.setCanPhoneNo(phoneNo);
             trans.begin();
-                em.persist(c);
+            em.persist(c);
             trans.commit();
             return null;
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, ex);
             errList.add("System error. Please check logs");
             return errList;
-        } finally{
-            if(trans.isActive())
+        } finally {
+            if (trans.isActive()) {
                 trans.rollback();
+            }
             em.close();
         }
     }
-    
-    public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description){
+
+    public final ArrayList<String> createBusinessClientProfile(String username, String password, String firstName, String lastName, String company, String email, String phoneNo) {
+        initialize();
+
+        ArrayList<String> errList = new ArrayList<>();
+
+        try {
+            //Checking to see if User already exists
+            if (this.doesClientExist(em, "busClientUsername", username)) {
+                errList.add("Username already Exists");
+                return errList;
+            } else if (doesClientExist(em, "busClientEmail", email)) {
+                errList.add("Email already exists");
+                return errList;
+            }
+
+            BusinessClient bc = new BusinessClient();
+            bc.setBusClientUsername(username.toLowerCase());
+            bc.setBusClientEmail(email);
+            bc.setBusClientPassword(PasswordUtil.hashPassword(password));
+            //bc.setBusClientCompany(company);
+            bc.setBusClientPhone(phoneNo);
+
+            trans.begin();
+            em.persist(bc);
+            trans.commit();
+
+            return null;
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, ex);
+            errList.add("System error. Please check logs");
+            return errList;
+        } finally {
+            if (trans.isActive()) {
+                trans.rollback();
+            }
+            em.close();
+        }
+    }
+
+    public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description) {
         initialize();
         ArrayList<String> errList = new ArrayList<>();
 
@@ -89,69 +130,75 @@ public class AccountServicesDB {
             jp.setStartDate(startDate);
             jp.setEndDate(endDate);
             trans.begin();
-                em.persist(jp);
+            em.persist(jp);
             trans.commit();
             return null;
         } catch (Exception ex) {
             Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, ex);
             errList.add("System error. Please check logs");
             return errList;
-        } finally{
-            if(trans.isActive())
+        } finally {
+            if (trans.isActive()) {
                 trans.rollback();
+            }
             em.close();
         }
     }
-    
-    public final String doesEducationExist(String username, String ID){
+
+    public final String doesEducationExist(String username, String ID) {
         String err = null;
-        try{
+        try {
             Education e = em.find(Education.class, Integer.parseInt(ID));
-            if(e==null){
+            if (e == null) {
                 err = "Education does not exist";
-            }else{
-                if(username != null){
-                    Candidate c = em.createNamedQuery("Candidate.findByCanUsername",Candidate.class).setParameter("canUsername", username).getSingleResult();
-                    if(!c.getEducationList().contains(e)){
+            } else {
+                if (username != null) {
+                    Candidate c = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class).setParameter("canUsername", username).getSingleResult();
+                    if (!c.getEducationList().contains(e)) {
                         return "This education record does not belong to you";
                     }
                 }
             }
-            
-        }finally{
+
+        } finally {
             em.close();
-            if(trans.isActive())
+            if (trans.isActive()) {
                 trans.rollback();
+            }
             return err;
         }
-        
+
     }
-    public final String doesWorkHistoryExist(String username, String ID){
+
+    public final String doesWorkHistoryExist(String username, String ID) {
         String err = null;
-        try{
+        try {
             WorkHistory e = em.find(WorkHistory.class, Integer.parseInt(ID));
-            if(e==null){
+            if (e == null) {
                 err = "Work History does not exist";
-            }else{
-                if(username != null){
-                    Candidate c = em.createNamedQuery("Candidate.findByCanUsername",Candidate.class).setParameter("canUsername", username).getSingleResult();
-                    if(!c.getWorkHistoryList().contains(e)){
+            } else {
+                if (username != null) {
+                    Candidate c = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class).setParameter("canUsername", username).getSingleResult();
+                    if (!c.getWorkHistoryList().contains(e)) {
                         return "This work history record does not belong to you";
                     }
                 }
             }
-            
-        }finally{
+
+        } finally {
             em.close();
-            if(trans.isActive())
+            if (trans.isActive()) {
                 trans.rollback();
+            }
             return err;
         }
-        
+
     }
-    
+
     /**
-     * Authenticates a user. The trick here is to hash the input password before comparing it to the input password
+     * Authenticates a user. The trick here is to hash the input password before
+     * comparing it to the input password
+     *
      * @param username Input username
      * @param password Input password
      * @return Arraylist of errors
@@ -162,31 +209,34 @@ public class AccountServicesDB {
         try {
             Authentication auth = getAuthObject(userType);
             errList = auth.authenticate(username, password);
-        } catch(NoResultException e){
-                errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
+        } catch (NoResultException e) {
+            errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             em.close();
         }
-        
+
         return errList;
 
     }
-    
-    private Authentication getAuthObject(String userType){
-        switch(userType){
-                case "candidate":
-                    return new CandidateAuthentication(em);
-                case "businessClient":
-                    return new BusinessClientAuthentication(em);
-                case "admin":
-                    return new AdvisorAuthentication(em);
-            }   
+
+    private Authentication getAuthObject(String userType) {
+        switch (userType) {
+            case "candidate":
+                return new CandidateAuthentication(em);
+            case "businessClient":
+                return new BusinessClientAuthentication(em);
+            case "admin":
+                return new AdvisorAuthentication(em);
+        }
         return null;
     }
+
     /**
-     * Authenticates a user. The trick here is to hash the input password before comparing it to the input password
+     * Authenticates a user. The trick here is to hash the input password before
+     * comparing it to the input password
+     *
      * @param username Input username
      * @param password Input password
      * @return Arraylist of errors
@@ -196,30 +246,32 @@ public class AccountServicesDB {
         TypedQuery<BusinessClient> businessClients = em.createNamedQuery("BusinessClient.findByBusClientUsername", BusinessClient.class).setParameter("busClientUsername", username);
         ArrayList<String> errList = null;
         try {
-    
+
             BusinessClient businessClient = businessClients.getSingleResult();
             String hashedInputPassword = PasswordUtil.hashPassword(password);
-            System.out.println("INPUT = "+hashedInputPassword+" and db = "+businessClient.getBusClientPassword());
-            if(hashedInputPassword.equals(businessClient.getBusClientPassword())){
+            System.out.println("INPUT = " + hashedInputPassword + " and db = " + businessClient.getBusClientPassword());
+            if (hashedInputPassword.equals(businessClient.getBusClientPassword())) {
                 return null;
-            } else{
+            } else {
                 errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
             }
-            
-        } catch(NoResultException e){
-                errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
+
+        } catch (NoResultException e) {
+            errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             em.close();
         }
-        
+
         return errList;
 
     }
-    
+
     /**
-     * Authenticates a user. The trick here is to hash the input password before comparing it to the input password
+     * Authenticates a user. The trick here is to hash the input password before
+     * comparing it to the input password
+     *
      * @param username Input username
      * @param password Input password
      * @return Arraylist of errors
@@ -229,60 +281,60 @@ public class AccountServicesDB {
         TypedQuery<Advisor> advisors = em.createNamedQuery("Advisor.findByAdvisorUsername", Advisor.class).setParameter("advisorUsername", username);
         ArrayList<String> errList = null;
         try {
-                  
+
             Advisor advisor = advisors.getSingleResult();
             String hashedInputPassword = PasswordUtil.hashPassword(password);
-            if(hashedInputPassword.equals(advisor.getAdvisorPassword())){
+            if (hashedInputPassword.equals(advisor.getAdvisorPassword())) {
                 return null;
-            } else{
+            } else {
                 errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
             }
-            
-        } catch(NoResultException e){
-                errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
+
+        } catch (NoResultException e) {
+            errList = new ArrayList<>(Arrays.asList(new String[]{"Invalid Username or password"}));
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
+        } finally {
             em.close();
         }
-        
+
         return errList;
 
     }
-    
-    public final Candidate getCandidateByUsername(String username){
+
+    public final Candidate getCandidateByUsername(String username) {
         initialize();
-        try{
-            if(!doesUserExist(em,"canUsername",username)){
+        try {
+            if (!doesCandidateExist(em, "canUsername", username)) {
                 return null;
             }
             TypedQuery<Candidate> q = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class);
             q.setParameter("canUsername", username);
-            
+
             Candidate c = q.getSingleResult();
             em.refresh(c);
             return c;
-        }catch(Exception e){
+        } catch (Exception e) {
             return null;
-        }finally{
+        } finally {
             em.close();
         }
     }
-    
-    public final Skill getSkillById(String id){
+
+    public final Skill getSkillById(String id) {
         initialize();
-        try{
-            if(!this.doesSkillExist(id)){
+        try {
+            if (!this.doesSkillExist(id)) {
                 return null;
             }
             TypedQuery<Skill> q = em.createNamedQuery("Skill.findBySkillID", Skill.class);
             q.setParameter("skillID", Integer.parseInt(id));
-            
+
             Skill s = q.getSingleResult();
             return s;
-        }catch(Exception e){
+        } catch (Exception e) {
             return null;
-        }finally{
+        } finally {
             em.close();
         }
     }
@@ -290,7 +342,7 @@ public class AccountServicesDB {
     public final BusinessClient getBusinessClientByUsername(String username){
         initialize();
         try{
-            if(!doesUserExist(em,"busClientUsername",username)){
+            if(!doesClientExist(em,"busClientUsername",username)){
                 return null;
             }
             TypedQuery<BusinessClient> q = em.createNamedQuery("BusinessClient.findByBusClientUsername", BusinessClient.class);
@@ -309,7 +361,7 @@ public class AccountServicesDB {
     public final Advisor getAdvisorByUsername(String username){
         initialize();
         try{
-            if(!doesUserExist(em,"advisorUsername",username)){
+            if(!doesAdvisorExist(em,"advisorUsername",username)){
                 return null;
             }
             TypedQuery<Advisor> q = em.createNamedQuery("Advisor.findByAdvisorUsername", Advisor.class);
@@ -326,21 +378,34 @@ public class AccountServicesDB {
     }
     
     /**
-     * Checks to see if user exists -- does not alter the EntityManager in any way so em can passed by reference
+     * Checks to see if user exists -- does not alter the EntityManager in any
+     * way so em can passed by reference
+     *
      * @param em Entity Manager
-     * @param attributeName Name of the parameter by which user wants to check 
-     * @param attributeValue Value of that parameter 
+     * @param attributeName Name of the parameter by which user wants to check
+     * @param attributeValue Value of that parameter
      * @return Boolean indicating whether user exists
      */
-    public final boolean doesUserExist(EntityManager em,String attributeName, String attributeValue){
-        List<Candidate> q = em.createNamedQuery("Candidate.findBy"+attributeName.substring(0, 1).toUpperCase()+ attributeName.substring(1), Candidate.class).setParameter(attributeName, attributeValue).getResultList();
+    public final boolean doesCandidateExist(EntityManager em, String attributeName, String attributeValue) {
+        List<Candidate> q = em.createNamedQuery("Candidate.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), Candidate.class).setParameter(attributeName, attributeValue).getResultList();
+        return q != null && !q.isEmpty();
+    }
+
+    public final boolean doesClientExist(EntityManager em, String attributeName, String attributeValue) {
+        List<BusinessClient> q = em.createNamedQuery("BusinessClient.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), BusinessClient.class).setParameter(attributeName, attributeValue).getResultList();
         return q != null && !q.isEmpty();
     }
     
-    public boolean doesSkillExist(String id){
-        if(em == null || !em.isOpen())
+    public final boolean doesAdvisorExist(EntityManager em, String attributeName, String attributeValue) {
+        List<Advisor> q = em.createNamedQuery("Advisor.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), Advisor.class).setParameter(attributeName, attributeValue).getResultList();
+        return q != null && !q.isEmpty();
+    }
+
+    public boolean doesSkillExist(String id) {
+        if (em == null || !em.isOpen()) {
             initialize();
-        
+        }
+
         return em.find(Skill.class, Integer.parseInt(id)) != null;
     }
 }

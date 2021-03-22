@@ -78,7 +78,7 @@
                     <div class="container register-photo">
                         <div class="form-container">
                             <div class="image-holder"></div>
-                            <form action="<c:url value='/create-profile'></c:url>" method="post">
+                            <form action="<c:url value='/user-registration'></c:url>" method="post">
                                     <h2 class="text-center"><strong>Create</strong> an account.</h2>
                                     <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"
                                                                    data-bss-tooltip="" name="username" placeholder="Username"
@@ -96,15 +96,22 @@
                                                                maxlength="30"
                                                                title="Password repeat"></div>
                                 <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"
-                                                               data-bss-tooltip="" name="firstName" placeholder="First Name"
+                                                               data-bss-tooltip="" name="firstName" id="candidateFirstName" placeholder="First Name"
                                                                required="" maxlength="45" title="First name"
-                                                               value="<c:out value='${lastCandidate.canfirstName}' default=''/>">
+                                                               value="<c:out value='${lastCandidate.canfirstName}' default=''/>" style="${requestScope.lastClient eq null ? 'display: block;' : 'display: none;'}" ${requestScope.lastClient eq null ? '' : 'disabled'}>
                                 </div>
                                 <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"
-                                                               data-bss-tooltip="" name="lastName" placeholder="Last Name"
+                                                               data-bss-tooltip="" name="lastName" id="candidateLastName" placeholder="Last Name"
                                                                required="" maxlength="45" title="Last name"
-                                                               value="<c:out value='${lastCandidate.canlastName}' default=''/>">
+                                                               value="<c:out value='${lastCandidate.canlastName}' default=''/>" style="${requestScope.lastClient eq null ? 'display: block;' : 'display: none;'}" ${requestScope.lastClient eq null ? '' : 'disabled'}>
                                 </div>
+
+                                <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"
+                                                               data-bss-tooltip="" name="company" id="businessCompany" placeholder="Company"
+                                                               required="" maxlength="45" title="Company"
+                                                               value="<c:out value='' default=''/>" style="${requestScope.lastClient eq null ? 'display: none;' : 'display: block;'}" ${requestScope.lastClient eq null ? 'disabled' : ''}>
+                                </div>
+
                                 <div class="form-group"><input class="form-control" type="email" data-toggle="tooltip"
                                                                data-bss-tooltip="" name="email" placeholder="Email" required=""
                                                                title="Email"
@@ -115,6 +122,13 @@
                                                                title="Phone Number" maxlength="10" inputmode="tel"
                                                                value="<c:out value='${lastCandidate.canPhoneNo}' default=''/>">
                                 </div>
+
+                                <div class="form-group justify-content-lg-center align-items-lg-center login-as">
+                                    <h5>Register as</h5>
+                                    <div class="form-check" style="font-size: 1rem;"><input type="radio" class="form-check-input" id="candidate" name="userType" value="candidate" onclick="registerCandidate();" ${requestScope.lastClient eq null ? 'checked' : ''}/><label class="form-check-label" for="candidate">Candidate</label></div>
+                                    <div class="form-check" style="font-size: 1rem;"><input type="radio" class="form-check-input" id="business" name="userType" value="businessClient" onclick="registerBusinessClient();" ${requestScope.lastClient eq null ? '' : 'checked'}/><label class="form-check-label" for="business">Business Client</label></div>
+                                </div>
+
                                 <div class="form-group">
                                     <div class="form-check"><label class="form-check-label"><input class="form-check-input"
                                                                                                    type="checkbox">I agree to
@@ -130,10 +144,13 @@
                 </div>
             </div>
         </div>
+
+
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/js/bs-init.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+        <script src="assets/js/register.js"></script>
     </body>
 
 </html>
