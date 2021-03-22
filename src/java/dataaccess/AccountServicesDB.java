@@ -353,7 +353,7 @@ public class AccountServicesDB {
             return bc;
         }catch(Exception e){
             return null;
-        }finally{
+        } finally {
             em.close();
         }
     }
