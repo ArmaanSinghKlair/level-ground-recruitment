@@ -78,7 +78,7 @@ public class AccountServicesDB {
         }
     }
 
-    public final ArrayList<String> createBusinessClientProfile(String username, String password, String firstName, String lastName, String company, String email, String phoneNo) {
+    public final ArrayList<String> createBusinessClientProfile(String username, String password, String company, String email, String phoneNo) {
         initialize();
 
         ArrayList<String> errList = new ArrayList<>();
@@ -97,7 +97,7 @@ public class AccountServicesDB {
             bc.setBusClientUsername(username.toLowerCase());
             bc.setBusClientEmail(email);
             bc.setBusClientPassword(PasswordUtil.hashPassword(password));
-            //bc.setBusClientCompany(company);
+            bc.setBusClientCompany(company);
             bc.setBusClientPhone(phoneNo);
 
             trans.begin();
@@ -347,7 +347,7 @@ public class AccountServicesDB {
             }
             TypedQuery<BusinessClient> q = em.createNamedQuery("BusinessClient.findByBusClientUsername", BusinessClient.class);
             q.setParameter("busClientUsername", username);
-            
+
             BusinessClient bc = q.getSingleResult();
             em.refresh(bc);
             return bc;
@@ -357,7 +357,7 @@ public class AccountServicesDB {
             em.close();
         }
     }
-    
+
     public final Advisor getAdvisorByUsername(String username){
         initialize();
         try{
@@ -366,7 +366,7 @@ public class AccountServicesDB {
             }
             TypedQuery<Advisor> q = em.createNamedQuery("Advisor.findByAdvisorUsername", Advisor.class);
             q.setParameter("advisorUsername", username);
-            
+
             Advisor a = q.getSingleResult();
             em.refresh(a);
             return a;
@@ -376,7 +376,7 @@ public class AccountServicesDB {
             em.close();
         }
     }
-    
+
     /**
      * Checks to see if user exists -- does not alter the EntityManager in any
      * way so em can passed by reference
@@ -395,7 +395,7 @@ public class AccountServicesDB {
         List<BusinessClient> q = em.createNamedQuery("BusinessClient.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), BusinessClient.class).setParameter(attributeName, attributeValue).getResultList();
         return q != null && !q.isEmpty();
     }
-    
+
     public final boolean doesAdvisorExist(EntityManager em, String attributeName, String attributeValue) {
         List<Advisor> q = em.createNamedQuery("Advisor.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), Advisor.class).setParameter(attributeName, attributeValue).getResultList();
         return q != null && !q.isEmpty();

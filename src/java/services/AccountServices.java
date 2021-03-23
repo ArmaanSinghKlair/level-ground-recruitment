@@ -50,9 +50,9 @@ public class AccountServices {
         }
     }
 
-    public final ArrayList<String> createBusinessClientProfile(String username, String password, String password_repeat, String firstName, String lastName, String company, String email, String phoneNo) {
+    public final ArrayList<String> createBusinessClientProfile(String username, String password, String password_repeat, String company, String email, String phoneNo) {
         ArrayList<String> errList;
-        errList = ValidateBusinessClient.getErrorMapForAllfields(username, password, firstName, lastName, company, email, phoneNo);
+        errList = ValidateBusinessClient.getErrorMapForAllfields(username, password, company, email, phoneNo);
 
         if (errList == null) {
             errList = new ArrayList<>();
@@ -63,7 +63,7 @@ public class AccountServices {
         if (errList.size() > 0) {
             return errList;
         } else {
-            return asdb.createBusinessClientProfile(username, password, firstName, lastName, company, email, phoneNo);
+            return asdb.createBusinessClientProfile(username, password, company, email, phoneNo);
         }
     }
 
@@ -145,7 +145,7 @@ public class AccountServices {
     public final BusinessClient getBusinessClientByUsername(String username){
         return asdb.getBusinessClientByUsername(username);
     }
-    
+
     public final Advisor getAdvisorByUsername(String username){
         return asdb.getAdvisorByUsername(username);
     }

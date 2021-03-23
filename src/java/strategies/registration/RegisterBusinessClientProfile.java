@@ -19,20 +19,20 @@ public class RegisterBusinessClientProfile implements RegisterProfile {
     @Override
     public ArrayList<String> register(HttpServletRequest request) {
         String username = request.getParameter("username");
-        String firstName = "TEST";
-        String lastName = "TEST";
         String company = request.getParameter("company");
         String password = request.getParameter("password");
         String password_repeat = request.getParameter("password-repeat");
         String email = request.getParameter("email");
         String phoneNo = request.getParameter("phoneNo");
 
-        ArrayList<String> errList = new AccountServices().createBusinessClientProfile(username, password, password_repeat, firstName, lastName, company, email, phoneNo);
+        ArrayList<String> errList = new AccountServices().createBusinessClientProfile(username, password, password_repeat, company, email, phoneNo);
         
         if(errList != null)
         {
             BusinessClient client = new BusinessClient();
-            //client.setBusClientCompany(company); TODO
+            client.setBusClientCompany(company);
+            client.setBusClientEmail(email);
+            client.setBusClientPhone(phoneNo);
             request.setAttribute("lastClient", client);
             return errList;
         }

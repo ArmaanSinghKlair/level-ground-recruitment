@@ -28,15 +28,11 @@ public final class ValidateBusinessClient {
     }
 
     //Basic business client validation
-    public static ArrayList<String> getErrorMapForAllfields(String username, String password, String firstName, String lastName, String company, String email, String phoneNo) {
+    public static ArrayList<String> getErrorMapForAllfields(String username, String password, String company, String email, String phoneNo) {
         startValidation();
-        System.out.println("Firstname:" + firstName);
-
         put("busClientUsername", validateBusClientUsername(username));
         put("busClientPassword", validateBusClientPassword(password));
         put("busClientCompany", validateBusClientCompany(company));
-        put("busClientFirstName", validateBusClientfirstName(firstName));
-        put("busClientLastName", validateBusClientlastName(lastName));
         put("busClientEmail", validateBusClientEmail(email));
         put("busClientPhoneNo", validateBusClientPhoneNo(phoneNo));
         return getErrorMap();
@@ -47,7 +43,7 @@ public final class ValidateBusinessClient {
             errList.add(value);
         }
     }
-    
+
     //This checks that the username is not empty or too long
     public static String validateBusClientUsername(String username){
         if(isEmpty(username)) {
@@ -58,7 +54,7 @@ public final class ValidateBusinessClient {
             return null;
         }
     }
-    
+
     //This checks that the password is not empty or too long
     public static String validateBusClientPassword(String password){
         if(isEmpty(password)) {
@@ -80,29 +76,6 @@ public final class ValidateBusinessClient {
             return null;
         }
     }
-    
-    //This checks that the first name is not empty or too long
-    public static String validateBusClientfirstName(String firstName){
-        if(isEmpty(firstName)) {
-            return "First name cannot be empty";
-        } else if (firstName.length() > 45) {
-            return "First name cannot be more than 45 characters";
-        } else {
-            return null;
-        }
-    }
-    
-    //This checks that the last name is not empty or too long
-    public static String validateBusClientlastName(String lastName){
-        if(isEmpty(lastName)) {
-            return "Last name cannot be empty";
-        } else if (lastName.length() > 45) {
-            return "Last name cannot be more than 45 characters";
-        } else {
-            return null;
-        }
-    }
-    
     //This checks that the email is not empty or too long. It also checks that it is in the correct email format
     public static String validateBusClientEmail(String email){
         if(isEmpty(email)) {
@@ -115,7 +88,7 @@ public final class ValidateBusinessClient {
             return null;
         }
     }
-    
+
     //This checks that the phone number is not empty or too long. It also checks that it is in the correct phone number format
     public static String validateBusClientPhoneNo(String phoneNo){
         if(isEmpty(phoneNo)) {

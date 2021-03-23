@@ -19,21 +19,22 @@ import services.ProfileServices;
  * @author 756887
  */
 public class LoadBusinessClientProfile implements LoadProfile {
-    
+
     @Override
     public void loadProfile(HttpServletRequest request) {
         AccountServices accService = new AccountServices();
         ProfileServices ps = new ProfileServices();
-        
+
         HttpSession sess = request.getSession(false);
-        
+
         // Get business client
-        BusinessClient bc = accService.getBusinessClientByUsername((String)sess.getAttribute("username"));
+        BusinessClient bc = accService.getBusinessClientByUsername((String) sess.getAttribute("username"));
         request.setAttribute("businessClient", bc);
-        
+
         // Get job postings
-        ArrayList<JobPosting> jobPostings = ps.getClientJobPostings(bc.getBusinessclientID());
-        request.setAttribute("jobPostings", jobPostings);
-        request.setAttribute("url", "/WEB-INF/business-client-profile.jsp");
+        //ArrayList<JobPosting> jobPostings = ps.getClientJobPostings(bc.getBusinessclientID());
+        //request.setAttribute("jobPostings", jobPostings);
+        //request.setAttribute("url", "/WEB-INF/business-client-profile.jsp");
+        request.setAttribute("url", "/WEB-INF/business-client-home.jsp"); //TODO Replace this line of code with above line once we have business client profile
     }
 }

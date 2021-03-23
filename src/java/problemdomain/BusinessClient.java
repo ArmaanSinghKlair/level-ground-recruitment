@@ -6,6 +6,7 @@
 package problemdomain;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,16 +15,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author 839645
+ * @author kentp
  */
 @Entity
 @Table(name = "business_client")
@@ -33,13 +37,15 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "BusinessClient.findByBusinessclientID", query = "SELECT b FROM BusinessClient b WHERE b.businessclientID = :businessclientID"),
     @NamedQuery(name = "BusinessClient.findByBusClientUsername", query = "SELECT b FROM BusinessClient b WHERE b.busClientUsername = :busClientUsername"),
     @NamedQuery(name = "BusinessClient.findByBusClientPassword", query = "SELECT b FROM BusinessClient b WHERE b.busClientPassword = :busClientPassword"),
-    @NamedQuery(name = "BusinessClient.findByBusclientfirstName", query = "SELECT b FROM BusinessClient b WHERE b.busclientfirstName = :busclientfirstName"),
-    @NamedQuery(name = "BusinessClient.findByBusclientlastName", query = "SELECT b FROM BusinessClient b WHERE b.busclientlastName = :busclientlastName"),
+    @NamedQuery(name = "BusinessClient.findByBusClientCompany", query = "SELECT b FROM BusinessClient b WHERE b.busClientCompany = :busClientCompany"),
+    @NamedQuery(name = "BusinessClient.findByBusClientAddress", query = "SELECT b FROM BusinessClient b WHERE b.busClientAddress = :busClientAddress"),
     @NamedQuery(name = "BusinessClient.findByBusClientEmail", query = "SELECT b FROM BusinessClient b WHERE b.busClientEmail = :busClientEmail"),
     @NamedQuery(name = "BusinessClient.findByBusClientPhone", query = "SELECT b FROM BusinessClient b WHERE b.busClientPhone = :busClientPhone"),
-    @NamedQuery(name = "BusinessClient.findByBusClientPayment", query = "SELECT b FROM BusinessClient b WHERE b.busClientPayment = :busClientPayment"),
-    @NamedQuery(name = "BusinessClient.findByAdvisorID", query = "SELECT b FROM BusinessClient b WHERE b.advisorID = :advisorID")})
+    @NamedQuery(name = "BusinessClient.findByBusClientWebsite", query = "SELECT b FROM BusinessClient b WHERE b.busClientWebsite = :busClientWebsite")})
 public class BusinessClient implements Serializable {
+
+    @OneToMany(mappedBy = "businessclientID")
+    private Collection<JobPosting> jobPostingCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,19 +60,20 @@ public class BusinessClient implements Serializable {
     @Column(name = "bus_client_password")
     private String busClientPassword;
     @Basic(optional = false)
-    @Column(name = "bus_client_firstName")
-    private String busclientfirstName;
-    @Basic(optional = false)
-    @Column(name = "bus_client_lastName")
-    private String busclientlastName;
+    @Column(name = "bus_client_company")
+    private String busClientCompany;
+    @Lob
+    @Column(name = "bus_client_description")
+    private String busClientDescription;
+    @Column(name = "bus_client_address")
+    private String busClientAddress;
     @Basic(optional = false)
     @Column(name = "bus_client_email")
     private String busClientEmail;
     @Column(name = "bus_client_phone")
     private String busClientPhone;
-    @Basic(optional = false)
-    @Column(name = "bus_client_payment")
-    private String busClientPayment;
+    @Column(name = "bus_client_website")
+    private String busClientWebsite;
     @JoinColumn(name = "advisorID", referencedColumnName = "advisorID")
     @ManyToOne
     private Advisor advisorID;
@@ -80,14 +87,12 @@ public class BusinessClient implements Serializable {
         this.businessclientID = businessclientID;
     }
 
-    public BusinessClient(Integer businessclientID, String busClientUsername, String busClientPassword, String busclientfirstName, String busclientlastName, String busClientEmail, String busClientPayment) {
+    public BusinessClient(Integer businessclientID, String busClientUsername, String busClientPassword, String busClientCompany, String busClientEmail) {
         this.businessclientID = businessclientID;
         this.busClientUsername = busClientUsername;
         this.busClientPassword = busClientPassword;
-        this.busclientfirstName = busclientfirstName;
-        this.busclientlastName = busclientlastName;
+        this.busClientCompany = busClientCompany;
         this.busClientEmail = busClientEmail;
-        this.busClientPayment = busClientPayment;
     }
 
     public Integer getBusinessclientID() {
@@ -114,20 +119,28 @@ public class BusinessClient implements Serializable {
         this.busClientPassword = busClientPassword;
     }
 
-    public String getBusclientfirstName() {
-        return busclientfirstName;
+    public String getBusClientCompany() {
+        return busClientCompany;
     }
 
-    public void setBusclientfirstName(String busclientfirstName) {
-        this.busclientfirstName = busclientfirstName;
+    public void setBusClientCompany(String busClientCompany) {
+        this.busClientCompany = busClientCompany;
     }
 
-    public String getBusclientlastName() {
-        return busclientlastName;
+    public String getBusClientDescription() {
+        return busClientDescription;
     }
 
-    public void setBusclientlastName(String busclientlastName) {
-        this.busclientlastName = busclientlastName;
+    public void setBusClientDescription(String busClientDescription) {
+        this.busClientDescription = busClientDescription;
+    }
+
+    public String getBusClientAddress() {
+        return busClientAddress;
+    }
+
+    public void setBusClientAddress(String busClientAddress) {
+        this.busClientAddress = busClientAddress;
     }
 
     public String getBusClientEmail() {
@@ -146,12 +159,12 @@ public class BusinessClient implements Serializable {
         this.busClientPhone = busClientPhone;
     }
 
-    public String getBusClientPayment() {
-        return busClientPayment;
+    public String getBusClientWebsite() {
+        return busClientWebsite;
     }
 
-    public void setBusClientPayment(String busClientPayment) {
-        this.busClientPayment = busClientPayment;
+    public void setBusClientWebsite(String busClientWebsite) {
+        this.busClientWebsite = busClientWebsite;
     }
 
     public Advisor getAdvisorID() {
@@ -193,6 +206,15 @@ public class BusinessClient implements Serializable {
     @Override
     public String toString() {
         return "problemdomain.BusinessClient[ businessclientID=" + businessclientID + " ]";
+    }
+
+    @XmlTransient
+    public Collection<JobPosting> getJobPostingCollection() {
+        return jobPostingCollection;
+    }
+
+    public void setJobPostingCollection(Collection<JobPosting> jobPostingCollection) {
+        this.jobPostingCollection = jobPostingCollection;
     }
     
 }

@@ -52,6 +52,10 @@ public class LoginServlet extends HttpServlet {
             Candidate candidate = new Candidate();
             candidate.setCanUsername(username);
             request.setAttribute("lastCandidate", candidate);
+            
+            //Depending on which user tried to login, their radiobutton will be selected based on lastUserType
+            request.setAttribute("lastUserType", userType);
+            
             request.setAttribute("fail", true);
             request.setAttribute("errList", errList);
             
