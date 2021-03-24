@@ -43,7 +43,6 @@ create table lgrdb.business_client
     bus_client_email       varchar(255) not null,
     bus_client_phone       varchar(10)  null,
     bus_client_website     varchar(255) null,
-    bus_client_payment     varchar(255) not null,
     constraint bus_client_email_UNIQUE
         unique (bus_client_email),
     constraint bus_client_username_UNIQUE

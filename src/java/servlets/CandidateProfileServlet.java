@@ -6,7 +6,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -98,8 +97,10 @@ public class CandidateProfileServlet extends HttpServlet {
                 break;
             case "edit":
                 str = "Item edited successfully";
+                break;
             case "deleteCandidate":
                 str = "User deleted successfully";
+                break;
         }
         return str;
     }

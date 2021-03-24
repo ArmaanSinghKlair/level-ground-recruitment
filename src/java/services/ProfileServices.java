@@ -48,6 +48,7 @@ public final class ProfileServices {
                     request.setAttribute("sucessMessage", "Account removed permanently");
                     request.setAttribute("success",true);
                 }
+                break;
             case "delete":
               errList = psdb.delete(form_name, id, username);  
             break;
@@ -67,6 +68,7 @@ public final class ProfileServices {
               if(errList == null || errList.isEmpty()){
                 errList = psdb.edit(request, username);
               }
+              break;
 
         }
         return errList;
