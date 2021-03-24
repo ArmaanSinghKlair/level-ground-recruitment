@@ -11,9 +11,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
+import problemdomain.BusinessClient;
 import problemdomain.Candidate;
 import problemdomain.CandidateSkill;
 import problemdomain.Education;
+import problemdomain.JobPosting;
 import problemdomain.Skill;
 import problemdomain.WorkHistory;
 import util.DBUtil;
@@ -36,6 +38,30 @@ public final class ProfileServicesDB {
         try{
             ArrayList<Skill> skills = new ArrayList(em.createNamedQuery("Skill.findAll",Skill.class).getResultList());
             return skills;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public final ArrayList<JobPosting> getClientJobPostings(int id){
+        initialize();
+        try{
+            TypedQuery<JobPosting> q = em.createNamedQuery("JobPosting.findByBusinessClientID", JobPosting.class);
+            q.setParameter("businessClientID", id); 
+            ArrayList<JobPosting> postings = new ArrayList(q.getResultList());
+            return postings;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public final ArrayList<BusinessClient> getBusClientsByAdvisorID(int id){
+        initialize();
+        try{
+            TypedQuery<BusinessClient> q = em.createNamedQuery("BusinessClient.findByAdvisorID", BusinessClient.class);
+            q.setParameter("advisorID", id); 
+            ArrayList<BusinessClient> clients = new ArrayList(q.getResultList());
+            return clients;
         }finally{
             em.close();
         }

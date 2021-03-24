@@ -42,6 +42,8 @@ public class ValidateJobPosting {
         if(value != null)
             errList.add(value);
     }
+    
+    //This checks if the job title is not empty or too long
     public static String validateJobTitle(String title){
         if(isEmpty(title))
             return "Title cannot be empty";
@@ -51,6 +53,7 @@ public class ValidateJobPosting {
             return null;
     }
     
+    //This checks that the job requirements are not empty or too long
     public static String validateJobRequirements(String requirements){
         if(isEmpty(requirements))
             return "Requirements cannot be empty";
@@ -60,6 +63,7 @@ public class ValidateJobPosting {
             return null;
     }
     
+    //This checks that the start date is before the end date and that the start date is not before today
     public static String validateJobStartDate(Date startDate, Date endDate){
         if(startDate.after(endDate))
             return "Start date cannot be after end date";
@@ -69,6 +73,7 @@ public class ValidateJobPosting {
             return null;
     }
     
+    //This checks that the end date is after the start date and that the end date is not before today
     public static String validateJobEndDate(Date startDate, Date endDate){
         if(endDate.after(startDate))
             return "End date cannot be before start date";
@@ -78,6 +83,7 @@ public class ValidateJobPosting {
             return null;
     }
     
+    //This checks that the job status is not empty or too long
     public static String validateJobStatus(String status){
         if(isEmpty(status))
             return "Status cannot be empty";
@@ -87,6 +93,7 @@ public class ValidateJobPosting {
             return null;
     }
     
+    //This checks that the job description is not empty or too long
     public static String validateJobDescription(String description){
         if(isEmpty(description))
             return "Description cannot be empty";
@@ -96,6 +103,7 @@ public class ValidateJobPosting {
             return null;
     }
     
+    //This checks that the wage is not empty and that the wage is not negative
     public static String validateJobWage(Double wage){
         if(wage == 0)
             return "Wage cannot be empty";
@@ -105,6 +113,7 @@ public class ValidateJobPosting {
             return null;
     }
     
+    //This checks that the job location is not empty or too long
     public static String validateJobLocation(String location){
         if(isEmpty(location))
             return "Location cannot be empty";

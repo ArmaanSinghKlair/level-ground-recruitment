@@ -25,7 +25,7 @@ public class BusinessClientHome extends HttpServlet {
         @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            request.getRequestDispatcher("/WEB-INF/BusinessClientHome.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/business-client-home.jsp").forward(request, response);
     }
 
 
@@ -47,11 +47,11 @@ public class BusinessClientHome extends HttpServlet {
         if (errList == null)
             {
                 request.setAttribute("message", "Job posting created");
-                request.getRequestDispatcher("/WEB-INF/BusinessClientHome.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/business-client-home.jsp").forward(request, response);
             } else
             {
                 request.setAttribute("errList", errList);
-                request.getRequestDispatcher("/WEB-INF/BusinessClientHome.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/business-client-home.jsp").forward(request, response);
             }
     
     }

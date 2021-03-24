@@ -14,7 +14,8 @@ import problemdomain.BusinessClient;
 import util.PasswordUtil;
 
 /**
- *
+ * This class authenticates a business clients login information
+ * 
  * @author 839645
  */
 public class BusinessClientAuthentication implements Authentication{

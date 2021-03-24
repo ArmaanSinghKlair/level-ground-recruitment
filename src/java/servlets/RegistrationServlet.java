@@ -3,30 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package testdeletelater;
+package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import problemdomain.Candidate;
-import problemdomain.CandidateSkill;
-import problemdomain.Education;
-import problemdomain.Role;
-import problemdomain.Skill;
-import problemdomain.WorkHistory;
+import services.AccountServices;
+import services.ProfileServices;
 
 /**
  *
  * @author kentp
  */
-@WebServlet(name = "BusinessClientCandidateTest", urlPatterns = {"/BusinessClientCandidateTest"})
-public class BusinessClientCandidateTest extends HttpServlet {
+@WebServlet(name = "RegistrationServlet", urlPatterns = {"/RegistrationServlet"})
+public class RegistrationServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,52 +34,24 @@ public class BusinessClientCandidateTest extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Candidate candidate = new Candidate();
-        candidate.setCandidateID(1);
 
-        ArrayList<Education> educationList = new ArrayList<>();
-        ArrayList<WorkHistory> workList = new ArrayList<>();
-        ArrayList<CandidateSkill> skillList = new ArrayList<>();
-        ArrayList<Role> roleList = new ArrayList<>();
+        ProfileServices ps = new ProfileServices();
+        ArrayList<String> errList = ps.createProfile(request);
 
-        Education education = new Education();
-        education.setInstitution("SAIT");
-        education.setSubject("ITSD");
-        education.setLevel("Advanced");
-        education.setStartDate(new Date());
-        education.setEndDate(new Date());
-        educationList.add(education);
+        if (errList == null) 
+        {
+            request.setAttribute("success", true);
+            request.setAttribute("sucessMessage", "Account created successfully");
+        } else {
+            request.setAttribute("fail", true);
+            request.setAttribute("errList", errList);
+            request.setAttribute("currentTab", "signup-tab-cta");
+        }
 
-        WorkHistory workHistory = new WorkHistory();
-        workHistory.setCompany("Walmart");
-        workHistory.setStartDate(new Date());
-        workHistory.setEndDate(new Date());
-        workList.add(workHistory);
-
-        CandidateSkill candidateSkill = new CandidateSkill();
-        Skill skill = new Skill();
-        skill.setDescription("Java");
-        candidateSkill.setSkillID(skill);
-        skillList.add(candidateSkill);
-
-        Role role = new Role();
-        role.setDescription("Web Developer");
-        roleList.add(role);
-
-        candidate.setWorkHistoryList(workList);
-        candidate.setEducationList(educationList);
-        candidate.setCandidateSkillList(skillList);
-        candidate.setRoleList(roleList);
-
-        ArrayList<Candidate> candidateList = new ArrayList<>();
-        candidateList.add(candidate);
-
-        request.setAttribute("candidateList", candidateList);
-        request.getRequestDispatcher("/WEB-INF/businessClientCandidateList.jsp").forward(request, response);
-
+        request.getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

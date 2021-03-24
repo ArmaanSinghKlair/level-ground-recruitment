@@ -22,6 +22,30 @@ import services.ProfileServices;
 public class ProfileNavigationServlet extends HttpServlet {
 
     /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        ProfileServices ps = new ProfileServices();
+        // Load all variables necessary and also the next URL
+        ps.loadProfile(request);
+        //System.out.println((List)request.getAttribute("skills")).size());
+        request.getServletContext().getRequestDispatcher((String) request.getAttribute("url")).forward(request, response);
+        /*
+        /candidate-profile
+        /business-client-profile
+        /admin-profile
+         */
+    }
+
+    /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -32,18 +56,7 @@ public class ProfileNavigationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        ProfileServices ps = new ProfileServices();
-        // Load all variables necessary and also the next URL
-        ps.loadProfile(request);
-        //System.out.println((List)request.getAttribute("skills")).size());
-        request.getServletContext().getRequestDispatcher((String)request.getAttribute("url")).forward(request, response);
-        /*
-        /candidate-profile
-        /business-client-profile
-        /admin-profile
-        */
-        
+        processRequest(request, response);
     }
 
     /**
@@ -57,27 +70,7 @@ public class ProfileNavigationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession session = request.getSession();
-        String userType = session.getAttribute("userType").toString();
+        processRequest(request, response);
 
-        System.out.println("test");
-
-        if (userType != null && !userType.equals("")) {
-            switch (userType) {
-                case "candidate":
-                    request.getRequestDispatcher("/candidate-profile").forward(request, response);
-                    break;
-                case "businessClient":
-                    request.getRequestDispatcher("/business-client-profile").forward(request, response);
-                    break;
-                case "admin":
-                    request.getRequestDispatcher("/admin-profile").forward(request, response);
-                    break;
-                default:
-                    //request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-                    break;
-            }
-        }
     }
 }

@@ -1,7 +1,9 @@
 <%-- any content can be specified here e.g.: --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page pageEncoding="UTF-8" %>
+<link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+<link rel="stylesheet" href="assets/css/navbar-popup.css">
+
 <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
     <div class="container-fluid"><a
             class="navbar-brand d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center"
@@ -37,7 +39,8 @@
                                                  data-toggle="dropdown" data-bss-hover-animate="pulse"
                                                  href="#">Services</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Contact us</a><a class="dropdown-item" href="#">About</a>
+                        <div class="dropdown-item open-contact" style="cursor:pointer;">Contact us</div>
+                        <div class="dropdown-item open-about" style="cursor:pointer;">About</div>
                     </div>
                 </li>
 
@@ -61,4 +64,38 @@
         </div>
     </div>
 </nav>
+
+
+<div class="contact popup">
+    <div class="border rounded popup-content">
+        <button class="btn btn-primary close" type="button"><i class="icon ion-close-round"></i>
+        </button>
+        <h3>Contact Us</h3>
+        <div class="ignore popup-form">
+            <p>
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<div class="about popup">
+    <div class="border rounded popup-content">
+        <button class="btn btn-primary close" type="button"><i class="icon ion-close-round"></i>
+        </button>
+        <h3>About</h3>
+        <div class="ignore popup-form">
+            <p>
+                <strong>Level Ground Recruitment</strong> hopes to remove all bias from a Candidate
+                by displaying only relevant information and hiding all personal information.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/popup.js"></script>
 

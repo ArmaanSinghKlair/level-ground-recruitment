@@ -37,9 +37,9 @@ create table lgrdb.business_client
     advisorID              int          null,
     bus_client_username    varchar(45)  not null,
     bus_client_password    varchar(64)  not null,
-    bus_client_name        varchar(50)  not null,
+    bus_client_company     varchar(50)  not null,
     bus_client_description text         null,
-    bus_client_address     varchar(255) not null,
+    bus_client_address     varchar(255) null,
     bus_client_email       varchar(255) not null,
     bus_client_phone       varchar(10)  null,
     bus_client_website     varchar(255) null,
@@ -68,8 +68,6 @@ create table lgrdb.candidate
     placed        tinyint(1)   null,
     constraint can_email_UNIQUE
         unique (can_email),
-    constraint can_password_UNIQUE
-        unique (can_password),
     constraint can_username_UNIQUE
         unique (can_username),
     constraint FK_CANDIDATE_ADVISOR
