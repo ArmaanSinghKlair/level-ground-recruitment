@@ -65,6 +65,10 @@
         <url-pattern>/job-search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>BusinessClientProfileServlet</servlet-name>
+        <url-pattern>/business-client-profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>HomePageServlet</servlet-name>
         <url-pattern>/application-home</url-pattern>
     </servlet-mapping>

@@ -19,13 +19,15 @@ import services.AccountServices;
  *
  * @author 756887
  */
-@WebServlet(name = "BusinessClientProfileServlet", urlPatterns = {"/BusinessClientProfileServlet"})
+@WebServlet(name = "BusinessClientProfileServlet", urlPatterns = {"/business-client-profile"})
 public class BusinessClientProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            request.getRequestDispatcher("/WEB-INF/BusinessClientProfileServlet.jsp").forward(request, response);
+            String url = "/profile-navigation";
+       
+        this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
 
@@ -33,7 +35,7 @@ public class BusinessClientProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String title = request.getParameter("title");
-        String requirements = request.getParameter("requirements");
+        String requirements = request.getParameter("requirement");
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
         String status = request.getParameter("status");
@@ -47,11 +49,11 @@ public class BusinessClientProfileServlet extends HttpServlet {
         if (errList == null)
             {
                 request.setAttribute("message", "Job posting created");
-                request.getRequestDispatcher("/WEB-INF/BusinessClientHome.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/business-client-home.jsp").forward(request, response);
             } else
             {
                 request.setAttribute("errList", errList);
-                request.getRequestDispatcher("/WEB-INF/BusinessClientHome.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/business-client-home.jsp").forward(request, response);
             }
     
     }
