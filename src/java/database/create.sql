@@ -48,7 +48,7 @@ create table lgrdb.business_client
     constraint bus_client_username_UNIQUE
         unique (bus_client_username),
     constraint FK_BUSINESS_CLIENT_ADVISOR
-        foreign key (advisorID) references lgrdb.advisor (advisorID)
+        foreign key (advisorID) references lgrdb.advisor (advisorID) ON DELETE CASCADE
 );
 
 create index FK_BUSINESS_CLIENT_ADVISOR_idx
@@ -71,7 +71,7 @@ create table lgrdb.candidate
     constraint can_username_UNIQUE
         unique (can_username),
     constraint FK_CANDIDATE_ADVISOR
-        foreign key (advisorID) references lgrdb.advisor (advisorID)
+        foreign key (advisorID) references lgrdb.advisor (advisorID) ON DELETE CASCADE
 );
 
 create index FK_CANDIDATE_ADVISOR_idx
@@ -89,7 +89,7 @@ create table lgrdb.education
     end_date    datetime             null,
     type        tinyint(1) default 1 not null,
     constraint FK_EDUCATION_CANDIDATE
-        foreign key (candidateID) references lgrdb.candidate (candidateID)
+        foreign key (candidateID) references lgrdb.candidate (candidateID) ON DELETE CASCADE
 );
 
 create index FK_EDUCATION_CANDIDATE_idx
@@ -111,7 +111,7 @@ create table lgrdb.job_posting
     end_date          date                               null,
     applicants        int                                null,
     constraint FK_JOB_P_BUS_CLIENT
-        foreign key (business_clientID) references lgrdb.business_client (business_clientID)
+        foreign key (business_clientID) references lgrdb.business_client (business_clientID) ON DELETE CASCADE
 );
 
 create table lgrdb.application
@@ -122,9 +122,9 @@ create table lgrdb.application
     job_postingID int               null,
     status        tinyint default 0 null,
     constraint FK_APPLICAITON_JP
-        foreign key (job_postingID) references lgrdb.job_posting (job_postingID),
+        foreign key (job_postingID) references lgrdb.job_posting (job_postingID) ON DELETE CASCADE,
     constraint FK_APPLICATION_CAN
-        foreign key (candidateID) references lgrdb.candidate (candidateID)
+        foreign key (candidateID) references lgrdb.candidate (candidateID) ON DELETE CASCADE
 );
 
 create index FK_APPLICAITON_JP_idx
@@ -145,7 +145,7 @@ create table lgrdb.log
     logout_date timestamp                           null,
     description varchar(255)                        null,
     constraint FK_log_advisor
-        foreign key (advisorID) references lgrdb.advisor (advisorID)
+        foreign key (advisorID) references lgrdb.advisor (advisorID) ON DELETE CASCADE
 );
 
 create index advisorID_idx
@@ -164,9 +164,9 @@ create table lgrdb.candidate_role
     roleID      int not null,
     primary key (candidateID, roleID),
     constraint FK_CANDIDATE_ROLE_CANDIDATE
-        foreign key (candidateID) references lgrdb.candidate (candidateID),
+        foreign key (candidateID) references lgrdb.candidate (candidateID) ON DELETE CASCADE,
     constraint FK_CANDIDATE_ROLE_ROLE
-        foreign key (roleID) references lgrdb.role (roleID)
+        foreign key (roleID) references lgrdb.role (roleID) ON DELETE CASCADE
 );
 
 create index FK_CANDIDATE_ROLE_ROLE_idx
@@ -187,9 +187,9 @@ create table lgrdb.candidate_skill
     skillID     int  null,
     added_date  date null,
     constraint FK_CAN_SKILL_CAN
-        foreign key (candidateID) references lgrdb.candidate (candidateID),
+        foreign key (candidateID) references lgrdb.candidate (candidateID) ON DELETE CASCADE,
     constraint FK_CAN_SKILL_SKILL
-        foreign key (skillID) references lgrdb.skill (skillID)
+        foreign key (skillID) references lgrdb.skill (skillID) ON DELETE CASCADE
 );
 
 create index FK_CAN_SKILL_CAN_idx
@@ -209,9 +209,8 @@ create table lgrdb.work_history
     end_date       datetime     null,
     reference      varchar(255) null,
     constraint FK_WORK_HISTORY_CANDIDATE
-        foreign key (candidateID) references lgrdb.candidate (candidateID)
+        foreign key (candidateID) references lgrdb.candidate (candidateID) ON DELETE CASCADE
 );
 
 create index FK_WORK_HISTORY_CANDIDATE_idx
     on lgrdb.work_history (candidateID);
-

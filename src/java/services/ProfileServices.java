@@ -256,11 +256,11 @@ public final class ProfileServices {
     public final ArrayList<Skill> getAllSkills() {
         return psdb.getAllSkills();
     }
-    
+
     public final ArrayList<JobPosting> getClientJobPostings(int id) {
         return psdb.getClientJobPostings(id);
     }
-    
+
     public final ArrayList<BusinessClient> getBusClientsByAdvisorID(int id) {
         return psdb.getBusClientsByAdvisorID(id);
     }

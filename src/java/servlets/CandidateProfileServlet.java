@@ -27,7 +27,7 @@ public class CandidateProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = "/profile-navigation";
-       
+
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
@@ -36,70 +36,73 @@ public class CandidateProfileServlet extends HttpServlet {
             throws ServletException, IOException {
         // Identifies which page request came from
         String action = request.getParameter("action");
-        AccountServices accService =new AccountServices();
+        AccountServices accService = new AccountServices();
         HttpSession sess = request.getSession(false);
         ProfileServices ps = new ProfileServices();
-        ArrayList<String> errList=new ArrayList<>();
-        
-        if(action != null && action.equals("profilePageAction")){
-            errList = ps.profilePageAction(request, (String)sess.getAttribute("username"));
-        } else{
+        ArrayList<String> errList = new ArrayList<>();
+
+        if (action != null && action.equals("profilePageAction")) {
+            errList = ps.profilePageAction(request, (String) sess.getAttribute("username"));
+        } else {
             errList.add("Unknown error occured. Please reload and try again");
         }
-        
+
         // Generate success message depending upon the type of request OR give a list of errors
-        if(errList == null || errList.isEmpty()){
-            request.setAttribute("success",true);
+        if (errList == null || errList.isEmpty()) {
+            request.setAttribute("success", true);
             request.setAttribute("sucessMessage", getSuccessMessage(request.getParameter("submit")));
-        } else{
-            request.setAttribute("fail",true);
-            request.setAttribute("errList",errList);
+        } else {
+            request.setAttribute("fail", true);
+            request.setAttribute("errList", errList);
         }
         String submit = request.getParameter("submit");
 
         // If user deleted 
-        if(submit != null && submit.equals("deleteCandidate")){
-            request.getServletContext().getRequestDispatcher("/login").forward(request, response);
+        if (submit != null && submit.equals("deleteCandidate")) {
+            request.getServletContext().getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
+            return;
         }
         //Load back updated User
         // Get candidate
-        Candidate c = accService.getCandidateByUsername((String)sess.getAttribute("username"));
+        Candidate c = accService.getCandidateByUsername((String) sess.getAttribute("username"));
         request.setAttribute("candidate", c);
-        
+
         // Get skills
         ArrayList<Skill> skills = ps.getAllSkills();
         request.setAttribute("skills", skills);
-        
+
         request.setAttribute("candidate", c);
         String url = "/WEB-INF/candidate.jsp";
-        
-        if(submit != null && submit.equals("edit")){
-                url ="/WEB-INF/candidate-profile-edit.jsp";
-        } 
+
+        if (submit != null && submit.equals("edit")) {
+            url = "/profile-navigation";
+        }
         request.getServletContext().getRequestDispatcher(url).forward(request, response);
 
     }
 
     /**
-     * Gives the success message depending upon the page that sent the POST request
+     * Gives the success message depending upon the page that sent the POST
+     * request
+     *
      * @param page Page that sent the request
      * @param request Request object used to get certain parameters
      * @return Success Message
      */
-    private final String getSuccessMessage(String submit){
+    private final String getSuccessMessage(String submit) {
         String str = "";
-        switch(submit){
+        switch (submit) {
             case "delete":
-                str = "Item deleted successfully";
-                break;  
+                str = "Item(s) deleted successfully";
+                break;
             case "add":
-                str = "Item added successfully";
+                str = "Item(s) added successfully";
                 break;
             case "edit":
-                str = "Item edited successfully";
+                str = "Item(s) edited successfully";
                 break;
             case "deleteCandidate":
-                str = "User deleted successfully";
+                str = "Account deleted successfully";
                 break;
         }
         return str;
