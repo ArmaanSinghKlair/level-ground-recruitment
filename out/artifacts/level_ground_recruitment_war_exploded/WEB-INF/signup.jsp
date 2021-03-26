@@ -50,7 +50,7 @@
             <span class="d-md-flex flex-md-shrink-0 justify-content-md-center align-items-md-center navbar-text actions"> <a
                     data-bss-hover-animate="pulse" class="login" href="<c:url value='/candidate-login' />">Log In</a><a
                     class="btn btn-primary action-button" role="button" data-bss-hover-animate="pulse"
-                    href="<c:url value='/create-profile' />">Sign Up</a></span>
+                    href="<c:url value='/user-registration' />">Sign Up</a></span>
         </div>
     </div>
 </nav>
@@ -115,7 +115,7 @@
             <div class="container register-photo">
                 <div class="form-container">
                     <div class="image-holder"></div>
-                    <form action="<c:url value='/create-profile'></c:url>" method="post">
+                    <form action="<c:url value='/user-registration'></c:url>" method="post">
                         <h2 class="text-center"><strong>Create</strong> an account.</h2>
                         <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"
                                                        data-bss-tooltip="" name="username" placeholder="Username"
