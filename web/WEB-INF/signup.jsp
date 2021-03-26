@@ -139,7 +139,7 @@
                                 <div class="form-group">
                                     <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
                                 </div>
-                                <a class="already" href="#tab-1">You already have an account? Login here.</a>
+                                <a class="already" href="<c:url value='/login'/>">You already have an account? Login here.</a>
                             </form>
                         </div>
                     </div>
