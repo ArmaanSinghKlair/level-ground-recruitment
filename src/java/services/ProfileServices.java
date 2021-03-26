@@ -72,9 +72,9 @@ public final class ProfileServices {
                 errList = this.validateEditFeature(request, username);
                 // If no errors
 
-                if (errList == null || errList.isEmpty()) {
-                    errList = psdb.edit(request, username);
-                }
+              if(errList == null || errList.isEmpty()){
+                errList = psdb.edit(request, username);
+              }
               break;
 
         }
