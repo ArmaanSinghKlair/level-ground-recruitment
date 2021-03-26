@@ -249,7 +249,7 @@ public class AccountServicesDB {
 
             BusinessClient businessClient = businessClients.getSingleResult();
             String hashedInputPassword = PasswordUtil.hashPassword(password);
-            System.out.println("INPUT = " + hashedInputPassword + " and db = " + businessClient.getBusClientPassword());
+            //System.out.println("INPUT = " + hashedInputPassword + " and db = " + businessClient.getBusClientPassword());
             if (hashedInputPassword.equals(businessClient.getBusClientPassword())) {
                 return null;
             } else {
