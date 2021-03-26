@@ -55,6 +55,7 @@ public final class ProfileServices {
                     request.setAttribute("sucessMessage", "Account removed permanently");
                     request.setAttribute("success", true);
                 }
+                break;
             case "delete":
                 errList = psdb.delete(form_name, id, username);
                 break;
@@ -74,6 +75,7 @@ public final class ProfileServices {
                 if (errList == null || errList.isEmpty()) {
                     errList = psdb.edit(request, username);
                 }
+              break;
 
         }
         return errList;
@@ -254,11 +256,11 @@ public final class ProfileServices {
     public final ArrayList<Skill> getAllSkills() {
         return psdb.getAllSkills();
     }
-    
+
     public final ArrayList<JobPosting> getClientJobPostings(int id) {
         return psdb.getClientJobPostings(id);
     }
-    
+
     public final ArrayList<BusinessClient> getBusClientsByAdvisorID(int id) {
         return psdb.getBusClientsByAdvisorID(id);
     }
