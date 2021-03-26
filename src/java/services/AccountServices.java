@@ -74,8 +74,6 @@ public class AccountServices {
             errList.add("All fields required");
         }
 
-        System.out.println(userTypes + "," + userType);
-
         if (!userTypes.contains(userType.trim())) {
             errList.add("Invalid User type");
         }
