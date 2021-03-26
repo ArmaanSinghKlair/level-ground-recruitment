@@ -102,7 +102,7 @@ public class CandidateProfileServlet extends HttpServlet {
                 str = "Item(s) edited successfully";
                 break;
             case "deleteCandidate":
-                str = "User deleted successfully";
+                str = "Account deleted successfully";
                 break;
         }
         return str;
