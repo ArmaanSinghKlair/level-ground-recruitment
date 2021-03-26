@@ -57,7 +57,7 @@
                     <c:otherwise>
                         <a data-bss-hover-animate="pulse" class="login" href="<c:url value='/login' />">Log In</a>
                         <a class="btn btn-primary action-button" role="button" data-bss-hover-animate="pulse"
-                           href="<c:url value='/create-profile' />">Sign Up</a>
+                           href="<c:url value='/user-registration' />">Sign Up</a>
                     </c:otherwise>
                 </c:choose>
             </span>
