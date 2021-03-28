@@ -1,0 +1,51 @@
+.head-row {
+  background: var(--bs-white);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.business-icon {
+  padding-right: 10px;
+  font-size: 24px;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #1d3557;
+  background-color: #e7f1ff;
+  font-size: 1em;
+}
+
+.accordion-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  font-size: .8em;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+  border: 0;
+  border-radius: 0;
+  overflow-anchor: none;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,border-radius .15s ease;
+}
+
+.notif {
+  margin-left: 10px;
+}
+
+.stat-badge {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+.job-header {
+  padding: 10px;
+}
+
+.job-post {
+  padding: 25px;
+}
+
