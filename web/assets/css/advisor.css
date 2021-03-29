@@ -1,0 +1,101 @@
+.head-row {
+  background: var(--bs-white);
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.fas.fa-plus-square {
+  padding: 5px;
+  font-size: 20px;
+}
+
+.business-icon {
+  padding-right: 10px;
+  font-size: 24px;
+}
+
+h3 {
+  padding: 20px;
+}
+
+.add-btn {
+  margin-bottom: 5px;
+}
+
+.add-btn:hover {
+  color: #f1faee;
+  background: #457b9d;
+}
+
+.info-heading {
+  padding-left: 0;
+}
+
+.control-btns {
+  padding: 20px;
+}
+
+.list-btn {
+  background: #457b9d;
+}
+
+.list-btn:hover {
+  background: #1d3557;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  background-color: white;
+  width: 50%;
+  border-radius: 5px;
+}
+
+.wrapper {
+  display: none;
+}
+
+.wrapper.active {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: block;
+  z-index: 2;
+}
+
+.popup-content {
+  padding: 20px;
+}
+
+.form-row {
+  padding: 5px;
+}
+
+.popup-form {
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  popup {
+    width: 100%;
+  }
+}
+
+.btn-group.popup-btns {
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .control-clum {
+    padding-left: 20px;
+  }
+}
+

@@ -63,7 +63,9 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        request.setAttribute("currentTab", "signup-tab-cta");
+        this.getServletContext().getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
     }
 
     /**
