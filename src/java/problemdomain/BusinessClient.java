@@ -41,7 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "BusinessClient.findByBusClientAddress", query = "SELECT b FROM BusinessClient b WHERE b.busClientAddress = :busClientAddress"),
     @NamedQuery(name = "BusinessClient.findByBusClientEmail", query = "SELECT b FROM BusinessClient b WHERE b.busClientEmail = :busClientEmail"),
     @NamedQuery(name = "BusinessClient.findByBusClientPhone", query = "SELECT b FROM BusinessClient b WHERE b.busClientPhone = :busClientPhone"),
-    @NamedQuery(name = "BusinessClient.findByBusClientWebsite", query = "SELECT b FROM BusinessClient b WHERE b.busClientWebsite = :busClientWebsite")})
+    @NamedQuery(name = "BusinessClient.findByBusClientWebsite", query = "SELECT b FROM BusinessClient b WHERE b.busClientWebsite = :busClientWebsite"),
+    @NamedQuery(name = "BusinessClient.findByAdvisorID", query = "SELECT b FROM BusinessClient b WHERE b.advisorID = :advisorID")})
 public class BusinessClient implements Serializable {
 
     @OneToMany(mappedBy = "businessclientID")

@@ -10,9 +10,11 @@ import dataaccess.ProfileServicesDB;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import problemdomain.Advisor;
 import problemdomain.BusinessClient;
 import problemdomain.JobPosting;
 import problemdomain.Skill;
+import strategies.profile.LoadAdvisorProfile;
 import strategies.profile.LoadBusinessClientProfile;
 import strategies.profile.LoadCandidateProfile;
 import strategies.profile.LoadProfile;
@@ -233,7 +235,7 @@ public final class ProfileServices {
                 p = new LoadBusinessClientProfile();
                 break;
             case "admin":
-                //p = new LoadAdminProfile();
+                p = new LoadAdvisorProfile();
                 break;
         }
         p.loadProfile(request);
@@ -257,11 +259,11 @@ public final class ProfileServices {
         return psdb.getAllSkills();
     }
 
-    public final ArrayList<JobPosting> getClientJobPostings(int id) {
+    public final ArrayList<JobPosting> getClientJobPostings(BusinessClient id) {
         return psdb.getClientJobPostings(id);
     }
 
-    public final ArrayList<BusinessClient> getBusClientsByAdvisorID(int id) {
+    public final ArrayList<BusinessClient> getBusClientsByAdvisorID(Advisor id) {
         return psdb.getBusClientsByAdvisorID(id);
     }
 
