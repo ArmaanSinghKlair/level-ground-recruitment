@@ -34,7 +34,6 @@ create table business_client
 (
     business_clientID      int auto_increment
         primary key,
-    advisorID              int          null,
     bus_client_username    varchar(45)  not null,
     bus_client_password    varchar(64)  not null,
     bus_client_company     varchar(50)  not null,
@@ -46,14 +45,8 @@ create table business_client
     constraint bus_client_email_UNIQUE
         unique (bus_client_email),
     constraint bus_client_username_UNIQUE
-        unique (bus_client_username),
-    constraint FK_BUSINESS_CLIENT_ADVISOR
-        foreign key (advisorID) references advisor (advisorID)
-            on delete cascade
+        unique (bus_client_username)
 );
-
-create index FK_BUSINESS_CLIENT_ADVISOR_idx
-    on business_client (advisorID);
 
 create table candidate
 (

@@ -25,6 +25,7 @@ public class AdvisorServicesDB {
     
     public synchronized Advisor getNextAdvisor(){
         this.initialize();
-        String query = "SELECT a from "
+        String query = "SELECT a from ";
+        return null;
     }
 }

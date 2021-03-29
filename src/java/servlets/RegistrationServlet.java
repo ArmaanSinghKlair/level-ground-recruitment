@@ -24,35 +24,6 @@ import services.ProfileServices;
 public class RegistrationServlet extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        ProfileServices ps = new ProfileServices();
-        ArrayList<String> errList = ps.createProfile(request);
-
-        if (errList == null) 
-        {
-            request.setAttribute("success", true);
-            request.setAttribute("sucessMessage", "Account created successfully");
-        } else {
-            request.setAttribute("fail", true);
-            request.setAttribute("errList", errList);
-            request.setAttribute("currentTab", "signup-tab-cta");
-        }
-
-        request.getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
-    }
-
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
@@ -79,7 +50,20 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        ProfileServices ps = new ProfileServices();
+        ArrayList<String> errList = ps.createProfile(request);
+
+        if (errList == null) {
+            request.setAttribute("success", true);
+            request.setAttribute("sucessMessage", "Account created successfully");
+        } else {
+            request.setAttribute("fail", true);
+            request.setAttribute("errList", errList);
+            request.setAttribute("currentTab", "signup-tab-cta");
+        }
+
+        request.getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
     }
 
     /**
