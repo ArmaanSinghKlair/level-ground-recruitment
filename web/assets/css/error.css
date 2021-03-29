@@ -1,0 +1,33 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar. 29, 2021, 9:55:42 a.m.
+    Author     : kentp
+*/
+
+h1
+{
+    font-size: 200px;
+    color: #457B9D;
+}
+
+p
+{
+    font-weight: 600;
+}
+
+.btn
+{
+    color: #F1FAEE;
+}
+
+.container
+{
+    background-color: #F1FAEE;
+    padding: 30px;
+    margin-top: 20px;
+    width: 700px;
+}
