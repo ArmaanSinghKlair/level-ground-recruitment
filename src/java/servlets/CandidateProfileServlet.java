@@ -59,6 +59,7 @@ public class CandidateProfileServlet extends HttpServlet {
 
         // If user deleted 
         if (submit != null && submit.equals("deleteCandidate")) {
+            sess.invalidate();
             request.getServletContext().getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
             return;
         }

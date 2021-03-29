@@ -45,8 +45,8 @@ public final class ValidateBusinessClient {
     }
 
     //This checks that the username is not empty or too long
-    public static String validateBusClientUsername(String username){
-        if(isEmpty(username)) {
+    public static String validateBusClientUsername(String username) {
+        if (isEmpty(username)) {
             return "Username cannot be empty";
         } else if (username.trim().length() > 45) {
             return "Username cannot be more than 45 characters";
@@ -56,8 +56,8 @@ public final class ValidateBusinessClient {
     }
 
     //This checks that the password is not empty or too long
-    public static String validateBusClientPassword(String password){
-        if(isEmpty(password)) {
+    public static String validateBusClientPassword(String password) {
+        if (isEmpty(password)) {
             return "Password cannot be empty";
         } else if (password.length() > 100) {
             return "Password cannot be more than 100 characters";
@@ -76,9 +76,10 @@ public final class ValidateBusinessClient {
             return null;
         }
     }
+
     //This checks that the email is not empty or too long. It also checks that it is in the correct email format
-    public static String validateBusClientEmail(String email){
-        if(isEmpty(email)) {
+    public static String validateBusClientEmail(String email) {
+        if (isEmpty(email)) {
             return "Email cannot be empty";
         } else if (email.trim().length() > 255) {
             return "Email cannot be more than 255 characters";
@@ -90,14 +91,15 @@ public final class ValidateBusinessClient {
     }
 
     //This checks that the phone number is not empty or too long. It also checks that it is in the correct phone number format
-    public static String validateBusClientPhoneNo(String phoneNo){
-        if(isEmpty(phoneNo)) {
+    public static String validateBusClientPhoneNo(String phoneNo) {
+        if (isEmpty(phoneNo)) {
             return "Phone no cannot be empty";
         } else if (phoneNo.trim().length() > 10) {
             return "Phone no cannot be more than 10 characters";
         } else if (!Pattern.matches("\\d{10}", phoneNo)) {
-            return "Only 10 digits allowed in phone number";
-        } else {
+            return "Phone number requires 10 digits";
+        } else 
+        {
             return null;
         }
     }

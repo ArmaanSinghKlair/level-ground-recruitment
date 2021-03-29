@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
+import problemdomain.Advisor;
 import problemdomain.BusinessClient;
 import problemdomain.Candidate;
 import problemdomain.CandidateSkill;
@@ -43,11 +44,11 @@ public final class ProfileServicesDB {
         }
     }
     
-    public final ArrayList<JobPosting> getClientJobPostings(int id){
+    public final ArrayList<JobPosting> getClientJobPostings(BusinessClient id){
         initialize();
         try{
             TypedQuery<JobPosting> q = em.createNamedQuery("JobPosting.findByBusinessClientID", JobPosting.class);
-            q.setParameter("businessClientID", id); 
+            q.setParameter("businessclientID", id);
             ArrayList<JobPosting> postings = new ArrayList(q.getResultList());
             return postings;
         }finally{
@@ -55,7 +56,7 @@ public final class ProfileServicesDB {
         }
     }
     
-    public final ArrayList<BusinessClient> getBusClientsByAdvisorID(int id){
+    public final ArrayList<BusinessClient> getBusClientsByAdvisorID(Advisor id){
         initialize();
         try{
             TypedQuery<BusinessClient> q = em.createNamedQuery("BusinessClient.findByAdvisorID", BusinessClient.class);

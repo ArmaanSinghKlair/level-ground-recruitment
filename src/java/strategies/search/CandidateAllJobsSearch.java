@@ -86,7 +86,7 @@ public class CandidateAllJobsSearch implements SearchBehaviour{
             Object[] val= (Object[]) results.get(0);
            // return String.valueOf(val[0]);
            int i=0;
-           System.out.println("MAX= "+MAX+" plength = "+pageLength+" pno= "+paginate);
+           //System.out.println("MAX= "+MAX+" plength = "+pageLength+" pno= "+paginate);
             for(Object[] o: results){
                 resultJson.append("{").append(this.getJsonField("jobpostingID",String.valueOf(o[0]),true)).append(",");
                 resultJson.append(this.getJsonField("jobTitle",String.valueOf(o[1]).trim(),false)).append(",");
@@ -98,7 +98,7 @@ public class CandidateAllJobsSearch implements SearchBehaviour{
                 if(i==MAX)
                     break;
                 else{
-                    System.out.println(MAX+" = max, i = "+i); 
+                    //System.out.println(MAX+" = max, i = "+i); 
                 }
             }
             // Remove that extra comma in the end

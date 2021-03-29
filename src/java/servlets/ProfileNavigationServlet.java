@@ -36,7 +36,6 @@ public class ProfileNavigationServlet extends HttpServlet {
         ProfileServices ps = new ProfileServices();
         // Load all variables necessary and also the next URL
         ps.loadProfile(request);
-        //System.out.println((List)request.getAttribute("skills")).size());
         request.getServletContext().getRequestDispatcher((String) request.getAttribute("url")).forward(request, response);
         /*
         /candidate-profile
