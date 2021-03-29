@@ -125,6 +125,7 @@ public class AccountServicesDB {
             JobPosting jp = new JobPosting();
             jp.setRequirements(requirements);
             jp.setJobTitle(title);
+            jp.setPostDate(new Date());
             jp.setJobDescription(description);
             jp.setJobStatus(status);
             jp.setStartDate(startDate);
