@@ -79,11 +79,9 @@ public class CandidateAllJobsSearch implements SearchBehaviour{
         // If results Found
         if(resultCount > 0){
             
-            Gson gson = new Gson();
             resultJson.setCharAt(resultJson.length()-1, ',');
             resultJson.append("\"data\": [");
        
-            Object[] val= (Object[]) results.get(0);
            // return String.valueOf(val[0]);
            int i=0;
            System.out.println("MAX= "+MAX+" plength = "+pageLength+" pno= "+paginate);
