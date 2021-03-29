@@ -57,17 +57,18 @@ public final class ProfileServicesDB {
         }
     }
     
-    public final ArrayList<BusinessClient> getBusClientsByAdvisorID(Advisor id){
+    public final ArrayList<JobPosting> getJobpostingsByAdvisorID(Advisor id){
         initialize();
         try{
-            TypedQuery<BusinessClient> q = em.createNamedQuery("BusinessClient.findByAdvisorID", BusinessClient.class);
+            TypedQuery<JobPosting> q = em.createNamedQuery("JobPosting.findByAdvisorID", JobPosting.class);
             q.setParameter("advisorID", id); 
-            ArrayList<BusinessClient> clients = new ArrayList(q.getResultList());
-            return clients;
+            ArrayList<JobPosting> jobPostings = new ArrayList(q.getResultList());
+            return jobPostings;
         }finally{
             em.close();
         }
     }
+   
     
     public final ArrayList<Application> getCandidateIDsByJobpostingID(int id){
         initialize();

@@ -265,8 +265,8 @@ public final class ProfileServices {
         return psdb.getClientJobPostings(id);
     }
 
-    public final ArrayList<BusinessClient> getBusClientsByAdvisorID(Advisor id) {
-        return psdb.getBusClientsByAdvisorID(id);
+    public final ArrayList<JobPosting> getJobpostingsByAdvisorID(Advisor id) {
+        return psdb.getJobpostingsByAdvisorID(id);
     }
     
     public final ArrayList<Application> getCandidateIDsByJobpostingID(int id) {

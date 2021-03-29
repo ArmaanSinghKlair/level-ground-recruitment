@@ -34,7 +34,6 @@ create table business_client
 (
     business_clientID      int auto_increment
         primary key,
-    advisorID              int          null,
     bus_client_username    varchar(45)  not null,
     bus_client_password    varchar(64)  not null,
     bus_client_company     varchar(50)  not null,
@@ -46,14 +45,8 @@ create table business_client
     constraint bus_client_email_UNIQUE
         unique (bus_client_email),
     constraint bus_client_username_UNIQUE
-        unique (bus_client_username),
-    constraint FK_BUSINESS_CLIENT_ADVISOR
-        foreign key (advisorID) references advisor (advisorID)
-            on delete cascade
+        unique (bus_client_username)
 );
-
-create index FK_BUSINESS_CLIENT_ADVISOR_idx
-    on business_client (advisorID);
 
 create table candidate
 (
@@ -102,18 +95,20 @@ create table job_posting
 (
     job_postingID     int auto_increment
         primary key,
-    advisorID         int                                  not null,
-    business_clientID int                                  not null,
-    job_title         text                                 not null,
-    post_date         datetime default (CURRENT_TIMESTAMP) not null,
-    job_status        varchar(45)                          null,
-    job_description   text                                 null,
-    requirements      text                                 null,
-    wage              double                               null,
-    location          varchar(45)                          null,
-    start_date        date                                 null,
-    end_date          date                                 null,
-    applicants        int                                  null,
+    advisorID         int                      not null,
+    business_clientID int                      not null,
+    job_title         text                     not null,
+    post_date         datetime default (now()) not null,
+    job_status        varchar(45)              null,
+    job_description   text                     null,
+    requirements      text                     null,
+    wage              double                   null,
+    location          varchar(45)              null,
+    start_date        date                     null,
+    end_date          date                     null,
+    applicants        int                      null,
+    constraint FK_JOB_P_ADVISOR
+        foreign key (advisorID) references advisor (advisorID),
     constraint FK_JOB_P_BUS_CLIENT
         foreign key (business_clientID) references business_client (business_clientID)
             on delete cascade
@@ -126,7 +121,7 @@ create table application
     candidateID   int               null,
     job_postingID int               null,
     status        tinyint default 0 null,
-    constraint FK_APPLICAITON_JP
+    constraint FK_APPLICATION_JP
         foreign key (job_postingID) references job_posting (job_postingID)
             on delete cascade,
     constraint FK_APPLICATION_CAN
@@ -140,6 +135,9 @@ create index FK_APPLICAITON_JP_idx
 create index FK_APPLICATION_CAN_idx
     on application (candidateID);
 
+create index FK_JOB_P_ADVISOR_idx
+    on job_posting (advisorID);
+
 create index FK_JOB_P_BUS_CLIENT_idx
     on job_posting (business_clientID);
 
@@ -147,10 +145,10 @@ create table log
 (
     logID       int auto_increment
         primary key,
-    advisorID   int                                   not null,
-    login_date  timestamp default (CURRENT_TIMESTAMP) not null,
-    logout_date timestamp                             null,
-    description varchar(255)                          null,
+    advisorID   int                       not null,
+    login_date  timestamp default (now()) not null,
+    logout_date timestamp                 null,
+    description varchar(255)              null,
     constraint FK_log_advisor
         foreign key (advisorID) references advisor (advisorID)
             on delete cascade
@@ -227,4 +225,3 @@ create table work_history
 
 create index FK_WORK_HISTORY_CANDIDATE_idx
     on work_history (candidateID);
-

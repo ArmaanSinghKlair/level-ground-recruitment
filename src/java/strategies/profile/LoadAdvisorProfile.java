@@ -31,9 +31,11 @@ public class LoadAdvisorProfile implements LoadProfile{
         Advisor a = accService.getAdvisorByUsername((String)sess.getAttribute("username"));
         request.setAttribute("advisor", a);
         
-        // Get business clients
-        ArrayList<BusinessClient> businessClients = ps.getBusClientsByAdvisorID(a);
-        request.setAttribute("businessClients", businessClients);
+        // Get job postings
+        ArrayList<JobPosting> jobPostings = ps.getJobpostingsByAdvisorID(a);
+        request.setAttribute("jobPostings", jobPostings);
         request.setAttribute("url", "/WEB-INF/advisor-home.jsp");
+
+
     }
 }
