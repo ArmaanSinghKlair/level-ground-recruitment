@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import problemdomain.Advisor;
+import problemdomain.Application;
 import problemdomain.BusinessClient;
 import problemdomain.Candidate;
 import problemdomain.JobPosting;
@@ -28,13 +29,20 @@ public class LoadJobPosting implements LoadProfile{
         
         HttpSession sess = request.getSession(false);
         
+        int id = Integer.parseInt(request.getParameter("jobpostingID"));
+        
         // Get job posting
-        //JobPosting jp = accService.getJobPostingByUsername((String)sess.getAttribute("username"));
-        //request.setAttribute("jobPosting", jp);
+        JobPosting jp = accService.getJobpostingByID(id);
+        request.setAttribute("jobposting", jp);
         
         // Get applied candidates
-        //ArrayList<Candidate> candidates = ps.getCandidatesByJobpostingID(jp.getJobpostingID());
-        //request.setAttribute("candidates", candidates);
-        //request.setAttribute("url", "/WEB-INF/business-post-view.jsp");
+        ArrayList<Application> apps = ps.getCandidateIDsByJobpostingID(jp.getJobpostingID());
+        ArrayList<Candidate> candidates = null;
+        for (Application app: apps)
+        {
+            candidates.add(app.getCandidateID());
+        }
+        request.setAttribute("candidates", candidates);
+        request.setAttribute("url", "/WEB-INF/business-post-view.jsp"); //change this when correct page is added
     }
 }

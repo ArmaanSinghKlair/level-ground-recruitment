@@ -13,6 +13,7 @@ import java.util.Date;
 import problemdomain.Advisor;
 import problemdomain.BusinessClient;
 import problemdomain.Candidate;
+import problemdomain.JobPosting;
 import validation.ValidateAdvisor;
 import validation.ValidateBusinessClient;
 import validation.ValidateCandidate;
@@ -147,6 +148,10 @@ public class AccountServices {
 
     public final Advisor getAdvisorByUsername(String username){
         return asdb.getAdvisorByUsername(username);
+    }
+    
+    public final JobPosting getJobpostingByID(int id){
+        return asdb.getJobpostingByID(id);
     }
     
     private final boolean isEmpty(String field){

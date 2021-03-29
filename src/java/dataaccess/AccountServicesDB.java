@@ -376,6 +376,25 @@ public class AccountServicesDB {
             em.close();
         }
     }
+    
+    public final JobPosting getJobpostingByID(int id){
+        initialize();
+        try{
+            if(!doesJobPostingExist(em,"jobpostingID",id)){
+                return null;
+            }
+            TypedQuery<JobPosting> q = em.createNamedQuery("JobPosting.findByJobpostingID", JobPosting.class);
+            q.setParameter("jobpostingID", id);
+
+            JobPosting jp = q.getSingleResult();
+            em.refresh(jp);
+            return jp;
+        }catch(Exception e){
+            return null;
+        }finally{
+            em.close();
+        }
+    }
 
     /**
      * Checks to see if user exists -- does not alter the EntityManager in any
@@ -398,6 +417,11 @@ public class AccountServicesDB {
 
     public final boolean doesAdvisorExist(EntityManager em, String attributeName, String attributeValue) {
         List<Advisor> q = em.createNamedQuery("Advisor.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), Advisor.class).setParameter(attributeName, attributeValue).getResultList();
+        return q != null && !q.isEmpty();
+    }
+    
+    public final boolean doesJobPostingExist(EntityManager em, String attributeName, int attributeValue) {
+        List<JobPosting> q = em.createNamedQuery("JobPosting.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), JobPosting.class).setParameter(attributeName, attributeValue).getResultList();
         return q != null && !q.isEmpty();
     }
 

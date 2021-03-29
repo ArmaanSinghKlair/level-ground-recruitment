@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import problemdomain.Advisor;
+import problemdomain.Application;
 import problemdomain.BusinessClient;
+import problemdomain.Candidate;
 import problemdomain.JobPosting;
 import problemdomain.Skill;
 import strategies.profile.LoadAdvisorProfile;
@@ -265,6 +267,10 @@ public final class ProfileServices {
 
     public final ArrayList<BusinessClient> getBusClientsByAdvisorID(Advisor id) {
         return psdb.getBusClientsByAdvisorID(id);
+    }
+    
+    public final ArrayList<Application> getCandidateIDsByJobpostingID(int id) {
+        return psdb.getCandidateIDsByJobpostingID(id);
     }
 
     private final boolean isEmpty(String field) {
