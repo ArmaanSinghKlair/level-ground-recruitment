@@ -263,9 +263,6 @@ public final class ProfileServices {
         return psdb.getClientJobPostings(id);
     }
 
-    public final ArrayList<BusinessClient> getBusClientsByAdvisorID(Advisor id) {
-        return psdb.getBusClientsByAdvisorID(id);
-    }
 
     private final boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;

@@ -56,17 +56,7 @@ public final class ProfileServicesDB {
         }
     }
     
-    public final ArrayList<BusinessClient> getBusClientsByAdvisorID(Advisor id){
-        initialize();
-        try{
-            TypedQuery<BusinessClient> q = em.createNamedQuery("BusinessClient.findByAdvisorID", BusinessClient.class);
-            q.setParameter("advisorID", id); 
-            ArrayList<BusinessClient> clients = new ArrayList(q.getResultList());
-            return clients;
-        }finally{
-            em.close();
-        }
-    }
+   
     
     public final ArrayList<String> add(HttpServletRequest request, String username){
         initialize();

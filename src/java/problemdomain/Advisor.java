@@ -60,11 +60,11 @@ public class Advisor implements Serializable {
     @Column(name = "advisor_Email")
     private String advisorEmail;
     @OneToMany(mappedBy = "advisorID")
-    private List<BusinessClient> businessClientList;
-    @OneToMany(mappedBy = "advisorID")
     private List<Candidate> candidateList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "advisorID")
     private List<Log> logList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "advisorID")
+    private List<JobPosting> jobPostingList;
 
     public Advisor() {
     }
@@ -131,15 +131,6 @@ public class Advisor implements Serializable {
     }
 
     @XmlTransient
-    public List<BusinessClient> getBusinessClientList() {
-        return businessClientList;
-    }
-
-    public void setBusinessClientList(List<BusinessClient> businessClientList) {
-        this.businessClientList = businessClientList;
-    }
-
-    @XmlTransient
     public List<Candidate> getCandidateList() {
         return candidateList;
     }
@@ -155,6 +146,15 @@ public class Advisor implements Serializable {
 
     public void setLogList(List<Log> logList) {
         this.logList = logList;
+    }
+
+    @XmlTransient
+    public List<JobPosting> getJobPostingList() {
+        return jobPostingList;
+    }
+
+    public void setJobPostingList(List<JobPosting> jobPostingList) {
+        this.jobPostingList = jobPostingList;
     }
 
     @Override
