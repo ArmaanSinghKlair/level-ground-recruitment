@@ -5,8 +5,6 @@
  */
 package servlets;
 
-import dataaccess.AccountServicesDB;
-import dataaccess.AdvisorServicesDB;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +15,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 import problemdomain.Candidate;
 import services.AccountServices;
-import services.ProfileServices;
+import services.JobPostingServices;
 
 /**
  *
@@ -29,6 +27,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setAttribute("applicationID", "2");
+            System.out.println(new JobPostingServices().selectCandidateForInterview(request, response));
         request.getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
     }
 
