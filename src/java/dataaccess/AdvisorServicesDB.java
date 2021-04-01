@@ -7,6 +7,7 @@ package dataaccess;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import problemdomain.Advisor;
 import util.DBUtil;
 
@@ -25,7 +26,14 @@ public class AdvisorServicesDB {
     
     public synchronized Advisor getNextAdvisor(){
         this.initialize();
-        String query = "SELECT a from ";
+        try{
+        String query = "SELECT jp.advisorID from JobPosting jp where jp.jobpostingID = (select max(j.jobpostingID) from JobPosting j);";
+        TypedQuery<Advisor> q = em.createQuery(query, Advisor.class);
+        } catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            
+        }
         return null;
     }
 }
