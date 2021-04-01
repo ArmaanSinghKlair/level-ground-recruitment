@@ -54,6 +54,32 @@ public class JobPostingServices {
        
         
     }
+    
+    public ArrayList<String> selectCandidateForReview(HttpServletRequest request, HttpServletResponse response){
+        String applicationID = request.getParameter("applicationID");
+        ArrayList<String> errList = new ArrayList<String>();
+
+        
+        if(isNumeric(applicationID) && !isEmpty(applicationID)){
+            errList.addAll(jpsd.selectCandidateForReview(Integer.parseInt(applicationID)));
+        }else{
+            errList.add("Unknown error occured. Please try again later");
+        }
+        return errList;
+    }
+    
+    public ArrayList<String> selectCandidateForInterview(HttpServletRequest request, HttpServletResponse response){
+        String applicationID =(String) request.getAttribute("applicationID");
+        ArrayList<String> errList = new ArrayList<String>();
+
+        
+        if(isNumeric(applicationID) && !isEmpty(applicationID)){
+            errList.addAll(jpsd.selectCandidateForInterview(Integer.parseInt(applicationID), request.getServletContext().getRealPath("/WEB-INF")));
+        }else{
+            errList.add("Unknown error occured. Please try again later");
+        }
+        return errList;
+    }
     private final boolean isEmpty(String field){
         return field == null || field.trim().length() == 0;
     }
@@ -68,5 +94,13 @@ public class JobPostingServices {
         return sb.toString();
     }
     
+    private final boolean isNumeric(String str){
+        try{
+            Integer.parseInt(str);
+            return true;
+        }catch(NumberFormatException e){
+            return false;
+        }
+    }
     
 }

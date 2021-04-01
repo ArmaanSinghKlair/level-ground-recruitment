@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Interview Notice</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="base-style.css"/>
+        <link rel="stylesheet" type="text/css" href="theme-style.css"/>
+
+    </head>
+    <body>
+        <h1>Congratulations, {{firstName}} {{lastName}}</h1>
+        <h3>You have been selected to interview for {{jobTitle}}</h3>
+        <div style="color: white;
+    font-size: 1.5em;
+    font-family: 'Roboto',sans-serif;
+    box-sizing: border-box;
+    padding: 1vmax;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    background: #7289DA;">
+            {{companyName}} will contact you with interview and further instructions shortly.<br/>
+            <br/>
+            Job Description:<br/>
+            {{jobDescription}}
+        </div>
+        
+        <p>Regards,<br/>
+            Level Ground Recruitment Team</p>
+    </body>
+</html>

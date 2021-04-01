@@ -61,6 +61,10 @@
         <url-pattern>/job-search</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>BusinessClientProfileServlet</servlet-name>
+        <url-pattern>/business-client-profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>HomePageServlet</servlet-name>
         <url-pattern>/application-home</url-pattern>
     </servlet-mapping>
@@ -91,4 +95,14 @@
         <location>/WEB-INF/errorhandling/500error.jsp</location>
     </error-page>
     
+    <env-entry>
+        <env-entry-name>webmail-username</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>inficonisnexgen@gmail.com</env-entry-value>
+    </env-entry>
+    <env-entry>
+        <env-entry-name>webmail-password</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>nexgenisinficon</env-entry-value>
+    </env-entry>
 </web-app>

@@ -6,7 +6,7 @@
 package problemdomain;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,20 +14,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author kentp
+ * @author 839645
  */
 @Entity
 @Table(name = "business_client")
@@ -41,12 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "BusinessClient.findByBusClientAddress", query = "SELECT b FROM BusinessClient b WHERE b.busClientAddress = :busClientAddress"),
     @NamedQuery(name = "BusinessClient.findByBusClientEmail", query = "SELECT b FROM BusinessClient b WHERE b.busClientEmail = :busClientEmail"),
     @NamedQuery(name = "BusinessClient.findByBusClientPhone", query = "SELECT b FROM BusinessClient b WHERE b.busClientPhone = :busClientPhone"),
-    @NamedQuery(name = "BusinessClient.findByBusClientWebsite", query = "SELECT b FROM BusinessClient b WHERE b.busClientWebsite = :busClientWebsite"),
-    @NamedQuery(name = "BusinessClient.findByAdvisorID", query = "SELECT b FROM BusinessClient b WHERE b.advisorID = :advisorID")})
+    @NamedQuery(name = "BusinessClient.findByBusClientWebsite", query = "SELECT b FROM BusinessClient b WHERE b.busClientWebsite = :busClientWebsite")})
 public class BusinessClient implements Serializable {
-
-    @OneToMany(mappedBy = "businessclientID")
-    private Collection<JobPosting> jobPostingCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -75,11 +68,8 @@ public class BusinessClient implements Serializable {
     private String busClientPhone;
     @Column(name = "bus_client_website")
     private String busClientWebsite;
-    @JoinColumn(name = "advisorID", referencedColumnName = "advisorID")
-    @ManyToOne
-    private Advisor advisorID;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "businessclientID")
-    private JobPosting jobPosting;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "businessclientID")
+    private List<JobPosting> jobPostingList;
 
     public BusinessClient() {
     }
@@ -168,20 +158,13 @@ public class BusinessClient implements Serializable {
         this.busClientWebsite = busClientWebsite;
     }
 
-    public Advisor getAdvisorID() {
-        return advisorID;
+    @XmlTransient
+    public List<JobPosting> getJobPostingList() {
+        return jobPostingList;
     }
 
-    public void setAdvisorID(Advisor advisorID) {
-        this.advisorID = advisorID;
-    }
-
-    public JobPosting getJobPosting() {
-        return jobPosting;
-    }
-
-    public void setJobPosting(JobPosting jobPosting) {
-        this.jobPosting = jobPosting;
+    public void setJobPostingList(List<JobPosting> jobPostingList) {
+        this.jobPostingList = jobPostingList;
     }
 
     @Override
@@ -207,15 +190,6 @@ public class BusinessClient implements Serializable {
     @Override
     public String toString() {
         return "problemdomain.BusinessClient[ businessclientID=" + businessclientID + " ]";
-    }
-
-    @XmlTransient
-    public Collection<JobPosting> getJobPostingCollection() {
-        return jobPostingCollection;
-    }
-
-    public void setJobPostingCollection(Collection<JobPosting> jobPostingCollection) {
-        this.jobPostingCollection = jobPostingCollection;
     }
     
 }

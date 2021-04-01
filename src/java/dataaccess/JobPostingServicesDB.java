@@ -6,13 +6,19 @@
 package dataaccess;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import problemdomain.Application;
 import problemdomain.Candidate;
 import problemdomain.JobPosting;
 import util.DBUtil;
+import util.Gmail;
 
 /**
  *
@@ -58,4 +64,54 @@ public class JobPostingServicesDB {
         
         return errList;
     }
+    
+    public ArrayList<String> selectCandidateForReview(int applicationID){
+        initialize();
+        ArrayList<String> errList = new ArrayList<>();
+        try{
+            Application a = em.find(Application.class, applicationID);
+            trans.begin();
+            a.setStatus((short)1);
+            trans.commit();
+        } finally{
+            em.close();
+            if(trans.isActive())
+                trans.rollback();
+        }
+        
+        return errList;
+    }
+    
+    public ArrayList<String> selectCandidateForInterview(int applicationID, String path){
+        initialize();
+        ArrayList<String> errList = new ArrayList<>();
+        try{
+            
+            Application a = em.find(Application.class, applicationID);
+            Candidate c = a.getCandidateID();
+            trans.begin();
+            a.setStatus((short)2);
+            trans.commit();
+            
+            //Preparing the email
+            HashMap<String,String> tags = new HashMap<>();
+            tags.put("firstName", c.getCanfirstName());
+            tags.put("lastName", c.getCanlastName());
+            tags.put("jobTitle", a.getJobpostingID().getJobTitle());
+            tags.put("companyName", a.getJobpostingID().getBusinessclientID().getBusClientCompany());
+            tags.put("jobDescription", a.getJobpostingID().getJobDescription());
+            Gmail.sendMail(c.getCanEmail(), "Interview Update for "+a.getJobpostingID().getJobTitle(), path+"/emailTemplates/interview.html", tags);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(JobPostingServicesDB.class.getName()).log(Level.SEVERE, null, ex);
+            errList.add("Unknown error occured. Please try again later");
+        } finally{
+            em.close();
+            if(trans.isActive())
+                trans.rollback();
+        }
+        
+        return errList;
+    }
+
 }

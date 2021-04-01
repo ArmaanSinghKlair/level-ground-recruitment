@@ -16,10 +16,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -43,6 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "JobPosting.findByStartDate", query = "SELECT j FROM JobPosting j WHERE j.startDate = :startDate"),
     @NamedQuery(name = "JobPosting.findByEndDate", query = "SELECT j FROM JobPosting j WHERE j.endDate = :endDate"),
     @NamedQuery(name = "JobPosting.findByApplicants", query = "SELECT j FROM JobPosting j WHERE j.applicants = :applicants"),
+    @NamedQuery(name = "JobPosting.findByAdvisorID", query = "SELECT j FROM JobPosting j WHERE j.advisorID = :advisorID"),
     @NamedQuery(name = "JobPosting.findByBusinessClientID", query = "SELECT j FROM JobPosting j WHERE j.businessclientID = :businessclientID")})
 public class JobPosting implements Serializable {
 
@@ -56,13 +57,12 @@ public class JobPosting implements Serializable {
     @Lob
     @Column(name = "job_title")
     private String jobTitle;
+    @Basic(optional = false)
     @Column(name = "post_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date postDate;
-    @Basic(optional = false)
     @Column(name = "job_status")
     private String jobStatus;
-    @Basic(optional = false)
     @Lob
     @Column(name = "job_description")
     private String jobDescription;
@@ -84,8 +84,11 @@ public class JobPosting implements Serializable {
     private Integer applicants;
     @OneToMany(mappedBy = "jobpostingID")
     private List<Application> applicationList;
+    @JoinColumn(name = "advisorID", referencedColumnName = "advisorID")
+    @ManyToOne(optional = false)
+    private Advisor advisorID;
     @JoinColumn(name = "business_clientID", referencedColumnName = "business_clientID")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private BusinessClient businessclientID;
 
     public JobPosting() {
@@ -95,11 +98,10 @@ public class JobPosting implements Serializable {
         this.jobpostingID = jobpostingID;
     }
 
-    public JobPosting(Integer jobpostingID, String jobTitle, String jobStatus, String jobDescription) {
+    public JobPosting(Integer jobpostingID, String jobTitle, Date postDate) {
         this.jobpostingID = jobpostingID;
         this.jobTitle = jobTitle;
-        this.jobStatus = jobStatus;
-        this.jobDescription = jobDescription;
+        this.postDate = postDate;
     }
 
     public Integer getJobpostingID() {
@@ -197,6 +199,14 @@ public class JobPosting implements Serializable {
 
     public void setApplicationList(List<Application> applicationList) {
         this.applicationList = applicationList;
+    }
+
+    public Advisor getAdvisorID() {
+        return advisorID;
+    }
+
+    public void setAdvisorID(Advisor advisorID) {
+        this.advisorID = advisorID;
     }
 
     public BusinessClient getBusinessclientID() {
