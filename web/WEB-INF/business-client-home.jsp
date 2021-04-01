@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,26 +30,26 @@
         <div class="popup edu">
             <div class="border rounded popup-content overflow-auto"><button class="btn-close float-end close"></button>
                 <h3>Add New Job Posting</h3>
-                <form class="ignore popup-form">
+                <form class="ignore popup-form" action="<c:url value='/business-client-profile'/>" method="post">
                     <div class="row d-flex justify-content-around new-post-row">
-                        <div class="col-md-6 new-post-row"><label class="form-label new-post-row">Title</label><input class="form-control new-post-row" type="text" name="institution" autofocus="" title="Institution"></div>
-                        <div class="col-md-6 new-post-row"><label class="form-label new-post-row">Status</label><select class="form-select level-slc new-post-row" name="education-lvl">
+                        <div class="col-md-6 new-post-row"><label class="form-label new-post-row">Title</label><input class="form-control new-post-row" type="text" name="title" autofocus="" title="Institution"></div>
+                        <div class="col-md-6 new-post-row"><label class="form-label new-post-row">Status</label><select class="form-select level-slc new-post-row" name="status">
                                 <option value="fullTime" selected="">Full-Time</option>
-                                <option value="partTime">Par-Time</option>
-                                <option value="temperory">Temperory</option>
+                                <option value="partTime">Part-Time</option>
+                                <option value="temperory">Temporary</option>
                             </select></div>
                     </div>
                     <div class="row d-flex new-post-row">
-                        <div class="col-md-6 form-row new-post-row"><label class="form-label new-post-row">Requirment</label><textarea class="form-control new-post-row" rows="5"></textarea></div>
-                        <div class="col-md-6 new-post-row"><label class="form-label new-post-row">Description</label><textarea class="form-control new-post-row" rows="5"></textarea></div>
+                        <div class="col-md-6 form-row new-post-row"><label class="form-label new-post-row">Requirement</label><textarea class="form-control new-post-row" rows="5" name="requirement"></textarea></div>
+                        <div class="col-md-6 new-post-row"><label class="form-label new-post-row">Description</label><textarea class="form-control new-post-row" rows="5" name="description"></textarea></div>
                     </div>
                     <div class="row d-flex justify-content-around new-post-row">
-                        <div class="col-md-6 new-post-row"><label class="form-label new-post-row">Wage</label><input class="form-control new-post-row" type="text" name="institution" autofocus="" title="Institution"></div>
+                        <div class="col-md-6 new-post-row"><label class="form-label new-post-row">Wage</label><input class="form-control new-post-row" type="text" name="wage" autofocus="" title="Institution"></div>
                         <div class="col-md-6 new-post-row"><label class="form-label new-post-row">Location</label><input class="form-control new-post-row" type="text" name="location"></div>
                     </div>
                     <div class="row d-flex justify-content-around new-post-row">
-                        <div class="col-md-6"><label class="form-label">Start Date</label><input class="form-control" name="start-date" title="Institution" type="date"></div>
-                        <div class="col-md-6"><label class="form-label">End Date</label><input class="form-control" name="start-date" title="Institution" type="date"></div>
+                        <div class="col-md-6"><label class="form-label">Start Date</label><input class="form-control" name="startDate" title="Institution" type="date"></div>
+                        <div class="col-md-6"><label class="form-label">End Date</label><input class="form-control" name="endDate" title="Institution" type="date"></div>
                     </div>
                     <div class="btn-group d-flex popup-btns" role="group"><button class="btn btn-secondary" type="reset">Reset</button><button class="btn btn-success" type="submit">Add</button></div>
                 </form>

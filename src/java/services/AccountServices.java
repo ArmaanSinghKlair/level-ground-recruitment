@@ -13,6 +13,7 @@ import java.util.Date;
 import problemdomain.Advisor;
 import problemdomain.BusinessClient;
 import problemdomain.Candidate;
+import problemdomain.JobPosting;
 import validation.ValidateAdvisor;
 import validation.ValidateBusinessClient;
 import validation.ValidateCandidate;
@@ -89,14 +90,15 @@ public class AccountServices {
 
     public final ArrayList<String> createJobPosting(String title, String requirements, String sDate, String eDate, String status, String description, String sWage, String location) {
         ArrayList<String> errList = new ArrayList<>();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+        
         try {
-            Date startDate = format.parse(sDate);
-            Date endDate = format.parse(eDate);
+            Date startDate = parser.parse(sDate);
+            Date endDate = parser.parse(eDate);
             Double wage = Double.parseDouble(sWage);
 
             errList = ValidateJobPosting.getErrorMapForAllfields(title, requirements, startDate, endDate, status, description, wage, location);
-
+            
             if (errList != null) {
                 return errList;
             } else {
@@ -146,6 +148,10 @@ public class AccountServices {
 
     public final Advisor getAdvisorByUsername(String username){
         return asdb.getAdvisorByUsername(username);
+    }
+    
+    public final JobPosting getJobpostingByID(int id){
+        return asdb.getJobpostingByID(id);
     }
     
     private final boolean isEmpty(String field){

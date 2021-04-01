@@ -68,18 +68,18 @@ public class ValidateJobPosting {
         if(startDate.after(endDate))
             return "Start date cannot be after end date";
         else if(startDate.before(new Date()))
-            return "Start date cannot be before today";
-        else 
+            return "Start date cannot be before current date";
+        else
             return null;
     }
     
     //This checks that the end date is after the start date and that the end date is not before today
     public static String validateJobEndDate(Date startDate, Date endDate){
-        if(endDate.after(startDate))
+        if(endDate.before(startDate))
             return "End date cannot be before start date";
         else if(endDate.before(new Date()))
-            return "end date cannot be before today";
-        else 
+            return "End date cannot be before current date";
+        else
             return null;
     }
     
