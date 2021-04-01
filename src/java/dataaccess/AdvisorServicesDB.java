@@ -5,8 +5,10 @@
  */
 package dataaccess;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import problemdomain.Advisor;
 import util.DBUtil;
@@ -24,16 +26,34 @@ public class AdvisorServicesDB {
         this.trans = this.em.getTransaction();
     }
     
-    public synchronized Advisor getNextAdvisor(){
+    public synchronized int getNextAdvisorID(){
         this.initialize();
         try{
-        String query = "SELECT jp.advisorID from JobPosting jp where jp.jobpostingID = (select max(j.jobpostingID) from JobPosting j);";
+        String query = "SELECT j.advisorID from JobPosting j where j.jobpostingID = (select max(jp.jobpostingID) from JobPosting jp)";
         TypedQuery<Advisor> q = em.createQuery(query, Advisor.class);
-        } catch(Exception e){
+        List<Advisor> lastAdvisor = q.getResultList();
+        
+        // If job postings available
+        if(!(lastAdvisor == null || lastAdvisor.isEmpty())){
+             Advisor nextAdvisor = em.find(Advisor.class, lastAdvisor.get(0).getAdvisorID()+1);
+        
+            // If  next advisor available
+            if(nextAdvisor!=null){
+                    return nextAdvisor.getAdvisorID();
+        }
+
+        }
+            return ((Advisor)em.createQuery("SELECT a from Advisor a ORDER BY a.advisorID", Advisor.class).setMaxResults(1).getResultList().get(0)).getAdvisorID();
+
+        } catch(NoResultException e){
+           // Advisor
+        }catch(Exception e){
             e.printStackTrace();
         }finally{
-            
+            em.close();
+            if(trans.isActive())
+                trans.rollback();
         }
-        return null;
+        return 0;
     }
 }
