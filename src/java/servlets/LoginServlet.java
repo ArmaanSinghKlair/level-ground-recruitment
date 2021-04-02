@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setAttribute("applicationID", "2");
-            System.out.println(new JobPostingServices().selectCandidateForInterview(request, response));
+        System.out.println(new JobPostingServices().selectCandidateForInterview(request, response));
         request.getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
     }
 

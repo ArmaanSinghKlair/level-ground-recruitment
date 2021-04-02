@@ -49,7 +49,7 @@ public class Gmail {
         } catch (Exception e) {
             Logger.getLogger(Gmail.class.getName()).log(Level.SEVERE, null, e);
         }
-
+        System.out.println("TO = "+to+", subject = "+subject);
         sendMail(to, subject, body, true);
     }
        public static void sendMail(String to, String subject, String body, boolean bodyIsHTML) throws NamingException, AddressException, MessagingException{
