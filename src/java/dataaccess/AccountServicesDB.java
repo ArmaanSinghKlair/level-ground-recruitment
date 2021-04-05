@@ -117,15 +117,18 @@ public class AccountServicesDB {
         }
     }
 
-    public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description) {
+    public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description, String username) {
+        BusinessClient bc = getBusinessClientByUsername(username);
         initialize();
         ArrayList<String> errList = new ArrayList<>();
-
+        
         try {
             JobPosting jp = new JobPosting();
             jp.setRequirements(requirements);
             jp.setJobTitle(title);
             jp.setPostDate(new Date());
+            jp.setAdvisorID(em.find(Advisor.class, new AdvisorServicesDB().getNextAdvisorID()));
+            jp.setBusinessclientID(bc);
             jp.setJobDescription(description);
             jp.setJobStatus(status);
             jp.setStartDate(startDate);

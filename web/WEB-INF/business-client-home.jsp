@@ -36,7 +36,7 @@
                         <div class="col-md-6 new-post-row"><label class="form-label new-post-row">Status</label><select class="form-select level-slc new-post-row" name="status">
                                 <option value="fullTime" selected="">Full-Time</option>
                                 <option value="partTime">Part-Time</option>
-                                <option value="temperory">Temporary</option>
+                                <option value="temporary">Temporary</option>
                             </select></div>
                     </div>
                     <div class="row d-flex new-post-row">
@@ -50,6 +50,7 @@
                     <div class="row d-flex justify-content-around new-post-row">
                         <div class="col-md-6"><label class="form-label">Start Date</label><input class="form-control" name="startDate" title="Institution" type="date"></div>
                         <div class="col-md-6"><label class="form-label">End Date</label><input class="form-control" name="endDate" title="Institution" type="date"></div>
+                        <input type="hidden" name="username" value="${businessClient.busClientUsername}">
                     </div>
                     <div class="btn-group d-flex popup-btns" role="group"><button class="btn btn-secondary" type="reset">Reset</button><button class="btn btn-success" type="submit">Add</button></div>
                 </form>

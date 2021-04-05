@@ -88,7 +88,7 @@ public class AccountServices {
         }
     }
 
-    public final ArrayList<String> createJobPosting(String title, String requirements, String sDate, String eDate, String status, String description, String sWage, String location) {
+    public final ArrayList<String> createJobPosting(String title, String requirements, String sDate, String eDate, String status, String description, String sWage, String location, String username) {
         ArrayList<String> errList = new ArrayList<>();
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
         
@@ -102,7 +102,7 @@ public class AccountServices {
             if (errList != null) {
                 return errList;
             } else {
-                return asdb.createJobPosting(title, requirements, startDate, endDate, status, description);
+                return asdb.createJobPosting(title, requirements, startDate, endDate, status, description, username);
             }
         } catch (NumberFormatException e) {
             errList.add("error parsing wage");

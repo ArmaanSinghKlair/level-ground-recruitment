@@ -42,9 +42,10 @@ public class BusinessClientProfileServlet extends HttpServlet {
         String description = request.getParameter("description");
         String wage = request.getParameter("wage");
         String location = request.getParameter("location");
+        String username = request.getParameter("username");
     
         AccountServices service = new AccountServices();
-        ArrayList<String> errList = service.createJobPosting(title, requirements, startDate, endDate, status, description, wage, location);
+        ArrayList<String> errList = service.createJobPosting(title, requirements, startDate, endDate, status, description, wage, location, username);
         
         if (errList == null)
             {
