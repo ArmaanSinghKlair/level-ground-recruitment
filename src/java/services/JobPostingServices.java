@@ -69,7 +69,7 @@ public class JobPostingServices {
     }
     
     public ArrayList<String> selectCandidateForInterview(HttpServletRequest request, HttpServletResponse response){
-        String applicationID =(String) request.getAttribute("applicationID");
+        String applicationID =request.getParameter("applicationID");
         ArrayList<String> errList = new ArrayList<String>();
 
         
