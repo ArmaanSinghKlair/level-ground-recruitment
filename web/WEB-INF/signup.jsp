@@ -122,17 +122,18 @@
                         <div class="form-group mb-3">
                             <div class="d-flex justify-content-center signup-type">
                                 <input type="radio" class="btn-check" name="userType" id="candidate-reg"
-                                       autocomplete="off" value="candidate" onclick="registerCandidate"
+                                       autocomplete="off" value="candidate" onclick="registerCandidate()"
                                 ${requestScope.lastClient eq null ? 'checked' : '' } />
                                 <label class="btn btn-outline-secondary"
                                        for="candidate-reg">Candidate</label>
 
                                 <input type="radio" class="btn-check" name="userType" id="business-reg"
                                        autocomplete="off" value="businessClient"
-                                       onclick="registerBusinessClient" ${requestScope.lastClient eq null ? ''
+                                       onclick="registerBusinessClient()" ${requestScope.lastClient eq null ? ''
                                         : 'checked' } />
                                 <label class="btn btn-outline-secondary" for="business-reg">Business</label>
                             </div>
+
                             <input class="form-control" type="text" data-bs-toggle="tooltip"
                                    data-bss-tooltip="" name="username" placeholder="Username" autofocus=""
                                    required="" minlength="4" maxlength="30" title="Username"
@@ -152,20 +153,28 @@
                                    title="Password repeat">
                         </div>
                         <div class="form-group mb-3">
-                            <input class="form-control" type="text" data-bs-toggle="tooltip"
+                            <input class="form-control" type="text" data-toggle="tooltip"
                                    data-bss-tooltip="" name="firstName" id="candidateFirstName"
-                                   placeholder="First Name" required="" maxlength="45" title="First name"
+                                   placeholder="First Name"
+                                   required="" maxlength="45" title="First name"
                                    value="<c:out value='${lastCandidate.canfirstName}' default=''/>"
-                                   style="${requestScope.lastClient eq null ? 'display: block;' : 'display: none;'}"
-                            ${requestScope.lastClient eq null ? '' : 'disabled' } />
+                                   style="${requestScope.lastClient eq null ? 'display: block;' : 'display: none;'}" ${requestScope.lastClient eq null ? '' : 'disabled'}>
                         </div>
                         <div class="form-group mb-3">
-                            <input class="form-control" type="text" data-bs-toggle="tooltip"
-                                   data-bss-tooltip="" name="lastName" placeholder="Last Name" required=""
-                                   maxlength="45" title="Last name"
+                            <input class="form-control" type="text" data-toggle="tooltip"
+                                   data-bss-tooltip="" name="lastName" id="candidateLastName"
+                                   placeholder="Last Name"
+                                   required="" maxlength="45" title="Last name"
                                    value="<c:out value='${lastCandidate.canlastName}' default=''/>"
-                                   style="${requestScope.lastClient eq null ? 'display: block;' : 'display: none;'}"
-                            ${requestScope.lastClient eq null ? '' : 'disabled' } />
+                                   style="${requestScope.lastClient eq null ? 'display: block;' : 'display: none;'}" ${requestScope.lastClient eq null ? '' : 'disabled'}>
+                        </div>
+                        <div class="form-group mb-3">
+                            <input class="form-control" type="text" data-toggle="tooltip"
+                                   data-bss-tooltip="" name="company" id="businessCompany"
+                                   placeholder="Company"
+                                   required="" maxlength="45" title="Company"
+                                   value="<c:out value='${lastClient.busClientCompany}' default=''/>"
+                                   style="${requestScope.lastClient eq null ? 'display: none;' : 'display: block;'}" ${requestScope.lastClient eq null ? 'disabled' : ''}>
                         </div>
                         <div class="form-group mb-3">
                             <input class="form-control" type="email" data-bs-toggle="tooltip"
@@ -202,13 +211,14 @@
     </div>
 </div>
 
-<%@include file="/WEB-INF/jspf/footer.jspf"%>
+<%@include file="/WEB-INF/jspf/footer.jspf" %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
         src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta3/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/bs-init.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="assets/js/popup.js"></script>
+<script src="assets/js/register.js"></script>
 </body>
 
 </html>
@@ -341,28 +351,28 @@
 <%--                                                       maxlength="30"--%>
 <%--                                                       title="Password repeat"/>--%>
 <%--                        </div>--%>
-<%--                        <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"--%>
-<%--                                                       data-bss-tooltip="" name="firstName" id="candidateFirstName"--%>
-<%--                                                       placeholder="First Name"--%>
-<%--                                                       required="" maxlength="45" title="First name"--%>
-<%--                                                       value="<c:out value='${lastCandidate.canfirstName}' default=''/>"--%>
-<%--                                                       style="${requestScope.lastClient eq null ? 'display: block;' : 'display: none;'}" ${requestScope.lastClient eq null ? '' : 'disabled'}>--%>
-<%--                        </div>--%>
-<%--                        <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"--%>
-<%--                                                       data-bss-tooltip="" name="lastName" id="candidateLastName"--%>
-<%--                                                       placeholder="Last Name"--%>
-<%--                                                       required="" maxlength="45" title="Last name"--%>
-<%--                                                       value="<c:out value='${lastCandidate.canlastName}' default=''/>"--%>
-<%--                                                       style="${requestScope.lastClient eq null ? 'display: block;' : 'display: none;'}" ${requestScope.lastClient eq null ? '' : 'disabled'}>--%>
-<%--                        </div>--%>
+<%--<div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"--%>
+<%--                               data-bss-tooltip="" name="firstName" id="candidateFirstName"--%>
+<%--                               placeholder="First Name"--%>
+<%--                               required="" maxlength="45" title="First name"--%>
+<%--                               value="<c:out value='${lastCandidate.canfirstName}' default=''/>"--%>
+<%--                               style="${requestScope.lastClient eq null ? 'display: block;' : 'display: none;'}" ${requestScope.lastClient eq null ? '' : 'disabled'}>--%>
+<%--</div>--%>
+<%--<div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"--%>
+<%--                               data-bss-tooltip="" name="lastName" id="candidateLastName"--%>
+<%--                               placeholder="Last Name"--%>
+<%--                               required="" maxlength="45" title="Last name"--%>
+<%--                               value="<c:out value='${lastCandidate.canlastName}' default=''/>"--%>
+<%--                               style="${requestScope.lastClient eq null ? 'display: block;' : 'display: none;'}" ${requestScope.lastClient eq null ? '' : 'disabled'}>--%>
+<%--</div>--%>
 
-<%--                        <div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"--%>
-<%--                                                       data-bss-tooltip="" name="company" id="businessCompany"--%>
-<%--                                                       placeholder="Company"--%>
-<%--                                                       required="" maxlength="45" title="Company"--%>
-<%--                                                       value="<c:out value='${lastClient.busClientCompany}' default=''/>"--%>
-<%--                                                       style="${requestScope.lastClient eq null ? 'display: none;' : 'display: block;'}" ${requestScope.lastClient eq null ? 'disabled' : ''}>--%>
-<%--                        </div>--%>
+<%--<div class="form-group"><input class="form-control" type="text" data-toggle="tooltip"--%>
+<%--                               data-bss-tooltip="" name="company" id="businessCompany"--%>
+<%--                               placeholder="Company"--%>
+<%--                               required="" maxlength="45" title="Company"--%>
+<%--                               value="<c:out value='${lastClient.busClientCompany}' default=''/>"--%>
+<%--                               style="${requestScope.lastClient eq null ? 'display: none;' : 'display: block;'}" ${requestScope.lastClient eq null ? 'disabled' : ''}>--%>
+<%--</div>--%>
 
 <%--                        <div class="form-group"><input class="form-control" type="email" data-toggle="tooltip"--%>
 <%--                                                       data-bss-tooltip="" name="email" placeholder="Email" required=""--%>
