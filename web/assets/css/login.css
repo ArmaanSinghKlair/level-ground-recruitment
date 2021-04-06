@@ -1,5 +1,5 @@
 .login-clean {
-  background: #f1faee;
+  background: var(--bs-light);
   padding: 80px 0;
   border-radius: 5px;
 }
@@ -8,11 +8,11 @@
   max-width: 320px;
   width: inherit;
   margin: 0 auto;
-  background-color: #F1FAEE;
   padding: 40px;
   border-radius: 15px;
   color: #505e6c;
   box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+  background: var(--bs-white);
 }
 
 .login-clean .illustration {
@@ -71,7 +71,7 @@
   width: 80%;
   margin: auto;
   margin-top: 50px;
-  background: #f1faee;
+  background: var(--bs-light);
   padding: 15px;
   border-radius: 5px;
 }
@@ -86,9 +86,17 @@ hr {
 }
 
 .page-blur {
-  /*width: 100%;*/
-  /*height: 100%;*/
-  /*background-color: black;*/
-  /*z-index: 5;*/
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 5;
+}
+
+a:hover {
+  color: var(--bs-gray-dark);
+}
+
+a {
+  color: #9da9ae;
 }
 

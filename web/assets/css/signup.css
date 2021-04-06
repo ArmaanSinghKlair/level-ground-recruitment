@@ -1,18 +1,18 @@
 .register-photo {
-  background: #f1f7fc;
+  background: var(--bs-white);
   padding: 80px 0;
 }
 
 .register-photo .image-holder {
   display: none;
-  background: url("../../assets/img/scott-graham-OQMZwNd3ThU-unsplash.jpg");
+  background: url("https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80");
 }
 
 @media (min-width: 992px) {
   .register-photo .image-holder {
     display: table-cell;
     width: auto;
-    background: url("../../assets/img/scott-graham-OQMZwNd3ThU-unsplash.jpg");
+    background: url("https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80");
     background-size: cover;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
@@ -96,12 +96,10 @@
   text-decoration: none;
 }
 
-.container.register-photo {
-  background: #f1faee;
-  border-radius: 5px;
-}
-
 form {
   background: #f1faee;
 }
 
+.signup-type {
+  padding-bottom: 10px;
+}
