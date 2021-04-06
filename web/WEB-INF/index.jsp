@@ -35,7 +35,9 @@
 <%--Wrapper div--%>
 <div class="wrapper"></div>
 <%--Navigation bar--%>
-<%@ include file="/WEB-INF/jspf/navbar.jspf"%>  
+<%@ include file="/WEB-INF/jspf/navbar.jspf"%>
+<%--Alter section--%>
+<%@include file="/WEB-INF/jspf/alert.jspf" %>
 <div class="container">
     <section data-aos="fade-up" class="article-clean">
         <div class="container">

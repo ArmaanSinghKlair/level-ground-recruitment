@@ -3,6 +3,8 @@ $(".close").on("click", function () {
   $(".wrapper").removeClass("active");
   $(".wrapper").removeClass("active-popup");
   $(".edu").fadeOut();
+  $(".contact").fadeOut();
+  $(".about").fadeOut();
   $(".work").fadeOut();
   $(".skill").fadeOut();
   $(".remove-acc-alert").fadeOut();
@@ -20,6 +22,16 @@ $(".open-work").on("click", function () {
 
 $(".open-skill").on("click", function () {
   $(".skill").fadeIn("slow");
+  $(".wrapper").addClass("active");
+});
+
+$(".open-contact").on("click", function () {
+  $(".contact").fadeIn("slow");
+  $(".wrapper").addClass("active");
+});
+
+$(".open-about").on("click", function () {
+  $(".about").fadeIn("slow");
   $(".wrapper").addClass("active");
 });
 

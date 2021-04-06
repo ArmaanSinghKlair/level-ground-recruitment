@@ -42,9 +42,9 @@
                 </c:choose>
                 <%--                Contant Us Section--%>
                 <li class="nav-item">
-                    <a class="nav-link open-work" data-bss-hover-animate="pulse" href="#">Contact Us
+                    <a class="nav-link open-contact" data-bss-hover-animate="pulse" href="#">Contact Us
                     </a>
-                    <section class="testimonials-clean popup work">
+                    <section class="testimonials-clean popup contact">
                         <button class="btn-close float-end close"></button>
                         <div class="container">
                             <div class="intro">
@@ -70,8 +70,8 @@
                 </li>
                 <%--                About Section--%>
                 <li class="nav-item">
-                    <a class="nav-link open-edu" data-bss-hover-animate="pulse" href="#">About</a>
-                    <section class="testimonials-clean popup edu">
+                    <a class="nav-link open-about" data-bss-hover-animate="pulse" href="#">About</a>
+                    <section class="testimonials-clean popup about">
                         <button class="btn-close float-end close"></button>
                         <div class="container">
                             <div class="intro">

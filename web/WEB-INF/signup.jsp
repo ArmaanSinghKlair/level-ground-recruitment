@@ -117,7 +117,7 @@
             <div class="container register-photo">
                 <div class="form-container">
                     <div class="image-holder"></div>
-                    <form class="signup-form" method="post" action="<c:url value='/user-registration'></c:url>">
+                    <form class="signup-form" method="post" action="<c:url value='/user-registration'/>">
                         <h2 class="text-center"><strong>Create</strong> an account</h2>
                         <div class="form-group mb-3">
                             <div class="d-flex justify-content-center signup-type">
@@ -143,13 +143,12 @@
                             <input class="form-control" type="password" data-bs-toggle="tooltip"
                                    data-bss-tooltip="" name="password" placeholder="Password" required
                                    minlength="8" maxlength="30"
-                                   pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Password"/>
+                                   title="Password"/>
                         </div>
                         <div class="form-group mb-3">
                             <input class="form-control" type="password" data-bs-toggle="tooltip"
                                    data-bss-tooltip="" name="password-repeat" placeholder="Password (repeat)"
                                    required="" minlength="8" maxlength="30"
-                                   pattern="&quot;^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$&quot;"
                                    title="Password repeat">
                         </div>
                         <div class="form-group mb-3">
