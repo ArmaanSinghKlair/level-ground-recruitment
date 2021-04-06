@@ -1,40 +1,29 @@
-$(".open-edu").on("click", function () {
-    $(".edu").fadeIn("slow");
-    $(".wrapper").addClass("active");
-});
 
 $(".close").on("click", function () {
-    $(".wrapper").removeClass("active");
-    $(".wrapper").removeClass("active-popup");
-    $(".edu").fadeOut();
-    $(".work").fadeOut();
-    $(".skill").fadeOut();
-    $(".contact").fadeOut();
-    $(".about").fadeOut();
-    $(".remove-acc-alert").fadeOut();
+  $(".wrapper").removeClass("active");
+  $(".wrapper").removeClass("active-popup");
+  $(".edu").fadeOut();
+  $(".work").fadeOut();
+  $(".skill").fadeOut();
+  $(".remove-acc-alert").fadeOut();
+});
+
+$(".open-edu").on("click", function () {
+  $(".edu").fadeIn("slow");
+  $(".wrapper").addClass("active");
 });
 
 $(".open-work").on("click", function () {
-    $(".work").fadeIn("slow");
-    $(".wrapper").addClass("active");
+  $(".work").fadeIn("slow");
+  $(".wrapper").addClass("active");
 });
 
 $(".open-skill").on("click", function () {
-    $(".skill").fadeIn("slow");
-    $(".wrapper").addClass("active");
+  $(".skill").fadeIn("slow");
+  $(".wrapper").addClass("active");
 });
 
 $(".open-remove").on("click", function () {
-    $(".remove-acc-alert").fadeIn("slow");
-    $(".wrapper").addClass("active-popup");
-});
-
-$(".open-contact").on("click", function () {
-    $(".contact").fadeIn("slow");
-    $(".wrapper").addClass("active");
-});
-
-$(".open-about").on("click", function () {
-    $(".about").fadeIn("slow");
-    $(".wrapper").addClass("active");
+  $(".remove-acc-alert").fadeIn("slow");
+  $(".wrapper").addClass("active-popup");
 });
