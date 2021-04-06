@@ -28,10 +28,14 @@
     <link rel="stylesheet" href="assets/css/nav-bar.css">
     <link rel="stylesheet" href="assets/css/signup.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/index.css">
 </head>
 
 <body onload="<c:if
         test='${requestScope.currentTab != null}'>document.getElementById('${requestScope.currentTab.trim()}').click()</c:if>">
+<%--Wrapper div--%>
+<div class="wrapper"></div>
 <%--Navigation bat--%>
 <%@include file="/WEB-INF/jspf/navbar.jspf" %>
 <%--Alter section--%>
@@ -113,7 +117,7 @@
             <div class="container register-photo">
                 <div class="form-container">
                     <div class="image-holder"></div>
-                    <form method="post" action="<c:url value='/user-registration'></c:url>">
+                    <form class="signup-form" method="post" action="<c:url value='/user-registration'></c:url>">
                         <h2 class="text-center"><strong>Create</strong> an account</h2>
                         <div class="form-group mb-3">
                             <div class="d-flex justify-content-center signup-type">
@@ -197,11 +201,14 @@
         </div>
     </div>
 </div>
+
+<%@include file="/WEB-INF/jspf/footer.jspf"%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
         src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta3/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/bs-init.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="assets/js/popup.js"></script>
 </body>
 
 </html>
