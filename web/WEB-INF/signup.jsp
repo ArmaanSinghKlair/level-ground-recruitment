@@ -47,7 +47,7 @@
             <a class="nav-link active" role="tab" data-bs-toggle="tab" href="#tab-1">Log In</a>
         </li>
         <li class="nav-item" role="presentation" data-bss-hover-animate="pulse">
-            <a class="nav-link" role="tab" data-bs-toggle="tab" data-bss-hover-animate="pulse" href="#tab-2">Sign Up</a>
+            <a class="nav-link" role="tab" data-bs-toggle="tab" id="signup-tab-cta" data-bss-hover-animate="pulse" href="#tab-2">Sign Up</a>
         </li>
     </ul>
     <%--Tab content--%>
@@ -98,7 +98,7 @@
                             </c:if>>
                             <label class="btn btn-outline-secondary" for="business">Business</label>
                             <input type="radio" class="btn-check" name="userType" id="admin"
-                                   autocomplete="off" value="businessClient"
+                                   autocomplete="off" value="admin"
                             <c:if test="${requestScope.lastUserType eq 'admin'}">
                                    checked
                             </c:if>>

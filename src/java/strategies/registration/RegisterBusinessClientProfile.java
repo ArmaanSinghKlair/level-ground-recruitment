@@ -26,21 +26,19 @@ public class RegisterBusinessClientProfile implements RegisterProfile {
         String phoneNo = request.getParameter("phoneNo");
 
         ArrayList<String> errList = new AccountServices().createBusinessClientProfile(username, password, password_repeat, company, email, phoneNo);
-        
-        if(errList != null)
-        {
+        request.setAttribute("url", "/WEB-INF/signup.jsp");
+
+        if (errList != null) {
             BusinessClient client = new BusinessClient();
             client.setBusClientCompany(company);
             client.setBusClientEmail(email);
             client.setBusClientPhone(phoneNo);
             request.setAttribute("lastClient", client);
             return errList;
-        }
-        else
-        {
+        } else {
             return null;
         }
-        
+
     }
 
 }

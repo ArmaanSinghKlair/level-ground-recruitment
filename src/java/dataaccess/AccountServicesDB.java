@@ -117,11 +117,50 @@ public class AccountServicesDB {
         }
     }
 
+    public final ArrayList<String> createAdvisorProfile(String username, String password, String firstName, String lastName, String email) {
+        initialize();
+
+        ArrayList<String> errList = new ArrayList<>();
+
+        try {
+            //Checking to see if User already exists
+            if (this.doesAdvisorExist(em, "advisorUsername", username)) {
+                errList.add("Username already Exists");
+                return errList;
+            } else if (doesAdvisorExist(em, "advisorEmail", email)) {
+                errList.add("Email already exists");
+                return errList;
+            }
+
+            Advisor a = new Advisor();
+            a.setAdvisorUsername(username.toLowerCase());
+            a.setAdvisorPassword(PasswordUtil.hashPassword(password));
+            a.setAdvisorfirstName(firstName);
+            a.setAdvisorlastName(lastName);
+            a.setAdvisorEmail(email);
+
+            trans.begin();
+            em.persist(a);
+            trans.commit();
+
+            return null;
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, ex);
+            errList.add("System error. Please check logs");
+            return errList;
+        } finally {
+            if (trans.isActive()) {
+                trans.rollback();
+            }
+            em.close();
+        }
+    }
+
     public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description, String username) {
         BusinessClient bc = getBusinessClientByUsername(username);
         initialize();
         ArrayList<String> errList = new ArrayList<>();
-        
+
         try {
             JobPosting jp = new JobPosting();
             jp.setRequirements(requirements);
@@ -342,11 +381,11 @@ public class AccountServicesDB {
             em.close();
         }
     }
-    
-    public final BusinessClient getBusinessClientByUsername(String username){
+
+    public final BusinessClient getBusinessClientByUsername(String username) {
         initialize();
-        try{
-            if(!doesClientExist(em,"busClientUsername",username)){
+        try {
+            if (!doesClientExist(em, "busClientUsername", username)) {
                 return null;
             }
             TypedQuery<BusinessClient> q = em.createNamedQuery("BusinessClient.findByBusClientUsername", BusinessClient.class);
@@ -355,17 +394,17 @@ public class AccountServicesDB {
             BusinessClient bc = q.getSingleResult();
             em.refresh(bc);
             return bc;
-        }catch(Exception e){
+        } catch (Exception e) {
             return null;
         } finally {
             em.close();
         }
     }
 
-    public final Advisor getAdvisorByUsername(String username){
+    public final Advisor getAdvisorByUsername(String username) {
         initialize();
-        try{
-            if(!doesAdvisorExist(em,"advisorUsername",username)){
+        try {
+            if (!doesAdvisorExist(em, "advisorUsername", username)) {
                 return null;
             }
             TypedQuery<Advisor> q = em.createNamedQuery("Advisor.findByAdvisorUsername", Advisor.class);
@@ -374,17 +413,17 @@ public class AccountServicesDB {
             Advisor a = q.getSingleResult();
             em.refresh(a);
             return a;
-        }catch(Exception e){
+        } catch (Exception e) {
             return null;
-        }finally{
+        } finally {
             em.close();
         }
     }
-    
-    public final JobPosting getJobpostingByID(int id){
+
+    public final JobPosting getJobpostingByID(int id) {
         initialize();
-        try{
-            if(!doesJobPostingExist(em,"jobpostingID",id)){
+        try {
+            if (!doesJobPostingExist(em, "jobpostingID", id)) {
                 return null;
             }
             TypedQuery<JobPosting> q = em.createNamedQuery("JobPosting.findByJobpostingID", JobPosting.class);
@@ -393,9 +432,9 @@ public class AccountServicesDB {
             JobPosting jp = q.getSingleResult();
             em.refresh(jp);
             return jp;
-        }catch(Exception e){
+        } catch (Exception e) {
             return null;
-        }finally{
+        } finally {
             em.close();
         }
     }
@@ -423,7 +462,7 @@ public class AccountServicesDB {
         List<Advisor> q = em.createNamedQuery("Advisor.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), Advisor.class).setParameter(attributeName, attributeValue).getResultList();
         return q != null && !q.isEmpty();
     }
-    
+
     public final boolean doesJobPostingExist(EntityManager em, String attributeName, int attributeValue) {
         List<JobPosting> q = em.createNamedQuery("JobPosting.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), JobPosting.class).setParameter(attributeName, attributeValue).getResultList();
         return q != null && !q.isEmpty();

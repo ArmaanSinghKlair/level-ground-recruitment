@@ -8,7 +8,7 @@ package strategies.registration;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import problemdomain.Candidate;
+import problemdomain.Advisor;
 import services.AccountServices;
 import services.ProfileServices;
 
@@ -22,13 +22,22 @@ public class RegisterAdvisorProfile implements RegisterProfile {
     public ArrayList<String> register(HttpServletRequest request) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
 
+        System.out.println("****: " + username);
         
-        ArrayList<String> errList = null;// new AccountServices().createAdvisorProfile(username, password, password_repeat, firstName, lastName, email, phoneNo);
+        ArrayList<String> errList = new AccountServices().createAdvisorProfile(username, password, firstName, lastName, email);
+        request.setAttribute("url", "/WEB-INF/advisor-home.jsp");
 
         if (errList != null) {
-            
+            Advisor advisor = new Advisor();
+            advisor.setAdvisorUsername(username);
+            advisor.setAdvisorfirstName(firstName);
+            advisor.setAdvisorlastName(lastName);
+            advisor.setAdvisorEmail(email);
+            request.setAttribute("lastAdvisor", advisor);
             return errList;
         } else {
             return null;

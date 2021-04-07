@@ -3,7 +3,7 @@
     Created on : Mar 27, 2021, 9:48:54 AM
     Author     : AmirS
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,6 +26,8 @@
     </head>
 
     <body>
+        <%@include file="/WEB-INF/jspf/alert.jspf" %>
+
         <div class="container">
             <div class="row text-start d-flex flex-column flex-md-row head-row">
                 <div class="col m-auto">
@@ -79,27 +81,27 @@
             <div class="edu popup">
                 <div class="border rounded popup-content"><button class="btn-close float-end close"></button>
                     <h3>Add New Advisor</h3>
-                    <form class="ignore popup-form">
+                    <form class="ignore popup-form" action="<c:url value='/user-registration'/>" method="POST">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6"><label class="col-form-label">Username</label></div>
-                                <div class="col-md-6"><input class="form-control" type="text"></div>
+                                <div class="col-md-6"><input class="form-control" type="text" name="username"></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6"><label class="col-form-label">Password</label></div>
-                                <div class="col-md-6"><input class="form-control" type="password"></div>
+                                <div class="col-md-6"><input class="form-control" type="password" name="password"></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6"><label class="col-form-label">First name</label></div>
-                                <div class="col-md-6"><input class="form-control" type="text"></div>
+                                <div class="col-md-6"><input class="form-control" type="text" name="firstName"></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6"><label class="col-form-label">Last name</label></div>
-                                <div class="col-md-6"><input class="form-control" type="text"></div>
+                                <div class="col-md-6"><input class="form-control" type="text" name="lastName"></div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6"><label class="col-form-label">Email</label></div>
-                                <div class="col-md-6"><input class="form-control" type="email"></div>
+                                <div class="col-md-6"><input class="form-control" type="email" name="email"></div>
                             </div>
                         </div>
                         <div class="btn-group d-flex popup-btns" role="group"><button class="btn btn-secondary" type="reset">Reset</button><button class="btn btn-success" type="submit">Add</button></div>

@@ -20,6 +20,7 @@ import strategies.profile.LoadAdvisorProfile;
 import strategies.profile.LoadBusinessClientProfile;
 import strategies.profile.LoadCandidateProfile;
 import strategies.profile.LoadProfile;
+import strategies.registration.RegisterAdvisorProfile;
 import strategies.registration.RegisterBusinessClientProfile;
 import strategies.registration.RegisterCandidateProfile;
 import strategies.registration.RegisterProfile;
@@ -76,10 +77,10 @@ public final class ProfileServices {
                 errList = this.validateEditFeature(request, username);
                 // If no errors
 
-              if(errList == null || errList.isEmpty()){
-                errList = psdb.edit(request, username);
-              }
-              break;
+                if (errList == null || errList.isEmpty()) {
+                    errList = psdb.edit(request, username);
+                }
+                break;
 
         }
         return errList;
@@ -244,7 +245,15 @@ public final class ProfileServices {
     }
 
     public ArrayList<String> createProfile(HttpServletRequest request) {
-        String userType = request.getParameter("userType");
+        String userType;
+
+        if (request.getParameter("userType") != null) {
+            userType = request.getParameter("userType");
+        } else {
+            HttpSession sess = request.getSession(false);
+            userType = (String) sess.getAttribute("userType");
+        }
+
         RegisterProfile rp = null;
         switch (userType) {
             case "candidate":
@@ -253,6 +262,8 @@ public final class ProfileServices {
             case "businessClient":
                 rp = new RegisterBusinessClientProfile();
                 break;
+            case "admin":
+                rp = new RegisterAdvisorProfile();
         }
         return rp.register(request);
     }
@@ -268,7 +279,7 @@ public final class ProfileServices {
     public final ArrayList<JobPosting> getJobpostingsByAdvisorID(Advisor id) {
         return psdb.getJobpostingsByAdvisorID(id);
     }
-    
+
     public final ArrayList<Application> getCandidateIDsByJobpostingID(int id) {
         return psdb.getCandidateIDsByJobpostingID(id);
     }

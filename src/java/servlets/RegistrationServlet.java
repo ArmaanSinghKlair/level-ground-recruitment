@@ -63,7 +63,7 @@ public class RegistrationServlet extends HttpServlet {
             request.setAttribute("currentTab", "signup-tab-cta");
         }
 
-        request.getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
+        request.getServletContext().getRequestDispatcher((String) request.getAttribute("url")).forward(request, response);
     }
 
     /**

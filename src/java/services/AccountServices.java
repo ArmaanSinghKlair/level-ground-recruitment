@@ -68,6 +68,21 @@ public class AccountServices {
         }
     }
 
+    public final ArrayList<String> createAdvisorProfile(String username, String password, String firstName, String lastName, String email) {
+        ArrayList<String> errList;
+        errList = ValidateAdvisor.getErrorMapForSignup(username, password, firstName, lastName, email);
+
+        if (errList == null) {
+            errList = new ArrayList<>();
+        }
+
+        if (errList.size() > 0) {
+            return errList;
+        } else {
+            return asdb.createAdvisorProfile(username, password, firstName, lastName, email);
+        }
+    }
+
     public final ArrayList<String> authenticate(String username, String password, String userType) {
         ArrayList<String> errList = new ArrayList<>();
 
@@ -91,14 +106,14 @@ public class AccountServices {
     public final ArrayList<String> createJobPosting(String title, String requirements, String sDate, String eDate, String status, String description, String sWage, String location, String username) {
         ArrayList<String> errList = new ArrayList<>();
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
-        
+
         try {
             Date startDate = parser.parse(sDate);
             Date endDate = parser.parse(eDate);
             Double wage = Double.parseDouble(sWage);
 
             errList = ValidateJobPosting.getErrorMapForAllfields(title, requirements, startDate, endDate, status, description, wage, location);
-            
+
             if (errList != null) {
                 return errList;
             } else {
@@ -141,20 +156,20 @@ public class AccountServices {
     public final Candidate getCandidateByUsername(String username) {
         return asdb.getCandidateByUsername(username);
     }
-    
-    public final BusinessClient getBusinessClientByUsername(String username){
+
+    public final BusinessClient getBusinessClientByUsername(String username) {
         return asdb.getBusinessClientByUsername(username);
     }
 
-    public final Advisor getAdvisorByUsername(String username){
+    public final Advisor getAdvisorByUsername(String username) {
         return asdb.getAdvisorByUsername(username);
     }
-    
-    public final JobPosting getJobpostingByID(int id){
+
+    public final JobPosting getJobpostingByID(int id) {
         return asdb.getJobpostingByID(id);
     }
-    
-    private final boolean isEmpty(String field){
+
+    private final boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;
     }
 

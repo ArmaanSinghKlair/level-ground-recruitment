@@ -29,6 +29,7 @@ public class RegisterCandidateProfile implements RegisterProfile {
         String phoneNo = request.getParameter("phoneNo");
 
         ArrayList<String> errList = new AccountServices().createCandidateProfile(username, password, password_repeat, firstName, lastName, email, phoneNo);
+        request.setAttribute("url", "/WEB-INF/signup.jsp");
 
         if (errList != null) {
             Candidate candidate = new Candidate();
