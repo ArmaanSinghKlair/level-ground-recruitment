@@ -284,7 +284,7 @@
                                     <label class="col-form-label">Start Date</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input class="form-control" name="start-date" title="Institution"
+                                    <input class="form-control" name="start-date" type="date"
                                            value="<fmt:formatDate value="${requestScope.workHistory.startDate}" type="date" pattern="yyyy-MM-dd" />">
                                 </div>
                             </div>
@@ -293,7 +293,7 @@
                                     <label class="col-form-label">End Date</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input class="form-control" name="end-date" title="Institution"
+                                    <input class="form-control" name="end-date" 
                                            type="date"
                                            value="<fmt:formatDate value="${requestScope.workHistory.endDate}" type="date" pattern="yyyy-MM-dd" />">
                                 </div>

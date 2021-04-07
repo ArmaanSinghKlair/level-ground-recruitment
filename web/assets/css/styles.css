@@ -1,10 +1,10 @@
 body {
-  font-family: 'Montserrat', serif;
+  font-family: 'Montserrat';
   background: #e5e5e5;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Oswald', serif;
+  font-family: 'Oswald';
 }
 
 #footer {
@@ -47,8 +47,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
-  .popup {
+  popup {
     width: 100%;
   }
+}
+
+.popup.skill {
+  width: 50%;
+}
+
+.popup.work {
+  width: 60%;
+}
+
+.edu.popup {
+  width: 60%;
 }
 
