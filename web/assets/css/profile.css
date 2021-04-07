@@ -21,14 +21,13 @@ form {
 }
 
 .sections {
-  background: #f1faee;
   border-radius: 5px;
   padding: 15px;
   margin-bottom: 10px;
 }
 
 .head-row {
-  background: #f1faee;
+  background: var(--bs-white);
   padding: 10px;
   margin: 1;
   border-radius: 10px;
@@ -57,46 +56,11 @@ form {
   font-size: 1.5em;
 }
 
-.popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  background-color: white;
-  width: 500px;
-  border-radius: 5px;
-}
-
-.wrapper {
-  display: none;
-}
-
-.wrapper.active {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0,0,0,0.4);
-  display: block;
-  z-index: 2;
-}
-
-.form-row {
-  padding: 5px;
-}
-
-.popup-content {
-  padding: 20px;
-}
-
-.popup-form {
-  padding: 20px;
-}
-
 .btn-group.popup-btns {
   padding: 20px;
+}
+
+.skill-form {
+  height: 80px;
 }
 
