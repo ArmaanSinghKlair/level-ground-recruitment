@@ -4,7 +4,7 @@
 }
 
 .display-4 {
-  font-size: 30px;
+  font-size: 1.5em;
 }
 
 .job-post {
@@ -30,10 +30,6 @@
 
 .btn.apply-btn:hover {
   background: #1d3557;
-}
-
-.icons {
-  font-size: 20px;
 }
 
 .row.result-row {
@@ -77,5 +73,34 @@ form {
 
 .more-btn {
   color: #457b9d;
+}
+
+.search-select {
+  max-width: 150px;
+}
+
+.result-column {
+  border-radius: 40px;
+  background: #f8f9fa;
+  max-width: 200px;
+  height: 50px;
+  margin: auto;
+  padding: 0;
+}
+
+.search-row {
+  background: #f8f9fa;
+}
+
+.result-container {
+  background: #f8f9fa;
+}
+
+.result-column {
+  background: #14213d;
+}
+
+#job-found {
+  color: #e5e5e5;
 }
 

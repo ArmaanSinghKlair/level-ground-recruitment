@@ -12,11 +12,6 @@ a:hover {
   color: #1d3557;
 }
 
-.accordion-button:not(.collapsed) {
-  color: #457b9d;
-  background-color: #e7f1ff;
-}
-
 .accordion-button.candidate-headier {
 }
 

@@ -64,3 +64,11 @@ form {
   height: 80px;
 }
 
+#roles {
+  margin-top: 25px;
+}
+
+.popup.role {
+  width: 50%;
+}
+

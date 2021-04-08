@@ -1,6 +1,6 @@
 .tab-content.edit-content {
   width: 100%;
-  background: #f1faee;
+  background: #f8f9fa;
   padding: 10px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -8,7 +8,7 @@
 
 .nav.nav-tabs.edit-items {
   padding: 10px;
-  background: #f1faee;
+  background: #e9ecef;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -49,6 +49,11 @@ a {
   color: #f1faee;
 }
 
+.succ:hover {
+  background: #1d3557;
+  color: #f1faee;
+}
+
 .card-header {
   background: #1d3557;
 }
@@ -60,7 +65,6 @@ a {
 
 .header-btn:hover {
   text-decoration: none;
-  color: #a8dadc;
 }
 
 .display-4 {
@@ -75,7 +79,7 @@ a {
   transform: translate(-50%, -50%);
   z-index: 3;
   background-color: white;
-  width: 500px;
+  width: 80%;
   border-radius: 5px;
 }
 
@@ -108,5 +112,16 @@ a {
 
 .btn.btn-primary.btn-block.close {
   padding-bottom: 10px;
+}
+
+.title-div {
+  padding: 5px;
+  padding-left: 15px;
+}
+
+#title-row {
+  padding-bottom: 0px;
+  padding-left: 15px;
+  margin-bottom: 15px;
 }
 
