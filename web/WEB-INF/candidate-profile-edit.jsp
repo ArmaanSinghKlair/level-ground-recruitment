@@ -85,18 +85,21 @@
                                 </div>
                             </div>
                         </div>
-                        <form class="edit-form">
+                        <form class="edit-form" action="<c:url value='/candidate-profile'/>" method="post">
+                            <input type="hidden" name="form_name" value="profile"/>
+                                    <input type="hidden" name="action" value="profilePageAction" />
+                                    <input type="hidden" name="username" value="${candidate.canUsername}"/>
                             <div class="row">
                                 <div class="col-12 col-md-5">
                                     <div class="form-group mb-3"><label class="form-label" for="firstName">First
                                         Name</label><input class="form-control" type="text" id="firstName"
-                                                           name="firstName" value="${candidate.canUsername}"></div>
+                                                           name="firstName" value="${candidate.canfirstName}"></div>
                                 </div>
                                 <div class="col-12 col-md-5 offset-md-1">
                                     <div class="form-group mb-3"><label class="form-label" for="lastName">Last
                                         Name</label><input class="form-control" type="text" id="lastName"
                                                            name="lastName"
-                                                           value="<c:out value='${candidate.canfirstName}' default=''/>">
+                                                           value="<c:out value='${candidate.canlastName}' default=''/>">
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +108,7 @@
                                     <div class="form-group mb-3"><label class="form-label"
                                                                         for="username">Username</label><input
                                             class="form-control" type="text" id="username"
-                                            value="<c:out value='${candidate.canlastName}' default=''/>"></div>
+                                            value="<c:out value='${candidate.canUsername}' default=''/>"></div>
                                 </div>
                                 <div class="col-12 col-md-5 offset-md-1">
                                     <div class="form-group mb-3"><label class="form-label"
@@ -159,7 +162,7 @@
                                     <div class="btn-group d-flex" role="group">
                                         <button class="btn btn-secondary" type="reset" style="color: #f1faee;">Reset
                                         </button>
-                                        <button class="btn btn-dark succ" value="edit" type="submit">Save Changes
+                                        <button class="btn btn-dark succ" value="edit" name="submit" type="submit">Save Changes
                                         </button>
                                     </div>
                                 </div>

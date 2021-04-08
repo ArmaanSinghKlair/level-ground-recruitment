@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <link rel="stylesheet" href="assets/css/job-posting.css">
+    <link rel="stylesheet" href="react-inject-scripts/css/SearchBar.css"/>
     <link rel="stylesheet" href="assets/css/nav-bar.css">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
@@ -50,7 +51,7 @@
 <script src="assets/js/bs-init.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script src="assets/js/popup.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
 
 <!-- Load React. -->
 <!-- Note: when deploying, replace "development.js" with "production.min.js". -->

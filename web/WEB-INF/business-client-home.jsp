@@ -50,13 +50,13 @@
                     <div class="col-md-6 new-post-row"><label class="form-label new-post-row">Status</label><select
                             class="form-select level-slc new-post-row" name="status">
                         <option value="fullTime" selected="">Full-Time</option>
-                        <option value="partTime">Par-Time</option>
-                        <option value="temperory">Temperory</option>
+                        <option value="partTime">Part-Time</option>
+                        <option value="temperory">Temporary</option>
                     </select></div>
                 </div>
                 <div class="row d-flex new-post-row">
                     <div class="col-md-6 form-row new-post-row"><label
-                            class="form-label new-post-row">Requirment</label><textarea
+                            class="form-label new-post-row">Requirement</label><textarea
                                 class="form-control new-post-row" rows="5" name="requirement"></textarea></div>
                     <div class="col-md-6 new-post-row"><label
                             class="form-label new-post-row">Description</label><textarea
