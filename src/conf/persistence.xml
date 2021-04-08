@@ -15,10 +15,10 @@
     <class>problemdomain.WorkHistory</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://us-cdbr-east-03.cleardb.com:3306/heroku_9f7f55da9d71722?reconnect=true"/>
-      <property name="javax.persistence.jdbc.user" value="b63a42502baac7"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://g84t6zfpijzwx08q.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/qvt0v9the6uowez2"/>
+      <property name="javax.persistence.jdbc.user" value="dtzs5x7cysjy2nk7"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="e0abdcba"/>
+      <property name="javax.persistence.jdbc.password" value="gl0luucfn2wus8i5"/>
     </properties>
   </persistence-unit>
 </persistence>
