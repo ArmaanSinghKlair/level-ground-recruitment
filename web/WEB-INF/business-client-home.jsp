@@ -66,7 +66,7 @@
     <div class="container-md">
         <div class="row text-start head-row">
             <div class="col m-auto">
-                <h3>Business Name Here</h3>
+                <h3><c:out value="${businessClient.busClientCompany}"/></h3>
                 <p>Status</p>
             </div>
         </div>
@@ -79,23 +79,23 @@
                 <form data-aos="fade-up" class="info-form">
                     <div class="d-flex form-group mb-3">
                         <h6>About:</h6>
-                        <p>Paragraph</p>
+                        <p><c:out value="${businessClient.busClientDescription}"/></p>
                     </div>
                     <div class="d-flex form-group mb-3">
                         <h6>Email:</h6>
-                        <p>Paragraph</p>
+                        <p><c:out value="${businessClient.busClientEmail}"/></p>
                     </div>
                     <div class="d-flex form-group mb-3">
                         <h6>Phone:</h6>
-                        <p>Paragraph</p>
+                        <p><c:out value="${businessClient.busClientPhone}"/></p>
                     </div>
                     <div class="d-flex form-group mb-3">
                         <h6>Address:</h6>
-                        <p>Paragraph</p>
+                        <p><c:out value="${businessClient.busClientAddress}"/></p>
                     </div>
                     <div class="d-flex form-group mb-3">
                         <h6>Website:</h6>
-                        <p>Paragraph</p>
+                        <p><c:out value="${businessClient.busClientWebsite}"/></p>
                     </div>
                     <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
                         <div class="btn-group" role="group"><a class="btn" role="button" data-bs-toggle="tooltip" data-bss-tooltip="" title="Edit" href="profile-edit.html"><i class="far fa-edit" data-bss-hover-animate="pulse"></i></a></div>
@@ -106,22 +106,24 @@
                 <div class="d-flex flex-row justify-content-between align-items-baseline">
                     <h4>Postings</h4><button class="btn btn-outline-success open-edu" data-bss-hover-animate="pulse" type="submit"><i class="fas fa-plus-circle open" data-bss-hover-animate="pulse" value="addEducation"></i></button>
                 </div>
+                <c:forEach var="posting" items="${jobPostings}">
                 <hr>
                 <div>
                     <div class="d-flex form-group mb-3">
                         <h6>Title:</h6>
-                        <p>Paragraph</p>
+                        <p><c:out value="${posting.jobTitle}"/></p>
                     </div>
                     <div class="d-flex form-group mb-3">
                         <h6>Start Date:</h6>
-                        <p>Paragraph</p>
+                        <p><c:out value="${posting.startDate}"/></p>
                     </div>
                     <div class="d-flex form-group mb-3">
                         <h6>End Date:</h6>
-                        <p>Paragraph</p>
+                        <p><c:out value="${posting.endDate}"/></p>
                     </div>
                     <div class="d-flex justify-content-around modify-btns"><button class="btn btn-danger open-work" type="submit">Remove</button><button class="btn submit-btn" type="button">View Candidates</button></div>
                 </div>
+                </c:forEach>
             </div>
         </div>
     </div>

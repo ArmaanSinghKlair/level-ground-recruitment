@@ -61,7 +61,7 @@ public final class ProfileServicesDB {
         initialize();
         try{
             TypedQuery<JobPosting> q = em.createNamedQuery("JobPosting.findByAdvisorID", JobPosting.class);
-            q.setParameter("advisorID", id); 
+            q.setParameter("advisorID", id);
             ArrayList<JobPosting> jobPostings = new ArrayList(q.getResultList());
             return jobPostings;
         }finally{
@@ -70,11 +70,11 @@ public final class ProfileServicesDB {
     }
    
     
-    public final ArrayList<Application> getCandidateIDsByJobpostingID(int id){
+    public final ArrayList<Application> getApplicationsByJobpostingID(int id){
         initialize();
         try{
             TypedQuery<Application> q = em.createNamedQuery("Application.findByJobpostingID", Application.class);
-            q.setParameter("advisorID", id); 
+            q.setParameter("jobpostingID", id); 
             ArrayList<Application> candidateIDs = new ArrayList(q.getResultList());
             return candidateIDs;
         }finally{

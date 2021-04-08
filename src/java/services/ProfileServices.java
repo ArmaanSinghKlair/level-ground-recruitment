@@ -280,8 +280,8 @@ public final class ProfileServices {
         return psdb.getJobpostingsByAdvisorID(id);
     }
 
-    public final ArrayList<Application> getCandidateIDsByJobpostingID(int id) {
-        return psdb.getCandidateIDsByJobpostingID(id);
+    public final ArrayList<Application> getApplicationsByJobpostingID(int id) {
+        return psdb.getApplicationsByJobpostingID(id);
     }
 
     private final boolean isEmpty(String field) {
