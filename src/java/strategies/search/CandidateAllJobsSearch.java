@@ -52,6 +52,7 @@ public class CandidateAllJobsSearch implements SearchBehaviour{
         
         // Setting the parameters
         Query q = em.createQuery(query.toString());
+        System.out.println(q);
         // Add a .00 after whole number because field is a double
         if(minSalary != null && minSalary.indexOf('.')==-1){
             minSalary += ".00";
