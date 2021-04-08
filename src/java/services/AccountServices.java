@@ -168,6 +168,10 @@ public class AccountServices {
     public final JobPosting getJobpostingByID(int id) {
         return asdb.getJobpostingByID(id);
     }
+    
+    public final ArrayList<String> deleteJobPostingByID(int id) {
+        return asdb.deleteJobPostingByID(id);
+    }
 
     private final boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;

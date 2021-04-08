@@ -187,6 +187,29 @@ public class AccountServicesDB {
             em.close();
         }
     }
+    
+    public final ArrayList<String> deleteJobPostingByID(int id) {
+        initialize();
+        ArrayList<String> errList = new ArrayList<>();
+
+        try {
+            JobPosting jp = new JobPosting();
+            jp = em.find(JobPosting.class, id);
+            trans.begin();
+            em.remove(jp);
+            trans.commit();
+            return null;
+        } catch (Exception ex) {
+            Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, ex);
+            errList.add("System error. Please check logs");
+            return errList;
+        } finally {
+            if (trans.isActive()) {
+                trans.rollback();
+            }
+            em.close();
+        }
+    }
 
     public final String doesEducationExist(String username, String ID) {
         String err = null;

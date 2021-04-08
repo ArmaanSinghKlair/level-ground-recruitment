@@ -19,13 +19,13 @@ import services.AccountServices;
  *
  * @author 756887
  */
-@WebServlet(name = "BusinessClientProfileServlet", urlPatterns = {"/business-client-profile"})
-public class BusinessClientProfileServlet extends HttpServlet {
-
+@WebServlet(name = "DeleteJobPosting", urlPatterns = {"/delete-job-posting"})
+public class DeleteJobPosting extends HttpServlet {
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            String url = "/profile-navigation";
+        String url = "/profile-navigation";
        
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
@@ -34,22 +34,15 @@ public class BusinessClientProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String title = request.getParameter("title");
-        String requirements = request.getParameter("requirement");
-        String startDate = request.getParameter("startDate");
-        String endDate = request.getParameter("endDate");
-        String status = request.getParameter("status");
-        String description = request.getParameter("description");
-        String wage = request.getParameter("wage");
-        String location = request.getParameter("location");
-        String username = request.getParameter("username");
+        int id = Integer.parseInt(request.getParameter("postingID"));
+        System.out.println(id);
     
         AccountServices service = new AccountServices();
-        ArrayList<String> errList = service.createJobPosting(title, requirements, startDate, endDate, status, description, wage, location, username);
+        ArrayList<String> errList = service.deleteJobPostingByID(id);
         
         if (errList == null)
             {
-                request.setAttribute("message", "Job posting created");
+                request.setAttribute("message", "Job posting deleted");
                 request.getRequestDispatcher("/profile-navigation").forward(request, response);
             } else
             {

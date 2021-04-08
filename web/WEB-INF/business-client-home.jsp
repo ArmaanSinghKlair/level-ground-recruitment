@@ -90,7 +90,10 @@
             <button class="btn-close float-end close"></button>
             <h3>Delete this Posting?</h3>
             <div class="d-flex justify-content-center">
-                <button class="btn btn-danger" type="button">Permanently Remove This Post</button>
+                <form action="<c:url value='/delete-job-posting'/>" method="post">
+                <button class="btn btn-danger" type="submit">Permanently Remove This Post</button>
+                <input type="hidden" name="postingID" value="${postingID}">
+                </form>
             </div>
         </div>
     </div>
@@ -159,7 +162,7 @@
                     </div>
                     <div class="posting div">
                         <div class="d-flex justify-content-around modify-btns">
-                            <button class="btn btn-danger open-work" type="submit">Remove</button>
+                            <button class="btn btn-danger open-work" type="button" action="<c:set var="postingID" scope="session" value="${posting.jobpostingID}"/>">Remove</button>
                             <button class="btn submit-btn" type="button">View Candidates</button>
                         </div>
                     </div>
