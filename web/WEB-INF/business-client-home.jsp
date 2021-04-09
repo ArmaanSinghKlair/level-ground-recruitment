@@ -161,8 +161,8 @@
                         <p><c:out value="${posting.endDate}"/></p>
                     </div>
                     <div class="posting div">
-                        <div class="d-flex justify-content-around modify-btns">
-                            <button class="btn btn-danger open-work" type="button" action="<c:set var="postingID" scope="session" value="${posting.jobpostingID}"/>">Remove</button>
+                        <div class="d-flex justify-content-around modify-btns"><c:out value="${posting.jobpostingID}"/>
+                            <button class="btn btn-danger open-work" type="button" name="${posting.jobpostingID}" action="<c:set var="postingID" scope="session" value="${posting.jobpostingID}"/>">Remove</button>
                             <button class="btn submit-btn" type="button">View Candidates</button>
                         </div>
                     </div>

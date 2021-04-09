@@ -160,7 +160,6 @@ public class AccountServicesDB {
         BusinessClient bc = getBusinessClientByUsername(username);
         initialize();
         ArrayList<String> errList = new ArrayList<>();
-        System.out.println(username);
         try {
             JobPosting jp = new JobPosting();
             jp.setRequirements(requirements);
