@@ -21,8 +21,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,7 +28,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "candidate")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Candidate.findAll", query = "SELECT c FROM Candidate c"),
     @NamedQuery(name = "Candidate.findByCandidateID", query = "SELECT c FROM Candidate c WHERE c.candidateID = :candidateID"),
@@ -165,7 +162,6 @@ public class Candidate implements Serializable {
         this.placed = placed;
     }
 
-    @XmlTransient
     public List<Role> getRoleList() {
         return roleList;
     }
@@ -182,7 +178,6 @@ public class Candidate implements Serializable {
         this.advisorID = advisorID;
     }
 
-    @XmlTransient
     public List<Education> getEducationList() {
         return educationList;
     }
@@ -191,7 +186,6 @@ public class Candidate implements Serializable {
         this.educationList = educationList;
     }
 
-    @XmlTransient
     public List<Application> getApplicationList() {
         return applicationList;
     }
@@ -200,7 +194,6 @@ public class Candidate implements Serializable {
         this.applicationList = applicationList;
     }
 
-    @XmlTransient
     public List<CandidateSkill> getCandidateSkillList() {
         return candidateSkillList;
     }
@@ -209,7 +202,6 @@ public class Candidate implements Serializable {
         this.candidateSkillList = candidateSkillList;
     }
 
-    @XmlTransient
     public List<WorkHistory> getWorkHistoryList() {
         return workHistoryList;
     }
