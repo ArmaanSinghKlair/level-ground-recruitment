@@ -9,6 +9,12 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Random;
+
+/**
+ * Utility used to encrypt passwords for the users on our system.
+ * @author
+ * @version 1.0
+ */
 public class PasswordUtil {
 
 /* This code uses SHA-256. If this algorithm isn't available to you, you can try a weaker level of encryption such as SHA-128.

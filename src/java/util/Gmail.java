@@ -27,6 +27,7 @@ import javax.naming.NamingException;
 /**
  *
  * @author 839645
+ * @version 1.0
  */
 public class Gmail {
     
