@@ -13,8 +13,11 @@ import services.AccountServices;
 import services.ProfileServices;
 
 /**
+ * Implements RegisterProfile interface. This class adheres to the Strategy
+ * pattern and is used to register a new Candidate profile.
  *
  * @author kentp
+ * @version 1.0
  */
 public class RegisterCandidateProfile implements RegisterProfile {
 

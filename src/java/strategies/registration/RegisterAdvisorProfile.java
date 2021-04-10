@@ -13,8 +13,11 @@ import services.AccountServices;
 import services.ProfileServices;
 
 /**
+ * Implements RegisterProfile interface. This class adheres to the Strategy
+ * pattern and is used to register a new Advisor profile.
  *
  * @author kentp
+ * @version 1.0
  */
 public class RegisterAdvisorProfile implements RegisterProfile {
 
@@ -27,7 +30,7 @@ public class RegisterAdvisorProfile implements RegisterProfile {
         String email = request.getParameter("email");
 
         System.out.println("****: " + username);
-        
+
         ArrayList<String> errList = new AccountServices().createAdvisorProfile(username, password, firstName, lastName, email);
         request.setAttribute("url", "/WEB-INF/advisor-home.jsp");
 
