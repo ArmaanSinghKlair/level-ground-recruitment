@@ -31,16 +31,38 @@ import strategies.authentication.CandidateAuthentication;
 import util.DBUtil;
 import util.PasswordUtil;
 
+/**
+ * Various account services for different interactions within our database, such
+ * as inserting new data into our pre-existing database tables.
+ *
+ * @author
+ * @version 1.0
+ */
 public class AccountServicesDB {
 
     private EntityManager em;
     private EntityTransaction trans;
 
+    /**
+     * Initialize the EntityManager and EntityTransaction for the various
+     * methods within this class.
+     */
     private void initialize() {
         em = DBUtil.getEmFactory().createEntityManager();
         trans = em.getTransaction();
     }
 
+    /**
+     * Used to create a new Candidate Profile in our database.
+     *
+     * @param username Username of Candidate
+     * @param password Password of Candidate
+     * @param firstName First Name of Candidate
+     * @param lastName Last Name of Candidate
+     * @param email Email of Candidate
+     * @param phoneNo Phone number of Candidate
+     * @return String ArrayList of any errors that may have occurred.
+     */
     public final ArrayList<String> createCandidateProfile(String username, String password, String firstName, String lastName, String email, String phoneNo) {
         initialize();
 
@@ -79,6 +101,16 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Used to create a new Business Client Profile in our database.
+     *
+     * @param username Username of the Business Client
+     * @param password Password of the Business Client
+     * @param company Company of the Business Client
+     * @param email Email of the Business Client
+     * @param phoneNo Phone Number of the Business Client
+     * @return String ArrayList of any errors that may have occurred.
+     */
     public final ArrayList<String> createBusinessClientProfile(String username, String password, String company, String email, String phoneNo) {
         initialize();
 
@@ -118,6 +150,16 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Used to create a new Advisor Profile in our database.
+     *
+     * @param username Username of the Advisor
+     * @param password Password of the Advisor
+     * @param firstName First Name of the Advisor
+     * @param lastName Last Name of the Advisor
+     * @param email Email of the Advisor
+     * @return String ArrayList of any errors that may have occurred.
+     */
     public final ArrayList<String> createAdvisorProfile(String username, String password, String firstName, String lastName, String email) {
         initialize();
 
@@ -157,6 +199,12 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Used to create a new Skill in our database.
+     *
+     * @param description Skill description.
+     * @return String ArrayList of any errors that may have occurred.
+     */
     public final ArrayList<String> createSkill(String description) {
         initialize();
         ArrayList<String> errList = new ArrayList<>();
@@ -187,6 +235,12 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Used to create a new Role in our database.
+     *
+     * @param description Role Description.
+     * @return String ArrayList of any errors that may have occurred.
+     */
     public final ArrayList<String> createRole(String description) {
         initialize();
         ArrayList<String> errList = new ArrayList<>();
@@ -217,6 +271,18 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Used to create a new Job Posting in our database.
+     *
+     * @param title Title of the Job Posting
+     * @param requirements Requirements of the Job Posting
+     * @param startDate Start Date of the Job Posting
+     * @param endDate End Date of the Job Posting
+     * @param status Status of the Job Posting
+     * @param description Description of the Job Posting
+     * @param username 
+     * @return String ArrayList of any errors that may have occurred.
+     */
     public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description, String username) {
         BusinessClient bc = getBusinessClientByUsername(username);
         initialize();

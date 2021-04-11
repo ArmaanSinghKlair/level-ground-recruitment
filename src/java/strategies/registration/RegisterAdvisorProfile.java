@@ -29,8 +29,6 @@ public class RegisterAdvisorProfile implements RegisterProfile {
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
 
-        System.out.println("****: " + username);
-
         ArrayList<String> errList = new AccountServices().createAdvisorProfile(username, password, firstName, lastName, email);
         request.setAttribute("url", "/profile-navigation");
 
