@@ -140,11 +140,11 @@
                 <div class="border rounded popup-content">
                     <button class="btn-close float-end close"></button>
                     <h3>Add New Skill</h3>
-                    <form class="ignore popup-form">
+                    <form class="ignore popup-form" action="<c:url value='/advisor-profile'/>" method="POST">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6"><label class="col-form-label">Skill name</label></div>
-                                <div class="col-md-6"><input class="form-control" type="text"></div>
+                                <div class="col-md-6"><input class="form-control" type="text" name="skill"></div>
                             </div>
                         </div>
                         <div class="btn-group d-flex popup-btns" role="group">
@@ -158,11 +158,11 @@
                 <div class="border rounded popup-content">
                     <button class="btn-close float-end close"></button>
                     <h3>Add New Role</h3>
-                    <form class="ignore popup-form">
+                    <form class="ignore popup-form" action="<c:url value='/advisor-profile'/>" method="POST">
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-6"><label class="col-form-label">Role name</label></div>
-                                <div class="col-md-6"><input class="form-control" type="text"></div>
+                                <div class="col-md-6"><input class="form-control" type="text" name="role"></div>
                             </div>
                         </div>
                         <div class="btn-group d-flex popup-btns" role="group">

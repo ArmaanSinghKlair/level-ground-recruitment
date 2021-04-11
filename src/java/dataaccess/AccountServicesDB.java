@@ -21,6 +21,7 @@ import problemdomain.BusinessClient;
 import problemdomain.Candidate;
 import problemdomain.Education;
 import problemdomain.JobPosting;
+import problemdomain.Role;
 import problemdomain.Skill;
 import problemdomain.WorkHistory;
 import strategies.authentication.AdvisorAuthentication;
@@ -156,6 +157,66 @@ public class AccountServicesDB {
         }
     }
 
+    public final ArrayList<String> createSkill(String description) {
+        initialize();
+        ArrayList<String> errList = new ArrayList<>();
+        try {
+
+            //Checking to see if Skill already exists
+            if (this.doesSkillDescriptionExist(em, "description", description)) {
+                errList.add("Skill already exists");
+                return errList;
+            }
+
+            Skill s = new Skill();
+            s.setDescription(description);
+            trans.begin();
+            em.persist(s);
+            trans.commit();
+
+            return null;
+        } catch (Exception e) {
+            Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, e);
+            errList.add("System error. Please check logs");
+            return errList;
+        } finally {
+            if (trans.isActive()) {
+                trans.rollback();
+            }
+            em.close();
+        }
+    }
+
+    public final ArrayList<String> createRole(String description) {
+        initialize();
+        ArrayList<String> errList = new ArrayList<>();
+        try {
+
+            //Checking to see if Role already exists
+            if (this.doesSkillDescriptionExist(em, "description", description)) {
+                errList.add("Role already exists");
+                return errList;
+            }
+
+            Role r = new Role();
+            r.setDescription(description);
+            trans.begin();
+            em.persist(r);
+            trans.commit();
+
+            return null;
+        } catch (Exception e) {
+            Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, e);
+            errList.add("System error. Please check logs");
+            return errList;
+        } finally {
+            if (trans.isActive()) {
+                trans.rollback();
+            }
+            em.close();
+        }
+    }
+
     public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description, String username) {
         BusinessClient bc = getBusinessClientByUsername(username);
         initialize();
@@ -186,7 +247,7 @@ public class AccountServicesDB {
             em.close();
         }
     }
-    
+
     public final ArrayList<String> deleteJobPostingByID(int id) {
         initialize();
         ArrayList<String> errList = new ArrayList<>();
@@ -488,6 +549,12 @@ public class AccountServicesDB {
     public final boolean doesJobPostingExist(EntityManager em, String attributeName, int attributeValue) {
         List<JobPosting> q = em.createNamedQuery("JobPosting.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), JobPosting.class).setParameter(attributeName, attributeValue).getResultList();
         return q != null && !q.isEmpty();
+    }
+
+    public final boolean doesSkillDescriptionExist(EntityManager em, String attributeName, String attributeValue) {
+        List<Skill> q = em.createNamedQuery("Skill.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), Skill.class).setParameter(attributeName, attributeValue).getResultList();
+        return q != null && !q.isEmpty();
+
     }
 
     public boolean doesSkillExist(String id) {

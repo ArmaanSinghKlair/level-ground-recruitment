@@ -103,6 +103,38 @@ public class AccountServices {
         }
     }
 
+    public final ArrayList<String> createSkill(String description) {
+        ArrayList<String> errList = new ArrayList<>();
+        try {
+            if (errList.isEmpty()) {
+                return asdb.createSkill(description);
+
+            } else {
+                return errList;
+            }
+        } catch (Exception e) {
+            errList.add("Unknown error occured. Please try again later.");
+        }
+
+        return errList;
+    }
+
+    public final ArrayList<String> createRole(String description) {
+        ArrayList<String> errList = new ArrayList<>();
+        try {
+            if (errList.isEmpty()) {
+                return asdb.createRole(description);
+
+            } else {
+                return errList;
+            }
+        } catch (Exception e) {
+            errList.add("Unknown error occured. Please try again later.");
+        }
+
+        return errList;
+    }
+
     public final ArrayList<String> createJobPosting(String title, String requirements, String sDate, String eDate, String status, String description, String sWage, String location, String username) {
         ArrayList<String> errList = new ArrayList<>();
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
@@ -168,7 +200,7 @@ public class AccountServices {
     public final JobPosting getJobpostingByID(int id) {
         return asdb.getJobpostingByID(id);
     }
-    
+
     public final ArrayList<String> deleteJobPostingByID(int id) {
         return asdb.deleteJobPostingByID(id);
     }
