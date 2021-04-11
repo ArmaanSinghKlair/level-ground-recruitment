@@ -32,7 +32,7 @@ public class RegisterAdvisorProfile implements RegisterProfile {
         System.out.println("****: " + username);
 
         ArrayList<String> errList = new AccountServices().createAdvisorProfile(username, password, firstName, lastName, email);
-        request.setAttribute("url", "/WEB-INF/advisor-home.jsp");
+        request.setAttribute("url", "/profile-navigation");
 
         if (errList != null) {
             Advisor advisor = new Advisor();

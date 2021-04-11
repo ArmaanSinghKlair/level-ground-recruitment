@@ -193,7 +193,7 @@ public class AccountServicesDB {
         try {
 
             //Checking to see if Role already exists
-            if (this.doesSkillDescriptionExist(em, "description", description)) {
+            if (this.doesRoleExist(em, "description", description)) {
                 errList.add("Role already exists");
                 return errList;
             }
@@ -563,5 +563,11 @@ public class AccountServicesDB {
         }
 
         return em.find(Skill.class, Integer.parseInt(id)) != null;
+    }
+
+    public final boolean doesRoleExist(EntityManager em, String attributeName, String attributeValue) {
+        List<Role> q = em.createNamedQuery("Role.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), Role.class).setParameter(attributeName, attributeValue).getResultList();
+        return q != null && !q.isEmpty();
+
     }
 }
