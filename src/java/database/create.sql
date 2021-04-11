@@ -159,7 +159,7 @@ create index advisorID_idx
 
 create table role
 (
-    roleID      int          not null
+    roleID      int auto_increment not null
         primary key,
     description varchar(255) null
 );
@@ -182,7 +182,7 @@ create index FK_CANDIDATE_ROLE_ROLE_idx
 
 create table skill
 (
-    skillID     int          not null
+    skillID     int auto_increment not null
         primary key,
     description varchar(255) not null
 );
