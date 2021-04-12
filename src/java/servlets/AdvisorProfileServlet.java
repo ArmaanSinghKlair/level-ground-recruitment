@@ -16,8 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import services.AccountServices;
 
 /**
+ * Used alongside with the Advisor's home page.
  *
  * @author kentp
+ * @version 1.0
  */
 @WebServlet(name = "AdvisorProfileServlet", urlPatterns = {"/advisor-profile"})
 public class AdvisorProfileServlet extends HttpServlet {
@@ -40,22 +42,17 @@ public class AdvisorProfileServlet extends HttpServlet {
         ArrayList<String> errList;
 
         String successMessage = "";
-        if(skill != null)
-        {
+        if (skill != null) {
             errList = accServices.createSkill(skill);
             successMessage = "Skill added successfully";
-        }
-        else if (role != null)
-        {
+        } else if (role != null) {
             errList = accServices.createRole(role);
             successMessage = "Role added successfully";
-        }
-        else
-        {
+        } else {
             errList = new ArrayList<>();
             errList.add("Unknown error occurred, please try again later.");
         }
-        
+
         if (errList == null) {
             request.setAttribute("success", true);
             request.setAttribute("sucessMessage", successMessage);
