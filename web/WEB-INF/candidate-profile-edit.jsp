@@ -107,7 +107,7 @@
                                 <div class="col-12 col-md-5">
                                     <div class="form-group mb-3"><label class="form-label"
                                                                         for="username">Username</label><input
-                                            class="form-control" type="text" id="username" name=""
+                                            class="form-control" type="text" id="username" name="currentUsername"
                                             value="<c:out value='${candidate.canUsername}' default=''/>"></div>
                                 </div>
                                 <div class="col-12 col-md-5 offset-md-1">
