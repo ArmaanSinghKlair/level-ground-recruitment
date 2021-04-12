@@ -52,56 +52,56 @@
             <div class="row">
                 <div class="col head-row">
                     <h3>Assigned Businesses<c:if test="${requestScope.companyList eq null}">
-                            - EMPTY
+                            - N/A
                         </c:if></h3>
 
 
-                    <%--<c:forEach var="company" items="${requestScope.companyList}">--%>
-                    <div class="accordion" role="tablist" id="accordion-1">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" role="tab">
-                                <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1"
-                                        aria-expanded="true" aria-controls="accordion-1 .item-1">${company.busClientCompany}
-                                </button>
-                            </h2>
-                            <div class="accordion-collapse collapse show item-1" role="tabpanel" data-bs-parent="#accordion-1">
-                                <div class="accordion-body">
-                                    <p>${company.busClientDescription}</p>
-                                    <hr>
-                                    <div class="row d-flex flex-column flex-sm-row">
-                                        <div class="col d-flex align-self-center"><i class="fas fa-envelope business-icon"
-                                                                                     style="font-size: 24px;"></i>
-                                            <p>${company.busClientEmail}</p>
+                    <c:forEach var="company" items="${requestScope.companyList}">
+                        <div class="accordion" role="tablist" id="accordion-1">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" role="tab">
+                                    <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1"
+                                            aria-expanded="true" aria-controls="accordion-1 .item-1">${company.busClientCompany}
+                                    </button>
+                                </h2>
+                                <div class="accordion-collapse collapse show item-1" role="tabpanel" data-bs-parent="#accordion-1">
+                                    <div class="accordion-body">
+                                        <p>${company.busClientDescription}</p>
+                                        <hr>
+                                        <div class="row d-flex flex-column flex-sm-row">
+                                            <div class="col d-flex align-self-center"><i class="fas fa-envelope business-icon"
+                                                                                         style="font-size: 24px;"></i>
+                                                <p>${company.busClientEmail}<c:if test="${company.busClientEmail eq null || company.busClientEmail eq ''}">N/A</c:if></p>
+                                            </div>
+                                            <div class="col d-flex align-self-center"><i class="fas fa-globe-americas business-icon"
+                                                                                         style="font-size: 24px;"></i>
+                                                <p>${company.busClientWebsite}<c:if test="${company.busClientWebsite eq null || company.busClientWebsite eq ''}">N/A</c:if></p>
+                                            </div>
                                         </div>
-                                        <div class="col d-flex align-self-center"><i class="fas fa-globe-americas business-icon"
-                                                                                     style="font-size: 24px;"></i>
-                                            <p>${company.busClientWebsite}</p>
+                                        <hr>
+                                        <div class="row d-flex flex-column flex-sm-row">
+                                            <div class="col d-flex align-self-center"><i class="fas fa-phone-alt business-icon"
+                                                                                         style="font-size: 24px;"></i>
+                                                <p>${company.busClientPhone}<c:if test="${company.busClientPhone eq null || company.busClientPhone eq ''}">N/A</c:if></p>
+                                            </div>
+                                            <div class="col d-flex align-self-center"><i class="fas fa-map-pin business-icon"></i>
+                                                <p>${company.busClientAddress}<c:if test="${company.busClientAddress eq null || company.busClientAddress eq ''}">N/A</c:if></p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <hr>
-                                    <div class="row d-flex flex-column flex-sm-row">
-                                        <div class="col d-flex align-self-center"><i class="fas fa-phone-alt business-icon"
-                                                                                     style="font-size: 24px;"></i>
-                                            <p>${company.busClientPhone}</p>
-                                        </div>
-                                        <div class="col d-flex align-self-center"><i class="fas fa-map-pin business-icon"></i>
-                                            <p>${company.busClientAddress}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col d-flex justify-content-end control-btns">
-                                            <form action="<c:url value='/advisor-job'/>" method="POST">
-                                                <button class="btn btn-primary list-btn" type="submit" name="submit" value="test">List job postings</button>
-                                            </form>
+                                        <div class="row">
+                                            <div class="col d-flex justify-content-end control-btns">
+                                                <form action="<c:url value='/advisor-job'/>" method="POST">
+                                                    <button class="btn btn-primary list-btn" type="submit" name="clientID" value="${company.businessclientID}">List job postings</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <%--
+
                     </c:forEach>
-                    --%>
+
                 </div>
             </div>
         </div>

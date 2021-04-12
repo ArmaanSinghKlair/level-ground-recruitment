@@ -45,35 +45,35 @@
                     <div class="row d-flex flex-column flex-sm-row">
                         <div class="col d-flex align-self-center"><i class="fas fa-envelope business-icon"
                                                                      style="font-size: 24px;"></i>
-                            <p>${company.busClientEmail}</p>
+                            <p>${company.busClientEmail}<c:if test="${company.busClientEmail eq null || company.busClientEmail eq ''}">N/A</c:if></p>
+                            </div>
+                            <div class="col d-flex align-self-center"><i class="fas fa-globe-americas business-icon"
+                                                                         style="font-size: 24px;"></i>
+                                <p>${company.busClientWebsite}<c:if test="${company.busClientWebsite eq null || company.busClientWebsite eq ''}">N/A</c:if></p>
+                            </div>
                         </div>
-                        <div class="col d-flex align-self-center"><i class="fas fa-globe-americas business-icon"
-                                                                     style="font-size: 24px;"></i>
-                            <p>${company.busClientWebsite}</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row d-flex flex-column flex-sm-row">
-                        <div class="col d-flex align-self-center"><i class="fas fa-phone-alt business-icon"
-                                                                     style="font-size: 24px;"></i>
-                            <p>${company.busClientPhone}</p>
-                        </div>
-                        <div class="col d-flex align-self-center"><i class="fas fa-map-pin business-icon"></i>
-                            <p>${company.busClientAddress}</p>
+                        <hr>
+                        <div class="row d-flex flex-column flex-sm-row">
+                            <div class="col d-flex align-self-center"><i class="fas fa-phone-alt business-icon"
+                                                                         style="font-size: 24px;"></i>
+                                <p>${company.busClientPhone}<c:if test="${company.busClientPhone eq null || company.busClientPhone eq ''}">N/A</c:if></p>
+                            </div>
+                            <div class="col d-flex align-self-center"><i class="fas fa-map-pin business-icon"></i>
+                                <p>${company.busClientAddress}<c:if test="${company.busClientAddress eq null || company.busClientAddress eq ''}">N/A</c:if></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="row head-row">
-                <div class="col">
-                    <div class="d-flex flex-column flex-md-row">
-                        <h1 class="display-5 col">Job Posts
+            <div class="container">
+                <div class="row head-row">
+                    <div class="col">
+                        <div class="d-flex flex-column flex-md-row">
+                            <h1 class="display-5 col">Job Posts
                             <c:choose>
 
                                 <c:when test="${requestScope.jobList eq null}">
-                                    - EMPTY
+                                    - N/A
                                 </c:when>
 
                                 <c:otherwise>
@@ -88,7 +88,7 @@
                     </div>
                     <hr>
 
-                    <%--<c:forEach var="job" items="${requestScope.jobList}">--%>
+                    <c:forEach var="job" items="${requestScope.jobList}">
                         <div class="accordion" role="tablist" id="accordion-1">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" role="tab">
@@ -101,45 +101,68 @@
                                         <div class="shadow job-post">
                                             <div class="d-flex flex-column align-items-baseline flex-md-row justify-content-md-between job-header">
                                                 <span class="badge rounded-pill bg-secondary stat-badge">${job.jobStatus}</span>
-                                                <p>Post date: <fmt:formatDate value="${job.postDate}" type="date"
-                                                                pattern="yyyy-MM-dd"/></p>
-                                                <a href="<c:url value='/advisor-candidate'/>"><button class="btn btn-success" type="button">Applicants<span
-                                                            class="badge bg-dark notif">${job.applicants}</span></button></a>
+                                                <p>Post date: <c:if test="${job.postDate eq null || job.postDate eq ''}">N/A</c:if>
+                                                    <fmt:formatDate value="${job.postDate}" type="date"
+                                                                    pattern="yyyy-MM-dd"/></p>
+                                                    <c:choose>
+
+                                                    <c:when test="${job.applicants eq null || job.applicants eq 0}">
+                                                        0 Applicants
+                                                        <form action="<c:url value='/advisor-candidate'/>" method="POST">
+                                                            <button class="btn btn-success" type="submit" name="jobID" value="${job.jobpostingID}">Applicants<span
+                                                                    class="badge bg-dark notif">${job.applicants}</span></button>    
+                                                        </form>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <form action="<c:url value='/advisor-candidate'/>" method="POST">
+                                                            <button class="btn btn-success" type="submit" name="jobID" value="${job.jobpostingID}">Applicants<span
+                                                                    class="badge bg-dark notif">${job.applicants}</span></button>    
+                                                        </form>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
                                             <hr>
                                             <div>
                                                 <h4>Description</h4>
-                                                <p>${job.jobDescription}<br>
-                                                </p>
-                                                <hr>
-                                            </div>
-                                            <div>
-                                                <h4>Requirements</h4>
-                                                <p>${job.requirements}<br>
-                                                </p>
-                                                <hr>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5 d-flex justify-content-between align-items-baseline"><i
-                                                        class="fas fa-location-arrow icons"></i>
-                                                    <p>${job.location}</p>
+                                                <p>${job.jobDescription}<c:if test="${job.jobDescription eq null || job.jobDescription eq ''}">N/A</c:if><br>
+                                                    </p>
+                                                    <hr>
                                                 </div>
-                                                <div class="col-md-5 offset-md-1 d-flex justify-content-between align-items-baseline">
-                                                    <i class="far fa-money-bill-alt icons"></i>
-                                                    <p>$${job.wage} year</p>
+                                                <div>
+                                                    <h4>Requirements</h4>
+                                                    <p>${job.requirements}<c:if test="${job.requirements eq null || job.requirements eq ''}">N/A</c:if><br>
+                                                    </p>
+                                                    <hr>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-5 d-flex justify-content-between align-items-baseline"><i
+                                                            class="fas fa-location-arrow icons"></i>
+                                                        <p>${job.location}<c:if test="${job.location eq null || job.location eq ''}">N/A</c:if></p>
+                                                    </div>
+                                                    <div class="col-md-5 offset-md-1 d-flex justify-content-between align-items-baseline">
+                                                        <i class="far fa-money-bill-alt icons"></i>
+                                                        <p><c:choose>
+                                                            <c:when test="${job.wage eq null || job.wage eq 0}">
+                                                                N/A  
+                                                            </c:when>
+
+                                                            <c:otherwise>
+                                                                $${job.wage} year
+                                                            </c:otherwise>
+                                                        </c:choose></p>
                                                 </div>
                                             </div>
                                             <hr>
                                             <div class="row">
                                                 <div class="col-md-5 d-flex justify-content-between align-items-baseline"><i
                                                         class="fas fa-hourglass-start icons"></i>
-                                                    <p><fmt:formatDate value="${job.startDate}" type="date"
-                                                                    pattern="yyyy-MM-dd"/></p>
+                                                    <p><c:if test="${job.startDate eq null || job.startDate eq ''}">N/A</c:if><fmt:formatDate value="${job.startDate}" type="date"
+                                                                                                                                               pattern="yyyy-MM-dd"/></p>
                                                 </div>
                                                 <div class="col-md-5 offset-md-1 d-flex justify-content-between align-items-baseline">
                                                     <i class="fas fa-hourglass-end icons"></i>
-                                                    <p><fmt:formatDate value="${job.endDate}" type="date"
-                                                                    pattern="yyyy-MM-dd"/></p>
+                                                    <p><c:if test="${job.endDate eq null || job.endDate eq ''}">N/A</c:if><fmt:formatDate value="${job.endDate}" type="date"
+                                                                                                                                           pattern="yyyy-MM-dd"/></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -147,7 +170,7 @@
                                 </div>
                             </div>
                         </div>
-                    <%--</c:forEach>--%>
+                    </c:forEach>
 
                 </div>
             </div>
