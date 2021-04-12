@@ -45,6 +45,32 @@ public final class ProfileServicesDB {
         }
     }
     
+    public final BusinessClient getBusinessClientByClientID(int id)
+    {
+        initialize();
+        try{
+            TypedQuery<BusinessClient> q = em.createNamedQuery("BusinessClient.findByBusinessclientID", BusinessClient.class);
+            q.setParameter("businessclientID", id);
+            BusinessClient bc = q.getSingleResult();
+            return bc;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public final ArrayList<JobPosting> getJobsForAdvisor(int id, int adID){
+        initialize();
+        try{
+            TypedQuery<JobPosting> q = em.createQuery("select jp from JobPosting jp where jp.businessclientID.businessclientID = :bcID and jp.advisorID.advisorID = :adID", JobPosting.class);
+            q.setParameter("adID", adID);
+            q.setParameter("bcID", id);
+            ArrayList<JobPosting> postings = new ArrayList(q.getResultList());
+            return postings;
+        }finally{
+            em.close();
+        }
+    }
+    
     public final ArrayList<JobPosting> getClientJobPostings(BusinessClient id){
         initialize();
         try{

@@ -85,6 +85,7 @@ public class AccountServicesDB {
             c.setCanfirstName(firstName);
             c.setCanlastName(lastName);
             c.setCanPhoneNo(phoneNo);
+            c.setPlaced(false);
             trans.begin();
             em.persist(c);
             trans.commit();

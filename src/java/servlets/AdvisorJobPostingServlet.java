@@ -7,11 +7,18 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import problemdomain.Advisor;
+import problemdomain.BusinessClient;
+import problemdomain.JobPosting;
+import services.AccountServices;
+import services.ProfileServices;
 
 /**
  *
@@ -31,10 +38,19 @@ public class AdvisorJobPostingServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String test = request.getParameter("submit");
-       System.out.println(request.getParameter("submit"));
-       
-       request.getRequestDispatcher("/WEB-INF/advisor-business-view.jsp").forward(request, response);
+
+        //Get job postings from specific business client
+        String clientID = request.getParameter("clientID");
+        ProfileServices ps = new ProfileServices();
+        HttpSession sess = request.getSession(false);
+        Advisor a = new AccountServices().getAdvisorByUsername((String)sess.getAttribute("username"));
+        BusinessClient bc = ps.getBusinessClientByClientID(Integer.parseInt(clientID));
+        ArrayList<JobPosting> jobList = ps.getJobsForAdvisor(a.getAdvisorID(),bc.getBusinessclientID());
+        
+        request.setAttribute("company", bc);
+        request.setAttribute("jobList", jobList);
+
+        request.getRequestDispatcher("/WEB-INF/advisor-business-view.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
