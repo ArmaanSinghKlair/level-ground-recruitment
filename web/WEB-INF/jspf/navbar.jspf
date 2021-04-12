@@ -4,8 +4,8 @@
 <nav class="navbar navbar-light navbar-expand-lg navigation-clean-button">
     <div class="container-fluid">
         <a class="navbar-brand d-flex d-sm-flex d-md-flex d-lg-flex d-xl-flex justify-content-center align-items-center
-         justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center
-          justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center"
+           justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center
+           justify-content-lg-center align-items-lg-center justify-content-xl-center align-items-xl-center"
            href="<c:url value='/application-home'/>">
             <img class="logo" src="assets/img/logo.png" alt="Logo">
             <h4 class="brand-name">Level Ground Recruitment</h4>
@@ -33,11 +33,13 @@
                         </li>
                     </c:when>
                     <c:when test="${sessionScope.userType eq 'admin'}">
+                        <%--
                         <li class="nav-item">
                             <a class="nav-link" data-bss-hover-animate="pulse"
                                href="<c:url value='/advisor-job'/>">Job Postings
                             </a>
                         </li>
+                        --%>
                     </c:when>
                 </c:choose>
                 <%--                Contant Us Section--%>
