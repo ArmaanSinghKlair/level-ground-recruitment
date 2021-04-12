@@ -135,7 +135,7 @@
                     </div>
                     <hr>
 
-                    <c:forEach var="candidate" items="${requestScope.candidateList}">
+                    <%--<c:forEach var="candidate" items="${requestScope.candidateList}">--%>
                         <div class="accordion" role="tablist" id="accordion-1">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" role="tab">
@@ -257,7 +257,7 @@
                                 </div>
                             </div>
                         </div>
-                    </c:forEach>
+                    <%--</c:forEach>--%>
                 </div>
             </div>
         </div>

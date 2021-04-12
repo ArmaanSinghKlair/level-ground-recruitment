@@ -88,7 +88,7 @@
                     </div>
                     <hr>
 
-                    <c:forEach var="job" items="${requestScope.jobList}">
+                    <%--<c:forEach var="job" items="${requestScope.jobList}">--%>
                         <div class="accordion" role="tablist" id="accordion-1">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" role="tab">
@@ -103,8 +103,8 @@
                                                 <span class="badge rounded-pill bg-secondary stat-badge">${job.jobStatus}</span>
                                                 <p>Post date: <fmt:formatDate value="${job.postDate}" type="date"
                                                                 pattern="yyyy-MM-dd"/></p>
-                                                <button class="btn btn-success" type="button">Applicants<span
-                                                        class="badge bg-dark notif">${job.applicants}</span></button>
+                                                <a href="<c:url value='/advisor-candidate'/>"><button class="btn btn-success" type="button">Applicants<span
+                                                            class="badge bg-dark notif">${job.applicants}</span></button></a>
                                             </div>
                                             <hr>
                                             <div>
@@ -147,7 +147,7 @@
                                 </div>
                             </div>
                         </div>
-                    </c:forEach>
+                    <%--</c:forEach>--%>
 
                 </div>
             </div>
