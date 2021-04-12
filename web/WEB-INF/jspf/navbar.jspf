@@ -35,7 +35,7 @@
                     <c:when test="${sessionScope.userType eq 'admin'}">
                         <li class="nav-item">
                             <a class="nav-link" data-bss-hover-animate="pulse"
-                               href="<c:url value='/advisor'/>">Job Postings
+                               href="<c:url value='/advisor-job'/>">Job Postings
                             </a>
                         </li>
                     </c:when>
@@ -61,7 +61,7 @@
                                     <textarea class="form-control" rows="5" placeholder="Your Message..."></textarea>
                                 </label>
                                 <div class="btn-group" role="group">
-                                    <button class="btn btn-secondary" type="button">Reset</button>
+                                    <button class="btn btn-secondary" type="reset">Reset</button>
                                     <button class="btn btn-success" type="button">Submit</button>
                                 </div>
                             </form>
