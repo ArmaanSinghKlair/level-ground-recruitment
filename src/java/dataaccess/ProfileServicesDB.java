@@ -58,6 +58,19 @@ public final class ProfileServicesDB {
         }
     }
     
+    public final JobPosting getJobPostingByJobID(int id)
+    {
+        initialize();
+        try{
+            TypedQuery<JobPosting> q = em.createNamedQuery("JobPosting.findByJobpostingID", JobPosting.class);
+            q.setParameter("jobpostingID", id);
+            JobPosting job = q.getSingleResult();
+            return job;
+        }finally{
+            em.close();
+        }
+    }
+    
     public final ArrayList<JobPosting> getJobsForAdvisor(int id, int adID){
         initialize();
         try{

@@ -109,7 +109,9 @@
                                                     <c:when test="${job.applicants eq null || job.applicants eq 0}">
                                                         0 Applicants
                                                         <form action="<c:url value='/advisor-candidate'/>" method="POST">
-                                                            <button class="btn btn-success" type="submit" name="jobID" value="${job.jobpostingID}">Applicants<span
+                                                            <input type="hidden" name="jobID" value="${job.jobpostingID}">
+                                                            <input type="hidden" name="clientID" value="${company.businessclientID}">
+                                                            <button class="btn btn-success" type="submit">Applicants<span
                                                                     class="badge bg-dark notif">${job.applicants}</span></button>    
                                                         </form>
                                                     </c:when>

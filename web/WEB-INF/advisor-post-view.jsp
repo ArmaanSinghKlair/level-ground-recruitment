@@ -144,169 +144,169 @@
                     </div>
                     <hr>
 
-                    <%--<c:forEach var="candidate" items="${requestScope.candidateList}">--%>
-                    <div class="accordion" role="tablist" id="accordion-1">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" role="tab">
-                                <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1"
-                                        aria-expanded="true" aria-controls="accordion-1 .item-1">Candidate ID: ${candidateID}
-                                </button>
-                            </h2>
-                            <div class="accordion-collapse collapse show item-1 shadow" role="tabpanel"
-                                 data-bs-parent="#accordion-1">
-                                <div class="accordion-body">
-                                    <div class="row candidate-row">
-                                        <div class="col-md-5">
-                                            <c:choose>
-                                                <c:when test="${candidate.educationList eq null}">
-                                                    <h4>Education - N/A</h4>
-                                                    <hr>
-                                                </c:when>
+                    <c:forEach var="candidate" items="${requestScope.candidateList}">
+                        <div class="accordion" role="tablist" id="accordion-1">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" role="tab">
+                                    <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1"
+                                            aria-expanded="true" aria-controls="accordion-1 .item-1">Candidate ID: ${candidateID}
+                                    </button>
+                                </h2>
+                                <div class="accordion-collapse collapse show item-1 shadow" role="tabpanel"
+                                     data-bs-parent="#accordion-1">
+                                    <div class="accordion-body">
+                                        <div class="row candidate-row">
+                                            <div class="col-md-5">
+                                                <c:choose>
+                                                    <c:when test="${candidate.educationList eq null}">
+                                                        <h4>Education - N/A</h4>
+                                                        <hr>
+                                                    </c:when>
 
-                                                <c:otherwise>
-                                                    <h4>Education</h4>
-                                                    <hr>
-                                                    <div>
-                                                        <c:forEach var="education" items="${candidate.educationList}">
-
-                                                            <div class="d-flex align-items-baseline">
-                                                                <h6>Institution:&nbsp;</h6>
-                                                                <p>${education.institution}</p>
-                                                            </div>
-                                                            <div class="d-flex align-items-baseline">
-                                                                <h6>Education Level:&nbsp;</h6>
-                                                                <p>${education.level}</p>
-                                                            </div>
-                                                            <div class="d-flex align-items-baseline">
-                                                                <h6>Subject:&nbsp;</h6>
-                                                                <p>${education.subject}</p>
-                                                            </div>
-                                                            <div class="d-flex align-items-baseline">
-                                                                <h6>Date:&nbsp;</h6>
-                                                                <p><fmt:formatDate value="${education.startDate}" type="date"
-                                                                                pattern="yyyy-MM-dd"/> - 
-                                                                    <c:choose>
-                                                                        <c:when test="${education.endDate !=null}">
-                                                                            <fmt:formatDate value="${education.endDate}" type="date"
-                                                                                            pattern="yyyy-MM-dd"/>
-                                                                        </c:when>
-                                                                        <c:otherwise>
-                                                                            current
-                                                                        </c:otherwise>
-                                                                    </c:choose>
-                                                                </p>
-                                                            </div>
-
-                                                        </c:forEach>
-                                                        <hr/>
-                                                    </div>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </div>
-
-                                        <div class="col-md-5 offset-md-2">
-                                            <c:choose>
-                                                <c:when test="${candidate.workHistoryList eq null}">
-                                                    <h4>Work History - N/A</h4>
-                                                    <hr>
-                                                </c:when>
-
-                                                <c:otherwise>
-                                                    <h4>Work History</h4>
-                                                    <hr>
-                                                    <div>
-                                                        <c:forEach var="work" items="${candidate.workHistoryList}">
-                                                            <div class="d-flex align-items-baseline">
-                                                                <h6>Company:&nbsp;</h6>
-                                                                <p>${work.company}</p>
-                                                            </div>
-                                                            <div class="d-flex align-items-baseline">
-                                                                <h6>Title:&nbsp;</h6>
-                                                                <p>${work.title}</p>
-                                                            </div>
-                                                            <div class="d-flex align-items-baseline">
-                                                                <h6>Start Date:&nbsp;</h6>
-                                                                <p><fmt:formatDate value="${work.startDate}" type="date"
-                                                                                pattern="yyyy-MM-dd"/> 
-                                                                </p>
-                                                            </div>
-                                                            <div class="d-flex align-items-baseline">
-                                                                <h6>End Date:&nbsp;</h6>
-                                                                <p>
-                                                                    <c:choose>
-                                                                        <c:when test="${work.endDate !=null}">
-                                                                            <fmt:formatDate value="${work.endDate}" type="date"
-                                                                                            pattern="yyyy-MM-dd"/>
-                                                                        </c:when>
-                                                                        <c:otherwise>
-                                                                            current
-                                                                        </c:otherwise>
-                                                                    </c:choose>
-                                                                </p>
-                                                            </div>
-                                                            <div class="d-flex align-items-baseline">
-                                                                <h6>Reference:&nbsp;</h6>
-                                                                <p>${work.reference}</p>
-                                                            </div>
-                                                        </c:forEach>
-                                                        <hr/>
-                                                    </div>
-                                                </c:otherwise>
-                                            </c:choose>
-
-                                        </div>
-                                    </div>
-                                    <div class="row candidate-row">
-                                        <div class="col-md-5">
-                                            <c:choose>
-                                                <c:when test="${candidate.skillList eq null}">
-                                                    <h4>Skill - N/A</h4>
-                                                    <hr>
-                                                </c:when>
-
-                                                <c:otherwise>
-                                                    <h4>Skill</h4>
-                                                    <hr/>
-                                                    <div>
-                                                        <c:forEach var="skill" items="${skillList}">
-                                                            <p>${skill.description}</p>
-                                                        </c:forEach>
-                                                    </div>
-                                                </c:otherwise>
-                                            </c:choose>
-
-                                        </div>
-                                        <div class="col-md-5 offset-md-2">
-                                            <c:choose>
-                                                <c:when test="${candidate.roleList eq null}">
-                                                    <h4>Role - N/A</h4>
-                                                    <hr>
-                                                </c:when>
-
-                                                <c:otherwise>
-                                                    <h4>Role</h4>
-                                                    <hr/>
-                                                    <c:forEach var="role" items="${candidate.roleList}">
+                                                    <c:otherwise>
+                                                        <h4>Education</h4>
+                                                        <hr>
                                                         <div>
-                                                            <p>${role.description}</p>
-                                                        </div>
-                                                    </c:forEach>
-                                                </c:otherwise>
-                                            </c:choose>
+                                                            <c:forEach var="education" items="${candidate.educationList}">
 
+                                                                <div class="d-flex align-items-baseline">
+                                                                    <h6>Institution:&nbsp;</h6>
+                                                                    <p>${education.institution}</p>
+                                                                </div>
+                                                                <div class="d-flex align-items-baseline">
+                                                                    <h6>Education Level:&nbsp;</h6>
+                                                                    <p>${education.level}</p>
+                                                                </div>
+                                                                <div class="d-flex align-items-baseline">
+                                                                    <h6>Subject:&nbsp;</h6>
+                                                                    <p>${education.subject}</p>
+                                                                </div>
+                                                                <div class="d-flex align-items-baseline">
+                                                                    <h6>Date:&nbsp;</h6>
+                                                                    <p><fmt:formatDate value="${education.startDate}" type="date"
+                                                                                    pattern="yyyy-MM-dd"/> - 
+                                                                        <c:choose>
+                                                                            <c:when test="${education.endDate !=null}">
+                                                                                <fmt:formatDate value="${education.endDate}" type="date"
+                                                                                                pattern="yyyy-MM-dd"/>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                current
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                    </p>
+                                                                </div>
+
+                                                            </c:forEach>
+                                                            <hr/>
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+
+                                            <div class="col-md-5 offset-md-2">
+                                                <c:choose>
+                                                    <c:when test="${candidate.workHistoryList eq null}">
+                                                        <h4>Work History - N/A</h4>
+                                                        <hr>
+                                                    </c:when>
+
+                                                    <c:otherwise>
+                                                        <h4>Work History</h4>
+                                                        <hr>
+                                                        <div>
+                                                            <c:forEach var="work" items="${candidate.workHistoryList}">
+                                                                <div class="d-flex align-items-baseline">
+                                                                    <h6>Company:&nbsp;</h6>
+                                                                    <p>${work.company}</p>
+                                                                </div>
+                                                                <div class="d-flex align-items-baseline">
+                                                                    <h6>Title:&nbsp;</h6>
+                                                                    <p>${work.title}</p>
+                                                                </div>
+                                                                <div class="d-flex align-items-baseline">
+                                                                    <h6>Start Date:&nbsp;</h6>
+                                                                    <p><fmt:formatDate value="${work.startDate}" type="date"
+                                                                                    pattern="yyyy-MM-dd"/> 
+                                                                    </p>
+                                                                </div>
+                                                                <div class="d-flex align-items-baseline">
+                                                                    <h6>End Date:&nbsp;</h6>
+                                                                    <p>
+                                                                        <c:choose>
+                                                                            <c:when test="${work.endDate !=null}">
+                                                                                <fmt:formatDate value="${work.endDate}" type="date"
+                                                                                                pattern="yyyy-MM-dd"/>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                current
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="d-flex align-items-baseline">
+                                                                    <h6>Reference:&nbsp;</h6>
+                                                                    <p>${work.reference}</p>
+                                                                </div>
+                                                            </c:forEach>
+                                                            <hr/>
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
+
+                                            </div>
                                         </div>
+                                        <div class="row candidate-row">
+                                            <div class="col-md-5">
+                                                <c:choose>
+                                                    <c:when test="${candidate.skillList eq null}">
+                                                        <h4>Skill - N/A</h4>
+                                                        <hr>
+                                                    </c:when>
+
+                                                    <c:otherwise>
+                                                        <h4>Skill</h4>
+                                                        <hr/>
+                                                        <div>
+                                                            <c:forEach var="skill" items="${skillList}">
+                                                                <p>${skill.description}</p>
+                                                            </c:forEach>
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
+
+                                            </div>
+                                            <div class="col-md-5 offset-md-2">
+                                                <c:choose>
+                                                    <c:when test="${candidate.roleList eq null}">
+                                                        <h4>Role - N/A</h4>
+                                                        <hr>
+                                                    </c:when>
+
+                                                    <c:otherwise>
+                                                        <h4>Role</h4>
+                                                        <hr/>
+                                                        <c:forEach var="role" items="${candidate.roleList}">
+                                                            <div>
+                                                                <p>${role.description}</p>
+                                                            </div>
+                                                        </c:forEach>
+                                                    </c:otherwise>
+                                                </c:choose>
+
+                                            </div>
+                                        </div>
+                                        <form class="d-flex justify-content-end can-from">
+                                            <div class="btn-group" role="group">
+                                                <button class="btn btn-danger open-work" type="button">Reject</button>
+                                                <button class="btn btn-success" type="button">Approve</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <form class="d-flex justify-content-end can-from">
-                                        <div class="btn-group" role="group">
-                                            <button class="btn btn-danger open-work" type="button">Reject</button>
-                                            <button class="btn btn-success" type="button">Approve</button>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <%--</c:forEach>--%>
+                    </c:forEach>
                 </div>
             </div>
         </div>

@@ -12,6 +12,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import problemdomain.BusinessClient;
+import problemdomain.JobPosting;
+import problemdomain.Candidate;
+import services.ProfileServices;
 
 /**
  *
@@ -31,6 +35,19 @@ public class AdvisorCandidateListServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String jobID = request.getParameter("jobID");
+        String clientID = request.getParameter("clientID");
+        ProfileServices ps = new ProfileServices();
+        
+        JobPosting job = ps.getJobPostingByJobID(Integer.parseInt(jobID));
+        BusinessClient bc = ps.getBusinessClientByClientID(Integer.parseInt(clientID));
+        //ArrayList<Candidate> candidateList = ps.getCandidatesForAdvisor(jobID, clientID);
+        
+        request.setAttribute("job", job);
+        request.setAttribute("company", bc);
+        //request.setAttribute("candidateList", candidateList);
+        
         request.getRequestDispatcher("/WEB-INF/advisor-post-view.jsp").forward(request, response);
     }
 
