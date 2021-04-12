@@ -201,6 +201,11 @@ public final class ProfileServices {
                 String lastName = request.getParameter("lastName");
                 String phoneNo = request.getParameter("phoneNo");
                 String currentPassword = request.getParameter("currentPassword");
+                String currentUsername = request.getParameter("currentUsername");
+                String about = request.getParameter("about");
+
+                errList = ValidateCandidate.getErrorMapForEdit(username, firstName, lastName, email, phoneNo);
+
                 if (currentPassword != null && currentPassword.trim().length() > 0) {
                     if (isEmpty(password) || isEmpty(password_repeat)) {
                         errList.add("Password and confim password are required");
@@ -208,9 +213,7 @@ public final class ProfileServices {
                         errList.add("Password and confim pasword do not match");
                     }
                 }
-                if (errList == null) {
-                    errList = new ArrayList<>();
-                }
+
                 boolean withPassword = false;
                 if (currentPassword != null && currentPassword.trim().length() > 0) {
                     ArrayList<String> validationErr = (ValidateCandidate.validateCurrentPassword(username, currentPassword));
@@ -219,7 +222,7 @@ public final class ProfileServices {
 
                 }
 
-                ValidateCandidate.prepareResponseForEdit(request, password, firstName, lastName, email, phoneNo, withPassword);
+                ValidateCandidate.prepareResponseForEdit(request, password, firstName, lastName, email, phoneNo, currentUsername, about, withPassword);
                 break;
 
         }

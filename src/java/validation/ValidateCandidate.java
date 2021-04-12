@@ -192,16 +192,19 @@ public final class ValidateCandidate {
         return errList;
     }
 
-    public static void prepareResponseForEdit(HttpServletRequest request, String password, String firstName, String lastName, String email, String phoneNo, boolean withPassword) {
+    public static void prepareResponseForEdit(HttpServletRequest request, String password, String firstName, String lastName, String email, String phoneNo, String username, String about, boolean withPassword) {
         try {
             Candidate c = new AccountServices().getCandidateByUsername(request.getParameter("username"));
             if (withPassword) {
                 c.setCanPassword(PasswordUtil.hashPassword(password));
             }
+            
+            c.setCanUsername(username);
             c.setCanEmail(email);
             c.setCanPhoneNo(phoneNo);
             c.setCanfirstName(firstName);
             c.setCanlastName(lastName);
+            //c.setCanAbout(about)
 
             if (request.getParameter("placed") != null && request.getParameter("placed").equals("yes")) {
                 c.setPlaced(true);
