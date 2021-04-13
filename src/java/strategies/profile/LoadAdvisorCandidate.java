@@ -39,7 +39,7 @@ public class LoadAdvisorCandidate implements LoadProfile {
         ArrayList<Candidate> candidates = new ArrayList<>();
 
         for (Application app : apps) {
-            if (app.getStatus() == 1) {
+            if (app.getStatus() == 0) {
                 candidates.add(app.getCandidateID());
             }
         }
