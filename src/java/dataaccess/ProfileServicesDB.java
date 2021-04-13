@@ -109,7 +109,7 @@ public final class ProfileServicesDB {
     }
    
     
-    public final ArrayList<Application> getApplicationsByJobpostingID(int id){
+    public final ArrayList<Application> getApplicationsByJobpostingID(JobPosting id){
         initialize();
         try{
             TypedQuery<Application> q = em.createNamedQuery("Application.findByJobpostingID", Application.class);

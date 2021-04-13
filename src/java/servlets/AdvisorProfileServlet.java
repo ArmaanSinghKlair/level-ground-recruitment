@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import services.AccountServices;
+import strategies.profile.LoadAdvisorCandidate;
+import strategies.profile.LoadAdvisorJobPosting;
+import strategies.profile.LoadProfile;
 
 /**
  * Used alongside with the Advisor's home page.
@@ -35,6 +38,23 @@ public class AdvisorProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String form = request.getParameter("advisorForm");
+        LoadProfile load = null;
+        if (form != null && !form.equals("")) {
+            switch (form) {
+                case "load-job":
+                    load = new LoadAdvisorJobPosting();
+                    break;
+
+                case "load-can":
+                    load = new LoadAdvisorCandidate();
+                    break;
+            }
+            load.loadProfile(request);
+            request.getServletContext().getRequestDispatcher((String) request.getAttribute("url")).forward(request, response);
+            return;
+        }
 
         String skill = request.getParameter("skill");
         String role = request.getParameter("role");

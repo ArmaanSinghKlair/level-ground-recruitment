@@ -51,7 +51,7 @@
             </div>
             <div class="row">
                 <div class="col head-row">
-                    <h3>Assigned Businesses<c:if test="${requestScope.companyList eq null}">
+                    <h3>Assigned Businesses<c:if test="${requestScope.companyList eq null || fn:length(requestScope.companyList) eq 0}">
                             - N/A
                         </c:if></h3>
 
@@ -90,7 +90,8 @@
                                         </div>
                                         <div class="row">
                                             <div class="col d-flex justify-content-end control-btns">
-                                                <form action="<c:url value='/advisor-job'/>" method="POST">
+                                                <form action="<c:url value='/advisor-profile'/>" method="POST">
+                                                    <input type="hidden" name="advisorForm" value="load-job">
                                                     <button class="btn btn-primary list-btn" type="submit" name="clientID" value="${company.businessclientID}">List job postings</button>
                                                 </form>
                                             </div>

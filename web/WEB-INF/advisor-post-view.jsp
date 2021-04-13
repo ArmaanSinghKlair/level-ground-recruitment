@@ -6,6 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -128,7 +131,7 @@
                         <h1 class="display-5 col">Candidates
                             <c:choose>
 
-                                <c:when test="${requestScope.candidateList eq null}">
+                                <c:when test="${requestScope.candidateList eq null || fn:length(requestScope.candidateList) eq 0}">
                                     - N/A
                                 </c:when>
 
@@ -158,7 +161,7 @@
                                         <div class="row candidate-row">
                                             <div class="col-md-5">
                                                 <c:choose>
-                                                    <c:when test="${candidate.educationList eq null}">
+                                                    <c:when test="${candidate.educationList eq null || fn:length(candidate.educationList) eq 0}">
                                                         <h4>Education - N/A</h4>
                                                         <hr>
                                                     </c:when>
@@ -206,7 +209,7 @@
 
                                             <div class="col-md-5 offset-md-2">
                                                 <c:choose>
-                                                    <c:when test="${candidate.workHistoryList eq null}">
+                                                    <c:when test="${candidate.workHistoryList eq null || fn:length(candidate.workHistoryList) eq 0}">
                                                         <h4>Work History - N/A</h4>
                                                         <hr>
                                                     </c:when>
@@ -259,7 +262,7 @@
                                         <div class="row candidate-row">
                                             <div class="col-md-5">
                                                 <c:choose>
-                                                    <c:when test="${candidate.skillList eq null}">
+                                                    <c:when test="${candidate.candidateSkillList eq null || fn:length(candidate.candidateSkillList) eq 0}">
                                                         <h4>Skill - N/A</h4>
                                                         <hr>
                                                     </c:when>
@@ -268,8 +271,8 @@
                                                         <h4>Skill</h4>
                                                         <hr/>
                                                         <div>
-                                                            <c:forEach var="skill" items="${skillList}">
-                                                                <p>${skill.description}</p>
+                                                            <c:forEach var="skill" items="${candidate.candidateSkillList}">
+                                                                <p>${skill.skillID.description}</p>
                                                             </c:forEach>
                                                         </div>
                                                     </c:otherwise>
@@ -278,7 +281,7 @@
                                             </div>
                                             <div class="col-md-5 offset-md-2">
                                                 <c:choose>
-                                                    <c:when test="${candidate.roleList eq null}">
+                                                    <c:when test="${candidate.roleList eq null || fn:length(candidate.roleList) eq 0}">
                                                         <h4>Role - N/A</h4>
                                                         <hr>
                                                     </c:when>

@@ -296,7 +296,7 @@ public final class ProfileServices {
         return psdb.getJobpostingsByAdvisorID(id);
     }
 
-    public final ArrayList<Application> getApplicationsByJobpostingID(int id) {
+    public final ArrayList<Application> getApplicationsByJobpostingID(JobPosting id) {
         return psdb.getApplicationsByJobpostingID(id);
     }
 

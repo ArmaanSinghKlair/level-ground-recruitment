@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -72,7 +74,7 @@
                             <h1 class="display-5 col">Job Posts
                             <c:choose>
 
-                                <c:when test="${requestScope.jobList eq null}">
+                                <c:when test="${requestScope.jobList eq null || fn:length(requestScope.jobList) eq 0}">
                                     - N/A
                                 </c:when>
 
@@ -110,9 +112,10 @@
                                                         <strong>0 Applicants</strong>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <form action="<c:url value='/advisor-candidate'/>" method="POST">
+                                                        <form action="<c:url value='/advisor-profile'/>" method="POST">
                                                             <input type="hidden" name="jobID" value="${job.jobpostingID}">
                                                             <input type="hidden" name="clientID" value="${company.businessclientID}">
+                                                            <input type="hidden" name="advisorForm" value="load-can">
                                                             <button class="btn btn-success" type="submit">Applicants<span
                                                                     class="badge bg-dark notif">${job.applicants}</span></button>    
                                                         </form>
