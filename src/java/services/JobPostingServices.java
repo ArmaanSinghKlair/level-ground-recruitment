@@ -55,11 +55,22 @@ public class JobPostingServices {
         
     }
     
-    public ArrayList<String> selectCandidateForReview(HttpServletRequest request, HttpServletResponse response){
-        String applicationID = request.getParameter("applicationID");
+    public ArrayList<String> rejectCandidateReview(HttpServletRequest request, HttpServletResponse response){
+        String applicationID = (String)request.getAttribute("applicationID");
         ArrayList<String> errList = new ArrayList<String>();
 
-        
+        if(isNumeric(applicationID) && !isEmpty(applicationID)){
+            errList.addAll(jpsd.rejectCandidateReview(Integer.parseInt(applicationID)));
+        }else{
+            errList.add("Unknown error occured. Please try again later");
+        }
+        return errList;
+    }
+    
+    public ArrayList<String> selectCandidateForReview(HttpServletRequest request, HttpServletResponse response){
+        String applicationID = (String)request.getAttribute("applicationID");
+        ArrayList<String> errList = new ArrayList<String>();
+
         if(isNumeric(applicationID) && !isEmpty(applicationID)){
             errList.addAll(jpsd.selectCandidateForReview(Integer.parseInt(applicationID)));
         }else{
@@ -72,7 +83,6 @@ public class JobPostingServices {
         String applicationID =request.getParameter("applicationID");
         ArrayList<String> errList = new ArrayList<String>();
 
-        
         if(isNumeric(applicationID) && !isEmpty(applicationID)){
             errList.addAll(jpsd.selectCandidateForInterview(Integer.parseInt(applicationID), request.getServletContext().getRealPath("/WEB-INF")));
         }else{

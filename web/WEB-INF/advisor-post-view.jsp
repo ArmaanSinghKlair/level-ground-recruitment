@@ -152,7 +152,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header" role="tab">
                                     <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1"
-                                            aria-expanded="true" aria-controls="accordion-1 .item-1">Candidate ID: ${candidateID}
+                                            aria-expanded="true" aria-controls="accordion-1 .item-1">Candidate ID: ${candidate.candidateID}
                                     </button>
                                 </h2>
                                 <div class="accordion-collapse collapse show item-1 shadow" role="tabpanel"
@@ -299,10 +299,15 @@
 
                                             </div>
                                         </div>
-                                        <form class="d-flex justify-content-end can-from">
+                                        <form class="d-flex justify-content-end can-from" action="<c:url value='/advisor-candidate'/>" method="POST">
+                                            <input type="hidden" name="canID" value="${candidate.candidateID}">
+                                            <input type="hidden" name="jobID" value="${job.jobpostingID}">
+                                            <input type="hidden" name="clientID" value="${company.businessclientID}">
+                                            <input type="hidden" name="advisorForm" value="load-can">
+                                            <input type="hidden" name="action" value="accept">
                                             <div class="btn-group" role="group">
-                                                <button class="btn btn-danger open-work" type="button">Reject</button>
-                                                <button class="btn btn-success" type="button">Approve</button>
+                                                <button class="btn btn-danger open-work" type="submit" onclick="document.getElementById('delete-can').value=${candidate.candidateID};return false;">Reject</button>
+                                                <button class="btn btn-success" type="submit">Approve</button>
                                             </div>
                                         </form>
                                     </div>
@@ -318,9 +323,15 @@
                 <div class="border rounded popup-content overflow-auto">
                     <button class="btn-close float-end close"></button>
                     <h3>Remove This Candidate?</h3>
-                    <div class="d-flex justify-content-center">
-                        <button class="btn btn-danger" type="button">Permanently Remove This Candidate</button>
-                    </div>
+                    <form action="<c:url value='/advisor-candidate'/>" method="POST">
+                        <input type="hidden" name="jobID" value="${job.jobpostingID}">
+                        <input type="hidden" name="clientID" value="${company.businessclientID}">
+                        <input type="hidden" name="advisorForm" value="load-can">
+                        <input type="hidden" name="action" value="reject">
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-danger" type="submit" name="canID" id="delete-can">Permanently Remove This Candidate</button>
+                        </div> 
+                    </form>
                 </div>
             </div>
         </div>

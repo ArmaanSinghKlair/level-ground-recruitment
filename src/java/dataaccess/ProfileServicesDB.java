@@ -58,25 +58,39 @@ public final class ProfileServicesDB {
         }
     }
     
-    public final JobPosting getJobPostingByJobID(int id)
+    public final Candidate getCandidateByID(int id)
     {
         initialize();
         try{
-            TypedQuery<JobPosting> q = em.createNamedQuery("JobPosting.findByJobpostingID", JobPosting.class);
-            q.setParameter("jobpostingID", id);
-            JobPosting job = q.getSingleResult();
-            return job;
+            TypedQuery<Candidate> q = em.createNamedQuery("Candidate.findByCandidateID", Candidate.class);
+            q.setParameter("candidateID", id);
+            Candidate can = q.getSingleResult();
+            return can;
         }finally{
             em.close();
         }
     }
     
-    public final ArrayList<JobPosting> getJobsForAdvisor(int id, int adID){
+    public final Application getApplicationForAdvisor(int jobID, int canID)
+    {
+        initialize();
+        try{
+            TypedQuery<Application> q = em.createQuery("select a from Application a where a.jobpostingID.jobpostingID = :jobID and a.candidateID.candidateID = :canID", Application.class);
+            q.setParameter("jobID", jobID);
+            q.setParameter("canID", canID);
+            Application app = q.getSingleResult();
+            return app;
+        }finally{
+            em.close();
+        } 
+    }
+    
+    public final ArrayList<JobPosting> getJobsForAdvisor(int bcID, int adID){
         initialize();
         try{
             TypedQuery<JobPosting> q = em.createQuery("select jp from JobPosting jp where jp.businessclientID.businessclientID = :bcID and jp.advisorID.advisorID = :adID", JobPosting.class);
             q.setParameter("adID", adID);
-            q.setParameter("bcID", id);
+            q.setParameter("bcID", bcID);
             ArrayList<JobPosting> postings = new ArrayList(q.getResultList());
             return postings;
         }finally{

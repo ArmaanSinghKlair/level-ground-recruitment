@@ -65,6 +65,24 @@ public class JobPostingServicesDB {
         return errList;
     }
     
+    public ArrayList<String> rejectCandidateReview(int applicationID)
+    {
+        initialize();
+        ArrayList<String> errList = new ArrayList<>();
+        try{
+            Application a = em.find(Application.class, applicationID);
+            trans.begin();
+            a.setStatus((short)-1);
+            trans.commit();
+        } finally{
+            em.close();
+            if(trans.isActive())
+                trans.rollback();
+        }
+        
+        return errList;
+    }   
+    
     public ArrayList<String> selectCandidateForReview(int applicationID){
         initialize();
         ArrayList<String> errList = new ArrayList<>();
