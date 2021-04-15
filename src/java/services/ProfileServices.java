@@ -280,8 +280,16 @@ public final class ProfileServices {
         return psdb.getJobpostingsByAdvisorID(id);
     }
 
-    public final ArrayList<Application> getApplicationsByJobpostingID(int id) {
+    public final ArrayList<Application> getApplicationsByJobpostingID(JobPosting id) {
         return psdb.getApplicationsByJobpostingID(id);
+    }
+    
+    public final Application getApplicationByBothID(int jpID, int canID) {
+        return psdb.getApplicationByBothID(jpID, canID);
+    }
+    
+    public final ArrayList<String> editBusinessClientProfile(String company, String username, String email, String phone, String address, String website, String description, BusinessClient bc) {
+        return psdb.editBusinessClientProfile(company, username, email, phone, address, website, description, bc);
     }
 
     private final boolean isEmpty(String field) {

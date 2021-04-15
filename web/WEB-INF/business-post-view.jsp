@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -38,65 +40,61 @@
 <div class="container">
     <div class="row header-row">
         <div class="col header-row">
-            <h1 class="display-4 job-title">Job Title</h1>
+            <h1 class="display-4 job-title"><c:out value='${jobposting.jobTitle}' default=''/></h1>
         </div>
     </div>
     <div class="row header-row">
         <div class="shadow job-post">
             <div class="d-flex flex-column align-items-baseline flex-md-row justify-content-md-between job-header"><span
-                    class="badge rounded-pill bg-secondary stat-badge">Full-Time</span>
-                <p>Post date: 1 Jan, 2021</p>
-                <button class="btn btn-success" type="button">Applicants<span class="badge bg-dark notif">42</span>
+                    class="badge rounded-pill bg-secondary stat-badge"><c:out value='${jobposting.jobStatus}' default=''/></span>
+                <p>Post date: <fmt:formatDate value="${jobposting.postDate}" type="date" pattern="yyyy-MM-dd"/></p>
+                <button class="btn btn-success" type="button">Applicants<span class="badge bg-dark notif"><c:out value='${jobposting.applicants}' default=''/></span>
                 </button>
             </div>
             <hr>
             <div>
                 <h4>Description</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Venenatis cras sed felis eget velit aliquet sagittis id. Diam phasellus
-                    vestibulum lorem sed risus ultricies. Sit amet dictum sit amet justo donec enim. Egestas dui id
-                    ornare arcu odio ut.<br></p>
+                <p><c:out value='${jobposting.jobDescription}' default=''/><br></p>
                 <hr>
             </div>
             <div>
                 <h4>Requirements</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Venenatis cras sed felis eget velit aliquet sagittis id. Diam phasellus
-                    vestibulum lorem sed risus ultricies. Sit amet dictum sit amet justo donec enim. Egestas dui id
-                    ornare arcu odio ut.<br></p>
+                <p><c:out value='${jobposting.requirements}' default=''/><br></p>
                 <hr>
             </div>
             <div class="row">
                 <div class="col-md-5 d-flex justify-content-between align-items-baseline"><i
                         class="fas fa-map-pin icons"></i>
-                    <p>Location</p>
+                    <p><c:out value='${jobposting.location}' default=''/></p>
                 </div>
                 <div class="col-md-5 offset-md-1 d-flex justify-content-between align-items-baseline"><i
                         class="fas fa-money-bill-alt icons"></i>
-                    <p>$50,000 year</p>
+                    <p><c:out value='${jobposting.wage}' default=''/>$ year</p>
                 </div>
             </div>
             <hr>
             <div class="row">
                 <div class="col-md-5 d-flex justify-content-between align-items-baseline"><i
                         class="fas fa-hourglass-start icons"></i>
-                    <p>1 Jan, 2021</p>
+                    <p><fmt:formatDate value="${jobposting.startDate}" type="date" pattern="yyyy-MM-dd"/></p>
                 </div>
                 <div class="col-md-5 offset-md-1 d-flex justify-content-between align-items-baseline"><i
                         class="fas fa-hourglass-end icons"></i>
-                    <p>1 Dec, 2021</p>
+                    <p><fmt:formatDate value="${jobposting.endDate}" type="date" pattern="yyyy-MM-dd"/></p>
                 </div>
             </div>
         </div>
     </div>
+    
     <div class="row header-row">
         <div class="col">
             <div class="accordion" role="tablist" id="accordion-1">
+                <c:forEach var="candidate" items="${candidates}">
                 <div class="accordion-item">
                     <h2 class="accordion-header mb-0" role="tab">
                         <button class="accordion-button candidate-name accordion-button" data-bs-toggle="collapse"
                                 data-bs-target="#accordion-1 .item-1" aria-expanded="true"
-                                aria-controls="accordion-1 .item-1">Candidate ID: 123456789
+                                aria-controls="accordion-1 .item-1">Candidate ID: <c:out value='${candidate.candidateID}' default=''/>
                         </button>
                     </h2>
                     <div class="accordion-collapse collapse show item-1 item-content" role="tabpanel"
@@ -106,50 +104,62 @@
                                 <div class="col-md-5">
                                     <h4>Education</h4>
                                     <hr>
+                                    <c:forEach var="education" items="${candidate.educationList}">
                                     <div>
-                                        <h6>Institution</h6>
-                                        <p>level</p>
-                                        <p>Subject</p>
-                                        <p>Start date - End date</p>
+                                        <h6><c:out value='${education.institution}' default=''/></h6>
+                                        <p>Level: <c:out value='${education.level}' default=''/></p>
+                                        <p>Subject: <c:out value='${education.subject}' default=''/></p>
+                                        <p>Duration: <%-- <c:out value='${education.startDate - education.endDate}' default=''/> --%>Start date - End date</p>
                                         <hr>
                                     </div>
+                                    </c:forEach>
                                 </div>
                                 <div class="col-md-5 offset-md-2">
                                     <h4>Work History</h4>
                                     <hr>
+                                    <c:forEach var="work" items="${candidate.workHistoryList}">
                                     <div>
-                                        <h6>Company</h6>
-                                        <p>Title:&nbsp;</p>
-                                        <p>Start Date:</p>
-                                        <p>End Date:</p>
-                                        <p>Reference:</p>
+                                        <h6><c:out value='${work.company}' default=''/></h6>
+                                        <p>Title: <c:out value='${work.title}' default=''/></p>
+                                        <p>Duration: <%-- <c:out value='${work.startDate - work.endDate}' default=''/> --%></p>
+                                        <p>Reference: <c:out value='${work.reference}' default=''/></p>
                                         <hr>
                                     </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                             <div class="row candidate-row">
                                 <div class="col-md-5">
                                     <h4>Skills</h4>
                                     <hr>
+                                    <c:forEach var="skill" items="${candidate.candidateSkillList}">
                                     <div>
-                                        <p>skill</p>
+                                        <p>Skill: <c:out value='${skill.skillID.description}' default=''/></p>
                                     </div>
+                                    </c:forEach>
                                 </div>
                                 <div class="col-md-5 offset-md-2">
                                     <h4>Roles</h4>
                                     <hr>
+                                    <c:forEach var="role" items="${candidate.roleList}">
                                     <div>
-                                        <p>Role</p>
+                                        <p>Role: <c:out value='${role.description}' default=''/></p>
                                     </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                             <div class="btn-group float-end btn-group" role="group">
                                 <button class="btn btn-danger open-work" type="button">Reject</button>
-                                <button class="btn btn-primary submit-btn" type="button">Setup Interview</button>
+                                <form id="setup_interview" action="<c:url value='/setup-interview'/>" method="post">
+                                <button class="btn btn-primary submit-btn" type="submit">Setup Interview</button>
+                                <input type="hidden" name="candidateID" value="${candidate.candidateID}">
+                                <input type="hidden" name="postingID" value="${jobposting.jobpostingID}">
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                </c:forEach>
             </div>
         </div>
     </div>

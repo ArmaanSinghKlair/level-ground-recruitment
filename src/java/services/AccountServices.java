@@ -117,7 +117,7 @@ public class AccountServices {
             if (errList != null) {
                 return errList;
             } else {
-                return asdb.createJobPosting(title, requirements, startDate, endDate, status, description, username);
+                return asdb.createJobPosting(title, requirements, startDate, endDate, status, description, username, wage, location);
             }
         } catch (NumberFormatException e) {
             errList.add("error parsing wage");

@@ -34,11 +34,11 @@ public class LoadAdvisorJobPosting implements LoadProfile{
         request.setAttribute("jobposting", jp);
         
         // Get applied candidates
-        ArrayList<Application> apps = ps.getApplicationsByJobpostingID(jp.getJobpostingID());
+        ArrayList<Application> apps = ps.getApplicationsByJobpostingID(jp);
         ArrayList<Candidate> candidates = new ArrayList<Candidate>();
         for (Application app: apps)
         {
-            if (app.getStatus() == 1)
+            if (app.getStatus() == 0)
             {
                 candidates.add(app.getCandidateID());
             }

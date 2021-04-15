@@ -68,13 +68,13 @@ public class JobPostingServices {
         return errList;
     }
     
-    public ArrayList<String> selectCandidateForInterview(HttpServletRequest request, HttpServletResponse response){
-        String applicationID =request.getParameter("applicationID");
+    public ArrayList<String> selectCandidateForInterview(HttpServletRequest request, HttpServletResponse response, int applicationID){
+        
         ArrayList<String> errList = new ArrayList<String>();
 
         
-        if(isNumeric(applicationID) && !isEmpty(applicationID)){
-            errList.addAll(jpsd.selectCandidateForInterview(Integer.parseInt(applicationID), request.getServletContext().getRealPath("/WEB-INF")));
+        if(applicationID >= 0){
+            errList.addAll(jpsd.selectCandidateForInterview(applicationID, request.getServletContext().getRealPath("/WEB-INF")));
         }else{
             errList.add("Unknown error occured. Please try again later");
         }

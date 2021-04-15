@@ -30,7 +30,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Application.findAll", query = "SELECT a FROM Application a"),
     @NamedQuery(name = "Application.findByApplicationID", query = "SELECT a FROM Application a WHERE a.applicationID = :applicationID"),
     @NamedQuery(name = "Application.findByStatus", query = "SELECT a FROM Application a WHERE a.status = :status"),
-    @NamedQuery(name = "Application.findByJobpostingID", query = "SELECT a FROM Application a WHERE a.jobpostingID = :jobpostingID")})
+    @NamedQuery(name = "Application.findByJobpostingID", query = "SELECT a FROM Application a WHERE a.jobpostingID = :jobpostingID"),
+    @NamedQuery(name = "Application.findByBothID", query = "SELECT a FROM Application a WHERE a.jobpostingID.jobpostingID = :jobpostingID AND a.candidateID.candidateID = :candidateID")})
 public class Application implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -35,7 +35,6 @@ public class DeleteJobPosting extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("postingID"));
-        System.out.println(id);
     
         AccountServices service = new AccountServices();
         ArrayList<String> errList = service.deleteJobPostingByID(id);

@@ -12,7 +12,9 @@ import problemdomain.Advisor;
 import problemdomain.Application;
 import problemdomain.BusinessClient;
 import problemdomain.Candidate;
+import problemdomain.CandidateSkill;
 import problemdomain.JobPosting;
+import problemdomain.Skill;
 import services.AccountServices;
 import services.ProfileServices;
 
@@ -27,21 +29,22 @@ public class LoadClientJobPosting implements LoadProfile{
         AccountServices accService = new AccountServices();
         ProfileServices ps = new ProfileServices();
         
-        int id = Integer.parseInt(request.getParameter("jobpostingID"));
+        int id = Integer.parseInt(request.getParameter("postingID"));
         
         // Get job posting
         JobPosting jp = accService.getJobpostingByID(id);
         request.setAttribute("jobposting", jp);
         
         // Get applied candidates
-        ArrayList<Application> apps = ps.getApplicationsByJobpostingID(jp.getJobpostingID());
+        ArrayList<Application> apps = ps.getApplicationsByJobpostingID(jp);
         ArrayList<Candidate> candidates = new ArrayList<Candidate>();
         for (Application app: apps)
         {
-            if (app.getStatus() == 0)
+            if (app.getStatus() == 1)
             {
                 candidates.add(app.getCandidateID());
             }
+            //candidates.add(app.getCandidateID());
         }
         request.setAttribute("candidates", candidates);
         request.setAttribute("url", "/WEB-INF/business-post-view.jsp"); //change this when correct page is added

@@ -70,7 +70,7 @@ public final class ProfileServicesDB {
     }
    
     
-    public final ArrayList<Application> getApplicationsByJobpostingID(int id){
+    public final ArrayList<Application> getApplicationsByJobpostingID(JobPosting id){
         initialize();
         try{
             TypedQuery<Application> q = em.createNamedQuery("Application.findByJobpostingID", Application.class);
@@ -80,6 +80,44 @@ public final class ProfileServicesDB {
         }finally{
             em.close();
         }
+    }
+    
+    public final Application getApplicationByBothID(int jpID, int canID){
+        initialize();
+        try{
+            TypedQuery<Application> q = em.createNamedQuery("Application.findByBothID", Application.class);
+            q.setParameter("jobpostingID", jpID); 
+            q.setParameter("candidateID", canID);
+            Application application = q.getSingleResult();
+            return application;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public final ArrayList<String> editBusinessClientProfile(String company, String username, String email, String phone, String address, String website, String description, BusinessClient bc) {
+        initialize();
+        ArrayList<String> errList = null;
+        try{
+            trans.begin();
+            bc.setBusClientCompany(company);
+            bc.setBusClientUsername(username);
+            bc.setBusClientEmail(email);
+            bc.setBusClientPhone(phone);
+            bc.setBusClientAddress(address);
+            bc.setBusClientWebsite(website);
+            bc.setBusClientDescription(description);
+            em.merge(bc);
+            trans.commit();
+        } catch (Exception ex) {
+            errList.add("Unknown error occured. Please try again later");
+        } finally{
+            em.close();
+            if(trans.isActive())
+                trans.rollback();
+        }
+        
+        return errList;
     }
     
     public final ArrayList<String> add(HttpServletRequest request, String username){

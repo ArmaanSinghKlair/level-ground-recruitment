@@ -37,6 +37,18 @@ public final class ValidateBusinessClient {
         put("busClientPhoneNo", validateBusClientPhoneNo(phoneNo));
         return getErrorMap();
     }
+    
+    public static ArrayList<String> validateEdit(String company, String username, String email, String phone, String address, String website, String description) {
+        startValidation();
+        put("busClientUsername", validateBusClientUsername(username));
+        put("busClientCompany", validateBusClientCompany(company));
+        put("busClientEmail", validateBusClientEmail(email));
+        put("busClientPhoneNo", validateBusClientPhoneNo(phone));
+        put("busClientAddress", validateBusClientAddress(address));
+        put("busClientWebsite", validateBusClientWebsite(website));
+        put("busClientDescription", validateBusClientDescription(description));
+        return getErrorMap();
+    }
 
     private static void put(String name, String value) {
         if (value != null) {
@@ -109,6 +121,33 @@ public final class ValidateBusinessClient {
             return null;
         } else {
             return errList;
+        }
+    }
+    
+    public static String validateBusClientAddress(String address) {
+
+        if (address.length() > 100) {
+            return "Address cannot be more than 100 characters";
+        } else {
+            return null;
+        }
+    }
+    
+    public static String validateBusClientWebsite(String website) {
+
+        if (website.length() > 100) {
+            return "Website cannot be more than 100 characters";
+        } else {
+            return null;
+        }
+    }
+    
+    public static String validateBusClientDescription(String description) {
+
+        if (description.length() > 255) {
+            return "Description cannot be more than 255 characters";
+        } else {
+            return null;
         }
     }
 

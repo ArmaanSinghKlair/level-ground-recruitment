@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 
@@ -51,7 +53,7 @@
                     <div class="tab-pane fade show active" role="tabpanel" id="tab-1">
                         <div class="row d-flex flex-column align-items-center flex-md-row">
                             <div class="col">
-                                <h1>Name</h1>
+                                <h1><c:out value="${businessClient.busClientUsername}"/></h1>
                                 <p class="text-muted">Joined 01 Jan 2021</p>
                             </div>
                             <div class="col d-flex justify-content-center">
@@ -64,7 +66,7 @@
                                     <button class="btn-close float-end close"></button>
                                     <h5 class="text-center">Are you sure you want to remove your Account?</h5>
                                     <div class="d-flex justify-content-center" style="padding: 15px;">
-                                        <button class="btn btn-danger" type="submit">Preeminently Remove My Account
+                                        <button class="btn btn-danger" type="submit">Permanently Remove My Account
                                         </button>
                                     </div>
                                     <p class="lead text-center warming-txt"><em>You can't recover your account after
@@ -73,41 +75,41 @@
                             </div>
                         </div>
                         <hr>
-                        <form class="edit-form">
+                        <form class="edit-form" id="edit-profile" action="<c:url value='/edit-client-profile'/>" method="post">
                             <div class="row">
                                 <div class="col-12 col-md-5">
                                     <div class="form-group mb-3"><label class="form-label" for="businessName">Business
                                         Name</label><input class="form-control" type="text" id="businessName"
-                                                           name="businessName"></div>
+                                                           name="businessName" value="<c:out value="${businessClient.busClientCompany}" default=''/>"></div>
                                 </div>
                                 <div class="col-12 col-md-5 offset-md-1">
                                     <div class="form-group mb-3"><label class="form-label"
                                                                         for="username">Username</label><input
-                                            class="form-control" type="text" id="username"></div>
+                                                           class="form-control" type="text" id="username" name="username" value="<c:out value="${businessClient.busClientUsername}" default=''/>"></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-5">
                                     <div class="form-group mb-3"><label class="form-label"
                                                                         for="email">Email</label><input
-                                            class="form-control" type="email" id="email" name="email"></div>
+                                            class="form-control" type="email" id="email" name="email" value="<c:out value="${businessClient.busClientEmail}" default=''/>"></div>
                                 </div>
                                 <div class="col-12 col-md-5 offset-md-1">
                                     <div class="form-group mb-3"><label class="form-label"
                                                                         for="phone">Phone</label><input
-                                            class="form-control" type="tel" id="phone" name="phone"></div>
+                                            class="form-control" type="tel" id="phone" name="phone" value="<c:out value="${businessClient.busClientPhone}" default=''/>"></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-11">
                                     <div class="form-group mb-3"><label class="form-label" for="address">Address</label><input
-                                            class="form-control" type="text" id="address" name="address"></div>
+                                            class="form-control" type="text" id="address" name="address" value="<c:out value="${businessClient.busClientAddress}" default=''/>"></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-11">
                                     <div class="form-group mb-3"><label class="form-label" for="website">Website</label><input
-                                            class="form-control" type="text" id="website" name="website"></div>
+                                            class="form-control" type="text" id="website" name="website" value="<c:out value="${businessClient.busClientWebsite}" default=''/>"></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -115,19 +117,19 @@
                                     <div class="form-group mb-3"><label class="form-label"
                                                                         for="about">About</label><textarea
                                             class="form-control" id="about" rows="5" placeholder="About Business..."
-                                            name="about"></textarea></div>
+                                            name="about"><c:out value="${businessClient.busClientDescription}" default=''/></textarea></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-5">
                                     <h5>Change Password</h5>
                                     <div class="form-group mb-3"><label class="form-label" for="cur-pass">Current
-                                        Password</label><input class="form-control" type="password" id="cur-pass"
+                                            Password</label><input class="form-control" type="password" id="cur-pass" name="cur-pass"
                                                                placeholder="****"></div>
                                     <div class="form-group mb-3"><label class="form-label" for="new-pass">New
-                                        Password</label><input class="form-control" type="password" id="new-pass"></div>
+                                        Password</label><input class="form-control" type="password" id="new-pass" name="new-pass"></div>
                                     <div class="form-group mb-3"><label class="form-label" for="conf-pass">Confirm
-                                        Password</label><input class="form-control" type="password" id="conf-pass">
+                                        Password</label><input class="form-control" type="password" id="conf-pass" name="conf-pass">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-5 offset-md-2 d-flex flex-column justify-content-end align-items-start">
@@ -143,52 +145,55 @@
                     </div>
                     <div class="tab-pane fade" role="tabpanel" id="tab-4">
                         <div class="accordion" role="tablist" id="accordion-3">
+                            <c:forEach var="posting" items="${jobPostings}">
                             <div class="accordion-item">
                                 <h2 class="accordion-header mb-0" role="tab">
                                     <button class="accordion-button d-flex justify-content-between header-btn"
                                             data-bs-toggle="collapse" data-bs-target="#accordion-3 .item-1"
-                                            aria-expanded="true" aria-controls="accordion-3 .item-1">Job Title<p>Post
-                                        Date</p></button>
+                                            aria-expanded="true" aria-controls="accordion-3 .item-1"><c:out value="${posting.jobTitle}" default=''/> <fmt:formatDate value="${posting.postDate}" type="date" pattern="yyyy-MM-dd"/></button>
                                 </h2>
                                 <div class="accordion-collapse collapse show item-1" role="tabpanel"
                                      data-bs-parent="#accordion-3">
                                     <div class="accordion-body">
-                                        <form>
+                                        <form id="Posting_edit" action="<c:url value='/edit-job-posting'/>" method="post">
                                             <div class="row">
                                                 <div class="col justify-content-center"><label class="col-form-label">Title<input
-                                                        class="form-control" type="text"></label></div>
+                                                        class="form-control" type="text" value="<c:out value="${posting.jobTitle}" default=''/>"></label></div>
                                                 <div class="col justify-content-center"><label class="col-form-label">Status<select
                                                         class="form-select">
-                                                    <option value="12" selected="">Full-Time</option>
-                                                    <option value="13">Part-Time</option>
-                                                    <option value="14">Temperory</option>
+                                                    <option value="fullTime" <c:if test="${posting.jobStatus.equals('fullTime')}">selected</c:if>>Full-Time</option>
+                                                    <option value="partTime" <c:if test="${posting.jobStatus.equals('partTime')}">selected</c:if>>Part-Time</option>
+                                                    <option value="temporary" <c:if test="${posting.jobStatus.equals('temporary')}">selected</c:if>>Temporary</option>
                                                 </select></label></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col"><label class="col-form-label">Wage<input
-                                                        class="form-control" type="text"></label></div>
+                                                        class="form-control" type="text" value="<c:out value="${posting.wage}" default=''/>"></label></div>
                                                 <div class="col"><label class="col-form-label">Location<input
-                                                        class="form-control" type="text"></label></div>
+                                                        class="form-control" type="text" value="<c:out value="${posting.location}" default=''/>"></label></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col"><label class="col-form-label">Start Date<input
-                                                        class="form-control" type="date"></label></div>
+                                                        class="form-control" type="date" value="<fmt:formatDate value="${posting.startDate}" type="date" pattern="yyyy-MM-dd"/>"></label></div>
                                                 <div class="col"><label class="col-form-label">End Date<input
-                                                        class="form-control" type="date"></label></div>
+                                                        class="form-control" type="date" value="<fmt:formatDate value="${posting.endDate}" type="date" pattern="yyyy-MM-dd"/>"></label></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col justify-content-center"><label class="form-label">Description</label><textarea
-                                                        class="form-control" rows="3"></textarea></div>
+                                                        class="form-control" rows="3" value="<c:out value="${posting.jobDescription}" default=''/>"></textarea></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col justify-content-center"><label class="form-label">Requirements</label><textarea
-                                                        class="form-control" rows="3"></textarea></div>
+                                                        class="form-control" rows="3" value="<c:out value="${posting.requirements}" default=''/>"></textarea></div>
                                             </div>
                                             <div class="row" style="padding-top: 20px;">
                                                 <div class="col d-flex justify-content-end">
-                                                    <button class="btn btn-danger open-work" type="button"
+                                                    <form id="permanent_deletion" action="<c:url value='/delete-job-posting'/>" method="post">
+                                                    <button class="btn btn-danger open-work" type="submit"
                                                             style="margin-right: 20px;">Remove
                                                     </button>
+                                                    <input id="<c:out value="${posting.jobpostingID}"/>" type="hidden" name="postingID" value="<c:out value="${posting.jobpostingID}"/>">
+                                                    </form>
                                                     <button class="btn btn-primary succ open-edu" type="button">Save
                                                     </button>
                                                 </div>
@@ -197,6 +202,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
