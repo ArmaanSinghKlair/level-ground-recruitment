@@ -75,7 +75,13 @@ public class CandidateProfileServlet extends HttpServlet {
         String url = "/WEB-INF/candidate.jsp";
 
         if (submit != null && submit.equals("edit")) {
-            url = "/profile-navigation";
+            if (errList == null) {
+                url = "/profile-navigation";
+            }
+            else
+            {
+               url ="/WEB-INF/candidate-profile-edit.jsp"; 
+            }
         }
         request.getServletContext().getRequestDispatcher(url).forward(request, response);
 

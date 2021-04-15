@@ -7,6 +7,7 @@ package dataaccess;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
@@ -40,6 +41,59 @@ public final class ProfileServicesDB {
         try{
             ArrayList<Skill> skills = new ArrayList(em.createNamedQuery("Skill.findAll",Skill.class).getResultList());
             return skills;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public final BusinessClient getBusinessClientByClientID(int id)
+    {
+        initialize();
+        try{
+            TypedQuery<BusinessClient> q = em.createNamedQuery("BusinessClient.findByBusinessclientID", BusinessClient.class);
+            q.setParameter("businessclientID", id);
+            BusinessClient bc = q.getSingleResult();
+            return bc;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public final Candidate getCandidateByID(int id)
+    {
+        initialize();
+        try{
+            TypedQuery<Candidate> q = em.createNamedQuery("Candidate.findByCandidateID", Candidate.class);
+            q.setParameter("candidateID", id);
+            Candidate can = q.getSingleResult();
+            return can;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public final Application getApplicationForAdvisor(int jobID, int canID)
+    {
+        initialize();
+        try{
+            TypedQuery<Application> q = em.createQuery("select a from Application a where a.jobpostingID.jobpostingID = :jobID and a.candidateID.candidateID = :canID", Application.class);
+            q.setParameter("jobID", jobID);
+            q.setParameter("canID", canID);
+            Application app = q.getSingleResult();
+            return app;
+        }finally{
+            em.close();
+        } 
+    }
+    
+    public final ArrayList<JobPosting> getJobsForAdvisor(int bcID, int adID){
+        initialize();
+        try{
+            TypedQuery<JobPosting> q = em.createQuery("select jp from JobPosting jp where jp.businessclientID.businessclientID = :bcID and jp.advisorID.advisorID = :adID", JobPosting.class);
+            q.setParameter("adID", adID);
+            q.setParameter("bcID", bcID);
+            ArrayList<JobPosting> postings = new ArrayList(q.getResultList());
+            return postings;
         }finally{
             em.close();
         }
@@ -108,6 +162,52 @@ public final class ProfileServicesDB {
             bc.setBusClientWebsite(website);
             bc.setBusClientDescription(description);
             em.merge(bc);
+            trans.commit();
+        } catch (Exception ex) {
+            errList.add("Unknown error occured. Please try again later");
+        } finally{
+            em.close();
+            if(trans.isActive())
+                trans.rollback();
+        }
+        
+        return errList;
+    }
+    
+    public final ArrayList<String> setNewClientPassword(String password, BusinessClient bc) {
+        initialize();
+        ArrayList<String> errList = null;
+        try{
+            trans.begin();
+            bc.setBusClientPassword(password);
+            System.out.println(password);
+            em.merge(bc);
+            trans.commit();
+        } catch (Exception ex) {
+            errList.add("Unknown error occured. Please try again later");
+        } finally{
+            em.close();
+            if(trans.isActive())
+                trans.rollback();
+        }
+        
+        return errList;
+    }
+    
+    public final ArrayList<String> editJobPosting(String title, String status, String description, String requirements, Double wage, String location, Date startDate, Date endDate, JobPosting jp) {
+        initialize();
+        ArrayList<String> errList = null;
+        try{
+            trans.begin();
+            jp.setJobTitle(title);
+            jp.setJobStatus(status);
+            jp.setJobDescription(description);
+            jp.setRequirements(requirements);
+            jp.setWage(wage);
+            jp.setLocation(location);
+            jp.setStartDate(startDate);
+            jp.setEndDate(endDate);
+            em.merge(jp);
             trans.commit();
         } catch (Exception ex) {
             errList.add("Unknown error occured. Please try again later");

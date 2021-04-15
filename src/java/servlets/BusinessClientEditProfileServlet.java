@@ -7,7 +7,10 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import problemdomain.BusinessClient;
 import services.AccountServices;
 import services.ProfileServices;
+import util.PasswordUtil;
 import validation.ValidateBusinessClient;
 
 /**
@@ -54,7 +58,14 @@ public class BusinessClientEditProfileServlet extends HttpServlet {
         // Get business client
         BusinessClient bc = accService.getBusinessClientByUsername((String) sess.getAttribute("username"));
         
-        
+        try {
+            if (ValidateBusinessClient.validateBusClientPassword(newPass) == null && newPass.equals(confPass) && PasswordUtil.hashPassword(curPass).equals(bc.getBusClientPassword()))
+            {
+                ps.setNewClientPassword(PasswordUtil.hashPassword(newPass), bc);
+            }
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(BusinessClientEditProfileServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         ArrayList<String> errList = null;
         ArrayList<String> valErrList = ValidateBusinessClient.validateEdit(company, username, email, phone, address, website, description);

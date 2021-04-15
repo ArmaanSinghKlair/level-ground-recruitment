@@ -41,10 +41,12 @@ public class DeleteJobPosting extends HttpServlet {
         
         if (errList == null)
             {
-                request.setAttribute("message", "Job posting deleted");
+                request.setAttribute("success", true);
+                request.setAttribute("successMessage", "Job posting deleted");
                 request.getRequestDispatcher("/profile-navigation").forward(request, response);
             } else
             {
+                request.setAttribute("fail", true);
                 request.setAttribute("errList", errList);
                 request.getRequestDispatcher("/profile-navigation").forward(request, response);
             }

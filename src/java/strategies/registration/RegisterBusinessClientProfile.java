@@ -11,8 +11,11 @@ import problemdomain.BusinessClient;
 import services.AccountServices;
 
 /**
+ * Implements RegisterProfile interface. This class adheres to the Strategy
+ * pattern and is used to register a new BusinessClient profile.
  *
  * @author kentp
+ * @version 1.0
  */
 public class RegisterBusinessClientProfile implements RegisterProfile {
 

@@ -135,8 +135,10 @@
                                 <div class="col-12 col-md-5 offset-md-2 d-flex flex-column justify-content-end align-items-start">
                                     <h5 class="display-4">Apply Changes</h5>
                                     <div class="btn-group d-flex" role="group">
+                                        <form id="edit_reset" action="<c:url value='/edit-job-posting-nav'/>" method="post">
                                         <button class="btn btn-secondary" type="reset" style="color: #f1faee;">Reset
                                         </button>
+                                        </form>
                                         <button class="btn btn-dark succ" type="submit">Save Changes</button>
                                     </div>
                                 </div>
@@ -144,23 +146,23 @@
                         </form>
                     </div>
                     <div class="tab-pane fade" role="tabpanel" id="tab-4">
-                        <div class="accordion" role="tablist" id="accordion-3">
-                            <c:forEach var="posting" items="${jobPostings}">
+                        <c:forEach var="posting" items="${jobPostings}">
+                        <div class="accordion" role="tablist" id="accordion-<c:out value="${posting.jobpostingID}"/>">
                             <div class="accordion-item">
                                 <h2 class="accordion-header mb-0" role="tab">
                                     <button class="accordion-button d-flex justify-content-between header-btn"
-                                            data-bs-toggle="collapse" data-bs-target="#accordion-3 .item-1"
-                                            aria-expanded="true" aria-controls="accordion-3 .item-1"><c:out value="${posting.jobTitle}" default=''/> <fmt:formatDate value="${posting.postDate}" type="date" pattern="yyyy-MM-dd"/></button>
+                                            data-bs-toggle="collapse" data-bs-target="#accordion-<c:out value="${posting.jobpostingID}"/> .item-1"
+                                            aria-expanded="true" aria-controls="accordion-<c:out value="${posting.jobpostingID}"/> .item-1"><c:out value="${posting.jobTitle}" default=''/> <fmt:formatDate value="${posting.postDate}" type="date" pattern="yyyy-MM-dd"/></button>
                                 </h2>
                                 <div class="accordion-collapse collapse show item-1" role="tabpanel"
-                                     data-bs-parent="#accordion-3">
+                                     data-bs-parent="#accordion-<c:out value="${posting.jobpostingID}"/>">
                                     <div class="accordion-body">
                                         <form id="Posting_edit" action="<c:url value='/edit-job-posting'/>" method="post">
                                             <div class="row">
                                                 <div class="col justify-content-center"><label class="col-form-label">Title<input
-                                                        class="form-control" type="text" value="<c:out value="${posting.jobTitle}" default=''/>"></label></div>
+                                                        class="form-control" type="text" name="title" value="<c:out value="${posting.jobTitle}" default=''/>"></label></div>
                                                 <div class="col justify-content-center"><label class="col-form-label">Status<select
-                                                        class="form-select">
+                                                        class="form-select" name="status">
                                                     <option value="fullTime" <c:if test="${posting.jobStatus.equals('fullTime')}">selected</c:if>>Full-Time</option>
                                                     <option value="partTime" <c:if test="${posting.jobStatus.equals('partTime')}">selected</c:if>>Part-Time</option>
                                                     <option value="temporary" <c:if test="${posting.jobStatus.equals('temporary')}">selected</c:if>>Temporary</option>
@@ -168,42 +170,44 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col"><label class="col-form-label">Wage<input
-                                                        class="form-control" type="text" value="<c:out value="${posting.wage}" default=''/>"></label></div>
+                                                        class="form-control" type="text" name="wage" value="<c:out value="${posting.wage}" default=''/>"></label></div>
                                                 <div class="col"><label class="col-form-label">Location<input
-                                                        class="form-control" type="text" value="<c:out value="${posting.location}" default=''/>"></label></div>
+                                                        class="form-control" type="text" name="location" value="<c:out value="${posting.location}" default=''/>"></label></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col"><label class="col-form-label">Start Date<input
-                                                        class="form-control" type="date" value="<fmt:formatDate value="${posting.startDate}" type="date" pattern="yyyy-MM-dd"/>"></label></div>
+                                                        class="form-control" type="date" name="startDate" value="<fmt:formatDate value="${posting.startDate}" type="date" pattern="yyyy-MM-dd"/>"></label></div>
                                                 <div class="col"><label class="col-form-label">End Date<input
-                                                        class="form-control" type="date" value="<fmt:formatDate value="${posting.endDate}" type="date" pattern="yyyy-MM-dd"/>"></label></div>
+                                                        class="form-control" type="date" name="endDate" value="<fmt:formatDate value="${posting.endDate}" type="date" pattern="yyyy-MM-dd"/>"></label></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col justify-content-center"><label class="form-label">Description</label><textarea
-                                                        class="form-control" rows="3" value="<c:out value="${posting.jobDescription}" default=''/>"></textarea></div>
+                                                        class="form-control" rows="3" name="description"><c:out value="${posting.jobDescription}" default=''/></textarea></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col justify-content-center"><label class="form-label">Requirements</label><textarea
-                                                        class="form-control" rows="3" value="<c:out value="${posting.requirements}" default=''/>"></textarea></div>
+                                                        class="form-control" rows="3" name="requirements"><c:out value="${posting.requirements}" default=''/></textarea></div>
                                             </div>
                                             <div class="row" style="padding-top: 20px;">
                                                 <div class="col d-flex justify-content-end">
-                                                    <form id="permanent_deletion" action="<c:url value='/delete-job-posting'/>" method="post">
-                                                    <button class="btn btn-danger open-work" type="submit"
+                                                    
+                                                    <button class="btn btn-danger open-work" type="submit" form="permanent_deletion<c:out value="${posting.jobpostingID}"/>"
                                                             style="margin-right: 20px;">Remove
                                                     </button>
-                                                    <input id="<c:out value="${posting.jobpostingID}"/>" type="hidden" name="postingID" value="<c:out value="${posting.jobpostingID}"/>">
-                                                    </form>
-                                                    <button class="btn btn-primary succ open-edu" type="button">Save
+                                                    <button class="btn btn-primary succ open-edu" type="submit">Save
                                                     </button>
+                                                    <input id="<c:out value="${posting.jobpostingID}"/>" type="hidden" name="postingID" value="<c:out value="${posting.jobpostingID}"/>">
                                                 </div>
                                             </div>
                                         </form>
                                     </div>
+                                    <form id="permanent_deletion<c:out value="${posting.jobpostingID}"/>" action="<c:url value='/delete-job-posting'/>" method="post">
+                                    <input id="<c:out value="${posting.jobpostingID}"/>" type="hidden" name="postingID" value="<c:out value="${posting.jobpostingID}"/>">
+                                    </form>
                                 </div>
                             </div>
-                            </c:forEach>
                         </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>

@@ -107,13 +107,13 @@
                                 <div class="col-12 col-md-5">
                                     <div class="form-group mb-3"><label class="form-label"
                                                                         for="username">Username</label><input
-                                            class="form-control" type="text" id="username"
+                                            class="form-control" type="text" id="username" name="currentUsername"
                                             value="<c:out value='${candidate.canUsername}' default=''/>"></div>
                                 </div>
                                 <div class="col-12 col-md-5 offset-md-1">
                                     <div class="form-group mb-3"><label class="form-label"
                                                                         for="status">Status</label><select
-                                            class="form-select" id="status" name="select">
+                                            class="form-select" id="status" name="placed">
                                         <option value="yes" <c:if test="${candidate.placed==true}">selected</c:if>>
                                             Hired
                                         </option>
@@ -149,12 +149,12 @@
                                 <div class="col-12 col-md-5">
                                     <h5>Change Password</h5>
                                     <div class="form-group mb-3"><label class="form-label" for="cur-pass">Current
-                                        Password</label><input class="form-control" type="password" id="cur-pass"
+                                        Password</label><input class="form-control" type="password" name="currentPassword" id="cur-pass"
                                                                placeholder="****"></div>
                                     <div class="form-group mb-3"><label class="form-label" for="new-pass">New
-                                        Password</label><input class="form-control" type="password" id="new-pass"></div>
+                                        Password</label><input class="form-control" name="password" type="password" id="new-pass"></div>
                                     <div class="form-group mb-3"><label class="form-label" for="conf-pass">Confirm
-                                        Password</label><input class="form-control" type="password" id="conf-pass">
+                                        Password</label><input class="form-control" name="password-repeat" type="password" id="conf-pass">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-5 offset-md-2 d-flex flex-column justify-content-end align-items-start">

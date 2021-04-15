@@ -21,6 +21,7 @@ import problemdomain.BusinessClient;
 import problemdomain.Candidate;
 import problemdomain.Education;
 import problemdomain.JobPosting;
+import problemdomain.Role;
 import problemdomain.Skill;
 import problemdomain.WorkHistory;
 import strategies.authentication.AdvisorAuthentication;
@@ -30,16 +31,38 @@ import strategies.authentication.CandidateAuthentication;
 import util.DBUtil;
 import util.PasswordUtil;
 
+/**
+ * Various account services for different interactions within our database, such
+ * as inserting new data into our pre-existing database tables.
+ *
+ * @author
+ * @version 1.0
+ */
 public class AccountServicesDB {
 
     private EntityManager em;
     private EntityTransaction trans;
 
+    /**
+     * Initialize the EntityManager and EntityTransaction for the various
+     * methods within this class.
+     */
     private void initialize() {
         em = DBUtil.getEmFactory().createEntityManager();
         trans = em.getTransaction();
     }
 
+    /**
+     * Used to create a new Candidate Profile in our database.
+     *
+     * @param username Username of Candidate
+     * @param password Password of Candidate
+     * @param firstName First Name of Candidate
+     * @param lastName Last Name of Candidate
+     * @param email Email of Candidate
+     * @param phoneNo Phone number of Candidate
+     * @return String ArrayList of any errors that may have occurred.
+     */
     public final ArrayList<String> createCandidateProfile(String username, String password, String firstName, String lastName, String email, String phoneNo) {
         initialize();
 
@@ -62,6 +85,7 @@ public class AccountServicesDB {
             c.setCanfirstName(firstName);
             c.setCanlastName(lastName);
             c.setCanPhoneNo(phoneNo);
+            c.setPlaced(false);
             trans.begin();
             em.persist(c);
             trans.commit();
@@ -78,6 +102,16 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Used to create a new Business Client Profile in our database.
+     *
+     * @param username Username of the Business Client
+     * @param password Password of the Business Client
+     * @param company Company of the Business Client
+     * @param email Email of the Business Client
+     * @param phoneNo Phone Number of the Business Client
+     * @return String ArrayList of any errors that may have occurred.
+     */
     public final ArrayList<String> createBusinessClientProfile(String username, String password, String company, String email, String phoneNo) {
         initialize();
 
@@ -117,6 +151,16 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Used to create a new Advisor Profile in our database.
+     *
+     * @param username Username of the Advisor
+     * @param password Password of the Advisor
+     * @param firstName First Name of the Advisor
+     * @param lastName Last Name of the Advisor
+     * @param email Email of the Advisor
+     * @return String ArrayList of any errors that may have occurred.
+     */
     public final ArrayList<String> createAdvisorProfile(String username, String password, String firstName, String lastName, String email) {
         initialize();
 
@@ -156,6 +200,90 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Used to create a new Skill in our database.
+     *
+     * @param description Skill description.
+     * @return String ArrayList of any errors that may have occurred.
+     */
+    public final ArrayList<String> createSkill(String description) {
+        initialize();
+        ArrayList<String> errList = new ArrayList<>();
+        try {
+
+            //Checking to see if Skill already exists
+            if (this.doesSkillDescriptionExist(em, "description", description)) {
+                errList.add("Skill already exists");
+                return errList;
+            }
+
+            Skill s = new Skill();
+            s.setDescription(description);
+            trans.begin();
+            em.persist(s);
+            trans.commit();
+
+            return null;
+        } catch (Exception e) {
+            Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, e);
+            errList.add("System error. Please check logs");
+            return errList;
+        } finally {
+            if (trans.isActive()) {
+                trans.rollback();
+            }
+            em.close();
+        }
+    }
+
+    /**
+     * Used to create a new Role in our database.
+     *
+     * @param description Role Description.
+     * @return String ArrayList of any errors that may have occurred.
+     */
+    public final ArrayList<String> createRole(String description) {
+        initialize();
+        ArrayList<String> errList = new ArrayList<>();
+        try {
+
+            //Checking to see if Role already exists
+            if (this.doesRoleExist(em, "description", description)) {
+                errList.add("Role already exists");
+                return errList;
+            }
+
+            Role r = new Role();
+            r.setDescription(description);
+            trans.begin();
+            em.persist(r);
+            trans.commit();
+
+            return null;
+        } catch (Exception e) {
+            Logger.getLogger(AccountServicesDB.class.getName()).log(Level.SEVERE, null, e);
+            errList.add("System error. Please check logs");
+            return errList;
+        } finally {
+            if (trans.isActive()) {
+                trans.rollback();
+            }
+            em.close();
+        }
+    }
+
+    /**
+     * Used to create a new Job Posting in our database.
+     *
+     * @param title Title of the Job Posting
+     * @param requirements Requirements of the Job Posting
+     * @param startDate Start Date of the Job Posting
+     * @param endDate End Date of the Job Posting
+     * @param status Status of the Job Posting
+     * @param description Description of the Job Posting
+     * @param username 
+     * @return String ArrayList of any errors that may have occurred.
+     */
     public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description, String username, Double wage, String location) {
         BusinessClient bc = getBusinessClientByUsername(username);
         initialize();
@@ -189,7 +317,7 @@ public class AccountServicesDB {
             em.close();
         }
     }
-    
+
     public final ArrayList<String> deleteJobPostingByID(int id) {
         initialize();
         ArrayList<String> errList = new ArrayList<>();
@@ -493,11 +621,23 @@ public class AccountServicesDB {
         return q != null && !q.isEmpty();
     }
 
+    public final boolean doesSkillDescriptionExist(EntityManager em, String attributeName, String attributeValue) {
+        List<Skill> q = em.createNamedQuery("Skill.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), Skill.class).setParameter(attributeName, attributeValue).getResultList();
+        return q != null && !q.isEmpty();
+
+    }
+
     public boolean doesSkillExist(String id) {
         if (em == null || !em.isOpen()) {
             initialize();
         }
 
         return em.find(Skill.class, Integer.parseInt(id)) != null;
+    }
+
+    public final boolean doesRoleExist(EntityManager em, String attributeName, String attributeValue) {
+        List<Role> q = em.createNamedQuery("Role.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), Role.class).setParameter(attributeName, attributeValue).getResultList();
+        return q != null && !q.isEmpty();
+
     }
 }

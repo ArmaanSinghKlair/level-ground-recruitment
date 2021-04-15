@@ -88,17 +88,17 @@
     
     <div class="row header-row">
         <div class="col">
-            <div class="accordion" role="tablist" id="accordion-1">
-                <c:forEach var="candidate" items="${candidates}">
+            <c:forEach var="candidate" items="${candidates}">
+            <div class="accordion" role="tablist" id="accordion-<c:out value='${candidate.candidateID}' default=''/>">
                 <div class="accordion-item">
                     <h2 class="accordion-header mb-0" role="tab">
                         <button class="accordion-button candidate-name accordion-button" data-bs-toggle="collapse"
-                                data-bs-target="#accordion-1 .item-1" aria-expanded="true"
-                                aria-controls="accordion-1 .item-1">Candidate ID: <c:out value='${candidate.candidateID}' default=''/>
+                                data-bs-target="#accordion-<c:out value='${candidate.candidateID}' default=''/> .item-1" aria-expanded="true"
+                                aria-controls="accordion-<c:out value='${candidate.candidateID}' default=''/> .item-1">Candidate ID: <c:out value='${candidate.candidateID}' default=''/>
                         </button>
                     </h2>
                     <div class="accordion-collapse collapse show item-1 item-content" role="tabpanel"
-                         data-bs-parent="#accordion-1">
+                         data-bs-parent="#accordion-<c:out value='${candidate.candidateID}' default=''/>">
                         <div class="accordion-body">
                             <div class="row candidate-row">
                                 <div class="col-md-5">
@@ -159,8 +159,8 @@
                         </div>
                     </div>
                 </div>
-                </c:forEach>
             </div>
+            </c:forEach>
         </div>
     </div>
 </div>

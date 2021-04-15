@@ -7,8 +7,6 @@ package strategies.profile;
 
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import problemdomain.Advisor;
 import problemdomain.Application;
 import problemdomain.BusinessClient;
 import problemdomain.Candidate;
@@ -20,23 +18,36 @@ import services.ProfileServices;
  *
  * @author 756887
  */
-public class LoadAdvisorJobPosting implements LoadProfile{
-    
+public class LoadAdvisorCandidate implements LoadProfile {
+
     @Override
     public void loadProfile(HttpServletRequest request) {
-        
-        //Get job postings from specific business client
-        String clientID = request.getParameter("clientID");
-        ProfileServices ps = new ProfileServices();
-        HttpSession sess = request.getSession(false);
-        
-        Advisor a = new AccountServices().getAdvisorByUsername((String)sess.getAttribute("username"));
-        BusinessClient bc = ps.getBusinessClientByClientID(Integer.parseInt(clientID));
-        ArrayList<JobPosting> jobList = ps.getJobsForAdvisor(a.getAdvisorID(),bc.getBusinessclientID());
-        
-        request.setAttribute("company", bc);
-        request.setAttribute("jobList", jobList);
 
-        request.setAttribute("url", "/WEB-INF/advisor-business-view.jsp");
+        String jobID = request.getParameter("jobID");
+        String clientID = request.getParameter("clientID");
+        AccountServices accService = new AccountServices();
+        ProfileServices ps = new ProfileServices();
+
+        // Get job posting
+        JobPosting job = accService.getJobpostingByID(Integer.parseInt(jobID));
+
+        // Get business client
+        BusinessClient bc = ps.getBusinessClientByClientID(Integer.parseInt(clientID));
+
+        // Get applied candidates
+        ArrayList<Application> apps = ps.getApplicationsByJobpostingID(job);
+        ArrayList<Candidate> candidates = new ArrayList<>();
+
+        for (Application app : apps) {
+            if (app.getStatus() == 0) {
+                candidates.add(app.getCandidateID());
+            }
+        }
+
+        request.setAttribute("job", job);
+        request.setAttribute("company", bc);
+        request.setAttribute("candidateList", candidates);
+
+        request.setAttribute("url", "/WEB-INF/advisor-post-view.jsp");
     }
 }

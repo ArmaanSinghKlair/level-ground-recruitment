@@ -44,7 +44,6 @@ public class LoadClientJobPosting implements LoadProfile{
             {
                 candidates.add(app.getCandidateID());
             }
-            //candidates.add(app.getCandidateID());
         }
         request.setAttribute("candidates", candidates);
         request.setAttribute("url", "/WEB-INF/business-post-view.jsp"); //change this when correct page is added
