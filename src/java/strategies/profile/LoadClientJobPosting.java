@@ -34,7 +34,7 @@ public class LoadClientJobPosting implements LoadProfile{
         request.setAttribute("jobposting", jp);
         
         // Get applied candidates
-        ArrayList<Application> apps = ps.getApplicationsByJobpostingID(jp.getJobpostingID());
+        ArrayList<Application> apps = ps.getApplicationsByJobpostingID(jp);
         ArrayList<Candidate> candidates = new ArrayList<Candidate>();
         for (Application app: apps)
         {
