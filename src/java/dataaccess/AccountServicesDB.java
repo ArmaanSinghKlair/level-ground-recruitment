@@ -211,9 +211,15 @@ public class AccountServicesDB {
         ArrayList<String> errList = new ArrayList<>();
         try {
 
-            //Checking to see if Skill already exists
-            if (this.doesSkillDescriptionExist(em, "description", description)) {
+            //Error checking
+            if (description == null || description.equals("")) {
+                errList.add("Skill cannot be empty");
+                return errList;
+            } else if (this.doesSkillDescriptionExist(em, "description", description)) {
                 errList.add("Skill already exists");
+                return errList;
+            } else if (description.length() > 200) {
+                errList.add("Skill cannot be longer than 200 characters");
                 return errList;
             }
 
@@ -247,9 +253,15 @@ public class AccountServicesDB {
         ArrayList<String> errList = new ArrayList<>();
         try {
 
-            //Checking to see if Role already exists
-            if (this.doesRoleExist(em, "description", description)) {
+            //Error checking
+            if (description == null || description.equals("")) {
+                errList.add("Role cannot be empty");
+                return errList;
+            } else if (this.doesRoleExist(em, "description", description)) {
                 errList.add("Role already exists");
+                return errList;
+            } else if (description.length() > 200) {
+                errList.add("Role cannot be longer than 200 characters");
                 return errList;
             }
 
@@ -281,7 +293,7 @@ public class AccountServicesDB {
      * @param endDate End Date of the Job Posting
      * @param status Status of the Job Posting
      * @param description Description of the Job Posting
-     * @param username 
+     * @param username
      * @return String ArrayList of any errors that may have occurred.
      */
     public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description, String username, Double wage, String location) {
