@@ -108,7 +108,6 @@
                     <div class="form-group mb-3">
                         <button class="btn btn-primary d-block w-100" type="submit" value="Login">Log In</button>
                     </div>
-                    <a class="forgot" href="#">Forgot your email or password?</a>
                 </form>
             </div>
         </div>
