@@ -18,6 +18,7 @@ import problemdomain.Application;
 import problemdomain.BusinessClient;
 import problemdomain.Candidate;
 import problemdomain.JobPosting;
+import problemdomain.Role;
 import problemdomain.Skill;
 import strategies.profile.LoadAdvisorProfile;
 import strategies.profile.LoadBusinessClientProfile;
@@ -277,6 +278,11 @@ public final class ProfileServices {
 
     public final ArrayList<Skill> getAllSkills() {
         return psdb.getAllSkills();
+    }
+    
+    public final ArrayList<Role> getAllRoles()
+    {
+        return psdb.getAllRoles();
     }
 
     public final BusinessClient getBusinessClientByClientID(int id) {
