@@ -28,11 +28,6 @@ public class LoadBusinessClientProfile implements LoadProfile {
 
         HttpSession sess = request.getSession(false);
         
-        if (request.getAttribute("message") != null && request.getAttribute("message") != "")
-        {
-            request.setAttribute("message", request.getAttribute("message"));
-        }
-        
         // Get business client
         BusinessClient bc = accService.getBusinessClientByUsername((String) sess.getAttribute("username"));
         request.setAttribute("businessClient", bc);

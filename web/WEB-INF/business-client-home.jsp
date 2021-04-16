@@ -51,7 +51,7 @@
                             class="form-select level-slc new-post-row" name="status">
                         <option value="fullTime" selected="">Full-Time</option>
                         <option value="partTime">Part-Time</option>
-                        <option value="temperory">Temporary</option>
+                        <option value="temporary">Temporary</option>
                     </select></div>
                 </div>
                 <div class="row d-flex new-post-row">
@@ -90,9 +90,9 @@
             <button class="btn-close float-end close"></button>
             <h3>Delete this Posting?</h3>
             <div class="d-flex justify-content-center">
-                <form action="<c:url value='/delete-job-posting'/>" method="post">
+                <form id="permanent_deletion" action="<c:url value='/delete-job-posting'/>" method="post">
                 <button class="btn btn-danger" type="submit">Permanently Remove This Post</button>
-                <input type="hidden" name="postingID" value="${postingID}">
+                <input id="permanentdeletionID" type="hidden" name="postingID" value="">
                 </form>
             </div>
         </div>
@@ -133,7 +133,7 @@
                 </div>
                 <div class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
                     <div class="btn-group" role="group"><a class="btn" role="button" data-bs-toggle="tooltip"
-                                                           data-bss-tooltip="" title="Edit" href="profile-edit.html"><i
+                                                           data-bss-tooltip="" title="Edit" href="<c:url value='/edit-client-profile-nav'/>"><i
                             class="far fa-edit" data-bss-hover-animate="pulse"></i></a></div>
                 </div>
             </form>
@@ -147,23 +147,24 @@
             </div>
             <hr>
             <c:forEach var="posting" items="${jobPostings}">
-                <form class="shadow-sm" data-aos="fade-up">
+                <form class="shadow-sm" data-aos="fade-up" action="<c:url value='/business-client-job-posting'/>" method="post">
                     <div class="d-flex form-group mb-3">
                         <h6>Title:</h6>
                         <p><c:out value="${posting.jobTitle}"/></p>
                     </div>
                     <div class="d-flex form-group mb-3">
                         <h6>Start Date:</h6>
-                        <p><c:out value="${posting.startDate}"/></p>
+                        <p><fmt:formatDate value="${posting.startDate}" type="date" pattern="yyyy-MM-dd"/></p>
                     </div>
                     <div class="d-flex form-group mb-3">
                         <h6>End Date:</h6>
-                        <p><c:out value="${posting.endDate}"/></p>
+                        <p><fmt:formatDate value="${posting.endDate}" type="date" pattern="yyyy-MM-dd"/></p>
                     </div>
                     <div class="posting div">
-                        <div class="d-flex justify-content-around modify-btns"><c:out value="${posting.jobpostingID}"/>
-                            <button class="btn btn-danger open-work" type="button" name="${posting.jobpostingID}" action="<c:set var="postingID" scope="session" value="${posting.jobpostingID}"/>">Remove</button>
-                            <button class="btn submit-btn" type="button">View Candidates</button>
+                        <div class="d-flex justify-content-around modify-btns">
+                            <button class="btn btn-danger open-work" type="button" name="${posting.jobpostingID}" onclick="document.getElementById('permanentdeletionID').value=${posting.jobpostingID}">Remove</button>
+                            <input type="hidden" name="postingID" value="${posting.jobpostingID}">
+                            <button class="btn submit-btn" type="submit" name="${posting.jobpostingID}">View Candidates</button>
                         </div>
                     </div>
                 </form>

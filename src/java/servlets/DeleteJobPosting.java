@@ -35,17 +35,18 @@ public class DeleteJobPosting extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("postingID"));
-        System.out.println(id);
     
         AccountServices service = new AccountServices();
         ArrayList<String> errList = service.deleteJobPostingByID(id);
         
         if (errList == null)
             {
-                request.setAttribute("message", "Job posting deleted");
+                request.setAttribute("success", true);
+                request.setAttribute("successMessage", "Job posting deleted");
                 request.getRequestDispatcher("/profile-navigation").forward(request, response);
             } else
             {
+                request.setAttribute("fail", true);
                 request.setAttribute("errList", errList);
                 request.getRequestDispatcher("/profile-navigation").forward(request, response);
             }

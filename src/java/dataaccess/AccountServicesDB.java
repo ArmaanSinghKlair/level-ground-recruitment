@@ -284,7 +284,7 @@ public class AccountServicesDB {
      * @param username 
      * @return String ArrayList of any errors that may have occurred.
      */
-    public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description, String username) {
+    public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description, String username, Double wage, String location) {
         BusinessClient bc = getBusinessClientByUsername(username);
         initialize();
         ArrayList<String> errList = new ArrayList<>();
@@ -292,6 +292,9 @@ public class AccountServicesDB {
             JobPosting jp = new JobPosting();
             jp.setRequirements(requirements);
             jp.setJobTitle(title);
+            jp.setWage(wage);
+            jp.setApplicants(0);
+            jp.setLocation(location);
             jp.setPostDate(new Date());
             jp.setAdvisorID(em.find(Advisor.class, new AdvisorServicesDB().getNextAdvisorID()));
             jp.setBusinessclientID(bc);
