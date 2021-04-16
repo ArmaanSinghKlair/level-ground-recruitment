@@ -358,6 +358,27 @@ public final class ProfileServicesDB {
         
         return true;
     }
+     
+     public final ArrayList<String> deleteApplicationByID(Application ap) {
+        initialize();
+        ArrayList<String> errList = new ArrayList<>();
+        try{
+            trans.begin();
+            em.remove(ap);
+            trans.commit();
+        } catch(Exception e){
+            System.out.println(e);
+            errList.add("Application could not be removed");
+            return errList;
+        } finally{
+            if(trans.isActive()){
+                trans.rollback();
+            }
+            em.close();
+        }
+        
+        return null;
+    }
     
      /**
      * This method checks whether the feature to be deleted is infact owned by the user

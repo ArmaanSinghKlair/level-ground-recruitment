@@ -109,7 +109,18 @@
                                         <h6><c:out value='${education.institution}' default=''/></h6>
                                         <p>Level: <c:out value='${education.level}' default=''/></p>
                                         <p>Subject: <c:out value='${education.subject}' default=''/></p>
-                                        <p>Duration: <%-- <c:out value='${education.startDate - education.endDate}' default=''/> --%>Start date - End date</p>
+                                        <p>Start Date: <fmt:formatDate value="${education.startDate}" type="date" pattern="yyyy-MM-dd"/></p>
+                                        <p>End Date: 
+                                        <c:choose>
+                                              <c:when test="${education.endDate !=null}">
+                                                  <fmt:formatDate value="${education.endDate}" type="date"
+                                                                  pattern="yyyy-MM-dd"/>
+                                              </c:when>
+                                              <c:otherwise>
+                                                  current
+                                              </c:otherwise>
+                                        </c:choose>
+                                        <p/>
                                         <hr>
                                     </div>
                                     </c:forEach>
@@ -121,7 +132,18 @@
                                     <div>
                                         <h6><c:out value='${work.company}' default=''/></h6>
                                         <p>Title: <c:out value='${work.title}' default=''/></p>
-                                        <p>Duration: <%-- <c:out value='${work.startDate - work.endDate}' default=''/> --%></p>
+                                        <p>Start Date: <fmt:formatDate value="${work.startDate}" type="date" pattern="yyyy-MM-dd"/></p>
+                                        <p>End Date: 
+                                        <c:choose>
+                                              <c:when test="${work.endDate !=null}">
+                                                  <fmt:formatDate value="${work.endDate}" type="date"
+                                                                  pattern="yyyy-MM-dd"/>
+                                              </c:when>
+                                              <c:otherwise>
+                                                  current
+                                              </c:otherwise>
+                                        </c:choose>
+                                        <p/>
                                         <p>Reference: <c:out value='${work.reference}' default=''/></p>
                                         <hr>
                                     </div>
@@ -149,7 +171,9 @@
                                 </div>
                             </div>
                             <div class="btn-group float-end btn-group" role="group">
-                                <button class="btn btn-danger open-work" type="button">Reject</button>
+                                <button class="btn btn-danger open-work" type="button" name="${candidate.candidateID}${jobposting.jobpostingID}"
+                                        onclick="document.getElementById('deletecandidateID').value=${candidate.candidateID}
+                                        document.getElementById('deletepostingID').value=${jobposting.jobpostingID}">Reject</button>
                                 <form id="setup_interview" action="<c:url value='/setup-interview'/>" method="post">
                                 <button class="btn btn-primary submit-btn" type="submit">Setup Interview</button>
                                 <input type="hidden" name="candidateID" value="${candidate.candidateID}">
@@ -170,7 +194,11 @@
             <button class="btn-close float-end close"></button>
             <h3>Remove This Candidate?</h3>
             <div class="d-flex justify-content-center">
-                <button class="btn btn-danger" type="button">Permanently Remove This Candidate</button>
+                <form id="setup_interview" action="<c:url value='/reject-candidate'/>" method="post">
+                <button class="btn btn-danger" type="submit">Permanently Remove This Candidate</button>
+                <input id="deletecandidateID" type="hidden" name="candidateID" value="">
+                <input id="deletepostingID" type="hidden" name="postingID" value="">
+                </form>
             </div>
         </div>
     </div>

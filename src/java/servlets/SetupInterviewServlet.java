@@ -44,14 +44,17 @@ public class SetupInterviewServlet extends HttpServlet {
         // Get application
         Application app = ps.getApplicationByBothID(postID, canID);
         ArrayList<String> errList = jps.selectCandidateForInterview(request, response, app.getApplicationID());
-        if (errList == null)
+        if (errList != null)
         {
-            request.getRequestDispatcher("/business-client-job-posting").forward(request, response);
+            request.setAttribute("fail", true);
+            request.setAttribute("errList", errList);
         } else
         {
-            request.setAttribute("errList", errList);
-            request.getRequestDispatcher("/business-client-job-posting").forward(request, response);
+            request.setAttribute("success", true);
+            request.setAttribute("successMessage", "Interview request sent");
         }
+        
+        request.getRequestDispatcher("/business-client-job-posting").forward(request, response);
         
     }
 

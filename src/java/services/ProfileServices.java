@@ -338,6 +338,10 @@ public final class ProfileServices {
     public final ArrayList<String> setNewClientPassword(String password, BusinessClient bc) {
         return psdb.setNewClientPassword(password, bc);
     }
+    
+    public final ArrayList<String> deleteApplicationByID(Application ap) {
+        return psdb.deleteApplicationByID(ap);
+    }
 
     private final boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;
