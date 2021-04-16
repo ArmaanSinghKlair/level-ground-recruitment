@@ -205,7 +205,7 @@
                                                         <div class="form-group mb-3"><label
                                                                 class="form-label">Institution</label><input
                                                                 class="form-control" type="text"
-                                                                value="${education.institution}"></div>
+                                                                value="${education.institution}" name="institution"></div>
                                                     </div>
                                                     <div class="col-12 col-md-5 offset-md-1">
                                                         <div class="form-group mb-3"><label class="form-label">Education
@@ -229,13 +229,13 @@
                                                         <div class="form-group mb-3"><label
                                                                 class="form-label">Subject</label><input
                                                                 class="form-control" type="text"
-                                                                value="${education.subject}"></div>
+                                                                value="${education.subject}" name="subject"></div>
                                                     </div>
                                                     <div class="col-12 col-md-5 offset-md-1">
                                                         <div class="form-group mb-3"><label class="form-label">Start
                                                             Date</label><input class="form-control" type="date"
                                                                                name="start-date"
-                                                                               value="<fmt:formatDate value="${education.startDate}" type="date" pattern="yyyy-MM-dd" />">
+                                                                               value="<fmt:formatDate value="${education.startDate}" type="date" pattern="yyyy-MM-dd"/>" name="start-date">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -244,7 +244,7 @@
                                                         <div class="form-group mb-3"><label class="form-label">End
                                                             Date</label><input class="form-control" type="date"
                                                                                name="end-date"
-                                                                               value="<fmt:formatDate value="${education.endDate}" type="date" pattern="yyyy-MM-dd" />">
+                                                                               value="<fmt:formatDate value="${education.endDate}" type="date" pattern="yyyy-MM-dd"/>" name="end-date">
                                                         </div>
                                                     </div>
                                                     <div class="col-12 col-md-5 offset-md-1 d-flex justify-content-around align-items-end">
@@ -252,7 +252,7 @@
                                                             <button class="btn btn-secondary" type="reset">Reset
                                                             </button>
                                                             <button class="btn btn-success succ" value="edit"
-                                                                    type="submit">Save
+                                                                    type="submit" name="submit">Save
                                                                 Changes
                                                             </button>
                                                         </div>
@@ -340,7 +340,7 @@
                                                                 <button class="btn btn-secondary" type="reset">Reset
                                                                 </button>
                                                                 <button class="btn btn-success succ" value="edit"
-                                                                        type="submit">Save
+                                                                        type="submit" name="submit">Save
                                                                     Changes
                                                                 </button>
                                                             </div>
