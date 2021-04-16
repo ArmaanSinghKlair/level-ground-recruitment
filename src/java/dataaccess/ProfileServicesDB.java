@@ -7,6 +7,7 @@ package dataaccess;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
@@ -85,7 +86,7 @@ public final class ProfileServicesDB {
         } 
     }
     
-    public final ArrayList<JobPosting> getJobsForAdvisor(int bcID, int adID){
+    public final ArrayList<JobPosting> getJobsForAdvisor(int adID, int bcID){
         initialize();
         try{
             TypedQuery<JobPosting> q = em.createQuery("select jp from JobPosting jp where jp.businessclientID.businessclientID = :bcID and jp.advisorID.advisorID = :adID", JobPosting.class);
@@ -133,6 +134,90 @@ public final class ProfileServicesDB {
         }finally{
             em.close();
         }
+    }
+    
+    public final Application getApplicationByBothID(int jpID, int canID){
+        initialize();
+        try{
+            TypedQuery<Application> q = em.createNamedQuery("Application.findByBothID", Application.class);
+            q.setParameter("jobpostingID", jpID); 
+            q.setParameter("candidateID", canID);
+            Application application = q.getSingleResult();
+            return application;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public final ArrayList<String> editBusinessClientProfile(String company, String username, String email, String phone, String address, String website, String description, BusinessClient bc) {
+        initialize();
+        ArrayList<String> errList = null;
+        try{
+            trans.begin();
+            bc.setBusClientCompany(company);
+            bc.setBusClientUsername(username);
+            bc.setBusClientEmail(email);
+            bc.setBusClientPhone(phone);
+            bc.setBusClientAddress(address);
+            bc.setBusClientWebsite(website);
+            bc.setBusClientDescription(description);
+            em.merge(bc);
+            trans.commit();
+        } catch (Exception ex) {
+            errList.add("Unknown error occured. Please try again later");
+        } finally{
+            em.close();
+            if(trans.isActive())
+                trans.rollback();
+        }
+        
+        return errList;
+    }
+    
+    public final ArrayList<String> setNewClientPassword(String password, BusinessClient bc) {
+        initialize();
+        ArrayList<String> errList = null;
+        try{
+            trans.begin();
+            bc.setBusClientPassword(password);
+            System.out.println(password);
+            em.merge(bc);
+            trans.commit();
+        } catch (Exception ex) {
+            errList.add("Unknown error occured. Please try again later");
+        } finally{
+            em.close();
+            if(trans.isActive())
+                trans.rollback();
+        }
+        
+        return errList;
+    }
+    
+    public final ArrayList<String> editJobPosting(String title, String status, String description, String requirements, Double wage, String location, Date startDate, Date endDate, JobPosting jp) {
+        initialize();
+        ArrayList<String> errList = null;
+        try{
+            trans.begin();
+            jp.setJobTitle(title);
+            jp.setJobStatus(status);
+            jp.setJobDescription(description);
+            jp.setRequirements(requirements);
+            jp.setWage(wage);
+            jp.setLocation(location);
+            jp.setStartDate(startDate);
+            jp.setEndDate(endDate);
+            em.merge(jp);
+            trans.commit();
+        } catch (Exception ex) {
+            errList.add("Unknown error occured. Please try again later");
+        } finally{
+            em.close();
+            if(trans.isActive())
+                trans.rollback();
+        }
+        
+        return errList;
     }
     
     public final ArrayList<String> add(HttpServletRequest request, String username){

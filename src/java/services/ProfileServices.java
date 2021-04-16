@@ -7,7 +7,10 @@ package services;
 
 import dataaccess.AccountServicesDB;
 import dataaccess.ProfileServicesDB;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import problemdomain.Advisor;
@@ -26,6 +29,7 @@ import strategies.registration.RegisterCandidateProfile;
 import strategies.registration.RegisterProfile;
 import validation.ValidateCandidate;
 import validation.ValidateEducation;
+import validation.ValidateJobPosting;
 import validation.ValidateSkill;
 import validation.ValidateWorkHistory;
 
@@ -283,8 +287,8 @@ public final class ProfileServices {
         return psdb.getCandidateByID(id);
     }
 
-    public final Application getApplicationForAdvisor(int id, int adID) {
-        return psdb.getApplicationForAdvisor(id, adID);
+    public final Application getApplicationForAdvisor(int adID, int bcID) {
+        return psdb.getApplicationForAdvisor(adID, bcID);
     }
     
     public final ArrayList<JobPosting> getJobsForAdvisor(int bcID, int adID) {
@@ -301,6 +305,38 @@ public final class ProfileServices {
 
     public final ArrayList<Application> getApplicationsByJobpostingID(JobPosting id) {
         return psdb.getApplicationsByJobpostingID(id);
+    }
+
+    public final Application getApplicationByBothID(int jpID, int canID) {
+        return psdb.getApplicationByBothID(jpID, canID);
+    }
+    
+    public final ArrayList<String> editBusinessClientProfile(String company, String username, String email, String phone, String address, String website, String description, BusinessClient bc) {
+        return psdb.editBusinessClientProfile(company, username, email, phone, address, website, description, bc);
+    }
+    
+    public final ArrayList<String> editJobPosting(String title, String status, String description, String requirements, String sWage, String location, String sDate, String eDate, JobPosting jp) {
+        ArrayList<String> errList = new ArrayList<>();
+        SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            Date startDate = parser.parse(sDate);
+            Date endDate = parser.parse(eDate);
+            Double wage = Double.parseDouble(sWage);
+
+            errList = psdb.editJobPosting(title, status, description, requirements, wage, location, startDate, endDate, jp);
+            return errList;
+        } catch (NumberFormatException e) {
+            errList.add("error parsing wage");
+        } catch (ParseException e) {
+            errList.add("error parsing date");
+        }
+
+        return errList;
+    }
+    
+    public final ArrayList<String> setNewClientPassword(String password, BusinessClient bc) {
+        return psdb.setNewClientPassword(password, bc);
     }
 
     private final boolean isEmpty(String field) {
