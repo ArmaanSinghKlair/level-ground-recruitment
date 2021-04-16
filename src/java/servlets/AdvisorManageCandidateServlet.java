@@ -21,8 +21,12 @@ import services.JobPostingServices;
 import services.ProfileServices;
 
 /**
- *
+ * Used to either reject or approve a Candidate based on the button that was clicked.
+ * Will mark the Application with a status of -1 if Candidate is rejected.
+ * Otherwise the Application will get marked with a status of 1 if the Candidate is approved.
+ * 
  * @author kentp
+ * @version 1.0
  */
 @WebServlet(name = "AdvisorManageCandidateServlet", urlPatterns = {"/advisor-candidate"})
 public class AdvisorManageCandidateServlet extends HttpServlet {
@@ -54,7 +58,7 @@ public class AdvisorManageCandidateServlet extends HttpServlet {
         ArrayList<String> errList = null;
         if (action != null && !action.equals("")) {
             JobPostingServices jobServices = new JobPostingServices();
-            request.setAttribute("applicationID", app.getApplicationID() + "");
+            request.setAttribute("applicationID", app.getApplicationID().toString());
 
             switch (action) {
                 case "reject":

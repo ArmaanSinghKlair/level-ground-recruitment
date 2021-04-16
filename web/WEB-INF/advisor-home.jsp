@@ -57,14 +57,14 @@
 
 
                     <c:forEach var="company" items="${requestScope.companyList}">
-                        <div class="accordion" role="tablist" id="accordion-1">
+                        <div class="accordion" role="tablist" id="accordion-${company.businessclientID}">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" role="tab">
-                                    <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1"
-                                            aria-expanded="true" aria-controls="accordion-1 .item-1">${company.busClientCompany}
+                                    <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-${company.businessclientID} .item-1"
+                                            aria-expanded="true" aria-controls="accordion-${company.businessclientID} .item-1">${company.busClientCompany}
                                     </button>
                                 </h2>
-                                <div class="accordion-collapse collapse show item-1" role="tabpanel" data-bs-parent="#accordion-1">
+                                <div class="accordion-collapse collapse show item-1" role="tabpanel" data-bs-parent="#accordion-${company.businessclientID}">
                                     <div class="accordion-body">
                                         <p>${company.busClientDescription}</p>
                                         <hr>

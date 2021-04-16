@@ -72,33 +72,22 @@
                     <div class="col">
                         <div class="d-flex flex-column flex-md-row">
                             <h1 class="display-5 col">Job Posts
-                            <c:choose>
-
-                                <c:when test="${requestScope.jobList eq null || fn:length(requestScope.jobList) eq 0}">
-                                    - N/A
-                                </c:when>
-
-                                <c:otherwise>
-                                    <div class="d-flex align-self-center justify-content-md-end input-group col">
-                                        <div class="form-outline"><input type="search" id="form1" class="form-control"
-                                                                         placeholder="Search..."></div>
-                                        <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
-                                    </div>
-                                </c:otherwise>
-
-                            </c:choose></h1>
+                            <c:if test="${requestScope.jobList eq null || fn:length(requestScope.jobList) eq 0}">
+                                - N/A
+                            </c:if>
+                        </h1>
                     </div>
                     <hr>
 
                     <c:forEach var="job" items="${requestScope.jobList}">
-                        <div class="accordion" role="tablist" id="accordion-1">
+                        <div class="accordion" role="tablist" id="accordion-${job.jobpostingID}">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" role="tab">
-                                    <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1"
-                                            aria-expanded="true" aria-controls="accordion-1 .item-1">${job.jobTitle}
+                                    <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-${job.jobpostingID} .item-1"
+                                            aria-expanded="true" aria-controls="accordion-${job.jobpostingID} .item-1">${job.jobTitle}
                                     </button>
                                 </h2>
-                                <div class="accordion-collapse collapse show item-1" role="tabpanel" data-bs-parent="#accordion-1">
+                                <div class="accordion-collapse collapse show item-1" role="tabpanel" data-bs-parent="#accordion-${job.jobpostingID}">
                                     <div class="accordion-body">
                                         <div class="shadow job-post">
                                             <div class="d-flex flex-column align-items-baseline flex-md-row justify-content-md-between job-header">
@@ -106,21 +95,14 @@
                                                 <p>Post date: <c:if test="${job.postDate eq null || job.postDate eq ''}">N/A</c:if>
                                                     <fmt:formatDate value="${job.postDate}" type="date"
                                                                     pattern="yyyy-MM-dd"/></p>
-                                                    <c:choose>
 
-                                                    <c:when test="${job.applicants eq null || job.applicants eq 0}">
-                                                        <strong>0 Applicants</strong>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <form action="<c:url value='/advisor-profile'/>" method="POST">
-                                                            <input type="hidden" name="jobID" value="${job.jobpostingID}">
-                                                            <input type="hidden" name="clientID" value="${company.businessclientID}">
-                                                            <input type="hidden" name="advisorForm" value="load-can">
-                                                            <button class="btn btn-success" type="submit">Applicants<span
-                                                                    class="badge bg-dark notif">${job.applicants}</span></button>    
-                                                        </form>
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                <form action="<c:url value='/advisor-profile'/>" method="POST">
+                                                    <input type="hidden" name="jobID" value="${job.jobpostingID}">
+                                                    <input type="hidden" name="clientID" value="${company.businessclientID}">
+                                                    <input type="hidden" name="advisorForm" value="load-can">
+                                                    <button class="btn btn-success" type="submit">Applicants<span
+                                                            class="badge bg-dark notif"><%--${job.applicants}--%></span></button>    
+                                                </form>
                                             </div>
                                             <hr>
                                             <div>

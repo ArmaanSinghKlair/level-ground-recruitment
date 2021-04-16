@@ -15,8 +15,11 @@ import services.AccountServices;
 import services.ProfileServices;
 
 /**
+ * Used to load the content for the Advisor post view. Implements
+ * LoadProfile interface and adheres to the Strategy Pattern.
  *
  * @author 756887
+ * @version 1.0
  */
 public class LoadAdvisorCandidate implements LoadProfile {
 
