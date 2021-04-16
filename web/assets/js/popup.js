@@ -7,6 +7,7 @@ $(".close").on("click", function () {
   $(".about").fadeOut();
   $(".work").fadeOut();
   $(".skill").fadeOut();
+  $(".role").fadeOut();
   $(".remove-acc-alert").fadeOut();
 });
 
@@ -22,6 +23,11 @@ $(".open-work").on("click", function () {
 
 $(".open-skill").on("click", function () {
   $(".skill").fadeIn("slow");
+  $(".wrapper").addClass("active");
+});
+
+$(".open-role").on("click", function () {
+  $(".role").fadeIn("slow");
   $(".wrapper").addClass("active");
 });
 
