@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import problemdomain.Candidate;
+import problemdomain.Role;
 import problemdomain.Skill;
 import services.AccountServices;
 import services.ProfileServices;
@@ -17,24 +18,28 @@ import services.ProfileServices;
  *
  * @author 839645
  */
-public class LoadCandidateProfile implements LoadProfile{
+public class LoadCandidateProfile implements LoadProfile {
 
     @Override
     public void loadProfile(HttpServletRequest request) {
-        AccountServices accService =new AccountServices();
+        AccountServices accService = new AccountServices();
         ProfileServices ps = new ProfileServices();
-        
+
         HttpSession sess = request.getSession(false);
-        
+
         // Get candidate
-        Candidate c = accService.getCandidateByUsername((String)sess.getAttribute("username"));
+        Candidate c = accService.getCandidateByUsername((String) sess.getAttribute("username"));
         request.setAttribute("candidate", c);
-        
+
         // Get skills
         ArrayList<Skill> skills = ps.getAllSkills();
         request.setAttribute("skills", skills);
+
+        //Get Roles
+        ArrayList<Role> roles = ps.getAllRoles();
+        request.setAttribute("roles", roles);
+        
         request.setAttribute("url", "/WEB-INF/candidate.jsp");
 
     }
-    
 }

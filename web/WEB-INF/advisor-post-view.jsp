@@ -42,9 +42,11 @@
         <%@include file="/WEB-INF/jspf/alert.jspf" %>
         <div class="container">
             <div class="row text-start d-flex flex-column flex-md-row head-row">
-                <div class="col"><a href="#">
-                        <h2 class="display-5 info-heading">${company.busClientCompany}</h2>
-                    </a>
+                <div class="col"><form action="<c:url value='/advisor-profile'/>" method="POST">
+                        <input type="hidden" name="advisorForm" value="load-job">
+                        <input type="hidden" name="clientID" value="${company.businessclientID}">
+                        <button class="link-button" type="submit"><h2 class="display-5 info-heading">${company.busClientCompany}</h2></button>
+                    </form>
                     <p><br>${company.busClientDescription}<br><br></p>
                     <hr>
                     <div class="row d-flex flex-column flex-sm-row">
@@ -129,34 +131,22 @@
                 <div class="col">
                     <div class="d-flex flex-column flex-md-row">
                         <h1 class="display-5 col">Candidates
-                            <c:choose>
-
-                                <c:when test="${requestScope.candidateList eq null || fn:length(requestScope.candidateList) eq 0}">
-                                    - N/A
-                                </c:when>
-
-                                <c:otherwise>
-                                    <div class="d-flex align-self-center justify-content-md-end input-group col">
-                                        <div class="form-outline"><input type="search" id="form1" class="form-control"
-                                                                         placeholder="Search..."></div>
-                                        <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
-                                    </div>
-                                </c:otherwise>
-
-                            </c:choose></h1>
+                            <c:if test="${requestScope.jobList eq null || fn:length(requestScope.jobList) eq 0}">
+                                - N/A
+                            </c:if></h1>
                     </div>
                     <hr>
 
                     <c:forEach var="candidate" items="${requestScope.candidateList}">
-                        <div class="accordion" role="tablist" id="accordion-1">
+                        <div class="accordion" role="tablist" id="accordion-${candidate.candidateID}">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" role="tab">
-                                    <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-1 .item-1"
-                                            aria-expanded="true" aria-controls="accordion-1 .item-1">Candidate ID: ${candidate.candidateID}
+                                    <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-${candidate.candidateID} .item-1"
+                                            aria-expanded="true" aria-controls="accordion-${candidate.candidateID} .item-1">Candidate ID: ${candidate.candidateID}
                                     </button>
                                 </h2>
                                 <div class="accordion-collapse collapse show item-1 shadow" role="tabpanel"
-                                     data-bs-parent="#accordion-1">
+                                     data-bs-parent="#accordion-${candidate.candidateID}">
                                     <div class="accordion-body">
                                         <div class="row candidate-row">
                                             <div class="col-md-5">
@@ -306,7 +296,8 @@
                                             <input type="hidden" name="advisorForm" value="load-can">
                                             <input type="hidden" name="action" value="accept">
                                             <div class="btn-group" role="group">
-                                                <button class="btn btn-danger open-work" type="submit" onclick="document.getElementById('delete-can').value=${candidate.candidateID};return false;">Reject</button>
+                                                <button class="btn btn-danger open-work" type="submit" onclick="document.getElementById('delete-can').value =${candidate.candidateID};
+                                                        return false;">Reject</button>
                                                 <button class="btn btn-success" type="submit">Approve</button>
                                             </div>
                                         </form>

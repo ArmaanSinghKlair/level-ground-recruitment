@@ -1,93 +1,108 @@
 body {
-  font-family: 'Montserrat';
-  background: #e5e5e5;
+    font-family: 'Montserrat';
+    background: #e5e5e5;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Oswald';
+    font-family: 'Oswald';
 }
 
 #footer {
-  margin-top: 25px;
+    margin-top: 25px;
 }
 
 .popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 5;
-  background-color: white;
-  width: 80%;
-  border-radius: 5px;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    background-color: white;
+    width: 80%;
+    border-radius: 5px;
 }
 
 .wrapper {
-  display: none;
+    display: none;
 }
 
 .wrapper.active {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: block;
-  z-index: 2;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: block;
+    z-index: 2;
 }
 
 .popup-content {
-  padding: 20px;
+    padding: 20px;
 }
 
 .popup-form {
-  padding: 20px;
+    padding: 20px;
 }
 
 @media (max-width: 768px) {
-  popup {
-    width: 100%;
-  }
+    popup {
+        width: 100%;
+    }
 }
 
 .popup.skill {
-  width: 50%;
+    width: 50%;
 }
 
 .popup.work {
-  width: 60%;
+    width: 60%;
 }
 
 .edu.popup {
-  width: 60%;
+    width: 60%;
 }
 
 .accordion-button:not(.collapsed) {
-  background-color: #adb5bd;
-  font-size: 1em;
-  color: #212529;
+    background-color: #adb5bd;
+    font-size: 1em;
+    color: #212529;
 }
 
 .accordion-button {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 1rem 1.25rem;
-  font-size: .8em;
-  color: #212529;
-  text-align: left;
-  background-color: #fff;
-  border: 0;
-  border-radius: 0;
-  overflow-anchor: none;
-  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,border-radius .15s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    font-size: .8em;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+    border: 0;
+    border-radius: 0;
+    overflow-anchor: none;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,border-radius .15s ease;
 }
 
 .business-icon {
-  padding-right: 10px;
-  font-size: 24px;
+    padding-right: 10px;
+    font-size: 24px;
 }
+
+.link-button
+{ 
+    background:none!important;
+    border:none; 
+    padding:0!important;
+
+    cursor:pointer;
+}
+
+.link-button:hover
+{
+    text-decoration:underline;
+}
+
 

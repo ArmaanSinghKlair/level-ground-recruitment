@@ -19,6 +19,7 @@ import problemdomain.Candidate;
 import problemdomain.CandidateSkill;
 import problemdomain.Education;
 import problemdomain.JobPosting;
+import problemdomain.Role;
 import problemdomain.Skill;
 import problemdomain.WorkHistory;
 import util.DBUtil;
@@ -41,6 +42,16 @@ public final class ProfileServicesDB {
         try{
             ArrayList<Skill> skills = new ArrayList(em.createNamedQuery("Skill.findAll",Skill.class).getResultList());
             return skills;
+        }finally{
+            em.close();
+        }
+    }
+    
+    public final ArrayList<Role> getAllRoles(){
+        initialize();
+        try{
+            ArrayList<Role> roles = new ArrayList(em.createNamedQuery("Role.findAll", Role.class).getResultList());
+            return roles;
         }finally{
             em.close();
         }
@@ -86,7 +97,7 @@ public final class ProfileServicesDB {
         } 
     }
     
-    public final ArrayList<JobPosting> getJobsForAdvisor(int bcID, int adID){
+    public final ArrayList<JobPosting> getJobsForAdvisor(int adID, int bcID){
         initialize();
         try{
             TypedQuery<JobPosting> q = em.createQuery("select jp from JobPosting jp where jp.businessclientID.businessclientID = :bcID and jp.advisorID.advisorID = :adID", JobPosting.class);

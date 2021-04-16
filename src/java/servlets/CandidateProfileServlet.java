@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import problemdomain.Candidate;
+import problemdomain.Role;
 import problemdomain.Skill;
 import services.AccountServices;
 import services.ProfileServices;
@@ -27,7 +28,6 @@ public class CandidateProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = "/profile-navigation";
-
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 
@@ -71,16 +71,18 @@ public class CandidateProfileServlet extends HttpServlet {
         ArrayList<Skill> skills = ps.getAllSkills();
         request.setAttribute("skills", skills);
 
+        // Get roles
+        ArrayList<Role> roles = ps.getAllRoles();
+        request.setAttribute("roles", roles);
+
         request.setAttribute("candidate", c);
         String url = "/WEB-INF/candidate.jsp";
 
         if (submit != null && submit.equals("edit")) {
             if (errList == null) {
                 url = "/profile-navigation";
-            }
-            else
-            {
-               url ="/WEB-INF/candidate-profile-edit.jsp"; 
+            } else {
+                url = "/WEB-INF/candidate-profile-edit.jsp";
             }
         }
         request.getServletContext().getRequestDispatcher(url).forward(request, response);

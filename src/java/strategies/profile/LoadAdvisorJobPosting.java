@@ -17,8 +17,9 @@ import services.AccountServices;
 import services.ProfileServices;
 
 /**
- *
- * @author 756887
+ * 
+ * @author kentp
+ * @version 1.0
  */
 public class LoadAdvisorJobPosting implements LoadProfile{
     

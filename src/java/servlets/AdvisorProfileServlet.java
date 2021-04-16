@@ -19,7 +19,10 @@ import strategies.profile.LoadAdvisorJobPosting;
 import strategies.profile.LoadProfile;
 
 /**
- * Used alongside with the Advisor's home page.
+ * Used with the Advisor pages and performs different actions such as loading
+ * the page content, creating a new advisor, skill, or role.
+ *
+ * Adheres to the Strategy Pattern for loading the page content.
  *
  * @author kentp
  * @version 1.0
