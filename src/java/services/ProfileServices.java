@@ -348,6 +348,10 @@ public final class ProfileServices {
     public final ArrayList<String> deleteApplicationByID(Application ap) {
         return psdb.deleteApplicationByID(ap);
     }
+    
+    public final ArrayList<String> deleteBusinessClient(String username) {
+        return psdb.deleteBusinessClient(username);
+    }
 
     private final boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;

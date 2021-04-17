@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import problemdomain.Application;
+import services.JobPostingServices;
 import services.ProfileServices;
 
 /**
@@ -32,6 +33,7 @@ public class BusinessClientRejectCandidateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProfileServices ps = new ProfileServices();
+        JobPostingServices jps = new JobPostingServices();
         
         int canID = Integer.parseInt(request.getParameter("candidateID"));
         int postID = Integer.parseInt(request.getParameter("postingID"));
@@ -45,8 +47,9 @@ public class BusinessClientRejectCandidateServlet extends HttpServlet {
             request.setAttribute("errList", errList);
         } else
         {
+            jps.decrementApplicants(postID);
             request.setAttribute("success", true);
-            request.setAttribute("successMessage", "Interview request sent");
+            request.setAttribute("sucessMessage", "Client rejected");
         }
         
         request.getRequestDispatcher("/business-client-job-posting").forward(request, response);

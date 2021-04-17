@@ -191,7 +191,6 @@ public final class ProfileServicesDB {
         try{
             trans.begin();
             bc.setBusClientPassword(password);
-            System.out.println(password);
             em.merge(bc);
             trans.commit();
         } catch (Exception ex) {
@@ -375,11 +374,36 @@ public final class ProfileServicesDB {
         ArrayList<String> errList = new ArrayList<>();
         try{
             trans.begin();
-            em.remove(ap);
+            Application app = em.merge(ap);
+            em.remove(app);
+            trans.commit();
+        } catch(Exception e){
+            errList.add("Application could not be removed");
+            return errList;
+        } finally{
+            if(trans.isActive()){
+                trans.rollback();
+            }
+            em.close();
+        }
+        
+        return null;
+    }
+     
+    public final ArrayList<String> deleteBusinessClient(String username){
+        initialize();   
+        ArrayList<String> errList = new ArrayList<>();
+        try{
+            TypedQuery<BusinessClient> q = em.createNamedQuery("BusinessClient.findByBusClientUsername", BusinessClient.class);
+            q.setParameter("busClientUsername", username);            
+            BusinessClient businessClient = q.getSingleResult();
+            trans.begin();
+            BusinessClient bc = em.merge(businessClient);
+            em.remove(bc);
             trans.commit();
         } catch(Exception e){
             System.out.println(e);
-            errList.add("Application could not be removed");
+            errList.add("Business Client could not be removed");
             return errList;
         } finally{
             if(trans.isActive()){

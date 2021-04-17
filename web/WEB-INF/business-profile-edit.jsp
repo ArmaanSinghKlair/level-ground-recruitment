@@ -66,8 +66,10 @@
                                     <button class="btn-close float-end close"></button>
                                     <h5 class="text-center">Are you sure you want to remove your Account?</h5>
                                     <div class="d-flex justify-content-center" style="padding: 15px;">
+                                        <form id="delete-client" action="<c:url value='/delete-client'/>" method="post">
                                         <button class="btn btn-danger" type="submit">Permanently Remove My Account
                                         </button>
+                                        </form>
                                     </div>
                                     <p class="lead text-center warming-txt"><em>You can't recover your account after
                                         removing it</em></p>

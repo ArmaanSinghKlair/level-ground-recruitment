@@ -51,7 +51,7 @@ public class SetupInterviewServlet extends HttpServlet {
         } else
         {
             request.setAttribute("success", true);
-            request.setAttribute("successMessage", "Interview request sent");
+            request.setAttribute("sucessMessage", "Interview request sent");
         }
         
         request.getRequestDispatcher("/business-client-job-posting").forward(request, response);

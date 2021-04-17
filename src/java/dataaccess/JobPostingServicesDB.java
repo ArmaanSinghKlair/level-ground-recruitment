@@ -131,5 +131,20 @@ public class JobPostingServicesDB {
         
         return errList;
     }
+    
+    public void decrementApplicants(int id)
+    {
+        initialize();
+        try{
+            JobPosting jp = em.find(JobPosting.class, id);
+            trans.begin();
+            jp.setApplicants(jp.getApplicants()-1);
+            trans.commit();
+        } finally{
+            em.close();
+            if(trans.isActive())
+                trans.rollback();
+        }
+    } 
 
 }
