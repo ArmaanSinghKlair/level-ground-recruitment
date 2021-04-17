@@ -462,6 +462,8 @@ public final class ProfileServicesDB {
 
     private Class getFeatureClass(String form_name) {
         switch (form_name) {
+            case "roles":
+                return CandidateRole.class;
             case "skills":
                 return CandidateSkill.class;
             case "workHistory":

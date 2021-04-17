@@ -489,10 +489,14 @@
                                       <div class="border rounded popup-content"><button
                                               class="btn-close float-end close"></button>
                                           <h3>Add New Role</h3>
-                                          <form class="ignore popup-form">
+                                          <form class="ignore popup-form" action="<c:url value='/candidate-profile'/>"
+                                                method="post">
+                                              <input type="hidden" name="form_name" value="roles"/>
+                                              <input type="hidden" name="action" value="profilePageAction"/>
+                                              
                                               <div class="row d-flex justify-content-around align-items-center">
                                                   <div class="col">
-                                                      <select class="form-select level-slc" name="education-lvl">
+                                                      <select class="form-select level-slc" name="id">
                                                           <c:forEach var="role" items="${roles}">
                                                               <option value="${role.roleID}"
                                                                       <c:if
@@ -506,7 +510,7 @@
                                               </div>
                                               <div class="btn-group d-flex popup-btns" role="group">
                                                   <button class="btn btn-secondary" type="reset">Reset</button>
-                                                  <button class="btn btn-success" type="submit">Add</button>
+                                                  <button class="btn btn-success" name="submit" type="submit" value="add">Add</button>
                                               </div>
                                           </form>
                                       </div>
@@ -539,7 +543,7 @@
                                       <input type="hidden" name="id" value="${candidateRole.canroleID}"/>
                                       <input type="hidden" name="action" value="profilePageAction"/>
                                       <div class="form-group mb-3">
-                                          <p>${candidateSkill.roleID.description}</p>
+                                          <p>${candidateRole.roleID.description}</p>
                                       </div>
                                       <div
                                           class="d-sm-flex d-xl-flex justify-content-sm-end justify-content-xl-end modify-btns">
