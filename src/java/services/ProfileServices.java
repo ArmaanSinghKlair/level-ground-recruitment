@@ -49,6 +49,7 @@ public final class ProfileServices {
         String submit = request.getParameter("submit");
         String form_name = request.getParameter("form_name");
         String id = request.getParameter("id");
+        HttpSession sess = request.getSession(false);
 
         if (isEmpty(submit) || (isEmpty(id) && submit.equals("delete")) || isEmpty(username)) {
             errList.add("An error occured. Please reload and try again");
@@ -59,7 +60,6 @@ public final class ProfileServices {
 
         switch (submit) {
             case "deleteCandidate":
-                HttpSession sess = request.getSession(false);
                 if (psdb.deleteCandidate(username)) {
                     sess.invalidate();
                     request.setAttribute("sucessMessage", "Account removed permanently");
@@ -83,6 +83,11 @@ public final class ProfileServices {
                 // If no errors
 
                 if (errList == null || errList.isEmpty()) {
+                    sess = request.getSession(false);
+                    String currentUsername = request.getParameter("currentUsername");
+                    if (currentUsername != null && !currentUsername.equals("") && !username.equals(currentUsername)) {
+                        sess.setAttribute("username", currentUsername);
+                    }
                     errList = psdb.edit(request, username);
                 }
                 break;
@@ -201,7 +206,7 @@ public final class ProfileServices {
                 break;
 
             case "profile":
-                username = request.getParameter("username");
+                username = request.getParameter("currentUsername");
                 String password = request.getParameter("password");
                 String password_repeat = request.getParameter("password-repeat");
                 String email = request.getParameter("email");
@@ -209,7 +214,6 @@ public final class ProfileServices {
                 String lastName = request.getParameter("lastName");
                 String phoneNo = request.getParameter("phoneNo");
                 String currentPassword = request.getParameter("currentPassword");
-                String currentUsername = request.getParameter("currentUsername");
                 String about = request.getParameter("about");
 
                 errList = ValidateCandidate.getErrorMapForEdit(username, firstName, lastName, email, phoneNo);
@@ -230,7 +234,7 @@ public final class ProfileServices {
 
                 }
 
-                ValidateCandidate.prepareResponseForEdit(request, password, firstName, lastName, email, phoneNo, currentUsername, about, withPassword);
+                ValidateCandidate.prepareResponseForEdit(request, password, firstName, lastName, email, phoneNo, username, about, withPassword);
                 break;
 
         }
@@ -346,11 +350,11 @@ public final class ProfileServices {
     public final ArrayList<String> setNewClientPassword(String password, BusinessClient bc) {
         return psdb.setNewClientPassword(password, bc);
     }
-    
+
     public final ArrayList<String> deleteApplicationByID(Application ap) {
         return psdb.deleteApplicationByID(ap);
     }
-    
+
     public final ArrayList<String> deleteBusinessClient(String username) {
         return psdb.deleteBusinessClient(username);
     }

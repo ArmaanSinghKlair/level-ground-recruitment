@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import problemdomain.Advisor;
 import problemdomain.Application;
 import problemdomain.BusinessClient;
@@ -276,12 +277,12 @@ public final class ProfileServicesDB {
             case "roles":
                 String roleID = request.getParameter("id");
                 CandidateRole role = new CandidateRole();
-                
+
                 role.setCandidateID(c);
-                
+
                 Role actualRole = asdb.getRoleById(Integer.parseInt(roleID));
                 role.setRoleID(actualRole);
-                
+
                 c.getCandidateRoleList().add(role);
                 return role;
 
@@ -378,55 +379,57 @@ public final class ProfileServicesDB {
 
         return true;
     }
-     
-     public final ArrayList<String> deleteApplicationByID(Application ap) {
+
+    public final ArrayList<String> deleteApplicationByID(Application ap) {
         initialize();
         ArrayList<String> errList = new ArrayList<>();
-        try{
+        try {
             trans.begin();
             Application app = em.merge(ap);
             em.remove(app);
             trans.commit();
-        } catch(Exception e){
+        } catch (Exception e) {
             errList.add("Application could not be removed");
             return errList;
-        } finally{
-            if(trans.isActive()){
+        } finally {
+            if (trans.isActive()) {
                 trans.rollback();
             }
             em.close();
         }
-        
+
         return null;
     }
-     
-    public final ArrayList<String> deleteBusinessClient(String username){
-        initialize();   
+
+    public final ArrayList<String> deleteBusinessClient(String username) {
+        initialize();
         ArrayList<String> errList = new ArrayList<>();
-        try{
+        try {
             TypedQuery<BusinessClient> q = em.createNamedQuery("BusinessClient.findByBusClientUsername", BusinessClient.class);
-            q.setParameter("busClientUsername", username);            
+            q.setParameter("busClientUsername", username);
             BusinessClient businessClient = q.getSingleResult();
             trans.begin();
             BusinessClient bc = em.merge(businessClient);
             em.remove(bc);
             trans.commit();
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             errList.add("Business Client could not be removed");
             return errList;
-        } finally{
-            if(trans.isActive()){
+        } finally {
+            if (trans.isActive()) {
                 trans.rollback();
             }
             em.close();
         }
-        
+
         return null;
     }
-    
-     /**
-     * This method checks whether the feature to be deleted is infact owned by the user
+
+    /**
+     * This method checks whether the feature to be deleted is infact owned by
+     * the user
+     *
      * @param form_name Table to be updated
      * @return The class of the table
      */

@@ -63,7 +63,7 @@
                               <div class="d-flex align-items-baseline">
                                   <h6>About:&nbsp;</h6>
                                   <p>
-                                      <%--                            <c:out value="${candidate.canAbout}"/>--%>
+                                      ${candidate.canDescription}
                                   </p>
                               </div>
                               <div class="d-flex align-items-baseline">
@@ -207,7 +207,7 @@
                                                   <option value="phd">Ph.D</option>
                                               </optgroup>
                                               <optgroup label="Under Graduate">
-                                                  <option value="">High School</option>
+                                                  <option value="highschool">High School</option>
                                               </optgroup>
                                           </select>
                                       </div>
