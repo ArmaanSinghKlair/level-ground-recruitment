@@ -104,6 +104,9 @@ public final class ProfileServices {
         ArrayList<String> errList = new ArrayList<String>();
 
         switch (form_name) {
+            case "roles":
+                request.setAttribute("sucessMessage", "Role added successfully");
+                break;
             case "skills":
                 errList.addAll(ValidateSkill.getErrorMapForAllfields(request.getParameter("id"), username));
                 // Generate success message depending upon the type of request OR give a list of errors
@@ -279,16 +282,15 @@ public final class ProfileServices {
     public final ArrayList<Skill> getAllSkills() {
         return psdb.getAllSkills();
     }
-    
-    public final ArrayList<Role> getAllRoles()
-    {
+
+    public final ArrayList<Role> getAllRoles() {
         return psdb.getAllRoles();
     }
 
     public final BusinessClient getBusinessClientByClientID(int id) {
         return psdb.getBusinessClientByClientID(id);
     }
-    
+
     public final Candidate getCandidateByID(int id) {
         return psdb.getCandidateByID(id);
     }
@@ -296,7 +298,7 @@ public final class ProfileServices {
     public final Application getApplicationForAdvisor(int adID, int bcID) {
         return psdb.getApplicationForAdvisor(adID, bcID);
     }
-    
+
     public final ArrayList<JobPosting> getJobsForAdvisor(int bcID, int adID) {
         return psdb.getJobsForAdvisor(bcID, adID);
     }
@@ -312,15 +314,15 @@ public final class ProfileServices {
     public final ArrayList<Application> getApplicationsByJobpostingID(JobPosting id) {
         return psdb.getApplicationsByJobpostingID(id);
     }
-    
+
     public final Application getApplicationByBothID(int jpID, int canID) {
         return psdb.getApplicationByBothID(jpID, canID);
     }
-    
+
     public final ArrayList<String> editBusinessClientProfile(String company, String username, String email, String phone, String address, String website, String description, BusinessClient bc) {
         return psdb.editBusinessClientProfile(company, username, email, phone, address, website, description, bc);
     }
-    
+
     public final ArrayList<String> editJobPosting(String title, String status, String description, String requirements, String sWage, String location, String sDate, String eDate, JobPosting jp) {
         ArrayList<String> errList = new ArrayList<>();
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
@@ -340,7 +342,7 @@ public final class ProfileServices {
 
         return errList;
     }
-    
+
     public final ArrayList<String> setNewClientPassword(String password, BusinessClient bc) {
         return psdb.setNewClientPassword(password, bc);
     }

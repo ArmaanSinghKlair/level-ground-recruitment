@@ -1,15 +1,15 @@
-drop table lgrdb.application cascade;
-drop table lgrdb.candidate_role cascade;
-drop table lgrdb.candidate_skill cascade;
-drop table lgrdb.education cascade;
-drop table lgrdb.job_posting cascade;
-drop table lgrdb.business_client cascade;
-drop table lgrdb.log cascade;
-drop table lgrdb.role cascade;
-drop table lgrdb.skill cascade;
-drop table lgrdb.work_history cascade;
-drop table lgrdb.candidate cascade;
-drop table lgrdb.advisor cascade;
+drop table qvt0v9the6uowez2.application cascade;
+drop table qvt0v9the6uowez2.candidate_role cascade;
+drop table qvt0v9the6uowez2.candidate_skill cascade;
+drop table qvt0v9the6uowez2.education cascade;
+drop table qvt0v9the6uowez2.job_posting cascade;
+drop table qvt0v9the6uowez2.business_client cascade;
+drop table qvt0v9the6uowez2.log cascade;
+drop table qvt0v9the6uowez2.role cascade;
+drop table qvt0v9the6uowez2.skill cascade;
+drop table qvt0v9the6uowez2.work_history cascade;
+drop table qvt0v9the6uowez2.candidate cascade;
+drop table qvt0v9the6uowez2.advisor cascade;
 
 create table advisor
 (
@@ -55,6 +55,7 @@ create table candidate
     advisorID     int          null,
     can_username  varchar(45)  not null,
     can_password  varchar(64)  not null,
+    can_description text           null,
     can_firstName varchar(45)  not null,
     can_lastName  varchar(45)  not null,
     can_email     varchar(255) not null,
@@ -98,7 +99,7 @@ create table job_posting
     advisorID         int                      not null,
     business_clientID int                      not null,
     job_title         text                     not null,
-    post_date         datetime default (now()) not null,
+    post_date         datetime default now()   not null,
     job_status        varchar(45)              null,
     job_description   text                     null,
     requirements      text                     null,
@@ -146,7 +147,7 @@ create table log
     logID       int auto_increment
         primary key,
     advisorID   int                       not null,
-    login_date  timestamp default (now()) not null,
+    login_date  timestamp default now()   not null,
     logout_date timestamp                 null,
     description varchar(255)              null,
     constraint FK_log_advisor
@@ -166,9 +167,10 @@ create table role
 
 create table candidate_role
 (
+	can_roleID int auto_increment 
+		primary key,
     candidateID int not null,
     roleID      int not null,
-    primary key (candidateID, roleID),
     constraint FK_CANDIDATE_ROLE_CANDIDATE
         foreign key (candidateID) references candidate (candidateID)
             on delete cascade,

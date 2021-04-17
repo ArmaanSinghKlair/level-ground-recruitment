@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -24,7 +25,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author 839645
+ * @author kentp
  */
 @Entity
 @Table(name = "candidate")
@@ -52,6 +53,9 @@ public class Candidate implements Serializable {
     @Basic(optional = false)
     @Column(name = "can_password")
     private String canPassword;
+    @Lob
+    @Column(name = "can_description")
+    private String canDescription;
     @Basic(optional = false)
     @Column(name = "can_firstName")
     private String canfirstName;
@@ -79,6 +83,8 @@ public class Candidate implements Serializable {
     private List<Application> applicationList;
     @OneToMany(mappedBy = "candidateID")
     private List<CandidateSkill> candidateSkillList;
+    @OneToMany(mappedBy = "candidateID")
+    private List<CandidateRole> candidateRoleList;
     @OneToMany(mappedBy = "candidateID")
     private List<WorkHistory> workHistoryList;
 
@@ -120,6 +126,14 @@ public class Candidate implements Serializable {
 
     public void setCanPassword(String canPassword) {
         this.canPassword = canPassword;
+    }
+
+    public String getCanDescription() {
+        return canDescription;
+    }
+
+    public void setCanDescription(String canDescription) {
+        this.canDescription = canDescription;
     }
 
     public String getCanfirstName() {
@@ -201,7 +215,17 @@ public class Candidate implements Serializable {
     public void setCandidateSkillList(List<CandidateSkill> candidateSkillList) {
         this.candidateSkillList = candidateSkillList;
     }
-
+    
+    public List<CandidateRole> getCandidateRoleList()
+    {
+        return candidateRoleList;
+    }
+    
+    public void setCandidateRoleList(List<CandidateRole> candidateRoleList)
+    {
+        this.candidateRoleList = candidateRoleList;
+    }
+    
     public List<WorkHistory> getWorkHistoryList() {
         return workHistoryList;
     }
