@@ -204,7 +204,7 @@ public final class ValidateCandidate {
             c.setCanPhoneNo(phoneNo);
             c.setCanfirstName(firstName);
             c.setCanlastName(lastName);
-            //c.setCanAbout(about)
+            c.setCanDescription(about);
 
             if (request.getParameter("placed") != null && request.getParameter("placed").equals("yes")) {
                 c.setPlaced(true);
