@@ -49,7 +49,7 @@ public class BusinessClientRejectCandidateServlet extends HttpServlet {
         {
             jps.decrementApplicants(postID);
             request.setAttribute("success", true);
-            request.setAttribute("sucessMessage", "Client rejected");
+            request.setAttribute("sucessMessage", "Candidate rejected");
         }
         
         request.getRequestDispatcher("/business-client-job-posting").forward(request, response);
