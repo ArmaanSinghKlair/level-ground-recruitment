@@ -56,18 +56,6 @@ public class JobPostingServices {
         
     }
     
-    public ArrayList<String> rejectCandidateReview(HttpServletRequest request, HttpServletResponse response){
-        String applicationID = (String)request.getAttribute("applicationID");
-        ArrayList<String> errList = new ArrayList<String>();
-
-        if(isNumeric(applicationID) && !isEmpty(applicationID)){
-            errList.addAll(jpsd.rejectCandidateReview(Integer.parseInt(applicationID)));
-        }else{
-            errList.add("Unknown error occured. Please try again later");
-        }
-        return errList;
-    }
-    
     public ArrayList<String> selectCandidateForReview(HttpServletRequest request, HttpServletResponse response){
         String applicationID = (String)request.getAttribute("applicationID");
         ArrayList<String> errList = new ArrayList<String>();
