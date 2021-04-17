@@ -35,7 +35,7 @@
 <%--Wrapper div--%>
 <div class="wrapper"></div>
 <%--Navigation bar--%>
-<%@ include file="/WEB-INF/jspf/navbar.jspf"%>
+<%@ include file="/WEB-INF/jspf/navbar.jspf" %>
 <%--Alter section--%>
 <%@include file="/WEB-INF/jspf/alert.jspf" %>
 <div class="container">
@@ -46,43 +46,69 @@
                     <div class="intro">
                         <h1 class="text-center">Our Mission</h1>
                         <p class="text-center">
-                            <span class="by">by </span><em class="text-capitalize">Author Name</em>
+                            <span class="by">by </span><em class="text-capitalize">
+                            <a href="https://www.robertwaltersgroup.com/news/expert-insight/careers-blog/how-to-remove-unconscious-bias-from-your-hiring-process.html"
+                               target="_blank">Robert
+                                Walters Group</a></em>
                             <span class="date">Jan 01, 2021 </span>
                         </p>
                         <img class="img-fluid"
                              src="https://d3jh33bzyw1wep.cloudfront.net/s3/W1siZiIsIjIwMTkvMTAvMTgvMTMvMDQvNDYvMjM0L0pvaG4tYW5kLUplbm5pZmVyLXJlc3VtZXMtaGlyaW5nLWJpYXMtZXhwZXJpbWVudC5qcGciXV0"
-                             alt="abc"/>
+                             alt="employers rate female and male candidates"/>
                     </div>
                     <div class="text">
                         <p>
-                            Sed lobortis mi. Suspendisse vel placerat ligula. <span style="text-decoration: underline;">Vivamus</span>
-                            ac sem lac. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget
-                            velit pulvinar dictum vel in justo. Vestibulum ante ipsum primis in faucibus orci luctus et
-                            ultrices posuere cubilia Curae.
+                            Every company wants to hire the best available talent, but could unconscious bias be getting
+                            in the way? We take a look at the tech and tools that can help remove bias from your
+                            recruitment process.
+
+                            We all have our own unconscious biases – it’s human nature. But when it comes to recruiting
+                            the best new talent for your company it can be a hindrance.
+
+                            To avoid this, companies around the world are turning to technology in a bid to boost the
+                            diversity of their workforce and ensure they hire the best individuals for their business.
+
+                            We caught up with our Innovation Team to hear how new technology is being utilised to combat
+                            unconscious bias.
                         </p>
+                        <h2>Remove Gendered wording</h2>
+                        <p>How many of us have ever stopped and considered the inherent gender bias of the language we
+                            use every day? When it comes to crafting the perfect job description, the gender
+                            implications of words used can have a significant impact on the recruitment process.
+
+                            Researchers have found that women are much less likely to apply to job descriptions that
+                            include ‘masculine-coded’ language such as “active”, “confident” and “driven.”
+                            Interestingly, the effect of feminine-coded words like “interpersonal”, “honest” and
+                            “support” on male applicants was found to be negligible.
+
+                            The Robert Walters Group has created its own bespoke Adify tool to flag so-called gender
+                            bias in job adverts, which can then be removed. As Tom Lakin, senior innovation manager at
+                            Resource Solutions, our recruitment process outsourcing business, explains, “gender equality
+                            is a key priority for our clients, and Adify allows us to support our clients’ diversity
+                            goals.”</p>
+                        <h2>Have an interview panel</h2>
                         <p>
-                            Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac lacus. <strong>Ut
-                            vehicula rhoncus</strong> elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit
-                            <em>pulvinar dict</em> vel in justo. Vestibulum ante ipsum primis in faucibus orci luctus et
-                            ultrices posuere cubilia Curae.
-                        </p>
-                        <h2>Aliquam In Arcu </h2>
-                        <p>
-                            Suspendisse vel placerat ligula. Vivamus ac sem lac. Ut vehicula rhoncus elementum. Etiam
-                            quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo. Vestibulum
-                            ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
+                            It might sound like unconscious bias can be difficult to remove without the help of the
+                            latest recruitment technology, but if you’re looking for a more human-based approach then
+                            consider introducing interview panels into your recruitment process.
+
+                            Establishing a panel that includes a diverse set of colleagues (in terms of gender,
+                            ethnicity, socio-economic background and age) can ensure any personal unconscious biases are
+                            mitigated and help you to consider an applicant from a wider perspective and make a more
+                            informed decision.
                         </p>
                         <figure class="figure d-block">
                             <img class="figure-img"
-                                 src="https://eslbrains.com/wp-content/uploads/2020/07/unconscious-bias-in-recruitment.png"
-                                 alt="second article picture">
-                            <figcaption class="figure-caption">Caption</figcaption>
+                                 src="https://images.unsplash.com/photo-1471238119891-2e56eca253b4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                 alt="Steve Halama, unsplash">
+                            <figcaption class="figure-caption">Make your interview process structured</figcaption>
                         </figure>
-                        <p>
-                            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.
-                            Suspendisse vel placerat ligula. Vivamus ac sem lac. Ut vehicula rhoncus elementum. Etiam
-                            quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.
-                        </p>
+                        <h2>Curbing unconscious bias</h2>
+                        <p>Ultimately, our unconscious bias is inescapable, but equipping your business with the right
+                            tools and processes can significantly reduce its impact on your recruitment process. While
+                            new technologies provide rich insights to help guide data-driven decision making,
+                            underpinning new tech with regular diversity training is key to helping hiring managers
+                            recognise and reduce their bias blind spots.</p>
                     </div>
                 </div>
             </div>
@@ -91,10 +117,10 @@
     <section data-aos="fade-up" class="features-boxed">
         <div class="container">
             <div class="intro">
-                <h2 class="text-center">Features </h2>
+                <h2 class="text-center">Features</h2>
                 <p class="text-center">
-                    Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh
-                    erat, pellentesque ut laoreet vitae.
+                    This program is designed for individuals or businesses seeking a quick and
+                    easy-to-use application to hire or be hired without any discrimination.
                 </p>
             </div>
             <div class="row justify-content-center features">
@@ -102,43 +128,32 @@
                     <div class="box">
                         <i class="fa fa-map-marker icon"></i>
                         <h3 class="name">Works everywhere</h3>
-                        <p class="description">
-                            Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus.
-                            Praesent aliquam in tellus eu.
-                        </p>
-                        <a class="learn-more" href="#">Learn more »</a>
+                        <p class="description">Through our app, you can
+                            browse internationally for the right candidate or company to meet your needs.</p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item" data-aos="fade-up" data-aos-delay="100">
                     <div class="box">
                         <i class="fa fa-clock-o icon"></i>
                         <h3 class="name">Always available</h3>
-                        <p class="description">
-                            Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus.
-                            Praesent aliquam in tellus eu.
-                        </p>
-                        <a class="learn-more" href="#">Learn more »</a>
+                        <p class="description">With 24-hour availability, you can access the most recent updates and
+                            postings anytime and whenever.</p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item" data-aos="fade-left" data-aos-delay="300">
                     <div class="box"><i class="fa fa-list-alt icon"></i>
-                        <h3 class="name">Customizable </h3>
-                        <p class="description">
-                            Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus.
-                            Praesent aliquam in tellus eu.
-                        </p>
-                        <a class="learn-more" href="#">Learn more »</a>
+                        <h3 class="name">Customizable</h3>
+                        <p class="description">Our modular design adapts the software to various marketplaces with
+                            varying requirements.</p>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item" data-aos="fade-up-right" data-aos-delay="500">
                     <div class="box">
-                        <i class="fa fa-leaf icon"></i>
-                        <h3 class="name">Organic </h3>
+                        <i class="fas fa-expand-arrows-alt icon"></i>
+                        <h3 class="name">Expandable</h3>
                         <p class="description">
-                            Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus.
-                            Praesent aliquam in tellus eu.
+                            Our server and database are built in such a way that new functionality can be easily added.
                         </p>
-                        <a class="learn-more" href="#">Learn more »</a>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item" data-aos="fade-up" data-aos-delay="400">
@@ -146,21 +161,17 @@
                         <i class="fa fa-plane icon"></i>
                         <h3 class="name">Fast </h3>
                         <p class="description">
-                            Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus.
-                            Praesent aliquam in tellus eu.
+                            Our team is actively refining and refactoring code to provide users with the best experience
+                            possible.
                         </p>
-                        <a class="learn-more" href="#">Learn more »</a>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-5 col-lg-4 item" data-aos="fade-up-left" data-aos-delay="600">
                     <div class="box">
-                        <i class="fa fa-phone icon"></i>
+                        <i class="fas fa-mobile icon"></i>
                         <h3 class="name">Mobile-first</h3>
-                        <p class="description">
-                            Aenean tortor est, vulputate quis leo in, vehicula rhoncus lacus.
-                            Praesent aliquam in tellus eu.
-                        </p>
-                        <a class="learn-more" href="#">Learn more »</a>
+                        <p class="description">Our app ensures that customers have the same simple-to-use
+                            experience regardless of device size.</p>
                     </div>
                 </div>
             </div>
