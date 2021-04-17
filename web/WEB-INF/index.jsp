@@ -44,7 +44,7 @@
             <div class="row shadow-sm">
                 <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
                     <div class="intro">
-                        <h1 class="text-center">Our Mission</h1>
+                        <h1 class="text-center">How to remove unconscious bias from your hiring process</h1>
                         <p class="text-center">
                             <span class="by">by </span><em class="text-capitalize">
                             <a href="https://www.robertwaltersgroup.com/news/expert-insight/careers-blog/how-to-remove-unconscious-bias-from-your-hiring-process.html"

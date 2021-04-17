@@ -54,7 +54,8 @@
                             <div class="intro">
                                 <h2 class="text-center">Contact Us</h2>
                             </div>
-                            <form class="d-flex flex-column contact-from">
+                            <form action="mailto:contact@levelGroundRecruitment.com" method="post" name="contactForm"
+                                  class="d-flex flex-column contact-from">
                                 <label class="form-label">Name
                                     <input class="form-control" type="text">
                                 </label>
@@ -65,8 +66,7 @@
                                     <textarea class="form-control" rows="5" placeholder="Your Message..."></textarea>
                                 </label>
                                 <div class="btn-group" role="group">
-                                    <button class="btn btn-secondary" type="reset">Reset</button>
-                                    <button class="btn btn-success" type="button">Submit</button>
+                                    <input type="submit" class="btn btn-success" value="submit">
                                 </div>
                             </form>
                         </div>
@@ -74,60 +74,69 @@
                 </li>
                 <%--                About Section--%>
                 <li class="nav-item">
-                    <a class="nav-link open-about" data-bss-hover-animate="pulse" href="#">About</a>
+                    <a class="nav-link open-about" data-bss-hover-animate="pulse" href="#">About Us</a>
                     <section class="testimonials-clean popup about">
                         <button class="btn-close float-end close"></button>
                         <div class="container">
                             <div class="intro">
-                                <h2 class="text-center">Testimonials</h2>
+                                <h2 class="text-center">Our Mission</h2>
                                 <p class="text-center">
-                                    Our customers love us! Read what they have to say below. Aliquam
-                                    sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae.
+                                    People in Canada come from a diverse range of origins and ethnic traditions.
+                                    As a result, it's an excellent testing ground for our application to
+                                    determine its strengths and limitations.
                                 </p>
                             </div>
                             <div class="row people">
-                                <div class="col-md-6 col-lg-4 item">
-                                    <div class="box">
-                                        <p class="description">
-                                            Aenean tortor est, vulputate quis leo in, vehicula
-                                            rhoncus lacus. Praesent aliquam in tellus eu gravida. Aliquam varius finibus
-                                            est.
-                                        </p>
-                                    </div>
+                                <div class="col-md-5 col-lg-3 item">
                                     <div class="author">
                                         <img class="rounded-circle"
-                                             src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=707b9c33066bf8808c934c8ab394dff6"
-                                             alt="abc">
-                                        <h5 class="name">Ben Johnson</h5>
-                                        <p class="title">CEO of Company Inc.</p>
+                                             src="https://media-exp1.licdn.com/dms/image/C5635AQHCiftM5VURSg/profile-framedphoto-shrink_400_400/0/1615411892619?e=1618779600&v=beta&t=1pG03gc-uKXAm0y9FtHCnrVpjdcYEH1zj3pSyMf0rRs"
+                                             alt="Amir Soltani">
+                                        <h5 class="name">Amir Soltani</h5>
+                                        <p class="title">IT-SD Student <a class="about-link"
+                                                href="https://www.sait.ca/" target="_blank">SAIT</a></p>
+                                        <p class="title"><a class="about-link" href="mailto:amir.soltani@edu.sait.ca">amir.soltani@edu.sait.ca</a></p>
+                                        <p class="title"><a class="about-link" href="https://www.linkedin.com/in/amir-soltani90/"><i class="fab fa-linkedin about-icon"></i></a> <a class="about-link" href="https://github.com/amirsoltaani"><i class="fab fa-github about-icon"></i></a></p>
+
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-lg-4 item">
-                                    <div class="box">
-                                        <p class="description">
-                                            Praesent aliquam in tellus eu gravida. Aliquam varius
-                                            finibus est, et interdum justo suscipit id.
-                                        </p>
-                                    </div>
+                                <div class="col-md-5 col-lg-3 item">
                                     <div class="author">
                                         <img class="rounded-circle"
-                                             src="https://uifaces.co/our-content/donated/KtCFjlD4.jpg" alt="abc">
-                                        <h5 class="name">Carl Kent</h5>
-                                        <p class="title">Founder of Style Co.</p>
+                                             src="https://media-exp1.licdn.com/dms/image/C5635AQHCiftM5VURSg/profile-framedphoto-shrink_400_400/0/1615411892619?e=1618779600&v=beta&t=1pG03gc-uKXAm0y9FtHCnrVpjdcYEH1zj3pSyMf0rRs"
+                                             alt="Amir Soltani">
+                                        <h5 class="name">Amir Soltani</h5>
+                                        <p class="title">IT-SD Student <a class="about-link"
+                                                href="https://www.sait.ca/" target="_blank">SAIT</a></p>
+                                        <p class="title"><a class="about-link" href="mailto:amir.soltani@edu.sait.ca">amir.soltani@edu.sait.ca</a></p>
+                                        <p class="title"><a class="about-link" href="https://www.linkedin.com/in/amir-soltani90/"><i class="fab fa-linkedin about-icon"></i></a> <a class="about-link" href="https://github.com/amirsoltaani"><i class="fab fa-github about-icon"></i></a></p>
+
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-lg-4 item">
-                                    <div class="box">
-                                        <p class="description">Aliquam varius finibus est, et interdum justo suscipit.
-                                            Vulputate quis leo in, vehicula rhoncus lacus. Praesent aliquam in tellus
-                                            eu.
-                                        </p>
-                                    </div>
+                                <div class="col-md-5 col-lg-3 item">
                                     <div class="author">
                                         <img class="rounded-circle"
-                                             src="https://uifaces.co/our-content/donated/N5PLzyan.jpg" alt="abc">
-                                        <h5 class="name">Emily Clark</h5>
-                                        <p class="title">Owner of Creative Ltd.</p>
+                                             src="https://media-exp1.licdn.com/dms/image/C5635AQHCiftM5VURSg/profile-framedphoto-shrink_400_400/0/1615411892619?e=1618779600&v=beta&t=1pG03gc-uKXAm0y9FtHCnrVpjdcYEH1zj3pSyMf0rRs"
+                                             alt="Amir Soltani">
+                                        <h5 class="name">Amir Soltani</h5>
+                                        <p class="title">IT-SD Student <a class="about-link"
+                                                href="https://www.sait.ca/" target="_blank">SAIT</a></p>
+                                        <p class="title"><a class="about-link" href="mailto:amir.soltani@edu.sait.ca">amir.soltani@edu.sait.ca</a></p>
+                                        <p class="title"><a class="about-link" href="https://www.linkedin.com/in/amir-soltani90/"><i class="fab fa-linkedin about-icon"></i></a> <a class="about-link" href="https://github.com/amirsoltaani"><i class="fab fa-github about-icon"></i></a></p>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-5 col-lg-3 item">
+                                    <div class="author">
+                                        <img class="rounded-circle"
+                                             src="https://media-exp1.licdn.com/dms/image/C5635AQHCiftM5VURSg/profile-framedphoto-shrink_400_400/0/1615411892619?e=1618779600&v=beta&t=1pG03gc-uKXAm0y9FtHCnrVpjdcYEH1zj3pSyMf0rRs"
+                                             alt="Amir Soltani">
+                                        <h5 class="name">Amir Soltani</h5>
+                                        <p class="title">IT-SD Student <a class="about-link"
+                                                href="https://www.sait.ca/" target="_blank">SAIT</a></p>
+                                        <p class="title"><a class="about-link" href="mailto:amir.soltani@edu.sait.ca">amir.soltani@edu.sait.ca</a></p>
+                                        <p class="title"><a class="about-link" href="https://www.linkedin.com/in/amir-soltani90/"><i class="fab fa-linkedin about-icon"></i></a> <a class="about-link" href="https://github.com/amirsoltaani"><i class="fab fa-github about-icon"></i></a></p>
+
                                     </div>
                                 </div>
                             </div>
