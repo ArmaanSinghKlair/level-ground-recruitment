@@ -22,7 +22,7 @@ import services.ProfileServices;
 
 /**
  * Used to either reject or approve a Candidate based on the button that was clicked.
- * Will mark the Application with a status of -1 if Candidate is rejected.
+ * Will delete the application from the database if the Candidate is rejected.
  * Otherwise the Application will get marked with a status of 1 if the Candidate is approved.
  * 
  * @author kentp
@@ -62,7 +62,7 @@ public class AdvisorManageCandidateServlet extends HttpServlet {
 
             switch (action) {
                 case "reject":
-                    errList = jobServices.rejectCandidateReview(request, response);
+                    errList = ps.deleteApplicationByID(app);
                     successMessage = "Candidate Rejected";
                     break;
 
