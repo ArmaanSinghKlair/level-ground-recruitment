@@ -22,8 +22,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
+ * CandidateSkill entity class for the candidate_skill table in our database.
+ * Contains method for both retrieving and setting values for a CandidateSkill.
  *
  * @author 839645
+ * @version 1.0
  */
 @Entity
 @Table(name = "candidate_skill")
@@ -49,41 +52,91 @@ public class CandidateSkill implements Serializable {
     @ManyToOne
     private Skill skillID;
 
+    /**
+     * Default no-args constructor.
+     */
     public CandidateSkill() {
     }
 
+    /**
+     * Arguments constructor that takes in the id for the CandidateSKill.
+     *
+     * @param canskillID ID of the CandidateSkill
+     */
     public CandidateSkill(Integer canskillID) {
         this.canskillID = canskillID;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Integer representing CandidateSkill id
+     */
     public Integer getCanskillID() {
         return canskillID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param canskillID New CandidateSkill id
+     */
     public void setCanskillID(Integer canskillID) {
         this.canskillID = canskillID;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Date object representing the added date
+     */
     public Date getAddedDate() {
         return addedDate;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param addedDate New CandidateSkill date
+     */
     public void setAddedDate(Date addedDate) {
         this.addedDate = addedDate;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Candidate object representing the candidate associated with this
+     * CandidateSkill
+     */
     public Candidate getCandidateID() {
         return candidateID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param candidateID New CandidateSkill candidate
+     */
     public void setCandidateID(Candidate candidateID) {
         this.candidateID = candidateID;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Skill object representing the skill associated with this
+     * CandidateSkill
+     */
     public Skill getSkillID() {
         return skillID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param skillID New CandidateSkill skill
+     */
     public void setSkillID(Skill skillID) {
         this.skillID = skillID;
     }
@@ -112,5 +165,5 @@ public class CandidateSkill implements Serializable {
     public String toString() {
         return "problemdomain.CandidateSkill[ canskillID=" + canskillID + " ]";
     }
-    
+
 }

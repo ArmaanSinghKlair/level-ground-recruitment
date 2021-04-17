@@ -19,8 +19,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
+ * CandidateRole entity class for the candidate_role table in our database.
+ * Contains method for both retrieving and setting values for a CandidateRole.
  *
  * @author kentp
+ * @version 1.0
  */
 @Entity
 @Table(name = "candidate_role")
@@ -42,33 +45,73 @@ public class CandidateRole implements Serializable {
     @ManyToOne(optional = false)
     private Role roleID;
 
+    /**
+     * Default no-args constructor.
+     */
     public CandidateRole() {
     }
 
+    /**
+     * Arguments constructor that takes in the id for the CandidateRole.
+     *
+     * @param canroleID ID of the CandidateRole
+     */
     public CandidateRole(Integer canroleID) {
         this.canroleID = canroleID;
     }
 
+    /**
+     * Accesor method.
+     *
+     * @return Integer representing Candidate Role id
+     */
     public Integer getCanroleID() {
         return canroleID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param canroleID New CandidateRole id
+     */
     public void setCanroleID(Integer canroleID) {
         this.canroleID = canroleID;
     }
 
+    /**
+     * Accesor method.
+     *
+     * @return Candidate object representing the candidate associated with this
+     * CandidateRole
+     */
     public Candidate getCandidateID() {
         return candidateID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param candidateID New CandidateRole candidate
+     */
     public void setCandidateID(Candidate candidateID) {
         this.candidateID = candidateID;
     }
 
+    /**
+     * Accesor method.
+     *
+     * @return Role object representing the role associated with this
+     * CandidateRole
+     */
     public Role getRoleID() {
         return roleID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param roleID New CandidateRole role
+     */
     public void setRoleID(Role roleID) {
         this.roleID = roleID;
     }
@@ -97,5 +140,5 @@ public class CandidateRole implements Serializable {
     public String toString() {
         return "problemdomain.CandidateRole[ canroleID=" + canroleID + " ]";
     }
-    
+
 }

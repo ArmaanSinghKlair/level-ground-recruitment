@@ -19,8 +19,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
+ * Application entity class for the application table in our database. Contains
+ * method for both retrieving and setting values for an Application.
  *
  * @author 839645
+ * @version 1.0
  */
 @Entity
 @Table(name = "application")
@@ -47,41 +50,91 @@ public class Application implements Serializable {
     @ManyToOne
     private JobPosting jobpostingID;
 
+    /**
+     * Default no-args constructor.
+     */
     public Application() {
     }
 
+    /**
+     * Argument constructor that takes in the id for the Application.
+     *
+     * @param applicationID ID of the application
+     */
     public Application(Integer applicationID) {
         this.applicationID = applicationID;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Integer representing Application id
+     */
     public Integer getApplicationID() {
         return applicationID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param applicationID New Application id
+     */
     public void setApplicationID(Integer applicationID) {
         this.applicationID = applicationID;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Short representing Application status
+     */
     public Short getStatus() {
         return status;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param status New Application status
+     */
     public void setStatus(Short status) {
         this.status = status;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Candidate object representing the candidate associated with this
+     * Application
+     */
     public Candidate getCandidateID() {
         return candidateID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param candidateID New Application candidate
+     */
     public void setCandidateID(Candidate candidateID) {
         this.candidateID = candidateID;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return JobPosting object representing the jobposting associated with
+     * this Application
+     */
     public JobPosting getJobpostingID() {
         return jobpostingID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param jobpostingID New Application jobposting
+     */
     public void setJobpostingID(JobPosting jobpostingID) {
         this.jobpostingID = jobpostingID;
     }
@@ -110,5 +163,5 @@ public class Application implements Serializable {
     public String toString() {
         return "problemdomain.Application[ applicationID=" + applicationID + " ]";
     }
-    
+
 }

@@ -20,8 +20,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
+ * Role entity class for the role table in our database. Contains method for
+ * both retrieving and setting values for a Role.
  *
  * @author 839645
+ * @version 1.0
  */
 @Entity
 @Table(name = "role")
@@ -44,33 +47,71 @@ public class Role implements Serializable {
     @ManyToMany(mappedBy = "roleList")
     private List<Candidate> candidateList;
 
+    /**
+     * Default no-args constructor
+     */
     public Role() {
     }
 
+    /**
+     * Arguments constructor that takes in the id for the Role.
+     *
+     * @param roleID ID of the Role
+     */
     public Role(Integer roleID) {
         this.roleID = roleID;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Integer representing the Role id
+     */
     public Integer getRoleID() {
         return roleID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param roleID New Role id
+     */
     public void setRoleID(Integer roleID) {
         this.roleID = roleID;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing Role description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param description New Role description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return List of candidates associated with this Role
+     */
     public List<Candidate> getCandidateList() {
         return candidateList;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param candidateList New Role candidate list
+     */
     public void setCandidateList(List<Candidate> candidateList) {
         this.candidateList = candidateList;
     }
@@ -107,5 +148,5 @@ public class Role implements Serializable {
     public void setCandidateRoleCollection(Collection<CandidateRole> candidateRoleCollection) {
         this.candidateRoleCollection = candidateRoleCollection;
     }
-    
+
 }

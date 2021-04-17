@@ -21,8 +21,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
+ * BusinessClient entity class for the business_client table in our database.
+ * Contains method for both retrieving and setting values for a BusinessClient.
  *
  * @author 839645
+ * @version 1.0
  */
 @Entity
 @Table(name = "business_client")
@@ -68,13 +71,31 @@ public class BusinessClient implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "businessclientID")
     private List<JobPosting> jobPostingList;
 
+    /**
+     * Default no-args constructor.
+     */
     public BusinessClient() {
     }
 
+    /**
+     * Arguments constructor that takes in the id for the BusinessClient.
+     *
+     * @param businessclientID ID of the BusinessClient
+     */
     public BusinessClient(Integer businessclientID) {
         this.businessclientID = businessclientID;
     }
 
+    /**
+     * Arguments constructor that takes in various attributes for the
+     * BusinessClient.
+     *
+     * @param businessclientID ID of the BusinessClient
+     * @param busClientUsername username of the BusinessClient
+     * @param busClientPassword password of the BusinessClient
+     * @param busClientCompany company of the BusinessClient
+     * @param busClientEmail email of the BusinessClient
+     */
     public BusinessClient(Integer businessclientID, String busClientUsername, String busClientPassword, String busClientCompany, String busClientEmail) {
         this.businessclientID = businessclientID;
         this.busClientUsername = busClientUsername;
@@ -83,82 +104,182 @@ public class BusinessClient implements Serializable {
         this.busClientEmail = busClientEmail;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Integer representing the BusinessClient id
+     */
     public Integer getBusinessclientID() {
         return businessclientID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param businessclientID New BusinessClient id
+     */
     public void setBusinessclientID(Integer businessclientID) {
         this.businessclientID = businessclientID;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing the BusinessClient username
+     */
     public String getBusClientUsername() {
         return busClientUsername;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param busClientUsername New BusinessClient username
+     */
     public void setBusClientUsername(String busClientUsername) {
         this.busClientUsername = busClientUsername;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing the BusinessClient password
+     */
     public String getBusClientPassword() {
         return busClientPassword;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param busClientPassword New BusinessClient password
+     */
     public void setBusClientPassword(String busClientPassword) {
         this.busClientPassword = busClientPassword;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing BusinessClient company
+     */
     public String getBusClientCompany() {
         return busClientCompany;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param busClientCompany New BusinessClient company
+     */
     public void setBusClientCompany(String busClientCompany) {
         this.busClientCompany = busClientCompany;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing BusinesssClient description
+     */
     public String getBusClientDescription() {
         return busClientDescription;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param busClientDescription New BusinessClient description
+     */
     public void setBusClientDescription(String busClientDescription) {
         this.busClientDescription = busClientDescription;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing BusinessClient address
+     */
     public String getBusClientAddress() {
         return busClientAddress;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param busClientAddress New BusinessClient address
+     */
     public void setBusClientAddress(String busClientAddress) {
         this.busClientAddress = busClientAddress;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing BusinessClient email
+     */
     public String getBusClientEmail() {
         return busClientEmail;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param busClientEmail New BusinessClient email
+     */
     public void setBusClientEmail(String busClientEmail) {
         this.busClientEmail = busClientEmail;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing BusinessClient phone
+     */
     public String getBusClientPhone() {
         return busClientPhone;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param busClientPhone New BusinessClient phone
+     */
     public void setBusClientPhone(String busClientPhone) {
         this.busClientPhone = busClientPhone;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing BusinessClient website
+     */
     public String getBusClientWebsite() {
         return busClientWebsite;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param busClientWebsite New BusinessClient website
+     */
     public void setBusClientWebsite(String busClientWebsite) {
         this.busClientWebsite = busClientWebsite;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return List of job postings associated with this BusinessClient
+     */
     public List<JobPosting> getJobPostingList() {
         return jobPostingList;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param jobPostingList New BusinessClient job posting list
+     */
     public void setJobPostingList(List<JobPosting> jobPostingList) {
         this.jobPostingList = jobPostingList;
     }
@@ -187,5 +308,5 @@ public class BusinessClient implements Serializable {
     public String toString() {
         return "problemdomain.BusinessClient[ businessclientID=" + businessclientID + " ]";
     }
-    
+
 }

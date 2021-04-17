@@ -17,8 +17,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
+ * Skill entity class for the skill table in our database. Contains method for
+ * both retrieving and setting values for a Skill.
  *
  * @author 839645
+ * @version 1.0
  */
 @Entity
 @Table(name = "skill")
@@ -39,38 +42,82 @@ public class Skill implements Serializable {
     @OneToMany(mappedBy = "skillID")
     private List<CandidateSkill> candidateSkillList;
 
+    /**
+     * Default no-args constructor.
+     */
     public Skill() {
     }
 
+    /**
+     * Arguments constructor that takes in the id for the Skill.
+     *
+     * @param skillID
+     */
     public Skill(Integer skillID) {
         this.skillID = skillID;
     }
 
+    /**
+     * Arguments constructor that takes in the id and description for the Skill.
+     *
+     * @param skillID ID of the Skill
+     * @param description description of the Skill
+     */
     public Skill(Integer skillID, String description) {
         this.skillID = skillID;
         this.description = description;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Integer representing the Skill id
+     */
     public Integer getSkillID() {
         return skillID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param skillID New Skill id
+     */
     public void setSkillID(Integer skillID) {
         this.skillID = skillID;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing the Skill description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param description New Skill description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return List of candidate skills associated with this Skill
+     */
     public List<CandidateSkill> getCandidateSkillList() {
         return candidateSkillList;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param candidateSkillList New Skill candidate skill list
+     */
     public void setCandidateSkillList(List<CandidateSkill> candidateSkillList) {
         this.candidateSkillList = candidateSkillList;
     }
@@ -99,5 +146,5 @@ public class Skill implements Serializable {
     public String toString() {
         return "problemdomain.Skill[ skillID=" + skillID + " ]";
     }
-    
+
 }

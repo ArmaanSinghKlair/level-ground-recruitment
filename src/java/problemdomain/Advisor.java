@@ -20,8 +20,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
+ * Advisor entity class for the advisor table in our database. Contains method
+ * for both retrieving and setting values for an Advisor.
  *
  * @author 839645
+ * @version 1.0
  */
 @Entity
 @Table(name = "advisor")
@@ -63,13 +66,31 @@ public class Advisor implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "advisorID")
     private List<JobPosting> jobPostingList;
 
+    /**
+     * Default no-args constructor.
+     */
     public Advisor() {
     }
 
+    /**
+     * Argument constructor that takes in the id for the Advisor.
+     *
+     * @param advisorID ID of the Advisor
+     */
     public Advisor(Integer advisorID) {
         this.advisorID = advisorID;
     }
 
+    /**
+     * Argument constructor that takes in the various attributes for an Advisor.
+     *
+     * @param advisorID ID of the Advisor
+     * @param advisorUsername username of the Advisor
+     * @param advisorPassword password of the Advisor
+     * @param advisorfirstName first name of the Advisor
+     * @param advisorlastName last name of the Advisor
+     * @param advisorEmail email of the Advisor
+     */
     public Advisor(Integer advisorID, String advisorUsername, String advisorPassword, String advisorfirstName, String advisorlastName, String advisorEmail) {
         this.advisorID = advisorID;
         this.advisorUsername = advisorUsername;
@@ -79,74 +100,165 @@ public class Advisor implements Serializable {
         this.advisorEmail = advisorEmail;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Integer representing Advisor id
+     */
     public Integer getAdvisorID() {
         return advisorID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param advisorID New Advisor ID
+     */
     public void setAdvisorID(Integer advisorID) {
         this.advisorID = advisorID;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing Advisor username
+     */
     public String getAdvisorUsername() {
         return advisorUsername;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param advisorUsername New Advisor username
+     */
     public void setAdvisorUsername(String advisorUsername) {
         this.advisorUsername = advisorUsername;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing Advisor password
+     */
     public String getAdvisorPassword() {
         return advisorPassword;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param advisorPassword New Advisor password
+     */
     public void setAdvisorPassword(String advisorPassword) {
         this.advisorPassword = advisorPassword;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing Advisor first name
+     */
     public String getAdvisorfirstName() {
         return advisorfirstName;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param advisorfirstName New Advisor first name
+     */
     public void setAdvisorfirstName(String advisorfirstName) {
         this.advisorfirstName = advisorfirstName;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing Advisor last name
+     */
     public String getAdvisorlastName() {
         return advisorlastName;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param advisorlastName New Advisor last name
+     */
     public void setAdvisorlastName(String advisorlastName) {
         this.advisorlastName = advisorlastName;
     }
 
+    /**
+     * Acessor method.
+     *
+     * @return String representing Advisor email
+     */
     public String getAdvisorEmail() {
         return advisorEmail;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param advisorEmail New Advisor email
+     */
     public void setAdvisorEmail(String advisorEmail) {
         this.advisorEmail = advisorEmail;
     }
 
+    /**
+     * Acessor method.
+     *
+     * @return List representing the candidate list associated with this Advisor
+     */
     public List<Candidate> getCandidateList() {
         return candidateList;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param candidateList New candidate list to be associated with this
+     * Advisor
+     */
     public void setCandidateList(List<Candidate> candidateList) {
         this.candidateList = candidateList;
     }
 
+    /**
+     * Acessor method.
+     *
+     * @return List representing the log list associated with this Advisor
+     */
     public List<Log> getLogList() {
         return logList;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param logList New Advisor log list
+     */
     public void setLogList(List<Log> logList) {
         this.logList = logList;
     }
 
+    /**
+     * Acessor method.
+     *
+     * @return List representing the job postings associated with this Advisor
+     */
     public List<JobPosting> getJobPostingList() {
         return jobPostingList;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param jobPostingList New Advisor job posting list
+     */
     public void setJobPostingList(List<JobPosting> jobPostingList) {
         this.jobPostingList = jobPostingList;
     }
@@ -175,5 +287,5 @@ public class Advisor implements Serializable {
     public String toString() {
         return "problemdomain.Advisor[ advisorID=" + advisorID + " ]";
     }
-    
+
 }

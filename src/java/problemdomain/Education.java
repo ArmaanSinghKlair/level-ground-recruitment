@@ -22,8 +22,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
+ * Education entity class for the education table in our database. Contains
+ * method for both retrieving and setting values for an Education.
  *
  * @author 839645
+ * @version 1.0
  */
 @Entity
 @Table(name = "education")
@@ -67,13 +70,31 @@ public class Education implements Serializable {
     @ManyToOne
     private Candidate candidateID;
 
+    /**
+     * Default no-args constructor.
+     */
     public Education() {
     }
 
+    /**
+     * Arguments constructor that takes in the id for the Education.
+     *
+     * @param educationID ID of the Education
+     */
     public Education(Integer educationID) {
         this.educationID = educationID;
     }
 
+    /**
+     * Arguments constructor that takes in various attributes for the Education.
+     *
+     * @param educationID ID of the Education
+     * @param level level of the Education
+     * @param institution institution of the Education
+     * @param subject subject of the Education
+     * @param startDate start date of the Education
+     * @param type type of the Education
+     */
     public Education(Integer educationID, String level, String institution, String subject, Date startDate, boolean type) {
         this.educationID = educationID;
         this.level = level;
@@ -83,66 +104,146 @@ public class Education implements Serializable {
         this.type = type;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Integer representing Education id
+     */
     public Integer getEducationID() {
         return educationID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param educationID New Education id
+     */
     public void setEducationID(Integer educationID) {
         this.educationID = educationID;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing Education level
+     */
     public String getLevel() {
         return level;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param level New Education level
+     */
     public void setLevel(String level) {
         this.level = level;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing Education institution
+     */
     public String getInstitution() {
         return institution;
     }
 
+    /**
+     * Mutator method
+     *
+     * @param institution New Education institution
+     */
     public void setInstitution(String institution) {
         this.institution = institution;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing Education subject
+     */
     public String getSubject() {
         return subject;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param subject New Education subject
+     */
     public void setSubject(String subject) {
         this.subject = subject;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Date representing the start date for the Education
+     */
     public Date getStartDate() {
         return startDate;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param startDate New Education start date
+     */
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Date representing the end date for the Education
+     */
     public Date getEndDate() {
         return endDate;
     }
 
+    /**
+     * Mutator method
+     *
+     * @param endDate New Education end date
+     */
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Boolean representing the type of the Education
+     */
     public boolean getType() {
         return type;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param type New Education type
+     */
     public void setType(boolean type) {
         this.type = type;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Candidate object associated with this Education
+     */
     public Candidate getCandidateID() {
         return candidateID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param candidateID New Education Candidate
+     */
     public void setCandidateID(Candidate candidateID) {
         this.candidateID = candidateID;
     }
@@ -171,5 +272,5 @@ public class Education implements Serializable {
     public String toString() {
         return "problemdomain.Education[ educationID=" + educationID + " ]";
     }
-    
+
 }

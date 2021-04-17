@@ -22,8 +22,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
+ * Log entity class for the log table in our database. Contains method for both
+ * retrieving and setting values for a Log.
  *
  * @author 839645
+ * @version 1.0
  */
 @Entity
 @Table(name = "log")
@@ -54,54 +57,118 @@ public class Log implements Serializable {
     @ManyToOne(optional = false)
     private Advisor advisorID;
 
+    /**
+     * Default no-args constructor.
+     */
     public Log() {
     }
 
+    /**
+     * Arguments constructor that takes in the id for the Log
+     *
+     * @param logID ID of the Log
+     */
     public Log(Integer logID) {
         this.logID = logID;
     }
 
+    /**
+     * Arguments constructor that takes in the id and login date for the Log
+     *
+     * @param logID ID of the Log
+     * @param loginDate login date of the Log
+     */
     public Log(Integer logID, Date loginDate) {
         this.logID = logID;
         this.loginDate = loginDate;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Integer representing Log id
+     */
     public Integer getLogID() {
         return logID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param logID New Log id
+     */
     public void setLogID(Integer logID) {
         this.logID = logID;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Date representing Log login date
+     */
     public Date getLoginDate() {
         return loginDate;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param loginDate New Log login date
+     */
     public void setLoginDate(Date loginDate) {
         this.loginDate = loginDate;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Date representing Log logout date
+     */
     public Date getLogoutDate() {
         return logoutDate;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param logoutDate New Log logout date
+     */
     public void setLogoutDate(Date logoutDate) {
         this.logoutDate = logoutDate;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return String representing Log description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param description New Log description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * Accessor method.
+     *
+     * @return Advisor object representing the advisor associated with this Log
+     */
     public Advisor getAdvisorID() {
         return advisorID;
     }
 
+    /**
+     * Mutator method.
+     *
+     * @param advisorID New Log Advisor
+     */
     public void setAdvisorID(Advisor advisorID) {
         this.advisorID = advisorID;
     }
@@ -130,5 +197,5 @@ public class Log implements Serializable {
     public String toString() {
         return "problemdomain.Log[ logID=" + logID + " ]";
     }
-    
+
 }
