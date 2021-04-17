@@ -49,10 +49,12 @@ public class BusinessClientProfileServlet extends HttpServlet {
         
         if (errList == null)
             {
-                request.setAttribute("message", "Job posting created");
+                request.setAttribute("success", true);
+                request.setAttribute("sucessMessage", "Job posting created");
                 request.getRequestDispatcher("/profile-navigation").forward(request, response);
             } else
             {
+                request.setAttribute("fail", true);
                 request.setAttribute("errList", errList);
                 request.getRequestDispatcher("/profile-navigation").forward(request, response);
             }

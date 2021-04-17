@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import problemdomain.JobPosting;
 
 /**
  *
@@ -91,6 +92,11 @@ public class JobPostingServices {
         }
         return errList;
     }
+    
+    public final void decrementApplicants(int id) {
+        jpsd.decrementApplicants(id);
+    }
+    
     private final boolean isEmpty(String field){
         return field == null || field.trim().length() == 0;
     }

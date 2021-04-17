@@ -20,7 +20,7 @@ import services.AccountServices;
  * @author 756887
  */
 @WebServlet(name = "DeleteJobPosting", urlPatterns = {"/delete-job-posting"})
-public class DeleteJobPosting extends HttpServlet {
+public class DeleteJobPostingServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,7 +42,7 @@ public class DeleteJobPosting extends HttpServlet {
         if (errList == null)
             {
                 request.setAttribute("success", true);
-                request.setAttribute("successMessage", "Job posting deleted");
+                request.setAttribute("sucessMessage", "Job posting deleted");
                 request.getRequestDispatcher("/profile-navigation").forward(request, response);
             } else
             {

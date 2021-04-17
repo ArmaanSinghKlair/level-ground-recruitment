@@ -6,14 +6,17 @@
 package problemdomain;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -27,6 +30,9 @@ import javax.persistence.Table;
     @NamedQuery(name = "Role.findByRoleID", query = "SELECT r FROM Role r WHERE r.roleID = :roleID"),
     @NamedQuery(name = "Role.findByDescription", query = "SELECT r FROM Role r WHERE r.description = :description")})
 public class Role implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleID")
+    private Collection<CandidateRole> candidateRoleCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -92,6 +98,14 @@ public class Role implements Serializable {
     @Override
     public String toString() {
         return "problemdomain.Role[ roleID=" + roleID + " ]";
+    }
+
+    public Collection<CandidateRole> getCandidateRoleCollection() {
+        return candidateRoleCollection;
+    }
+
+    public void setCandidateRoleCollection(Collection<CandidateRole> candidateRoleCollection) {
+        this.candidateRoleCollection = candidateRoleCollection;
     }
     
 }

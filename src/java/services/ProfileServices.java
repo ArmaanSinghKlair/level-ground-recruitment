@@ -49,6 +49,7 @@ public final class ProfileServices {
         String submit = request.getParameter("submit");
         String form_name = request.getParameter("form_name");
         String id = request.getParameter("id");
+        HttpSession sess = request.getSession(false);
 
         if (isEmpty(submit) || (isEmpty(id) && submit.equals("delete")) || isEmpty(username)) {
             errList.add("An error occured. Please reload and try again");
@@ -59,7 +60,6 @@ public final class ProfileServices {
 
         switch (submit) {
             case "deleteCandidate":
-                HttpSession sess = request.getSession(false);
                 if (psdb.deleteCandidate(username)) {
                     sess.invalidate();
                     request.setAttribute("sucessMessage", "Account removed permanently");
@@ -83,6 +83,11 @@ public final class ProfileServices {
                 // If no errors
 
                 if (errList == null || errList.isEmpty()) {
+                    sess = request.getSession(false);
+                    String currentUsername = request.getParameter("currentUsername");
+                    if (currentUsername != null && !currentUsername.equals("") && !username.equals(currentUsername)) {
+                        sess.setAttribute("username", currentUsername);
+                    }
                     errList = psdb.edit(request, username);
                 }
                 break;
@@ -104,6 +109,9 @@ public final class ProfileServices {
         ArrayList<String> errList = new ArrayList<String>();
 
         switch (form_name) {
+            case "roles":
+                request.setAttribute("sucessMessage", "Role added successfully");
+                break;
             case "skills":
                 errList.addAll(ValidateSkill.getErrorMapForAllfields(request.getParameter("id"), username));
                 // Generate success message depending upon the type of request OR give a list of errors
@@ -198,7 +206,7 @@ public final class ProfileServices {
                 break;
 
             case "profile":
-                username = request.getParameter("username");
+                username = request.getParameter("currentUsername");
                 String password = request.getParameter("password");
                 String password_repeat = request.getParameter("password-repeat");
                 String email = request.getParameter("email");
@@ -206,7 +214,6 @@ public final class ProfileServices {
                 String lastName = request.getParameter("lastName");
                 String phoneNo = request.getParameter("phoneNo");
                 String currentPassword = request.getParameter("currentPassword");
-                String currentUsername = request.getParameter("currentUsername");
                 String about = request.getParameter("about");
 
                 errList = ValidateCandidate.getErrorMapForEdit(username, firstName, lastName, email, phoneNo);
@@ -227,7 +234,7 @@ public final class ProfileServices {
 
                 }
 
-                ValidateCandidate.prepareResponseForEdit(request, password, firstName, lastName, email, phoneNo, currentUsername, about, withPassword);
+                ValidateCandidate.prepareResponseForEdit(request, password, firstName, lastName, email, phoneNo, username, about, withPassword);
                 break;
 
         }
@@ -279,16 +286,15 @@ public final class ProfileServices {
     public final ArrayList<Skill> getAllSkills() {
         return psdb.getAllSkills();
     }
-    
-    public final ArrayList<Role> getAllRoles()
-    {
+
+    public final ArrayList<Role> getAllRoles() {
         return psdb.getAllRoles();
     }
 
     public final BusinessClient getBusinessClientByClientID(int id) {
         return psdb.getBusinessClientByClientID(id);
     }
-    
+
     public final Candidate getCandidateByID(int id) {
         return psdb.getCandidateByID(id);
     }
@@ -296,7 +302,7 @@ public final class ProfileServices {
     public final Application getApplicationForAdvisor(int adID, int bcID) {
         return psdb.getApplicationForAdvisor(adID, bcID);
     }
-    
+
     public final ArrayList<JobPosting> getJobsForAdvisor(int bcID, int adID) {
         return psdb.getJobsForAdvisor(bcID, adID);
     }
@@ -312,15 +318,15 @@ public final class ProfileServices {
     public final ArrayList<Application> getApplicationsByJobpostingID(JobPosting id) {
         return psdb.getApplicationsByJobpostingID(id);
     }
-    
+
     public final Application getApplicationByBothID(int jpID, int canID) {
         return psdb.getApplicationByBothID(jpID, canID);
     }
-    
+
     public final ArrayList<String> editBusinessClientProfile(String company, String username, String email, String phone, String address, String website, String description, BusinessClient bc) {
         return psdb.editBusinessClientProfile(company, username, email, phone, address, website, description, bc);
     }
-    
+
     public final ArrayList<String> editJobPosting(String title, String status, String description, String requirements, String sWage, String location, String sDate, String eDate, JobPosting jp) {
         ArrayList<String> errList = new ArrayList<>();
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
@@ -340,9 +346,17 @@ public final class ProfileServices {
 
         return errList;
     }
-    
+
     public final ArrayList<String> setNewClientPassword(String password, BusinessClient bc) {
         return psdb.setNewClientPassword(password, bc);
+    }
+
+    public final ArrayList<String> deleteApplicationByID(Application ap) {
+        return psdb.deleteApplicationByID(ap);
+    }
+
+    public final ArrayList<String> deleteBusinessClient(String username) {
+        return psdb.deleteBusinessClient(username);
     }
 
     private final boolean isEmpty(String field) {

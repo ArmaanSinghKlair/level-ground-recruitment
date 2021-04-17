@@ -80,7 +80,7 @@ public class BusinessClientEditProfileServlet extends HttpServlet {
             {
                 sess.setAttribute("username", username);
                 request.setAttribute("success", true);
-                request.setAttribute("successMessage", "Profile edited successfully");
+                request.setAttribute("sucessMessage", "Profile edited successfully");
             }
         } else
         {

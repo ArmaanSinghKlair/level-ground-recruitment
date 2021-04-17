@@ -60,7 +60,7 @@ public class BusinessClientEditJobServlet extends HttpServlet {
             } else
             {
                 request.setAttribute("success", true);
-                request.setAttribute("successMessage", "Profile edited successfully");
+                request.setAttribute("sucessMessage", "Profile edited successfully");
             }
         request.getRequestDispatcher("/edit-client-profile-nav").forward(request, response);
     }

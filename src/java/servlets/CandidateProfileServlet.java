@@ -40,7 +40,7 @@ public class CandidateProfileServlet extends HttpServlet {
         HttpSession sess = request.getSession(false);
         ProfileServices ps = new ProfileServices();
         ArrayList<String> errList = new ArrayList<>();
-
+        
         if (action != null && action.equals("profilePageAction")) {
             errList = ps.profilePageAction(request, (String) sess.getAttribute("username"));
         } else {
@@ -79,14 +79,9 @@ public class CandidateProfileServlet extends HttpServlet {
         String url = "/WEB-INF/candidate.jsp";
 
         if (submit != null && submit.equals("edit")) {
-            if (errList == null) {
-                url = "/profile-navigation";
-            } else {
-                url = "/WEB-INF/candidate-profile-edit.jsp";
-            }
+             url ="/WEB-INF/candidate-profile-edit.jsp";
         }
-        request.getServletContext().getRequestDispatcher(url).forward(request, response);
-
+        request.getRequestDispatcher(url).forward(request, response);
     }
 
     /**

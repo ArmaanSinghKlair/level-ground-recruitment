@@ -37,7 +37,7 @@ public class LoadClientJobPosting implements LoadProfile{
         
         // Get applied candidates
         ArrayList<Application> apps = ps.getApplicationsByJobpostingID(jp);
-        ArrayList<Candidate> candidates = new ArrayList<Candidate>();
+        ArrayList<Candidate> candidates = new ArrayList<>();
         for (Application app: apps)
         {
             if (app.getStatus() == 1)
@@ -46,6 +46,6 @@ public class LoadClientJobPosting implements LoadProfile{
             }
         }
         request.setAttribute("candidates", candidates);
-        request.setAttribute("url", "/WEB-INF/business-post-view.jsp"); //change this when correct page is added
+        request.setAttribute("url", "/WEB-INF/business-post-view.jsp");
     }
 }

@@ -547,6 +547,24 @@ public class AccountServicesDB {
         }
     }
 
+    public final Role getRoleById(int id) {
+        initialize();
+        try {
+            if (!this.doesRoleExist(id)) {
+                return null;
+            }
+            TypedQuery<Role> q = em.createNamedQuery("Role.findByRoleID", Role.class);
+            q.setParameter("roleID", id);
+
+            Role r = q.getSingleResult();
+            return r;
+        } catch (Exception e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
     public final BusinessClient getBusinessClientByUsername(String username) {
         initialize();
         try {
@@ -645,6 +663,15 @@ public class AccountServicesDB {
         }
 
         return em.find(Skill.class, Integer.parseInt(id)) != null;
+    }
+    
+    public boolean doesRoleExist(int id)
+    {
+        if (em == null || !em.isOpen()) {
+            initialize();
+        }
+
+        return em.find(Role.class, id) != null;
     }
 
     public final boolean doesRoleExist(EntityManager em, String attributeName, String attributeValue) {
