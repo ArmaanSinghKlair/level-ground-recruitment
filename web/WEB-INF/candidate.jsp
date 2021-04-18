@@ -433,7 +433,6 @@
                                           </div>
                                       </div>
                                       <div class="btn-group d-flex popup-btns" role="group">
-                                          <button class="btn btn-secondary" type="reset">Reset</button>
                                           <button class="btn btn-success" name="submit" type="submit" value="add">Add</button>
                                       </div>
                                   </form>
@@ -509,7 +508,6 @@
                                                   </div>
                                               </div>
                                               <div class="btn-group d-flex popup-btns" role="group">
-                                                  <button class="btn btn-secondary" type="reset">Reset</button>
                                                   <button class="btn btn-success" name="submit" type="submit" value="add">Add</button>
                                               </div>
                                           </form>
