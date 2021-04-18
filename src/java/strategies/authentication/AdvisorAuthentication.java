@@ -14,14 +14,22 @@ import problemdomain.Advisor;
 import util.PasswordUtil;
 
 /**
- * This class Authenticates an advisors login information
- * 
+ * This class Authenticates an advisors login information.
+ *
  * @author 839645
+ * @version 1.0
  */
-public class AdvisorAuthentication implements Authentication{
-    
+public class AdvisorAuthentication implements Authentication {
+
     private final EntityManager em;
-    public AdvisorAuthentication(EntityManager em){
+
+    /**
+     * Default constructor that takes in the EntityManager to be used. Adheres
+     * to the Strategy Pattern.
+     *
+     * @param em EntityManager object
+     */
+    public AdvisorAuthentication(EntityManager em) {
         this.em = em;
     }
 
@@ -30,16 +38,14 @@ public class AdvisorAuthentication implements Authentication{
         TypedQuery<Advisor> query = em.createNamedQuery("Advisor.findByAdvisorUsername", Advisor.class).setParameter("advisorUsername", username.toLowerCase());
         Advisor admin = query.getSingleResult();
         ArrayList<String> errList = new ArrayList<>();
-        
+
         String hashedInputPassword = PasswordUtil.hashPassword(password);
-        if(hashedInputPassword.equals(admin.getAdvisorPassword())){
+        if (hashedInputPassword.equals(admin.getAdvisorPassword())) {
             return null;
-        } else{
+        } else {
             errList.add("Invalid Username or password");
         }
         return errList;
     }
-    
-   
-    
+
 }

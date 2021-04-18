@@ -18,8 +18,11 @@ import services.AccountServices;
 import services.JobPostingServices;
 
 /**
+ * Used to login to our application. Redirects the user to their profile page
+ * after a successful login.
  *
  * @author 756887
+ * @version 1.0
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
@@ -54,13 +57,13 @@ public class LoginServlet extends HttpServlet {
             Candidate candidate = new Candidate();
             candidate.setCanUsername(username);
             request.setAttribute("lastCandidate", candidate);
-            
+
             //Depending on which user tried to login, their radiobutton will be selected based on lastUserType
             request.setAttribute("lastUserType", userType);
-            
+
             request.setAttribute("fail", true);
             request.setAttribute("errList", errList);
-            
+
             //Redirect user to login page if error in login
             request.getRequestDispatcher("/WEB-INF/signup.jsp").forward(request, response);
             return;

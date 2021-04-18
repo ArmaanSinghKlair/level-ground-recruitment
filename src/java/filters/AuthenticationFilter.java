@@ -22,8 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Used to filter and process requests in our application.
  *
  * @author 839645
+ * @version 1.0
  */
 public class AuthenticationFilter implements Filter {
 
@@ -34,9 +36,20 @@ public class AuthenticationFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
 
+    /**
+     * Default no-args constructor.
+     */
     public AuthenticationFilter() {
     }
 
+    /**
+     * Performs actions before processing the request.
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     * @throws ServletException
+     */
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
@@ -51,12 +64,21 @@ public class AuthenticationFilter implements Filter {
 
     }
 
+    /**
+     * Performs actions after processing the request.
+     *
+     * @param request
+     * @param response
+     * @throws IOException
+     * @throws ServletException
+     */
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
 
     }
 
     /**
+     * Traverses through the filter chain.
      *
      * @param request The servlet request we are processing
      * @param response The servlet response we are creating
@@ -65,6 +87,7 @@ public class AuthenticationFilter implements Filter {
      * @exception IOException if an input/output error occurs
      * @exception ServletException if a servlet error occurs
      */
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
@@ -78,9 +101,9 @@ public class AuthenticationFilter implements Filter {
     }
 
     /**
-     * Accessor method.
+     * Return the filter configuration object for this filter.
      *
-     * @return the filter configuration object for this filter.
+     * @return FilterConfig object
      */
     public FilterConfig getFilterConfig() {
         return (this.filterConfig);
@@ -102,7 +125,9 @@ public class AuthenticationFilter implements Filter {
     }
 
     /**
-     * Init method for this filter
+     * Init method for this filter.
+     *
+     * @param filterConfig The filter configuration object
      */
     public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
@@ -127,6 +152,12 @@ public class AuthenticationFilter implements Filter {
         return (sb.toString());
     }
 
+    /**
+     * Used to send any processing error that has occurred.
+     *
+     * @param t Throwable object
+     * @param response ServletResponse object
+     */
     private void sendProcessingError(Throwable t, ServletResponse response) {
         String stackTrace = getStackTrace(t);
 
@@ -157,6 +188,12 @@ public class AuthenticationFilter implements Filter {
         }
     }
 
+    /**
+     * Used to retrieve the stack trace.
+     *
+     * @param t Throwable object
+     * @return String representing the stack trace
+     */
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -171,6 +208,11 @@ public class AuthenticationFilter implements Filter {
         return stackTrace;
     }
 
+    /**
+     * Used to log messages.
+     *
+     * @param msg log message
+     */
     public void log(String msg) {
         filterConfig.getServletContext().log(msg);
     }

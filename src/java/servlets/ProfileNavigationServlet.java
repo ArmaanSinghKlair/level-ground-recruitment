@@ -16,8 +16,11 @@ import problemdomain.Skill;
 import services.ProfileServices;
 
 /**
+ * Used to redirect the user to their profile and load the appropriate content.
+ * Adheres to the Strategy Pattern.
  *
  * @author kentp
+ * @version 1.0
  */
 public class ProfileNavigationServlet extends HttpServlet {
 

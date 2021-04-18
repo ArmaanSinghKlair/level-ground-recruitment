@@ -15,7 +15,7 @@ import services.AccountServices;
 import services.ProfileServices;
 
 /**
- * Used to load the content for the Advisor home. Implements LoadProfile
+ * Used to load the profile content for the Advisor. Implements LoadProfile
  * interface and adheres to the Strategy Pattern.
  *
  * @author 756887

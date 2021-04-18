@@ -16,8 +16,11 @@ import services.AccountServices;
 import services.ProfileServices;
 
 /**
+ * Used to load the profile content for the BusinessClient. Implements LoadProfile
+ * interface and adheres to the Strategy Pattern.
  *
  * @author 756887
+ * @version 1.0
  */
 public class LoadBusinessClientProfile implements LoadProfile {
 
@@ -27,7 +30,7 @@ public class LoadBusinessClientProfile implements LoadProfile {
         ProfileServices ps = new ProfileServices();
 
         HttpSession sess = request.getSession(false);
-        
+
         // Get business client
         BusinessClient bc = accService.getBusinessClientByUsername((String) sess.getAttribute("username"));
         request.setAttribute("businessClient", bc);

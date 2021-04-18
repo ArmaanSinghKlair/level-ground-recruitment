@@ -15,8 +15,11 @@ import services.AccountServices;
 import services.ProfileServices;
 
 /**
+ * Used to load the profile content for the Candidate. Implements LoadProfile
+ * interface and adheres to the Strategy Pattern.
  *
  * @author 839645
+ * @version 1.0
  */
 public class LoadCandidateProfile implements LoadProfile {
 
@@ -38,7 +41,7 @@ public class LoadCandidateProfile implements LoadProfile {
         //Get Roles
         ArrayList<Role> roles = ps.getAllRoles();
         request.setAttribute("roles", roles);
-        
+
         request.setAttribute("url", "/WEB-INF/candidate.jsp");
 
     }

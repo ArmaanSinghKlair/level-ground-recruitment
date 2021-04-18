@@ -9,12 +9,12 @@ import dataaccess.AccountServicesDB;
 import java.util.ArrayList;
 import problemdomain.Candidate;
 import problemdomain.CandidateRole;
-import problemdomain.CandidateSkill;
-import problemdomain.Role;
 
 /**
+ * Used to validate Role attributes and ensure that they don't break the system.
  *
- * @author 839645
+ * @author kentp
+ * @version 1.0
  */
 public final class ValidateRole {
 
@@ -23,6 +23,13 @@ public final class ValidateRole {
     private static String username;
     private static ArrayList<String> errList = new ArrayList<>();
 
+    /**
+     * Generates an error map for role attributes.
+     *
+     * @param roleId ID of the Role
+     * @param Username username of the Role
+     * @return String Arraylist containing any errors that may have occurred
+     */
     public static ArrayList<String> getErrorMapForAllfields(String roleId, String Username) {
         errList = new ArrayList<>();
         roleID = roleId;
@@ -33,12 +40,23 @@ public final class ValidateRole {
         return errList;
     }
 
+    /**
+     * Appends the appropriate error message into the errList so long as the
+     * value is not null.
+     *
+     * @param str error value
+     */
     private static void put(String str) {
         if (str != null) {
             errList.add(str);
         }
     }
 
+    /**
+     * Validates the role id.
+     *
+     * @return String containing validation result
+     */
     public static String validateRoleID() {
         if (roleID == null) {
             return "Role is required";
@@ -47,6 +65,11 @@ public final class ValidateRole {
         }
     }
 
+    /**
+     * Checks if the role is current associated with the Candidate.
+     *
+     * @return String containing validation result
+     */
     public static String checkIfExists() {
         Candidate c = asdb.getCandidateByUsername(username);
         if (validateRoleID() == null && isNumeric(roleID)) {
@@ -62,6 +85,12 @@ public final class ValidateRole {
 
     }
 
+    /**
+     * Determines if the role id is numeric.
+     *
+     * @param id ID of the Role
+     * @return Boolean of whether the id is numeric or not
+     */
     private static boolean isNumeric(String id) {
         try {
             int ID = Integer.parseInt(id);
@@ -71,13 +100,24 @@ public final class ValidateRole {
         }
     }
 
+    /**
+     * Ensures the Role actually exists in the database.
+     *
+     * @return String containing validation result.
+     */
     public static String doesRoleExist() {
         if (!asdb.doesRoleExist(roleID)) {
-            return "Selected skill does not exist";
+            return "Selected role does not exist";
         }
         return null;
     }
 
+    /**
+     * Used to check if a specific field is empty or not.
+     *
+     * @param field String field to be checked
+     * @return Boolean that determines if the field is empty or not
+     */
     private final static boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;
     }

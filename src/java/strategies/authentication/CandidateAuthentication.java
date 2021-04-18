@@ -15,13 +15,20 @@ import util.PasswordUtil;
 
 /**
  * This class authenticates a candidates login information
- * 
+ *
  * @author 839645
+ * @version 1.0
  */
-public class CandidateAuthentication implements Authentication{
-    
+public class CandidateAuthentication implements Authentication {
+
     private final EntityManager em;
-    public CandidateAuthentication(EntityManager em){
+
+    /**
+     * Default constructor that takes in the EntityManager object to be used.
+     *
+     * @param em EntityManager object
+     */
+    public CandidateAuthentication(EntityManager em) {
         this.em = em;
     }
 
@@ -30,16 +37,14 @@ public class CandidateAuthentication implements Authentication{
         TypedQuery<Candidate> query = em.createNamedQuery("Candidate.findByCanUsername", Candidate.class).setParameter("canUsername", username.toLowerCase());
         Candidate candidate = query.getSingleResult();
         ArrayList<String> errList = new ArrayList<>();
-        
+
         String hashedInputPassword = PasswordUtil.hashPassword(password);
-        if(hashedInputPassword.equals(candidate.getCanPassword())){
+        if (hashedInputPassword.equals(candidate.getCanPassword())) {
             return null;
-        } else{
+        } else {
             errList.add("Invalid Username or password");
         }
         return errList;
     }
-    
-   
-    
+
 }

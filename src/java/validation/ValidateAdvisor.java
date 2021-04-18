@@ -47,10 +47,11 @@ public class ValidateAdvisor {
     }
 
     /**
-     * Used to pass parameters to their appropriate methods.
+     * Appends the appropriate error message into the errList so long as the
+     * value is not null.
      *
      * @param name name of the parameter
-     * @param value value of the parameter
+     * @param value error value
      */
     private static void put(String name, String value) {
         if (value != null) {

@@ -15,13 +15,20 @@ import util.PasswordUtil;
 
 /**
  * This class authenticates a business clients login information
- * 
+ *
  * @author 839645
+ * @version 1.0
  */
-public class BusinessClientAuthentication implements Authentication{
-    
+public class BusinessClientAuthentication implements Authentication {
+
     private final EntityManager em;
-    public BusinessClientAuthentication(EntityManager em){
+
+    /**
+     * Default constructor that takes in the EntityManager object to be used.
+     *
+     * @param em EntityManager object
+     */
+    public BusinessClientAuthentication(EntityManager em) {
         this.em = em;
     }
 
@@ -30,16 +37,14 @@ public class BusinessClientAuthentication implements Authentication{
         TypedQuery<BusinessClient> query = em.createNamedQuery("BusinessClient.findByBusClientUsername", BusinessClient.class).setParameter("busClientUsername", username.toLowerCase());
         BusinessClient candidate = query.getSingleResult();
         ArrayList<String> errList = new ArrayList<>();
-        
+
         String hashedInputPassword = PasswordUtil.hashPassword(password);
-        if(hashedInputPassword.equals(candidate.getBusClientPassword())){
+        if (hashedInputPassword.equals(candidate.getBusClientPassword())) {
             return null;
-        } else{
+        } else {
             errList.add("Invalid Username or password");
         }
         return errList;
     }
-    
-   
-    
+
 }

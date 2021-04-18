@@ -19,29 +19,30 @@ import services.AccountServices;
 import services.ProfileServices;
 
 /**
+ * Used to load the content for the Business post view. Implements LoadProfile
+ * interface and adheres to the Strategy Pattern.
  *
  * @author 756887
+ * @version 1.0
  */
-public class LoadClientJobPosting implements LoadProfile{
-    
+public class LoadClientJobPosting implements LoadProfile {
+
     @Override
     public void loadProfile(HttpServletRequest request) {
         AccountServices accService = new AccountServices();
         ProfileServices ps = new ProfileServices();
-        
+
         int id = Integer.parseInt(request.getParameter("postingID"));
-        
+
         // Get job posting
         JobPosting jp = accService.getJobpostingByID(id);
         request.setAttribute("jobposting", jp);
-        
+
         // Get applied candidates
         ArrayList<Application> apps = ps.getApplicationsByJobpostingID(jp);
         ArrayList<Candidate> candidates = new ArrayList<>();
-        for (Application app: apps)
-        {
-            if (app.getStatus() == 1)
-            {
+        for (Application app : apps) {
+            if (app.getStatus() == 1) {
                 candidates.add(app.getCandidateID());
             }
         }

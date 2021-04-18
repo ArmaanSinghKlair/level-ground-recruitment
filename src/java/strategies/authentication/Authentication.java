@@ -10,9 +10,13 @@ import java.util.ArrayList;
 import javax.persistence.NoResultException;
 
 /**
+ * Interface that is used as part of the Strategy Pattern for authentication
+ * users on our system.
  *
  * @author 839645
+ * @version 1.0
  */
 public interface Authentication {
+
     public ArrayList<String> authenticate(String username, String password) throws NoResultException, NoSuchAlgorithmException;
 }
