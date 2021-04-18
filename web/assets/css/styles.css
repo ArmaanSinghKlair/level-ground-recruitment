@@ -21,6 +21,8 @@ h1, h2, h3, h4, h5, h6 {
     background-color: white;
     width: 80%;
     border-radius: 5px;
+    height: 80vh;
+    overflow-y: auto;
 }
 
 .wrapper {
@@ -46,11 +48,11 @@ h1, h2, h3, h4, h5, h6 {
     padding: 20px;
 }
 
-@media (max-width: 768px) {
-    popup {
-        width: 100%;
-    }
-}
+/*@media (max-width: 768px) {*/
+/*    popup {*/
+/*        width: 100%;*/
+/*    }*/
+/*}*/
 
 .popup.skill {
     width: 50%;
