@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * Used to redirect the user to the home page.
  *
  * @author kentp
+ * @version 1.0
  */
 public class HomePageServlet extends HttpServlet {
 

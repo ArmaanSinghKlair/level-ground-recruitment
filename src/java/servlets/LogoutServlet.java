@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Invalidates the user's session and logs them out of the application.
+ *
  * @author kentp
  * @version 1.0
  */

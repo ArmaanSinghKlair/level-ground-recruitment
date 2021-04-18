@@ -280,7 +280,7 @@ public final class ProfileServicesDB {
 
                 role.setCandidateID(c);
 
-                Role actualRole = asdb.getRoleById(Integer.parseInt(roleID));
+                Role actualRole = asdb.getRoleById(roleID);
                 role.setRoleID(actualRole);
 
                 c.getCandidateRoleList().add(role);

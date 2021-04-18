@@ -17,24 +17,26 @@ import services.AccountServices;
 import services.ProfileServices;
 
 /**
- * 
+ * Used to load the content for the Advisor business view. Implements
+ * LoadProfile interface and adheres to the Strategy Pattern.
+ *
  * @author kentp
  * @version 1.0
  */
-public class LoadAdvisorJobPosting implements LoadProfile{
-    
+public class LoadAdvisorJobPosting implements LoadProfile {
+
     @Override
     public void loadProfile(HttpServletRequest request) {
-        
+
         //Get job postings from specific business client
         String clientID = request.getParameter("clientID");
         ProfileServices ps = new ProfileServices();
         HttpSession sess = request.getSession(false);
-        
-        Advisor a = new AccountServices().getAdvisorByUsername((String)sess.getAttribute("username"));
+
+        Advisor a = new AccountServices().getAdvisorByUsername((String) sess.getAttribute("username"));
         BusinessClient bc = ps.getBusinessClientByClientID(Integer.parseInt(clientID));
-        ArrayList<JobPosting> jobList = ps.getJobsForAdvisor(a.getAdvisorID(),bc.getBusinessclientID());
-        
+        ArrayList<JobPosting> jobList = ps.getJobsForAdvisor(a.getAdvisorID(), bc.getBusinessclientID());
+
         request.setAttribute("company", bc);
         request.setAttribute("jobList", jobList);
 

@@ -15,8 +15,11 @@ import services.AccountServices;
 import services.ProfileServices;
 
 /**
+ * Used to load the content for the Advisor home. Implements LoadProfile
+ * interface and adheres to the Strategy Pattern.
  *
  * @author 756887
+ * @version 1.0
  */
 public class LoadAdvisorProfile implements LoadProfile {
 
@@ -34,14 +37,15 @@ public class LoadAdvisorProfile implements LoadProfile {
         // Get job postings
         ArrayList<JobPosting> jobPostings = ps.getJobpostingsByAdvisorID(a);
         request.setAttribute("jobPostings", jobPostings);
-        
+
         // Get business clients
         ArrayList<BusinessClient> companyList = new ArrayList<>();
 
         for (JobPosting j : jobPostings) {
-            
-            if(!companyList.contains(j.getBusinessclientID()))
-            companyList.add(j.getBusinessclientID());
+
+            if (!companyList.contains(j.getBusinessclientID())) {
+                companyList.add(j.getBusinessclientID());
+            }
         }
 
         request.setAttribute("companyList", companyList);

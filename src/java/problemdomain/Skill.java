@@ -51,7 +51,7 @@ public class Skill implements Serializable {
     /**
      * Arguments constructor that takes in the id for the Skill.
      *
-     * @param skillID
+     * @param skillID ID of the Skill
      */
     public Skill(Integer skillID) {
         this.skillID = skillID;

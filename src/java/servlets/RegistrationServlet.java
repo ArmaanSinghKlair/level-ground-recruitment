@@ -17,8 +17,11 @@ import services.AccountServices;
 import services.ProfileServices;
 
 /**
+ * Used to register either candidates, business clients, or advisors on our
+ * application. Adheres to the Strategy Pattern.
  *
  * @author kentp
+ * @version 1.0
  */
 @WebServlet(name = "RegistrationServlet", urlPatterns = {"/RegistrationServlet"})
 public class RegistrationServlet extends HttpServlet {

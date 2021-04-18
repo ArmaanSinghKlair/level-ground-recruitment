@@ -294,6 +294,8 @@ public class AccountServicesDB {
      * @param status Status of the Job Posting
      * @param description Description of the Job Posting
      * @param username
+     * @param wage
+     * @param location
      * @return String ArrayList of any errors that may have occurred.
      */
     public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description, String username, Double wage, String location) {
@@ -409,6 +411,7 @@ public class AccountServicesDB {
      *
      * @param username Input username
      * @param password Input password
+     * @param userType Input userType
      * @return Arraylist of errors
      */
     public final ArrayList<String> authenticate(String username, String password, String userType) {
@@ -547,14 +550,14 @@ public class AccountServicesDB {
         }
     }
 
-    public final Role getRoleById(int id) {
+    public final Role getRoleById(String id) {
         initialize();
         try {
             if (!this.doesRoleExist(id)) {
                 return null;
             }
             TypedQuery<Role> q = em.createNamedQuery("Role.findByRoleID", Role.class);
-            q.setParameter("roleID", id);
+            q.setParameter("roleID", Integer.parseInt(id));
 
             Role r = q.getSingleResult();
             return r;
@@ -664,14 +667,13 @@ public class AccountServicesDB {
 
         return em.find(Skill.class, Integer.parseInt(id)) != null;
     }
-    
-    public boolean doesRoleExist(int id)
-    {
+
+    public boolean doesRoleExist(String id) {
         if (em == null || !em.isOpen()) {
             initialize();
         }
 
-        return em.find(Role.class, id) != null;
+        return em.find(Role.class, Integer.parseInt(id)) != null;
     }
 
     public final boolean doesRoleExist(EntityManager em, String attributeName, String attributeValue) {

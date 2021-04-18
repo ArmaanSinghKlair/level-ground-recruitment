@@ -31,6 +31,7 @@ import strategies.registration.RegisterProfile;
 import validation.ValidateCandidate;
 import validation.ValidateEducation;
 import validation.ValidateJobPosting;
+import validation.ValidateRole;
 import validation.ValidateSkill;
 import validation.ValidateWorkHistory;
 
@@ -110,7 +111,13 @@ public final class ProfileServices {
 
         switch (form_name) {
             case "roles":
-                request.setAttribute("sucessMessage", "Role added successfully");
+                errList.addAll(ValidateRole.getErrorMapForAllfields(request.getParameter("id"), username));
+                // Generate success message depending upon the type of request OR give a list of errors
+                if (errList.isEmpty()) {
+                    request.setAttribute("sucessMessage", "Role added successfully");
+                } else {
+                    request.setAttribute("currentTab", "add-roles-cta");
+                }
                 break;
             case "skills":
                 errList.addAll(ValidateSkill.getErrorMapForAllfields(request.getParameter("id"), username));
