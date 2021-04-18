@@ -175,10 +175,10 @@
                     </div>
                 </div>
             </div>
-            <%@include file="/WEB-INF/jspf/footer.jspf" %>
         </div>
     </section>
 </div>
+<%@include file="/WEB-INF/jspf/footer.jspf" %>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta3/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/bs-init.js"></script>
