@@ -35,7 +35,7 @@ function SearchResult({ row, setSuccess, setError, index }) {
   return (
     <div className="row">
       <div className="col">
-        <div role="tablist" id={`accordion-${index}`} className="accordion">
+        <div role="tablist" className="accordion" id={`accordion-${index}`} >
           <div className="accordion-item">
             <h2 className="card-header" role="tab">
               <button
@@ -44,40 +44,13 @@ function SearchResult({ row, setSuccess, setError, index }) {
                 data-bs-target={`#accordion-${index} .item-${index}`}
                 aria-expanded="true"
                 aria-controls={`accordion-${index} .item-${index}`}
+                onClick={() => setExpanded(true)}
               >
                 {row.jobTitle}
                 <span className="badge rounded-pill bg-secondary job-badge">
                   {row.jobStatus}
                 </span>
               </button>
-
-               <div className="d-md-flex justify-content-md-between align-items-md-baseline job-header">
-                <h1 className="display-4">{row.jobTitle}</h1>
-                <p className="text-muted">
-                  Posted on: {new Date(row.postDate).toDateString()}
-                </p>
-              </div>
-              <div className="d-md-flex justify-content-md-between align-items-md-baseline job-status">
-                <p className="lead">{row.jobStatus}</p>
-                <p className="text-muted">
-                  Expires on:{" "}
-                  {row.endDate == null
-                    ? "Not specified"
-                    : new Date(row.endDate).toDateString()}
-                </p>
-              </div>
-              <h3
-                className="d-flex justify-content-end mb-0"
-                onClick={() => setExpanded(true)}
-              >
-                <a
-                  data-bs-toggle="collapse"
-                  aria-expanded="true"
-                  aria-controls={`accordion-${index} .item-1`}
-                  href={`#accordion-${index} .item-1`}
-                  className="more-btn accordion-button"
-                ></a>
-              </h3> 
             </h2>
             <div
               className={`accordion-collapse collapse show item-${index}`}
@@ -133,7 +106,7 @@ function SearchResult({ row, setSuccess, setError, index }) {
                           />
                         </div>
                       ) : (
-                        <p className="lead">{curRow.location}</p>
+                        <p>{curRow.location}</p>
                       )}
                     </div>
                     <div className="col d-flex align-self-center">
@@ -148,18 +121,18 @@ function SearchResult({ row, setSuccess, setError, index }) {
                           />
                         </div>
                       ) : (
-                        <p className="lead">${curRow.wage} yearly</p>
+                        <p>${curRow.wage} yearly</p>
                       )}
                     </div>
                   </div>
                   <div className="row">
                     <div className="col d-flex align-self-center">
                       <i className="fas fa-hourglass-start business-icon"></i>
-                      <p className="lead">{curRow!=null?new Date(curRow.startDate).toDateString():"Not specified"}</p>
+                      <p>{curRow!=null?new Date(curRow.startDate).toDateString():"Not specified"}</p>
                     </div>
                     <div className="col d-flex align-self-center">
                       <i className="fas fa-hourglass-end business-icon"></i>
-                      <p className="lead">{curRow!=null?new Date(curRow.endDate).toDateString():"Not specified"}</p>
+                      <p>{curRow!=null?new Date(curRow.endDate).toDateString():"Not specified"}</p>
                     </div>
                   </div>
                   <div className="d-flex justify-content-end">

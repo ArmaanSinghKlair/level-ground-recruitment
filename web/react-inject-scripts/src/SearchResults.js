@@ -19,9 +19,6 @@ export default function SearchResults({
             <h5 className="display-4 text-center resultCount">
               Found <strong>{rowCount} </strong>match {rowCount > 1 ? "es" : ""}
             </h5>
-            {/* <h6 className="text-center" style={{ margin: "1vmax 0" }}>
-              Page {searchState.pn}
-            </h6> */}
           </div>
         </div>
       ) : null}
