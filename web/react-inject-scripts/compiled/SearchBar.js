@@ -65,12 +65,12 @@ function SearchBar(_ref) {
     { className: "shadow-sm searchDiv" },
     React.createElement(
       "div",
-      { "class": "input-group searchInner" },
+      { className: "input-group searchInner" },
       React.createElement(
         "select",
         {
           name: "searchType",
-          "class": "form-select search-select",
+          className: "form-select search-select",
           ref: searchTypeRef
         },
         React.createElement(
@@ -101,7 +101,7 @@ function SearchBar(_ref) {
             return handleSearch();
           }
         },
-        React.createElement("i", { "class": "fas fa-search" })
+        React.createElement("i", { className: "fas fa-search" })
       )
     ),
     React.createElement(

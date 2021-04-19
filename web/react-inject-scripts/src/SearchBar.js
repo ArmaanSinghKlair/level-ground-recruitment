@@ -69,10 +69,10 @@ function SearchBar({ setError }) {
 
   return (
     <div className="shadow-sm searchDiv">
-      <div class="input-group searchInner">
+      <div className="input-group searchInner">
         <select
           name="searchType"
-          class="form-select search-select"
+          className="form-select search-select"
           ref={searchTypeRef}
         >
           <option value="ti">Title</option>
@@ -91,7 +91,7 @@ function SearchBar({ setError }) {
           type="button"
           onClick={() => handleSearch()}
         >
-          <i class="fas fa-search"></i>
+          <i className="fas fa-search"></i>
         </button>
       </div>
 

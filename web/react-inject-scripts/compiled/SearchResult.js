@@ -76,6 +76,53 @@ function SearchResult(_ref) {
                 { className: "badge rounded-pill bg-secondary job-badge" },
                 row.jobStatus
               )
+            ),
+            React.createElement(
+              "div",
+              { className: "d-md-flex justify-content-md-between align-items-md-baseline job-header" },
+              React.createElement(
+                "h1",
+                { className: "display-4" },
+                row.jobTitle
+              ),
+              React.createElement(
+                "p",
+                { className: "text-muted" },
+                "Posted on: ",
+                new Date(row.postDate).toDateString()
+              )
+            ),
+            React.createElement(
+              "div",
+              { className: "d-md-flex justify-content-md-between align-items-md-baseline job-status" },
+              React.createElement(
+                "p",
+                { className: "lead" },
+                row.jobStatus
+              ),
+              React.createElement(
+                "p",
+                { className: "text-muted" },
+                "Expires on:",
+                " ",
+                row.endDate == null ? "Not specified" : new Date(row.endDate).toDateString()
+              )
+            ),
+            React.createElement(
+              "h3",
+              {
+                className: "d-flex justify-content-end mb-0",
+                onClick: function onClick() {
+                  return setExpanded(true);
+                }
+              },
+              React.createElement("a", {
+                "data-bs-toggle": "collapse",
+                "aria-expanded": "true",
+                "aria-controls": "accordion-" + index + " .item-1",
+                href: "#accordion-" + index + " .item-1",
+                className: "more-btn accordion-button"
+              })
             )
           ),
           React.createElement(
@@ -177,22 +224,22 @@ function SearchResult(_ref) {
                   { className: "row" },
                   React.createElement(
                     "div",
-                    { "class": "col d-flex align-self-center" },
-                    React.createElement("i", { "class": "fas fa-hourglass-start business-icon" }),
+                    { className: "col d-flex align-self-center" },
+                    React.createElement("i", { className: "fas fa-hourglass-start business-icon" }),
                     React.createElement(
                       "p",
-                      { "class": "lead" },
-                      "Start Date"
+                      { className: "lead" },
+                      curRow != null ? new Date(curRow.startDate).toDateString() : "Not specified"
                     )
                   ),
                   React.createElement(
                     "div",
-                    { "class": "col d-flex align-self-center" },
-                    React.createElement("i", { "class": "fas fa-hourglass-end business-icon" }),
+                    { className: "col d-flex align-self-center" },
+                    React.createElement("i", { className: "fas fa-hourglass-end business-icon" }),
                     React.createElement(
                       "p",
-                      { "class": "lead" },
-                      "End Date"
+                      { className: "lead" },
+                      curRow != null ? new Date(curRow.endDate).toDateString() : "Not specified"
                     )
                   )
                 ),

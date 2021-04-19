@@ -51,7 +51,7 @@ function SearchResult({ row, setSuccess, setError, index }) {
                 </span>
               </button>
 
-              {/* <div className="d-md-flex justify-content-md-between align-items-md-baseline job-header">
+               <div className="d-md-flex justify-content-md-between align-items-md-baseline job-header">
                 <h1 className="display-4">{row.jobTitle}</h1>
                 <p className="text-muted">
                   Posted on: {new Date(row.postDate).toDateString()}
@@ -77,7 +77,7 @@ function SearchResult({ row, setSuccess, setError, index }) {
                   href={`#accordion-${index} .item-1`}
                   className="more-btn accordion-button"
                 ></a>
-              </h3> */}
+              </h3> 
             </h2>
             <div
               className={`accordion-collapse collapse show item-${index}`}
@@ -153,13 +153,13 @@ function SearchResult({ row, setSuccess, setError, index }) {
                     </div>
                   </div>
                   <div className="row">
-                    <div class="col d-flex align-self-center">
-                      <i class="fas fa-hourglass-start business-icon"></i>
-                      <p class="lead">Start Date</p>
+                    <div className="col d-flex align-self-center">
+                      <i className="fas fa-hourglass-start business-icon"></i>
+                      <p className="lead">{curRow!=null?new Date(curRow.startDate).toDateString():"Not specified"}</p>
                     </div>
-                    <div class="col d-flex align-self-center">
-                      <i class="fas fa-hourglass-end business-icon"></i>
-                      <p class="lead">End Date</p>
+                    <div className="col d-flex align-self-center">
+                      <i className="fas fa-hourglass-end business-icon"></i>
+                      <p className="lead">{curRow!=null?new Date(curRow.endDate).toDateString():"Not specified"}</p>
                     </div>
                   </div>
                   <div className="d-flex justify-content-end">
