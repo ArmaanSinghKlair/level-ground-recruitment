@@ -195,17 +195,16 @@
                             </div>
                         </c:if>
                         <c:forEach var="education" items="${candidate.educationList}" varStatus="loop">
-                            <div class="accordion" role="tablist" id="accordion-${loop.index}">
+                            <div class="accordion" role="tablist" id="accordion-${loop.index}-education">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header mb-0" role="tab">
-                                        <button class="accordion-button header-btn" data-bs-toggle="collapse"
-                                                data-bs-target="#accordion-${loop.index} .item-${loop.index}"
-                                                aria-expanded="true"
-                                                aria-controls="accordion-${loop.index} .item-${loop.index}">${education.institution}
+                                        <button class="accordion-button collapsed header-btn" data-bs-toggle="collapse"
+                                                data-bs-target="#accordion-${loop.index}-education .item-${loop.index}-education"
+                                                aria-controls="accordion-${loop.index}-education .item-${loop.index}-education">${education.institution}
                                         </button>
                                     </h2>
-                                    <div class="accordion-collapse collapse show item-${loop.index}" role="tabpanel"
-                                         data-bs-parent="#accordion-${loop.index}">
+                                    <div class="accordion-collapse collapse item-${loop.index}-education" role="tabpanel"
+                                         data-bs-parent="#accordion-${loop.index}-education">
                                         <div class="accordion-body">
                                             <form action="<c:url value='/candidate-profile'/>" method="post">
                                                 <input type="hidden" name="form_name" value="education"/>
@@ -297,14 +296,13 @@
                             <div class="accordion" role="tablist" id="accordion-${loop.index}-workHistory">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header mb-0" role="tab">
-                                        <button class="accordion-button header-btn" data-bs-toggle="collapse"
+                                        <button class="accordion-button collapsed header-btn" data-bs-toggle="collapse"
                                                 data-bs-target="#accordion-${loop.index}-workHistory .item-${loop.index}-workHistory"
-                                                aria-expanded="true"
                                                 aria-controls="accordion-${loop.index}-workHistory .item-${loop.index}-workHistory">
                                                 ${workHistory.company}
                                         </button>
                                     </h2>
-                                    <div class="accordion-collapse collapse show item-1" role="tabpanel"
+                                    <div class="accordion-collapse collapse item-${loop.index}-workHistory" role="tabpanel"
                                          data-bs-parent="#accordion-${loop.index}-workHistory">
                                         <div class="accordion-body">
                                             <form action="<c:url value='/candidate-profile'/>" method="post">
@@ -386,14 +384,13 @@
                             <div class="accordion" role="tablist" id="accordion-${loop.index}-candidateSkill">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header mb-0" role="tab">
-                                        <button class="accordion-button header-btn" data-bs-toggle="collapse"
+                                        <button class="accordion-button collapsed header-btn" data-bs-toggle="collapse"
                                                 data-bs-target="#accordion-${loop.index}-candidateSkill .item-${loop.index}-candidateSkill"
-                                                aria-expanded="true"
                                                 aria-controls="accordion-${loop.index}-candidateSkill .item-${loop.index}-candidateSkill">
                                                 ${candidateSkill.skillID.description}
                                         </button>
                                     </h2>
-                                    <div class="accordion-collapse collapse show item-${loop.index}-candidateSkill"
+                                    <div class="accordion-collapse collapse collapsed item-${loop.index}-candidateSkill"
                                          role="tabpanel"
                                          data-bs-parent="#accordion-${loop.index}-candidateSkill">
                                         <div class="accordion-body">
@@ -453,14 +450,13 @@
                             <div class="accordion" role="tablist" id="accordion-${loop.index}-candidateRole">
                                 <div class="accordion-item">
                                     <h2 class="accordion-header mb-0" role="tab">
-                                        <button class="accordion-button header-btn" data-bs-toggle="collapse"
+                                        <button class="accordion-button collapsed header-btn" data-bs-toggle="collapse"
                                                 data-bs-target="#accordion-${loop.index}-candidateRole .item-${loop.index}-candidateRole"
-                                                aria-expanded="true"
                                                 aria-controls="accordion-${loop.index}-candidateRole .item-${loop.index}-candidateRole">
                                                 ${candidateRole.roleID.description}
                                         </button>
                                     </h2>
-                                    <div class="accordion-collapse collapse show item-${loop.index}-candidateRole"
+                                    <div class="accordion-collapse collapse collapsed item-${loop.index}-candidateRole"
                                          role="tabpanel"
                                          data-bs-parent="#accordion-${loop.index}-candidateRole">
                                         <div class="accordion-body">
