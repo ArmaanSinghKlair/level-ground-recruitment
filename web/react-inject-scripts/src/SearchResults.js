@@ -17,7 +17,7 @@ export default function SearchResults({
         <div className="row result-row">
           <div className="col-md-10 offset-md-1 d-flex justify-content-center align-items-center result-column">
             <h5 className="display-4 text-center resultCount">
-              Found <strong>{rowCount} </strong>matches
+              Found <strong>{rowCount} </strong>match {rowCount > 1 ? "es" : ""}
             </h5>
             {/* <h6 className="text-center" style={{ margin: "1vmax 0" }}>
               Page {searchState.pn}

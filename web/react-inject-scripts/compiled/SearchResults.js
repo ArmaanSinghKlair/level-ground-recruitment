@@ -35,7 +35,8 @@ export default function SearchResults(_ref) {
             rowCount,
             " "
           ),
-          "matches"
+          "match ",
+          rowCount > 1 ? "es" : ""
         )
       )
     ) : null,
