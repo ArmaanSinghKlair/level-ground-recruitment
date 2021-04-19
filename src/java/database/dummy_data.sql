@@ -239,4 +239,47 @@ VALUES (5, 9, null);
 INSERT INTO qvt0v9the6uowez2.candidate_skill (candidateID, skillID, added_date)
 VALUES (5, 29, null);
 
-#
+# Job Posting
+INSERT INTO qvt0v9the6uowez2.job_posting (advisorID, business_clientID, job_title, post_date, job_status,
+                                          job_description, requirements, wage, location, start_date, end_date,
+                                          applicants)
+VALUES (2, 2, 'SCADA Developer', DEFAULT, 'fullTime',
+        'The SCADA developer will create, implement, and support innovative technology solutions for SCADA platforms, IIoT, and automation middleware.',
+        '2 to 5+ years of experience as a developer', 129000, 'Calgary', '2021-05-01', '2021-12-31', 0);
+
+INSERT INTO qvt0v9the6uowez2.job_posting (advisorID, business_clientID, job_title, post_date, job_status,
+                                          job_description, requirements, wage, location, start_date, end_date,
+                                          applicants)
+VALUES (3, 3, 'Java Engineer', DEFAULT, 'fullTime',
+        'We are looking for Software Engineers to join our Infrastructure team to design and develop highly distributed microservices that together form an API our customers rely upon, that drives our “Network as a Service” platform. This is a unique opportunity that will give the selected candidate(s) the ability to learn about the operation of a mobile network and hands-on experience developing software systems that form the backbone of our services.',
+        'Bachelor’s Degree in Computer Science or a related field
+3+ years development experience in Java (preferably working with Spring) . Nice, but not mandatory, experience in another language (OOP or other)',
+        61000, 'Calgary', '2021-05-01', '2021-12-31', 0);
+
+INSERT INTO qvt0v9the6uowez2.job_posting (advisorID, business_clientID, job_title, post_date, job_status,
+                                          job_description, requirements, wage, location, start_date, end_date,
+                                          applicants)
+VALUES (3, 4, 'Junior Java Developer', DEFAULT, 'fullTime',
+        'Responsible for the development and maintenance of the company''s existing integrated platform.',
+        '1+ years of experience developing software in Java.',
+        40000, 'Calgary', '2021-05-01', '2021-12-31', 0);
+
+INSERT INTO qvt0v9the6uowez2.job_posting (advisorID, business_clientID, job_title, post_date, job_status,
+                                          job_description, requirements, wage, location, start_date, end_date,
+                                          applicants)
+VALUES (3, 4, 'Java Developer', DEFAULT, 'fullTime',
+        'Metal Supermarkets, the world’s largest supplier of small-quantity metals, is seeking a Java Developer to join our team.',
+        'Bachelor’s Degree in software engineering, Computer Science, or a related along with 5-6 years of experience.',
+        45000, 'Calgary', '2021-05-01', '2021-12-31', 0);
+
+INSERT INTO qvt0v9the6uowez2.job_posting (advisorID, business_clientID, job_title, post_date, job_status,
+                                          job_description, requirements, wage, location, start_date, end_date,
+                                          applicants)
+VALUES (4, 5, 'Full Stack Developer', DEFAULT, 'fullTime',
+        'Global IQX is looking for software engineers that are enthusiastic, interested in exploring new technology, enjoy developing innovative products, and love being part of a team.',
+        'Computer Science / Engineering related university / college degree or higher.',
+        60000, 'Calgary', '2021-05-01', '2021-12-31', 0);
+
+
+
+
