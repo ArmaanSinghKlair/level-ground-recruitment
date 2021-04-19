@@ -99,3 +99,34 @@ form {
   color: #e5e5e5;
 }
 
+.searchDiv {
+  padding: 20px;
+}
+
+.searchInner {
+  padding: 50px;
+}
+
+.jobType {
+  padding: 20px;
+}
+
+.empty-result {
+  display: grid;
+  place-items: center;
+  padding: 2vmax;
+}
+
+.empty-result img {
+  width: 2rem;
+}
+
+.resultCount {
+  color: white;
+}
+
+.job-badge {
+  margin-left: 50px;
+  font-weight: 300;
+  font-size: 1.2rem;
+}
