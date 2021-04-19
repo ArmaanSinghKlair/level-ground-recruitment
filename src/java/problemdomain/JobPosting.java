@@ -60,7 +60,7 @@ public class JobPosting implements Serializable {
     @Basic(optional = false)
     @Column(name = "post_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date postDate;
+    private  Date postDate;
     @Column(name = "job_status")
     private String jobStatus;
     @Lob
@@ -76,10 +76,10 @@ public class JobPosting implements Serializable {
     private String location;
     @Column(name = "start_date")
     @Temporal(TemporalType.DATE)
-    private Date startDate;
+    private  Date startDate;
     @Column(name = "end_date")
     @Temporal(TemporalType.DATE)
-    private Date endDate;
+    private  Date endDate;
     @Column(name = "applicants")
     private Integer applicants;
     @OneToMany(mappedBy = "jobpostingID")

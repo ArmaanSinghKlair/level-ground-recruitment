@@ -35,6 +35,7 @@ public class CandidateSingleJobSearch implements SearchBehaviour{
 
         jp.setApplicationList(null);
         jp.setBusinessclientID(null);
+        jp.setAdvisorID(null);
         resultJson.append(new Gson().toJson(jp));
         return resultJson.toString();
     }
