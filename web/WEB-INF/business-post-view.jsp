@@ -44,11 +44,11 @@
         </div>
     </div>
     <div class="row header-row">
-        <div class="shadow job-post">
+        <div class="shadow-sm job-post" style="padding: 20px">
             <div class="d-flex flex-column align-items-baseline flex-md-row justify-content-md-between job-header"><span
                     class="badge rounded-pill bg-secondary stat-badge"><c:out value='${jobposting.jobStatus}' default=''/></span>
                 <p>Post date: <fmt:formatDate value="${jobposting.postDate}" type="date" pattern="yyyy-MM-dd"/></p>
-                <button class="btn btn-success" type="button">Applicants<span class="badge bg-dark notif"><c:out value='${jobposting.applicants}' default=''/></span>
+                <button class="btn btn-success" type="button">Applicants <span class="badge bg-dark notif" style="margin-left: 5px"><c:out value='${jobposting.applicants}' default=''/></span>
                 </button>
             </div>
             <hr>

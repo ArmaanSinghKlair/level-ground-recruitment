@@ -39,7 +39,7 @@ function SearchResult({ row, setSuccess, setError, index }) {
           <div className="accordion-item">
             <h2 className="card-header" role="tab">
               <button
-                className="accordion-button more-btn accordion-button"
+                className="accordion-button collapsed more-btn accordion-button"
                 data-bs-toggle="collapse"
                 data-bs-target={`#accordion-${index} .item-${index}`}
                 aria-expanded="true"
@@ -53,7 +53,7 @@ function SearchResult({ row, setSuccess, setError, index }) {
               </button>
             </h2>
             <div
-              className={`accordion-collapse collapse show item-${index}`}
+              className={`accordion-collapse collapse collapsed item-${index}`}
               role="tabpanel"
               data-bs-parent={`#accordion-${index}`}
             >

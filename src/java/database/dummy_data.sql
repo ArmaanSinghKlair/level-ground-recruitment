@@ -44,7 +44,7 @@ INSERT INTO qvt0v9the6uowez2.business_client (bus_client_username, bus_client_pa
                                               bus_client_description, bus_client_address, bus_client_email,
                                               bus_client_phone, bus_client_website)
 VALUES ('graham_kovacek', 'password', 'Graham-Kovacek Inc', 'Grow Next-Generation Partnerships',
-        '6055 Dicki Fields Trenton, NJ 08650', 'bstroman@rice.info', '7135081285', 'pacificwestedge.com');
+        '6055 Dicki Fields Trenton, NJ 08650', 'bstroman@rice.info', '7135081285', 'www.pacificwestedge.com');
 
 INSERT INTO qvt0v9the6uowez2.business_client (bus_client_username, bus_client_password, bus_client_company,
                                               bus_client_description, bus_client_address, bus_client_email,
