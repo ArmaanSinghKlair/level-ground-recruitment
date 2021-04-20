@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="../assets/css/advisor.css"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Level Ground Recruitment | Advisor Profile</title>
     <link rel="stylesheet"
@@ -37,9 +38,9 @@
     <div class="row text-start d-flex flex-column flex-md-row head-row">
         <div class="col m-auto">
             <h3 class="info-heading">Advisor Control Panel</h3>
-            <p>${advisor.advisorfirstName}</p>
-            <p>${advisor.advisorlastName}</p>
-            <p>${advisor.advisorEmail}</p>
+            <p><strong>First name: </strong>${advisor.advisorfirstName}</p>
+            <p><strong>Last name: </strong>${advisor.advisorlastName}</p>
+            <p><strong>Email: </strong>${advisor.advisorEmail}</p>
         </div>
         <div class="col d-flex flex-column justify-content-end">
             <div class="d-flex flex-column align-items-start control-clum">
@@ -166,7 +167,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="btn-group d-flex popup-btns" role="group">
+                    <div class="btn-group d-flex popup-btns sub-btn" role="group">
                         <button class="btn btn-secondary" type="reset">Reset</button>
                         <button class="btn btn-success" type="submit">Add</button>
                     </div>
@@ -184,8 +185,7 @@
                             <div class="col-md-6"><input class="form-control" type="text" name="skill"></div>
                         </div>
                     </div>
-                    <div class="btn-group d-flex popup-btns" role="group">
-                        <button class="btn btn-secondary" type="reset">Reset</button>
+                    <div class="btn-group d-flex popup-btns sub-btn" role="group">
                         <button class="btn btn-success" type="submit">Add</button>
                     </div>
                 </form>
@@ -202,8 +202,7 @@
                             <div class="col-md-6"><input class="form-control" type="text" name="role"></div>
                         </div>
                     </div>
-                    <div class="btn-group d-flex popup-btns" role="group">
-                        <button class="btn btn-secondary" type="reset">Reset</button>
+                    <div class="btn-group d-flex popup-btns sub-btn" role="group">
                         <button class="btn btn-success" type="submit">Add</button>
                     </div>
                 </form>

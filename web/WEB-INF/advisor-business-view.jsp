@@ -24,7 +24,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
-        <link rel="stylesheet" href="assets/css/advisor-job-view.css">
         <link rel="stylesheet" href="assets/css/advisor-post-view.css">
         <link rel="stylesheet" href="assets/css/footer.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
@@ -83,11 +82,11 @@
                         <div class="accordion" role="tablist" id="accordion-${job.jobpostingID}">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" role="tab">
-                                    <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#accordion-${job.jobpostingID} .item-1"
+                                    <button class="accordion-button collapsed header-btn" data-bs-toggle="collapse" data-bs-target="#accordion-${job.jobpostingID} .item-1"
                                             aria-expanded="true" aria-controls="accordion-${job.jobpostingID} .item-1">${job.jobTitle}
                                     </button>
                                 </h2>
-                                <div class="accordion-collapse collapse show item-1" role="tabpanel" data-bs-parent="#accordion-${job.jobpostingID}">
+                                <div class="accordion-collapse collapse collapsed item-1" role="tabpanel" data-bs-parent="#accordion-${job.jobpostingID}">
                                     <div class="accordion-body">
                                         <div class="shadow job-post">
                                             <div class="d-flex flex-column align-items-baseline flex-md-row justify-content-md-between job-header">
@@ -101,7 +100,7 @@
                                                     <input type="hidden" name="clientID" value="${company.businessclientID}">
                                                     <input type="hidden" name="advisorForm" value="load-can">
                                                     <button class="btn btn-success" type="submit">Applicants<span
-                                                            class="badge bg-dark notif"><%--${job.applicants}--%></span></button>    
+                                                            class="badge bg-dark notif"><c:out value='${job.applicants}' default=''/></span></button>
                                                 </form>
                                             </div>
                                             <hr>
@@ -118,12 +117,11 @@
                                                     <hr>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-5 d-flex justify-content-between align-items-baseline"><i
-                                                            class="fas fa-location-arrow icons"></i>
+                                                    <div class="col-md-5 d-flex justify-content-between align-items-baseline"><i class="fas fa-map-pin business-icon"></i>
                                                         <p>${job.location}<c:if test="${job.location eq null || job.location eq ''}">N/A</c:if></p>
                                                     </div>
                                                     <div class="col-md-5 offset-md-1 d-flex justify-content-between align-items-baseline">
-                                                        <i class="far fa-money-bill-alt icons"></i>
+                                                        <i class="fas fa-money-bill-alt business-icon"></i>
                                                         <p><c:choose>
                                                             <c:when test="${job.wage eq null || job.wage eq 0}">
                                                                 N/A  
@@ -138,12 +136,12 @@
                                             <hr>
                                             <div class="row">
                                                 <div class="col-md-5 d-flex justify-content-between align-items-baseline"><i
-                                                        class="fas fa-hourglass-start icons"></i>
+                                                        class="fas fa-hourglass-start business-icon"></i>
                                                     <p><c:if test="${job.startDate eq null || job.startDate eq ''}">N/A</c:if><fmt:formatDate value="${job.startDate}" type="date"
                                                                                                                                                pattern="yyyy-MM-dd"/></p>
                                                 </div>
                                                 <div class="col-md-5 offset-md-1 d-flex justify-content-between align-items-baseline">
-                                                    <i class="fas fa-hourglass-end icons"></i>
+                                                    <i class="fas fa-hourglass-end business-icon"></i>
                                                     <p><c:if test="${job.endDate eq null || job.endDate eq ''}">N/A</c:if><fmt:formatDate value="${job.endDate}" type="date"
                                                                                                                                            pattern="yyyy-MM-dd"/></p>
                                                 </div>

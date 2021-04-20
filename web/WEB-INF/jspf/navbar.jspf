@@ -90,7 +90,7 @@
                                 <div class="col-lg-4 item">
                                     <div class="author">
                                         <img class="rounded-circle"
-                                             src="https://media-exp1.licdn.com/dms/image/C5635AQHCiftM5VURSg/profile-framedphoto-shrink_200_200/0/1615411892619?e=1618869600&v=beta&t=MoHLfOrB_pw45WzCwPMTx7xJFzVCaolF-OV1KDMQ1-w"
+                                             src="assets/img/a-soltani-profile.jpg"
                                              alt="Amir Soltani">
                                         <h5 class="name">Amir Soltani</h5>
                                         <p class="title">IT-SD Student <a class="about-link"
@@ -109,7 +109,7 @@
                                 <div class="col-lg-4 item">
                                     <div class="author">
                                         <img class="rounded-circle"
-                                             src="https://media-exp1.licdn.com/dms/image/C5635AQH6nlEM6IGmxA/profile-framedphoto-shrink_400_400/0/1618622569053?e=1618866000&v=beta&t=2ElJtkMWIQkIKYJHEOojpB2SvTQMkN-toD7ZOg2uprY"
+                                             src="assets/img/k-pawson-profile.jpg"
                                              alt="Kent Pawson">
                                         <h5 class="name">Kent Pawson</h5>
                                         <p class="title">IT-SD Student <a class="about-link"
@@ -128,7 +128,7 @@
                                 <div class="col-lg-4 item">
                                     <div class="author">
                                         <img class="rounded-circle"
-                                             src="https://media-exp1.licdn.com/dms/image/C4E03AQGz3e-sYIt2Rg/profile-displayphoto-shrink_400_400/0/1582318948271?e=1624492800&v=beta&t=tNyVr7oryPH493RTJFJl_UiljnxCYZ2GIlf1e05RJFk"
+                                             src="assets/img/a-singh-profile.jpg"
                                              alt="ARMAAN SINGH">
                                         <h5 class="name">ARMAAN SINGH</h5>
                                         <p class="title">IT-SD Student <a class="about-link"
@@ -148,7 +148,7 @@
                                 <div class="col-lg-4 item">
                                     <div class="author">
                                         <img class="rounded-circle"
-                                             src="https://media-exp1.licdn.com/dms/image/C5603AQHZVEWji-GNYg/profile-displayphoto-shrink_400_400/0/1569346454982?e=1624492800&v=beta&t=38aHF3Z-WZgfFPdxtTnfTx3ta4DcVtE0d4okt0q9szU"
+                                             src="assets/img/a-hosemann-profile.jpg"
                                              alt="Anthony Hosemann">
                                         <h5 class="name">Anthony Hosemann</h5>
                                         <p class="title">IT-SD Student <a class="about-link"
@@ -167,7 +167,7 @@
                                 <div class="col-lg-4 item">
                                     <div class="author">
                                         <img class="rounded-circle"
-                                             src="https://media-exp1.licdn.com/dms/image/C5603AQGmVFRWu04RkA/profile-displayphoto-shrink_400_400/0/1569188545960?e=1624492800&v=beta&t=HHCfwqs5GDWp9XRSMXWXjC_mTHy92D1XW6MxUngAEp4"
+                                             src="assets/img/k-imler-profile.jpg"
                                              alt="Kane A. Imler">
                                         <h5 class="name">Kane A. Imler</h5>
                                         <p class="title">IT-SD Student <a class="about-link"

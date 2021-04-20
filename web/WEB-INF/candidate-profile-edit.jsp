@@ -63,7 +63,6 @@
                                 <h1 class="display-5"><c:out
                                         value="${candidate.canfirstName} ${candidate.canlastName}"/></h1>
                                 <p>Status: ${candidate.placed ? 'Placed' : "Not Placed Yet"}</p>
-                                <p class="text-muted">Joined 01 Jan 2021</p>
                             </div>
                             <div class="col d-flex justify-content-center">
                                 <button class="btn btn-danger open-remove" type="submit">Remove Account</button>

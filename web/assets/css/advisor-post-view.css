@@ -1,40 +1,54 @@
 .head-row {
-  background: var(--bs-white);
-  padding: 10px;
-  border-radius: 10px;
-  margin-bottom: 10px;
+    background: var(--bs-white);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 .notif {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .stat-badge {
-  font-size: 1rem;
-  font-weight: normal;
+    font-size: 1rem;
+    font-weight: normal;
 }
 
 .job-header {
-  padding: 10px;
+    padding: 10px;
 }
 
 .job-post {
-  padding: 25px;
+    padding: 25px;
 }
 
 .btn-primary {
-  color: #fff;
-  border-color: #0d6efd;
-  background: #457b9d;
+    color: #fff;
+    border-color: #0d6efd;
+    background: #457b9d;
 }
 
 .btn-primary:hover {
-  color: #fff;
-  border-color: #0a58ca;
-  background: #1d3557;
+    color: #fff;
+    border-color: #0a58ca;
+    background: #1d3557;
 }
 
 #form1 {
-  border-radius: 0;
+    border-radius: 0;
 }
 
+.can-from {
+    padding-top: 20px;
+    /*padding-bottom: 20px;*/
+}
+
+.items {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+}
+
+.canHeader {
+    margin-bottom: 10px;
+    text-align: center;
+}

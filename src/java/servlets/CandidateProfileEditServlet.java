@@ -13,13 +13,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import problemdomain.Candidate;
+import problemdomain.Role;
 import problemdomain.Skill;
 import services.AccountServices;
 import services.ProfileServices;
 
 /**
- *
  * @author AmirS
  */
 public class CandidateProfileEditServlet extends HttpServlet {
@@ -27,19 +28,23 @@ public class CandidateProfileEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                AccountServices accService =new AccountServices();
+        AccountServices accService = new AccountServices();
         ProfileServices ps = new ProfileServices();
-        
+
         HttpSession sess = request.getSession(false);
-        
+
         // Get candidate
-        Candidate c = accService.getCandidateByUsername((String)sess.getAttribute("username"));
+        Candidate c = accService.getCandidateByUsername((String) sess.getAttribute("username"));
         request.setAttribute("candidate", c);
-        
+
         // Get skills
         ArrayList<Skill> skills = ps.getAllSkills();
         request.setAttribute("skills", skills);
-                request.getRequestDispatcher("/WEB-INF/candidate-profile-edit.jsp").forward(request, response);
+
+//        // Get roles
+        ArrayList<Role> roles = ps.getAllRoles();
+        request.setAttribute("roles", roles);
+        request.getRequestDispatcher("/WEB-INF/candidate-profile-edit.jsp").forward(request, response);
     }
 
     @Override
