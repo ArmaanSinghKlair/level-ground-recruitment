@@ -1,70 +1,49 @@
 .header-row {
-  background: var(--bs-white);
-  border-radius: 5px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  padding: 10px;
+    background: var(--bs-white);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 10px;
 }
 
 .job-title {
-  font-size: 2.5em;
+    font-size: 2.5em;
 }
 
 .candidate-name {
-  text-decoration: none;
-  color: #457b9d;
-  font-size: 1.2em;
+    text-decoration: none;
+    color: #457b9d;
+    font-size: 1.2em;
 }
 
 .submit-btn {
-  color: white;
-  background: #457b9d;
+    color: white;
+    background: #457b9d;
 }
 
 .submit-btn:hover {
-  color: white;
-  background: #1d3557;
+    color: white;
+    background: #1d3557;
 }
 
 .btn-group {
-  padding: 15px;
+    padding: 15px;
 }
 
 .candidate-row {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
-.popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 5;
-  background-color: white;
-  width: 80%;
-  border-radius: 5px;
+.items {
+    padding: 10px 20px;
+    margin-bottom: 10px;
 }
 
-.wrapper {
-  display: none;
+.canHeader {
+    margin-bottom: 10px;
+    text-align: center;
 }
 
-.wrapper.active {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: block;
-  z-index: 2;
-}
-
-.popup-content {
-  padding: 20px;
-}
-
-.popup-form {
-  padding: 20px;
+.sub-rej-btn {
+    width: 300px;
 }
