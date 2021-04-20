@@ -46,7 +46,7 @@
                                                                           data-bs-toggle="tab" href="#tab-1">Business
                         Information</a></li>
                     <li class="nav-item shadow-sm" role="presentation"><a class="nav-link" role="tab"
-                                                                          data-bs-toggle="tab" href="#tab-4">Job
+                                                                          data-bs-toggle="tab" href="#tab-2">Job
                         Postings</a></li>
                 </ul>
                 <div class="tab-content edit-content">
@@ -54,7 +54,6 @@
                         <div class="row d-flex flex-column align-items-center flex-md-row">
                             <div class="col">
                                 <h1><c:out value="${businessClient.busClientUsername}"/></h1>
-                                <p class="text-muted">Joined 01 Jan 2021</p>
                             </div>
                             <div class="col d-flex justify-content-center">
                                 <button class="btn btn-danger open-remove" type="submit">Remove Account</button>
@@ -67,8 +66,8 @@
                                     <h5 class="text-center">Are you sure you want to remove your Account?</h5>
                                     <div class="d-flex justify-content-center" style="padding: 15px;">
                                         <form id="delete-client" action="<c:url value='/delete-client'/>" method="post">
-                                        <button class="btn btn-danger" type="submit">Permanently Remove My Account
-                                        </button>
+                                            <button class="btn btn-danger" type="submit">Permanently Remove My Account
+                                            </button>
                                         </form>
                                     </div>
                                     <p class="lead text-center warming-txt"><em>You can't recover your account after
@@ -77,41 +76,52 @@
                             </div>
                         </div>
                         <hr>
-                        <form class="edit-form" id="edit-profile" action="<c:url value='/edit-client-profile'/>" method="post">
+                        <form class="edit-form" id="edit-profile" action="<c:url value='/edit-client-profile'/>"
+                              method="post">
                             <div class="row">
                                 <div class="col-12 col-md-5">
                                     <div class="form-group mb-3"><label class="form-label" for="businessName">Business
                                         Name</label><input class="form-control" type="text" id="businessName"
-                                                           name="businessName" value="<c:out value="${businessClient.busClientCompany}" default=''/>"></div>
+                                                           name="businessName"
+                                                           value="<c:out value="${businessClient.busClientCompany}" default=''/>">
+                                    </div>
                                 </div>
                                 <div class="col-12 col-md-5 offset-md-1">
                                     <div class="form-group mb-3"><label class="form-label"
                                                                         for="username">Username</label><input
-                                                           class="form-control" type="text" id="username" name="username" value="<c:out value="${businessClient.busClientUsername}" default=''/>"></div>
+                                            class="form-control" type="text" id="username" name="username"
+                                            value="<c:out value="${businessClient.busClientUsername}" default=''/>">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-5">
                                     <div class="form-group mb-3"><label class="form-label"
                                                                         for="email">Email</label><input
-                                            class="form-control" type="email" id="email" name="email" value="<c:out value="${businessClient.busClientEmail}" default=''/>"></div>
+                                            class="form-control" type="email" id="email" name="email"
+                                            value="<c:out value="${businessClient.busClientEmail}" default=''/>"></div>
                                 </div>
                                 <div class="col-12 col-md-5 offset-md-1">
                                     <div class="form-group mb-3"><label class="form-label"
                                                                         for="phone">Phone</label><input
-                                            class="form-control" type="tel" id="phone" name="phone" value="<c:out value="${businessClient.busClientPhone}" default=''/>"></div>
+                                            class="form-control" type="tel" id="phone" name="phone"
+                                            value="<c:out value="${businessClient.busClientPhone}" default=''/>"></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-11">
                                     <div class="form-group mb-3"><label class="form-label" for="address">Address</label><input
-                                            class="form-control" type="text" id="address" name="address" value="<c:out value="${businessClient.busClientAddress}" default=''/>"></div>
+                                            class="form-control" type="text" id="address" name="address"
+                                            value="<c:out value="${businessClient.busClientAddress}" default=''/>">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-11">
                                     <div class="form-group mb-3"><label class="form-label" for="website">Website</label><input
-                                            class="form-control" type="text" id="website" name="website" value="<c:out value="${businessClient.busClientWebsite}" default=''/>"></div>
+                                            class="form-control" type="text" id="website" name="website"
+                                            value="<c:out value="${businessClient.busClientWebsite}" default=''/>">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -119,27 +129,32 @@
                                     <div class="form-group mb-3"><label class="form-label"
                                                                         for="about">About</label><textarea
                                             class="form-control" id="about" rows="5" placeholder="About Business..."
-                                            name="about"><c:out value="${businessClient.busClientDescription}" default=''/></textarea></div>
+                                            name="about"><c:out value="${businessClient.busClientDescription}"
+                                                                default=''/></textarea></div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-5">
                                     <h5>Change Password</h5>
                                     <div class="form-group mb-3"><label class="form-label" for="cur-pass">Current
-                                            Password</label><input class="form-control" type="password" id="cur-pass" name="cur-pass"
+                                        Password</label><input class="form-control" type="password" id="cur-pass"
+                                                               name="cur-pass"
                                                                placeholder="****"></div>
                                     <div class="form-group mb-3"><label class="form-label" for="new-pass">New
-                                        Password</label><input class="form-control" type="password" id="new-pass" name="new-pass"></div>
+                                        Password</label><input class="form-control" type="password" id="new-pass"
+                                                               name="new-pass"></div>
                                     <div class="form-group mb-3"><label class="form-label" for="conf-pass">Confirm
-                                        Password</label><input class="form-control" type="password" id="conf-pass" name="conf-pass">
+                                        Password</label><input class="form-control" type="password" id="conf-pass"
+                                                               name="conf-pass">
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-5 offset-md-2 d-flex flex-column justify-content-end align-items-start">
                                     <h5 class="display-4">Apply Changes</h5>
                                     <div class="btn-group d-flex" role="group">
-                                        <form id="edit_reset" action="<c:url value='/edit-job-posting-nav'/>" method="post">
-                                        <button class="btn btn-secondary" type="reset" style="color: #f1faee;">Reset
-                                        </button>
+                                        <form id="edit_reset" action="<c:url value='/edit-job-posting-nav'/>"
+                                              method="post">
+                                            <button class="btn btn-secondary" type="reset" style="color: #f1faee;">Reset
+                                            </button>
                                         </form>
                                         <button class="btn btn-dark succ" type="submit">Save Changes</button>
                                     </div>
@@ -147,68 +162,105 @@
                             </div>
                         </form>
                     </div>
-                    <div class="tab-pane fade" role="tabpanel" id="tab-4">
-                        <c:forEach var="posting" items="${jobPostings}">
-                        <div class="accordion" role="tablist" id="accordion-<c:out value="${posting.jobpostingID}"/>">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header mb-0" role="tab">
-                                    <button class="accordion-button d-flex justify-content-between header-btn"
-                                            data-bs-toggle="collapse" data-bs-target="#accordion-<c:out value="${posting.jobpostingID}"/> .item-1"
-                                            aria-expanded="true" aria-controls="accordion-<c:out value="${posting.jobpostingID}"/> .item-1"><c:out value="${posting.jobTitle}" default=''/> <fmt:formatDate value="${posting.postDate}" type="date" pattern="yyyy-MM-dd"/></button>
-                                </h2>
-                                <div class="accordion-collapse collapse show item-1" role="tabpanel"
-                                     data-bs-parent="#accordion-<c:out value="${posting.jobpostingID}"/>">
-                                    <div class="accordion-body">
-                                        <form id="Posting_edit" action="<c:url value='/edit-job-posting'/>" method="post">
-                                            <div class="row">
-                                                <div class="col justify-content-center"><label class="col-form-label">Title<input
-                                                        class="form-control" type="text" name="title" value="<c:out value="${posting.jobTitle}" default=''/>"></label></div>
-                                                <div class="col justify-content-center"><label class="col-form-label">Status<select
-                                                        class="form-select" name="status">
-                                                    <option value="fullTime" <c:if test="${posting.jobStatus.equals('fullTime')}">selected</c:if>>Full-Time</option>
-                                                    <option value="partTime" <c:if test="${posting.jobStatus.equals('partTime')}">selected</c:if>>Part-Time</option>
-                                                    <option value="temporary" <c:if test="${posting.jobStatus.equals('temporary')}">selected</c:if>>Temporary</option>
-                                                </select></label></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col"><label class="col-form-label">Wage<input
-                                                        class="form-control" type="text" name="wage" value="<c:out value="${posting.wage}" default=''/>"></label></div>
-                                                <div class="col"><label class="col-form-label">Location<input
-                                                        class="form-control" type="text" name="location" value="<c:out value="${posting.location}" default=''/>"></label></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col"><label class="col-form-label">Start Date<input
-                                                        class="form-control" type="date" name="startDate" value="<fmt:formatDate value="${posting.startDate}" type="date" pattern="yyyy-MM-dd"/>"></label></div>
-                                                <div class="col"><label class="col-form-label">End Date<input
-                                                        class="form-control" type="date" name="endDate" value="<fmt:formatDate value="${posting.endDate}" type="date" pattern="yyyy-MM-dd"/>"></label></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col justify-content-center"><label class="form-label">Description</label><textarea
-                                                        class="form-control" rows="3" name="description"><c:out value="${posting.jobDescription}" default=''/></textarea></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col justify-content-center"><label class="form-label">Requirements</label><textarea
-                                                        class="form-control" rows="3" name="requirements"><c:out value="${posting.requirements}" default=''/></textarea></div>
-                                            </div>
-                                            <div class="row" style="padding-top: 20px;">
-                                                <div class="col d-flex justify-content-end">
-                                                    
-                                                    <button class="btn btn-danger open-work" type="submit" form="permanent_deletion<c:out value="${posting.jobpostingID}"/>"
-                                                            style="margin-right: 20px;">Remove
-                                                    </button>
-                                                    <button class="btn btn-primary succ open-edu" type="submit">Save
-                                                    </button>
-                                                    <input id="<c:out value="${posting.jobpostingID}"/>" type="hidden" name="postingID" value="<c:out value="${posting.jobpostingID}"/>">
+                    <div class="tab-pane fade" role="tabpanel" id="tab-2">
+                        <c:forEach var="posting" items="${jobPostings}" varStatus="loop">
+                            <div class="accordion" role="tablist"
+                                 id="accordion-${loop.index}-posting">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header mb-0" role="tab">
+                                        <button class="accordion-button collapsed d-flex justify-content-between header-btn"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#accordion-${loop.index}-posting .item-${loop.index}-posting"
+                                                aria-expanded="true"
+                                                aria-controls="accordion-${loop.index}-posting .item-${loop.index}-posting">
+                                            <c:out value="${posting.jobTitle}" default=''/> <fmt:formatDate
+                                                value="${posting.postDate}" type="date" pattern="yyyy-MM-dd"/></button>
+                                    </h2>
+                                    <div class="accordion-collapse collapse collapsed item-${loop.index}-posting"
+                                         role="tabpanel"
+                                         data-bs-parent="#accordion-${loop.index}-posting">
+                                        <div class="accordion-body">
+                                            <form id="Posting_edit" action="<c:url value='/edit-job-posting'/>"
+                                                  method="post">
+                                                <div class="row">
+                                                    <div class="col justify-content-center"><label
+                                                            class="col-form-label">Title<input
+                                                            class="form-control" type="text" name="title"
+                                                            value="<c:out value="${posting.jobTitle}" default=''/>"></label>
+                                                    </div>
+                                                    <div class="col justify-content-center"><label
+                                                            class="col-form-label">Status<select
+                                                            class="form-select" name="status">
+                                                        <option value="fullTime"
+                                                                <c:if test="${posting.jobStatus.equals('fullTime')}">selected</c:if>>
+                                                            Full-Time
+                                                        </option>
+                                                        <option value="partTime"
+                                                                <c:if test="${posting.jobStatus.equals('partTime')}">selected</c:if>>
+                                                            Part-Time
+                                                        </option>
+                                                        <option value="temporary"
+                                                                <c:if test="${posting.jobStatus.equals('temporary')}">selected</c:if>>
+                                                            Temporary
+                                                        </option>
+                                                    </select></label></div>
                                                 </div>
-                                            </div>
+                                                <div class="row">
+                                                    <div class="col"><label class="col-form-label">Wage<input
+                                                            class="form-control" type="text" name="wage"
+                                                            value="<c:out value="${posting.wage}" default=''/>"></label>
+                                                    </div>
+                                                    <div class="col"><label class="col-form-label">Location<input
+                                                            class="form-control" type="text" name="location"
+                                                            value="<c:out value="${posting.location}" default=''/>"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col"><label class="col-form-label">Start Date<input
+                                                            class="form-control" type="date" name="startDate"
+                                                            value="<fmt:formatDate value="${posting.startDate}" type="date" pattern="yyyy-MM-dd"/>"></label>
+                                                    </div>
+                                                    <div class="col"><label class="col-form-label">End Date<input
+                                                            class="form-control" type="date" name="endDate"
+                                                            value="<fmt:formatDate value="${posting.endDate}" type="date" pattern="yyyy-MM-dd"/>"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col justify-content-center"><label class="form-label">Description</label><textarea
+                                                            class="form-control" rows="3" name="description"><c:out
+                                                            value="${posting.jobDescription}" default=''/></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col justify-content-center"><label class="form-label">Requirements</label><textarea
+                                                            class="form-control" rows="3" name="requirements"><c:out
+                                                            value="${posting.requirements}" default=''/></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row" style="padding-top: 20px;">
+                                                    <div class="col d-flex justify-content-end">
+
+                                                        <button class="btn btn-danger open-work" type="submit"
+                                                                form="permanent_deletion<c:out value="${posting.jobpostingID}"/>"
+                                                                style="margin-right: 20px;">Remove
+                                                        </button>
+                                                        <button class="btn btn-primary succ open-edu" type="submit">Save
+                                                        </button>
+                                                        <input id="<c:out value="${posting.jobpostingID}"/>"
+                                                               type="hidden" name="postingID"
+                                                               value="<c:out value="${posting.jobpostingID}"/>">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <form id="permanent_deletion<c:out value="${posting.jobpostingID}"/>"
+                                              action="<c:url value='/delete-job-posting'/>" method="post">
+                                            <input id="<c:out value="${posting.jobpostingID}"/>" type="hidden"
+                                                   name="postingID" value="<c:out value="${posting.jobpostingID}"/>">
                                         </form>
                                     </div>
-                                    <form id="permanent_deletion<c:out value="${posting.jobpostingID}"/>" action="<c:url value='/delete-job-posting'/>" method="post">
-                                    <input id="<c:out value="${posting.jobpostingID}"/>" type="hidden" name="postingID" value="<c:out value="${posting.jobpostingID}"/>">
-                                    </form>
                                 </div>
                             </div>
-                        </div>
                         </c:forEach>
                     </div>
                 </div>

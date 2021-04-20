@@ -89,7 +89,7 @@
     <div class="row header-row">
         <div class="col">
             <c:forEach var="candidate" items="${candidates}">
-            <div class="accordion" role="tablist" id="accordion-<c:out value='${candidate.candidateID}' default=''/>">
+            <div class="accordion" role="tablist" id="accordion-${loop.index}">
                 <div class="accordion-item">
                     <h2 class="accordion-header mb-0" role="tab">
                         <button class="accordion-button candidate-name accordion-button" data-bs-toggle="collapse"
