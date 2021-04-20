@@ -366,7 +366,7 @@
                         </c:forEach>
                     </div>
                     <div class="tab-pane fade" role="tabpanel" id="tab-4">
-                        <c:if test="${candidate.workHistoryList.size() == 0}">
+                        <c:if test="${candidate.candidateSkillList.size() == 0}">SAIT
                             <div class="d-flex justify-content-center" style="padding:3rem 0;">
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" height="2rem" viewBox="0 -12 512.00032 512"
