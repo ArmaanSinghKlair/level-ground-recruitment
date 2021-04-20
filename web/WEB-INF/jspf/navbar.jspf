@@ -86,7 +86,7 @@
                                     determine its strengths and limitations.
                                 </p>
                             </div>
-                            <div class="row people">
+                            <div class="row people d-flex justify-content-center">
                                 <div class="col-lg-4 item">
                                     <div class="author">
                                         <img class="rounded-circle"

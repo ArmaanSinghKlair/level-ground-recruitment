@@ -286,13 +286,6 @@ section.testimonials-clean.popup.contact {
     margin-bottom: 0;
 }
 
-.testimonials-clean .people {
-    padding: 50px 0 20px;
-}
-
-.testimonials-clean .item {
-    margin-bottom: 32px;
-}
 
 @media (min-width: 768px) {
     .testimonials-clean .item {
@@ -359,4 +352,10 @@ section.testimonials-clean.popup.about {
 
 .about-icon {
     font-size: 20px;
+}
+
+.author {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
 }

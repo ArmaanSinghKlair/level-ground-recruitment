@@ -95,7 +95,8 @@ function SearchBar({ setError }) {
         </button>
       </div>
 
-      <div className="d-flex justify-content-around jobType">
+      <div className="d-flex justify-content-around align-items-center jobType">
+        <h1 className="display-6">Filters</h1>
         <select name="jobType" ref={jobTypeRef}>
           <option>Job Type</option>
           {jobTypes.map((type, i) => (

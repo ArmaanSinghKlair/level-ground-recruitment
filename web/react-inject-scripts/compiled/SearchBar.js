@@ -106,7 +106,12 @@ function SearchBar(_ref) {
     ),
     React.createElement(
       "div",
-      { className: "d-flex justify-content-around jobType" },
+      { className: "d-flex justify-content-around align-items-center jobType" },
+      React.createElement(
+        "h1",
+        { className: "display-6" },
+        "Filters"
+      ),
       React.createElement(
         "select",
         { name: "jobType", ref: jobTypeRef },
