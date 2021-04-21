@@ -19,8 +19,11 @@ import services.AccountServices;
 import services.ProfileServices;
 
 /**
+ * Used with the Candidate pages and performs different actions such as adding
+ * new content to the Candidate profile or changing existing content.
  *
  * @author 839645
+ * @version 1.0
  */
 public class CandidateProfileServlet extends HttpServlet {
 
@@ -40,7 +43,7 @@ public class CandidateProfileServlet extends HttpServlet {
         HttpSession sess = request.getSession(false);
         ProfileServices ps = new ProfileServices();
         ArrayList<String> errList = new ArrayList<>();
-        
+
         if (action != null && action.equals("profilePageAction")) {
             errList = ps.profilePageAction(request, (String) sess.getAttribute("username"));
         } else {
@@ -79,7 +82,7 @@ public class CandidateProfileServlet extends HttpServlet {
         String url = "/WEB-INF/candidate.jsp";
 
         if (submit != null && submit.equals("edit")) {
-             url ="/WEB-INF/candidate-profile-edit.jsp";
+            url = "/WEB-INF/candidate-profile-edit.jsp";
         }
         request.getRequestDispatcher(url).forward(request, response);
     }

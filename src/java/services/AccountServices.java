@@ -20,8 +20,11 @@ import validation.ValidateCandidate;
 import validation.ValidateJobPosting;
 
 /**
+ * Contains various methods to perform account related services and actions such
+ * as creating new accounts or entries in our database tables.
  *
  * @author 839645
+ * @version 1.0
  */
 public class AccountServices {
 

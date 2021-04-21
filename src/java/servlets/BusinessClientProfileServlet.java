@@ -16,8 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import services.AccountServices;
 
 /**
+ * Used with the Business Client pages and performs different actions such as
+ * creating a new job posting and redirecting the user to the appropriate
+ * webpage.
  *
  * @author 756887
+ * @version 1.0
  */
 @WebServlet(name = "BusinessClientProfileServlet", urlPatterns = {"/business-client-profile"})
 public class BusinessClientProfileServlet extends HttpServlet {
@@ -25,11 +29,10 @@ public class BusinessClientProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            String url = "/profile-navigation";
-       
+        String url = "/profile-navigation";
+
         this.getServletContext().getRequestDispatcher(url).forward(request, response);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -43,21 +46,19 @@ public class BusinessClientProfileServlet extends HttpServlet {
         String wage = request.getParameter("wage");
         String location = request.getParameter("location");
         String username = request.getParameter("username");
-    
+
         AccountServices service = new AccountServices();
         ArrayList<String> errList = service.createJobPosting(title, requirements, startDate, endDate, status, description, wage, location, username);
-        
-        if (errList == null)
-            {
-                request.setAttribute("success", true);
-                request.setAttribute("sucessMessage", "Job posting created");
-                request.getRequestDispatcher("/profile-navigation").forward(request, response);
-            } else
-            {
-                request.setAttribute("fail", true);
-                request.setAttribute("errList", errList);
-                request.getRequestDispatcher("/profile-navigation").forward(request, response);
-            }
-    
+
+        if (errList == null) {
+            request.setAttribute("success", true);
+            request.setAttribute("sucessMessage", "Job posting created");
+            request.getRequestDispatcher("/profile-navigation").forward(request, response);
+        } else {
+            request.setAttribute("fail", true);
+            request.setAttribute("errList", errList);
+            request.getRequestDispatcher("/profile-navigation").forward(request, response);
+        }
+
     }
 }

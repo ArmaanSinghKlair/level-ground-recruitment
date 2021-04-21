@@ -272,7 +272,7 @@ public class Candidate implements Serializable {
     /**
      * Accessor method
      *
-     * @return Boolean representing if the Candidate is placed or not
+     * @return boolean representing if the Candidate is placed or not
      */
     public Boolean getPlaced() {
         return placed;

@@ -632,7 +632,7 @@ public class AccountServicesDB {
      * @param em Entity Manager
      * @param attributeName Name of the parameter by which user wants to check
      * @param attributeValue Value of that parameter
-     * @return Boolean indicating whether user exists
+     * @return boolean indicating whether user exists
      */
     public final boolean doesCandidateExist(EntityManager em, String attributeName, String attributeValue) {
         List<Candidate> q = em.createNamedQuery("Candidate.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), Candidate.class).setParameter(attributeName, attributeValue).getResultList();

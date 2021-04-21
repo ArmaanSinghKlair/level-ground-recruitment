@@ -36,14 +36,24 @@ import validation.ValidateSkill;
 import validation.ValidateWorkHistory;
 
 /**
+ * Contains various methods to perform profile related services and actions for
+ * the different users in our system.
  *
  * @author 839645
+ * @version 1.0
  */
 public final class ProfileServices {
 
     private final ProfileServicesDB psdb = new ProfileServicesDB();
-    private final AccountServicesDB asdb = new AccountServicesDB();
 
+    /**
+     * Performs the appropriate page action based on the request from the
+     * front-end.
+     *
+     * @param request request from the front-end
+     * @param username username of the logged in user
+     * @return ArrayList containing any errors
+     */
     public final ArrayList<String> profilePageAction(HttpServletRequest request, String username) {
         ArrayList<String> errList = new ArrayList<>();
         // Basic parameters needed to identify request
@@ -101,9 +111,9 @@ public final class ProfileServices {
     /**
      * VALIDATE requests for create action on profile features
      *
-     * @param request
-     * @param username
-     * @return
+     * @param request request from front-end
+     * @param username username of logged in user
+     * @return ArrayList containing any errors that occurred
      */
     private final ArrayList<String> validateNewFeature(HttpServletRequest request, String username) {
         String form_name = request.getParameter("form_name");
@@ -175,6 +185,13 @@ public final class ProfileServices {
 
     }
 
+    /**
+     * VALIDATE requests for edit action on profile features
+     *
+     * @param request request from front-end
+     * @param username username of logged in user
+     * @return ArrayList containing any errors that occurred
+     */
     private final ArrayList<String> validateEditFeature(HttpServletRequest request, String username) {
         String form_name = request.getParameter("form_name");
         ArrayList<String> errList = new ArrayList<>();
@@ -190,7 +207,7 @@ public final class ProfileServices {
                 errList.addAll(ValidateRole.getErrorMapForAllfields(ID, username));
                 ValidateRole.prepareResponseForEdit(request);
                 break;
-                
+
             case "skills":
                 ID = request.getParameter("candidateSkill");
 
@@ -272,6 +289,11 @@ public final class ProfileServices {
 
     }
 
+    /**
+     * Loads the appropriate profile based on the user type.
+     *
+     * @param request request from the front-end
+     */
     public void loadProfile(HttpServletRequest request) {
         String userType = (String) request.getSession(false).getAttribute("userType");
         LoadProfile p = null;
@@ -289,6 +311,12 @@ public final class ProfileServices {
         p.loadProfile(request);
     }
 
+    /**
+     * Creates a profile for either a Candidate, Business Client, or an Advisor.
+     *
+     * @param request request from the front-end
+     * @return ArrayList containing any errors that occurred
+     */
     public ArrayList<String> createProfile(HttpServletRequest request) {
         String userType;
 
@@ -313,50 +341,142 @@ public final class ProfileServices {
         return rp.register(request);
     }
 
+    /**
+     * Return all skills from the database.
+     *
+     * @return ArrayList of Skills that matches the search query
+     */
     public final ArrayList<Skill> getAllSkills() {
         return psdb.getAllSkills();
     }
 
+    /**
+     * Return all roles from the database.
+     *
+     * @return ArrayList of Roles that matches the search query
+     */
     public final ArrayList<Role> getAllRoles() {
         return psdb.getAllRoles();
     }
 
+    /**
+     * Return a BusinessClient that matches the specified id.
+     *
+     * @param id id to search by
+     * @return BusinessClient that matches the search query
+     */
     public final BusinessClient getBusinessClientByClientID(int id) {
         return psdb.getBusinessClientByClientID(id);
     }
 
+    /**
+     * Return a Candidate that matches the specified id.
+     *
+     * @param id id to search by
+     * @return Candidate that matches the search query
+     */
     public final Candidate getCandidateByID(int id) {
         return psdb.getCandidateByID(id);
     }
 
-    public final Application getApplicationForAdvisor(int adID, int bcID) {
-        return psdb.getApplicationForAdvisor(adID, bcID);
+    /**
+     * Retrieve the appropriate application for an Advisor that matches the job
+     * id and the candidate id
+     *
+     * @param jobID job posting id
+     * @param canID candidate id
+     * @return Application that matches the search query
+     */
+    public final Application getApplicationForAdvisor(int jobID, int canID) {
+        return psdb.getApplicationForAdvisor(jobID, canID);
     }
 
+    /**
+     * Retrieve a list of job postings for an Advisor that matches the business
+     * client id and the advisor id.
+     *
+     * @param bcID business client id
+     * @param adID advisor id
+     * @return ArrayList of JobPostings that matches the search query
+     */
     public final ArrayList<JobPosting> getJobsForAdvisor(int bcID, int adID) {
         return psdb.getJobsForAdvisor(bcID, adID);
     }
 
+    /**
+     * Retrieve a list of job postings for a business client that matches the
+     * BusinessClient object.
+     *
+     * @param id BusinessClient object to search by
+     * @return ArrayList of JobPostings that match the search query
+     */
     public final ArrayList<JobPosting> getClientJobPostings(BusinessClient id) {
         return psdb.getClientJobPostings(id);
     }
 
+    /**
+     * Retrieve job postings that match an Advisor object.
+     *
+     * @param id Advisor object to search by
+     * @return ArrayList of JobPostings that match the search query
+     */
     public final ArrayList<JobPosting> getJobpostingsByAdvisorID(Advisor id) {
         return psdb.getJobpostingsByAdvisorID(id);
     }
 
+    /**
+     * Retrieve applications by the specified JobPosting object.
+     *
+     * @param id JobPosting object to search by
+     * @return ArrayList of Applications that match the search query
+     */
     public final ArrayList<Application> getApplicationsByJobpostingID(JobPosting id) {
         return psdb.getApplicationsByJobpostingID(id);
     }
 
+    /**
+     * Retrieves an Application that matches both the job posting id and the
+     * candidate id.
+     *
+     * @param jpID job posting id
+     * @param canID candidate id
+     * @return Application that matches the search query
+     */
     public final Application getApplicationByBothID(int jpID, int canID) {
         return psdb.getApplicationByBothID(jpID, canID);
     }
 
+    /**
+     * Used to modify an existing BusinessClient profile.
+     *
+     * @param company company of the BusinessClient
+     * @param username username of the BusinessClient
+     * @param email email of the BusinessClient
+     * @param phone phone of the BusinessClient
+     * @param address address of the BusinessClient
+     * @param website website of the BusinessClient
+     * @param description description of the BusinessClient
+     * @param bc BusinessClient
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> editBusinessClientProfile(String company, String username, String email, String phone, String address, String website, String description, BusinessClient bc) {
         return psdb.editBusinessClientProfile(company, username, email, phone, address, website, description, bc);
     }
 
+    /**
+     * Used to modify and existing JobPosting.
+     *
+     * @param title title of the Job Posting
+     * @param status status of the Job Posting
+     * @param description description of the Job Posting
+     * @param requirements requirements of the Job Posting
+     * @param sWage wage of the Job Posting
+     * @param location location of the Job Posting
+     * @param sDate start date of the Job Posting
+     * @param eDate end date of the Job Posting
+     * @param jp JobPosting
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> editJobPosting(String title, String status, String description, String requirements, String sWage, String location, String sDate, String eDate, JobPosting jp) {
         ArrayList<String> errList = new ArrayList<>();
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
@@ -377,18 +497,43 @@ public final class ProfileServices {
         return errList;
     }
 
+    /**
+     * Updates the Business Client password.
+     *
+     * @param password new password
+     * @param bc BusinessClient to update
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> setNewClientPassword(String password, BusinessClient bc) {
         return psdb.setNewClientPassword(password, bc);
     }
 
+    /**
+     * Deletes an application that matches the specified Application object.
+     *
+     * @param ap Application object to search by
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> deleteApplicationByID(Application ap) {
         return psdb.deleteApplicationByID(ap);
     }
 
+    /**
+     * Deletes a business client that matches the specified username.
+     *
+     * @param username username to search by
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> deleteBusinessClient(String username) {
         return psdb.deleteBusinessClient(username);
     }
 
+    /**
+     * Used to check if a specific field is empty or not.
+     *
+     * @param field field to be checked
+     * @return boolean that determines if the field is empty or not
+     */
     private final boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;
     }

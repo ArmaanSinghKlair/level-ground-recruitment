@@ -34,6 +34,17 @@ public final class ValidateCandidate {
         errList = new ArrayList<>();
     }
 
+    /**
+     * Generates an error map for the Candidate attributes during sign up.
+     *
+     * @param username username of the Candidate
+     * @param password password of the Candidate
+     * @param firstName first name of the Candidate
+     * @param lastName last name of the Candidate
+     * @param email email of the Candidate
+     * @param phoneNo phone number of the Candidate
+     * @return ArrayList that contains any errors that occurred
+     */
     public static ArrayList<String> getErrorMapForSignup(String username, String password, String firstName, String lastName, String email, String phoneNo) {
         startValidation();
         put(validateCanUsername(username));
@@ -45,6 +56,16 @@ public final class ValidateCandidate {
         return getErrorMap();
     }
 
+    /**
+     * Generates an error map for the Candidate attributes during edit.
+     *
+     * @param username username of the Candidate
+     * @param firstName first name of the Candidate
+     * @param lastName last name of the Candidate
+     * @param email email of the Candidate
+     * @param phoneNo phone number of the Candidate
+     * @return ArrayList that contains any errors that occurred
+     */
     public static ArrayList<String> getErrorMapForEdit(String username, String firstName, String lastName, String email, String phoneNo) {
         startValidation();
         put(validateCanUsername(username));
@@ -67,7 +88,12 @@ public final class ValidateCandidate {
         }
     }
 
-    //This checks that the username is not empty or too long
+    /**
+     * This checks that the username is not empty or too long.
+     *
+     * @param username username to check
+     * @return String containing validation results
+     */
     public static String validateCanUsername(String username) {
         if (isEmpty(username)) {
             return "Username cannot be empty";
@@ -78,7 +104,12 @@ public final class ValidateCandidate {
         }
     }
 
-    //This checks that the password is not empty or too long
+    /**
+     * This checks that the password is not empty or too long.
+     *
+     * @param password password to check
+     * @return String containing validation results
+     */
     public static String validateCanPassword(String password) {
         if (isEmpty(password)) {
             return "Password cannot be empty";
@@ -89,7 +120,12 @@ public final class ValidateCandidate {
         }
     }
 
-    //This checks that the first name is not empty or too long
+    /**
+     * This checks that the first name is not empty or too long.
+     *
+     * @param firstName first name to check
+     * @return String containing validation results
+     */
     public static String validateCanfirstName(String firstName) {
         if (isEmpty(firstName)) {
             return "First name cannot be empty";
@@ -100,7 +136,12 @@ public final class ValidateCandidate {
         }
     }
 
-    //This checks that the last name is not empty or too long
+    /**
+     * This checks that the last name is not empty or too long.
+     *
+     * @param lastName last name to check
+     * @return String containing validation results
+     */
     public static String validateCanlastName(String lastName) {
         if (isEmpty(lastName)) {
             return "Last name cannot be empty";
@@ -111,7 +152,13 @@ public final class ValidateCandidate {
         }
     }
 
-    //This checks that the email is not empty or too long. It also checks that it is in the correct email format
+    /**
+     * This checks that the email is not empty or too long. It also checks that
+     * it is in the correct email format.
+     *
+     * @param email email to check
+     * @return String containing validation results
+     */
     public static String validateCanEmail(String email) {
         if (isEmpty(email)) {
             return "Email cannot be empty";
@@ -124,7 +171,13 @@ public final class ValidateCandidate {
         }
     }
 
-    //This checks that the phone number is not empty or too long. It also checks that it is in the correct phone number format
+    /**
+     * This checks that the phone number is not empty or too long. It also
+     * checks that it is in the correct phone number format.
+     *
+     * @param phoneNo phone number to check
+     * @return String containing validation results
+     */
     public static String validateCanPhoneNo(String phoneNo) {
         if (isEmpty(phoneNo)) {
             return "Phone no cannot be empty";
@@ -137,7 +190,12 @@ public final class ValidateCandidate {
         }
     }
 
-    //This checks that the work history is not empty or too long
+    /**
+     * This checks that the work history is not empty or too long.
+     *
+     * @param workHistory work history to check
+     * @return String containing validation results
+     */
     public static String validateWorkHistory(String workHistory) {
         if (!isEmpty(workHistory) && workHistory.trim().length() > 255) {
             return "Work history cannot be more than 255 characters";
@@ -146,7 +204,12 @@ public final class ValidateCandidate {
         }
     }
 
-    //This checks that the primary education is not empty or too long
+    /**
+     * This checks that the primary education is not empty or too long.
+     *
+     * @param primaryEducation primary education to check
+     * @return String containing validation results
+     */
     public static String validatePrimaryEducation(String primaryEducation) {
         if (!isEmpty(primaryEducation) && primaryEducation.trim().length() > 255) {
             return "Primary education cannot be more than 255 characters";
@@ -155,7 +218,12 @@ public final class ValidateCandidate {
         }
     }
 
-    //This checks that the secondary education is not empty or too long
+    /**
+     * This checks that the secondary education is not empty or too long.
+     *
+     * @param secondaryEducation secondary education to check
+     * @return String containing validation results
+     */
     public static String validateSecondaryEducation(String secondaryEducation) {
         if (!isEmpty(secondaryEducation) && secondaryEducation.trim().length() > 255) {
             return "Secondary education cannot be more than 255 characters";
@@ -164,7 +232,12 @@ public final class ValidateCandidate {
         }
     }
 
-    //This checks that the certificates are not empty or too long
+    /**
+     * This checks that the certificates are not empty or too long.
+     *
+     * @param certificates certificates to check
+     * @return String containing validation results
+     */
     public static String validateCertificates(String certificates) {
         if (!isEmpty(certificates) && certificates.trim().length() > 255) {
             return "Certificates cannot be more than 255 characters";
@@ -173,7 +246,12 @@ public final class ValidateCandidate {
         }
     }
 
-    //This checks that the key skills are not empty or too long
+    /**
+     * This checks that the key skills are not empty or too long.
+     *
+     * @param keySkills key skills to check
+     * @return String containing validation results
+     */
     public static String validateKeySkills(String keySkills) {
         if (!isEmpty(keySkills) && keySkills.trim().length() > 255) {
             return "Key skills cannot be more than 255 characters";
@@ -182,7 +260,12 @@ public final class ValidateCandidate {
         }
     }
 
-    //This checks that the interested roles are not empty or too long
+    /**
+     * This checks that the interested roles are not empty or too long.
+     *
+     * @param interestedRoles interested roles to check
+     * @return String containing validation results
+     */
     public static String validateInterestedRoles(String interestedRoles) {
         if (!isEmpty(interestedRoles) && interestedRoles.trim().length() > 255) {
             return "Interested Roles cannot be more than 255 characters";
@@ -191,6 +274,13 @@ public final class ValidateCandidate {
         }
     }
 
+    /**
+     * Validates the current password.
+     *
+     * @param username username to check
+     * @param password password to check
+     * @return ArrayList containing any errors that occurred
+     */
     public static ArrayList<String> validateCurrentPassword(String username, String password) {
         ArrayList<String> errList = new AccountServices().authenticate(username, password, "candidate");
         if (errList == null) {
@@ -199,6 +289,19 @@ public final class ValidateCandidate {
         return errList;
     }
 
+    /**
+     * Prepares the Candidate for edit.
+     *
+     * @param request request from the front-end
+     * @param password password of the Candidate
+     * @param firstName first name of the Candidate
+     * @param lastName last name of the Candidate
+     * @param email email of the Candidate
+     * @param phoneNo phone number of theCandidate
+     * @param username username of the Candidate
+     * @param about about of the Candidate
+     * @param withPassword determines if password is provided
+     */
     public static void prepareResponseForEdit(HttpServletRequest request, String password, String firstName, String lastName, String email, String phoneNo, String username, String about, boolean withPassword) {
         try {
             Candidate c = new AccountServices().getCandidateByUsername(request.getParameter("username"));
@@ -229,6 +332,11 @@ public final class ValidateCandidate {
 
     }
 
+    /**
+     * Returns the error map.
+     *
+     * @return ArrayList containing any errors that occurred
+     */
     public static ArrayList<String> getErrorMap() {
         if (errList.isEmpty()) {
             return new ArrayList<>();
@@ -237,6 +345,12 @@ public final class ValidateCandidate {
         }
     }
 
+    /**
+     * Checks if a specific field is empty.
+     *
+     * @param field field to check
+     * @return boolean determining if field is empty or notF
+     */
     private final static boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;
     }

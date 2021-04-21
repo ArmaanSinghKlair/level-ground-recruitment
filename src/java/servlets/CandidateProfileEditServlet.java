@@ -21,7 +21,10 @@ import services.AccountServices;
 import services.ProfileServices;
 
 /**
+ * Used to load the appropriate content for the Candidate profile edit page.
+ *
  * @author AmirS
+ * @version 1.0
  */
 public class CandidateProfileEditServlet extends HttpServlet {
 

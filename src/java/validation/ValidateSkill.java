@@ -92,7 +92,7 @@ public final class ValidateSkill {
      * Determines if the id is numeric.
      *
      * @param id ID to check
-     * @return Boolean representing if the id is numeric or not.
+     * @return boolean representing if the id is numeric or not.
      */
     private static boolean isNumeric(String id) {
         try {
@@ -151,7 +151,7 @@ public final class ValidateSkill {
      * Determines if the field passed in is empty.
      *
      * @param field Field to check
-     * @return Boolean representing if the field was empty or not.
+     * @return boolean representing if the field was empty or not.
      */
     private final static boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;

@@ -90,7 +90,7 @@ public final class ValidateRole {
      * Determines if the role id is numeric.
      *
      * @param id ID of the Role
-     * @return Boolean of whether the id is numeric or not
+     * @return boolean of whether the id is numeric or not
      */
     private static boolean isNumeric(String id) {
         try {
@@ -149,7 +149,7 @@ public final class ValidateRole {
      * Used to check if a specific field is empty or not.
      *
      * @param field String field to be checked
-     * @return Boolean that determines if the field is empty or not
+     * @return boolean that determines if the field is empty or not
      */
     private final static boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;

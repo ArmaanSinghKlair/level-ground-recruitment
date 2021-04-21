@@ -154,7 +154,7 @@ public class ValidateEducation {
      * Determines if the specific field is empty or not.
      *
      * @param field field to check
-     * @return Boolean representing if the field is empty or not
+     * @return boolean representing if the field is empty or not
      */
     private final static boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;
