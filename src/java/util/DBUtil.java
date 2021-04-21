@@ -5,7 +5,7 @@ import javax.persistence.*;
 /**
  * Utility used for database connections within our application.
  *
- * @author
+ * @author 839645
  * @version 1.0
  */
 public class DBUtil {

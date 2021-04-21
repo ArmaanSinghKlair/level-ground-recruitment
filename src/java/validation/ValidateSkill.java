@@ -31,7 +31,7 @@ public final class ValidateSkill {
      *
      * @param skillId ID of the Skill
      * @param Username username of the Candidate
-     * @return
+     * @return ArrayList containing any errors that occurred
      */
     public static ArrayList<String> getErrorMapForAllfields(String skillId, String Username) {
         errList = new ArrayList<>();

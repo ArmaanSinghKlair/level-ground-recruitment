@@ -35,7 +35,7 @@ import util.PasswordUtil;
  * Various account services for different interactions within our database, such
  * as inserting new data into our pre-existing database tables.
  *
- * @author
+ * @author 839645
  * @version 1.0
  */
 public class AccountServicesDB {
@@ -293,9 +293,9 @@ public class AccountServicesDB {
      * @param endDate End Date of the Job Posting
      * @param status Status of the Job Posting
      * @param description Description of the Job Posting
-     * @param username
-     * @param wage
-     * @param location
+     * @param username Username of the Business Client
+     * @param wage Wage of the Job Posting
+     * @param location Location of the Job Posting
      * @return String ArrayList of any errors that may have occurred.
      */
     public final ArrayList<String> createJobPosting(String title, String requirements, Date startDate, Date endDate, String status, String description, String username, Double wage, String location) {
@@ -332,6 +332,12 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Deletes a Job Posting that matches the specified id.
+     *
+     * @param id id to search by
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> deleteJobPostingByID(int id) {
         initialize();
         ArrayList<String> errList = new ArrayList<>();
@@ -355,6 +361,14 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Determines if an education exists by matching an education with the
+     * specified id.
+     *
+     * @param username username of the Candidate
+     * @param ID id to search by
+     * @return String containing validation results
+     */
     public final String doesEducationExist(String username, String ID) {
         String err = null;
         try {
@@ -380,6 +394,13 @@ public class AccountServicesDB {
 
     }
 
+    /**
+     * Determines if a work history that matches the id exists.
+     *
+     * @param username username of the Candidate
+     * @param ID id to search by
+     * @return String containing validation results
+     */
     public final String doesWorkHistoryExist(String username, String ID) {
         String err = null;
         try {
@@ -407,7 +428,7 @@ public class AccountServicesDB {
 
     /**
      * Authenticates a user. The trick here is to hash the input password before
-     * comparing it to the input password
+     * comparing it to the input password.
      *
      * @param username Input username
      * @param password Input password
@@ -432,6 +453,12 @@ public class AccountServicesDB {
 
     }
 
+    /**
+     * Returns an authentication object for the appropriate user.
+     *
+     * @param userType the type of user
+     * @return Authentication object
+     */
     private Authentication getAuthObject(String userType) {
         switch (userType) {
             case "candidate":
@@ -446,7 +473,7 @@ public class AccountServicesDB {
 
     /**
      * Authenticates a user. The trick here is to hash the input password before
-     * comparing it to the input password
+     * comparing it to the input password.
      *
      * @param username Input username
      * @param password Input password
@@ -481,7 +508,7 @@ public class AccountServicesDB {
 
     /**
      * Authenticates a user. The trick here is to hash the input password before
-     * comparing it to the input password
+     * comparing it to the input password.
      *
      * @param username Input username
      * @param password Input password
@@ -513,6 +540,12 @@ public class AccountServicesDB {
 
     }
 
+    /**
+     * Returns a Candidate object that matches the specified username.
+     *
+     * @param username username to search by
+     * @return Candidate object that matches the search criteria
+     */
     public final Candidate getCandidateByUsername(String username) {
         initialize();
         try {
@@ -532,6 +565,12 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Returns a Skill that matches the specified id.
+     *
+     * @param id id to search by
+     * @return Skill object that matches the search query
+     */
     public final Skill getSkillById(String id) {
         initialize();
         try {
@@ -550,6 +589,12 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Returns a Role that matches the specified id.
+     *
+     * @param id id to search by
+     * @return Role object that matches the search query
+     */
     public final Role getRoleById(String id) {
         initialize();
         try {
@@ -568,6 +613,12 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Returns a Business Client that matches the specified username.
+     *
+     * @param username username to search by
+     * @return Business Client object that matches the search query
+     */
     public final BusinessClient getBusinessClientByUsername(String username) {
         initialize();
         try {
@@ -587,6 +638,12 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Returns an Advisor that matches the specified username.
+     *
+     * @param username username to search by
+     * @return Advisor object that matches the search query
+     */
     public final Advisor getAdvisorByUsername(String username) {
         initialize();
         try {
@@ -606,6 +663,12 @@ public class AccountServicesDB {
         }
     }
 
+    /**
+     * Returns a JobPosting that matches the specified id.
+     *
+     * @param id id to search by
+     * @return JobPosting that matches the search query
+     */
     public final JobPosting getJobpostingByID(int id) {
         initialize();
         try {
@@ -626,8 +689,8 @@ public class AccountServicesDB {
     }
 
     /**
-     * Checks to see if user exists -- does not alter the EntityManager in any
-     * way so em can passed by reference
+     * Checks to see if Candidate exists -- does not alter the EntityManager in
+     * any way so em can passed by reference
      *
      * @param em Entity Manager
      * @param attributeName Name of the parameter by which user wants to check
@@ -639,27 +702,69 @@ public class AccountServicesDB {
         return q != null && !q.isEmpty();
     }
 
+    /**
+     * Checks to see if Business Client exists -- does not alter the
+     * EntityManager in any way so em can passed by reference
+     *
+     * @param em EntityManager object
+     * @param attributeName name of the attribute
+     * @param attributeValue value of the attribute
+     * @return boolean indicating whether user exists
+     */
     public final boolean doesClientExist(EntityManager em, String attributeName, String attributeValue) {
         List<BusinessClient> q = em.createNamedQuery("BusinessClient.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), BusinessClient.class).setParameter(attributeName, attributeValue).getResultList();
         return q != null && !q.isEmpty();
     }
 
+    /**
+     * Checks to see if Advisor exists -- does not alter the EntityManager in
+     * any way so em can passed by reference
+     *
+     * @param em EntityManager object
+     * @param attributeName name of the attribute
+     * @param attributeValue value of the attribute
+     * @return boolean indicating whether Advisor exists
+     */
     public final boolean doesAdvisorExist(EntityManager em, String attributeName, String attributeValue) {
         List<Advisor> q = em.createNamedQuery("Advisor.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), Advisor.class).setParameter(attributeName, attributeValue).getResultList();
         return q != null && !q.isEmpty();
     }
 
+    /**
+     * Checks to see if JobPosting exists -- does not alter the EntityManager in
+     * any way so em can passed by reference
+     *
+     * @param em EntityManager object
+     * @param attributeName name of the attribute
+     * @param attributeValue value of the attribute
+     * @return boolean indicating whether JobPosting exists
+     */
     public final boolean doesJobPostingExist(EntityManager em, String attributeName, int attributeValue) {
         List<JobPosting> q = em.createNamedQuery("JobPosting.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), JobPosting.class).setParameter(attributeName, attributeValue).getResultList();
         return q != null && !q.isEmpty();
     }
 
+    /**
+     * Checks to see if Skill description exists -- does not alter the
+     * EntityManager in any way so em can passed by reference
+     *
+     * @param em EntityManager object
+     * @param attributeName name of the attribute
+     * @param attributeValue value of the attribute
+     * @return boolean indicating whether skill description exists
+     */
     public final boolean doesSkillDescriptionExist(EntityManager em, String attributeName, String attributeValue) {
         List<Skill> q = em.createNamedQuery("Skill.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), Skill.class).setParameter(attributeName, attributeValue).getResultList();
         return q != null && !q.isEmpty();
 
     }
 
+    /**
+     * Checks to see if Skill exists
+     *
+     * @param id id to search by
+     * @return boolean indication whether skill exists
+     */
     public boolean doesSkillExist(String id) {
         if (em == null || !em.isOpen()) {
             initialize();
@@ -668,6 +773,12 @@ public class AccountServicesDB {
         return em.find(Skill.class, Integer.parseInt(id)) != null;
     }
 
+    /**
+     * Checks to see if Role exists
+     *
+     * @param id id to search by
+     * @return boolean indication whether role exists
+     */
     public boolean doesRoleExist(String id) {
         if (em == null || !em.isOpen()) {
             initialize();
@@ -676,6 +787,15 @@ public class AccountServicesDB {
         return em.find(Role.class, Integer.parseInt(id)) != null;
     }
 
+    /**
+     * Checks to see if Role exists -- does not alter the EntityManager in any
+     * way so em can passed by reference
+     *
+     * @param em EntityManager object
+     * @param attributeName name of the attribute
+     * @param attributeValue value of the attribute
+     * @return boolean indicating whether role exists
+     */
     public final boolean doesRoleExist(EntityManager em, String attributeName, String attributeValue) {
         List<Role> q = em.createNamedQuery("Role.findBy" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1), Role.class).setParameter(attributeName, attributeValue).getResultList();
         return q != null && !q.isEmpty();

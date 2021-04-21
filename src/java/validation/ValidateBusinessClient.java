@@ -58,7 +58,7 @@ public final class ValidateBusinessClient {
      * @param address address of the Business Client
      * @param website website of the Business Client
      * @param description description of the Business Client
-     * @return
+     * @return ArrayList containing any errors that occurred
      */
     public static ArrayList<String> validateEdit(String company, String username, String email, String phone, String address, String website, String description) {
         startValidation();
