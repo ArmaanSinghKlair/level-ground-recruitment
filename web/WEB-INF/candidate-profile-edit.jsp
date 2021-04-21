@@ -413,7 +413,7 @@
                                                     <div class="col-12 col-md-5 offset-md-1 d-flex justify-content-around align-items-end">
                                                         <div class="d-flex justify-content-end align-items-end align-content-end save-btns form-group mb-3">
                                                             <div class="btn-group" role="group">
-                                                                <button class="btn btn-success succ" type="submit"
+                                                                <button class="btn btn-success succ" type="submit" name="submit"
                                                                         value="edit">Save
                                                                     Changes
                                                                 </button>
@@ -479,7 +479,8 @@
                                                     <div class="col-12 col-md-5 offset-md-1 d-flex justify-content-around align-items-end">
                                                         <div class="d-flex justify-content-end align-items-end align-content-end save-btns form-group mb-3">
                                                             <div class="btn-group" role="group">
-                                                                <button class="btn btn-success succ" type="submit">Save
+                                                                <button class="btn btn-success succ" type="submit" name="submit"
+                                                                        value="edit">Save
                                                                     Changes
                                                                 </button>
                                                             </div>

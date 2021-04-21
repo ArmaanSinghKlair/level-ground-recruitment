@@ -251,6 +251,7 @@ public final class ProfileServicesDB {
 
     public final ArrayList<String> edit(HttpServletRequest request, String username) {
         initialize();
+
         try {
             trans.begin();
             // Gets appropriate feature depending upon form parameters
@@ -275,29 +276,32 @@ public final class ProfileServicesDB {
         switch (form_name) {
 
             case "roles":
+                String newRole = request.getParameter("candidateRole");
                 String roleID = request.getParameter("id");
-                CandidateRole role = new CandidateRole();
-
+                CandidateRole role = (CandidateRole) request.getAttribute("canRole");
                 role.setCandidateID(c);
 
-                Role actualRole = asdb.getRoleById(roleID);
-                role.setRoleID(actualRole);
+                if (newRole == null || newRole.equals("")) {
+                    role.setRoleID(asdb.getRoleById(roleID));
+                } else {
+                    role.setRoleID(asdb.getRoleById(newRole));
+                }
 
                 c.getCandidateRoleList().add(role);
                 return role;
 
             case "skills":
+
+                String newSkill = request.getParameter("candidateSkill");
                 String skillID = request.getParameter("id");
-                CandidateSkill skill = new CandidateSkill();
-
-                // Adds a Candidate to Candidate_skill
+                CandidateSkill skill = (CandidateSkill) request.getAttribute("canSkill");
                 skill.setCandidateID(c);
+                if (newSkill == null || newSkill.equals("")) {
+                    skill.setSkillID(asdb.getSkillById(skillID));
+                } else {
+                    skill.setSkillID(asdb.getSkillById(newSkill));
+                }
 
-                // Adds a Skill to Candidate_skill
-                Skill actualSkill = asdb.getSkillById(skillID);
-                skill.setSkillID(actualSkill);
-
-                // Adds an integer skillID
                 c.getCandidateSkillList().add(skill);
                 return skill;
 

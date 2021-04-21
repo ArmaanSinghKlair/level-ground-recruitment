@@ -7,6 +7,7 @@ package validation;
 
 import dataaccess.AccountServicesDB;
 import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
 import problemdomain.Candidate;
 import problemdomain.CandidateRole;
 
@@ -110,6 +111,28 @@ public final class ValidateRole {
             return "Selected role does not exist";
         }
         return null;
+    }
+    
+    public static void prepareResponse(HttpServletRequest request) {
+        CandidateRole r = new CandidateRole();
+        // Do this if ANY ERRORS
+        if (!errList.isEmpty()) {
+            request.setAttribute("currentTab", "edit-roles-cta");
+
+        }
+        request.setAttribute("canRole", r);
+    }
+
+    public static void prepareResponseForEdit(HttpServletRequest request) {
+        CandidateRole r = new CandidateRole();
+        r.setCanroleID(Integer.parseInt((String) request.getParameter("id")));
+        // Do this if ANY ERRORS
+        if (!errList.isEmpty()) {
+            request.setAttribute("currentTab", "edit-roles-cta");
+
+        }
+        request.setAttribute("canRole", r);
+
     }
 
     /**

@@ -118,6 +118,7 @@ public final class ProfileServices {
                 } else {
                     request.setAttribute("currentTab", "add-roles-cta");
                 }
+                ValidateRole.prepareResponse(request);
                 break;
             case "skills":
                 errList.addAll(ValidateSkill.getErrorMapForAllfields(request.getParameter("id"), username));
@@ -127,7 +128,7 @@ public final class ProfileServices {
                 } else {
                     request.setAttribute("currentTab", "add-skills-cta");
                 }
-
+                ValidateSkill.prepareResponse(request);
                 break;
 
             case "education":
@@ -179,8 +180,30 @@ public final class ProfileServices {
         ArrayList<String> errList = new ArrayList<>();
 
         switch (form_name) {
+            case "roles":
+                String ID = request.getParameter("candidateRole");
+
+                if (isEmpty(ID)) {
+                    errList.add("Something went wrong, Please reload and try again");
+                    break;
+                }
+                errList.addAll(ValidateRole.getErrorMapForAllfields(ID, username));
+                ValidateRole.prepareResponseForEdit(request);
+                break;
+                
+            case "skills":
+                ID = request.getParameter("candidateSkill");
+
+                if (isEmpty(ID)) {
+                    errList.add("Something went wrong, Please reload and try again");
+                    break;
+                }
+                errList.addAll(ValidateSkill.getErrorMapForAllfields(ID, username));
+                ValidateSkill.prepareResponseForEdit(request);
+                break;
+
             case "education":
-                String ID = request.getParameter("id");
+                ID = request.getParameter("id");
                 String institution = request.getParameter("institution");
                 String education_lvl = request.getParameter("education-lvl");
                 String subject = request.getParameter("subject");
