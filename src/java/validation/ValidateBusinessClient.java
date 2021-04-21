@@ -15,6 +15,7 @@ import problemdomain.BusinessClient;
  * then call getErrorMap
  *
  * @author 839645
+ * @version 1.0
  */
 public final class ValidateBusinessClient {
 
@@ -30,29 +31,35 @@ public final class ValidateBusinessClient {
     //Basic business client validation
     public static ArrayList<String> getErrorMapForAllfields(String username, String password, String company, String email, String phoneNo) {
         startValidation();
-        put("busClientUsername", validateBusClientUsername(username));
-        put("busClientPassword", validateBusClientPassword(password));
-        put("busClientCompany", validateBusClientCompany(company));
-        put("busClientEmail", validateBusClientEmail(email));
-        put("busClientPhoneNo", validateBusClientPhoneNo(phoneNo));
-        return getErrorMap();
-    }
-    
-    public static ArrayList<String> validateEdit(String company, String username, String email, String phone, String address, String website, String description) {
-        startValidation();
-        put("busClientUsername", validateBusClientUsername(username));
-        put("busClientCompany", validateBusClientCompany(company));
-        put("busClientEmail", validateBusClientEmail(email));
-        put("busClientPhoneNo", validateBusClientPhoneNo(phone));
-        put("busClientAddress", validateBusClientAddress(address));
-        put("busClientWebsite", validateBusClientWebsite(website));
-        put("busClientDescription", validateBusClientDescription(description));
+        put(validateBusClientUsername(username));
+        put(validateBusClientPassword(password));
+        put(validateBusClientCompany(company));
+        put(validateBusClientEmail(email));
+        put(validateBusClientPhoneNo(phoneNo));
         return getErrorMap();
     }
 
-    private static void put(String name, String value) {
-        if (value != null) {
-            errList.add(value);
+    public static ArrayList<String> validateEdit(String company, String username, String email, String phone, String address, String website, String description) {
+        startValidation();
+        put(validateBusClientUsername(username));
+        put(validateBusClientCompany(company));
+        put(validateBusClientEmail(email));
+        put(validateBusClientPhoneNo(phone));
+        put(validateBusClientAddress(address));
+        put(validateBusClientWebsite(website));
+        put(validateBusClientDescription(description));
+        return getErrorMap();
+    }
+
+    /**
+     * Appends the appropriate error message into the errList so long as the
+     * value is not null.
+     *
+     * @param errMsg error message
+     */
+    private static void put(String errMsg) {
+        if (errMsg != null) {
+            errList.add(errMsg);
         }
     }
 
@@ -110,8 +117,7 @@ public final class ValidateBusinessClient {
             return "Phone no cannot be more than 10 characters";
         } else if (!Pattern.matches("\\d{10}", phoneNo)) {
             return "Phone number requires 10 digits";
-        } else 
-        {
+        } else {
             return null;
         }
     }
@@ -123,7 +129,7 @@ public final class ValidateBusinessClient {
             return errList;
         }
     }
-    
+
     public static String validateBusClientAddress(String address) {
 
         if (address.length() > 100) {
@@ -132,7 +138,7 @@ public final class ValidateBusinessClient {
             return null;
         }
     }
-    
+
     public static String validateBusClientWebsite(String website) {
 
         if (website.length() > 100) {
@@ -141,7 +147,7 @@ public final class ValidateBusinessClient {
             return null;
         }
     }
-    
+
     public static String validateBusClientDescription(String description) {
 
         if (description.length() > 255) {

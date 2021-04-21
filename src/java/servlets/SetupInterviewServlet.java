@@ -18,8 +18,10 @@ import services.JobPostingServices;
 import services.ProfileServices;
 
 /**
+ * Used to select the Candidate for interview.
  *
  * @author 756887
+ * @version 1.0
  */
 @WebServlet(name = "SetupInterviewServlet", urlPatterns = {"/setup-interview"})
 public class SetupInterviewServlet extends HttpServlet {
@@ -37,25 +39,23 @@ public class SetupInterviewServlet extends HttpServlet {
             throws ServletException, IOException {
         JobPostingServices jps = new JobPostingServices();
         ProfileServices ps = new ProfileServices();
-        
+
         int canID = Integer.parseInt(request.getParameter("candidateID"));
         int postID = Integer.parseInt(request.getParameter("postingID"));
-        
+
         // Get application
         Application app = ps.getApplicationByBothID(postID, canID);
         ArrayList<String> errList = jps.selectCandidateForInterview(request, response, app.getApplicationID());
-        if (errList != null)
-        {
+        if (errList != null) {
             request.setAttribute("fail", true);
             request.setAttribute("errList", errList);
-        } else
-        {
+        } else {
             request.setAttribute("success", true);
             request.setAttribute("sucessMessage", "Interview request sent");
         }
-        
+
         request.getRequestDispatcher("/business-client-job-posting").forward(request, response);
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

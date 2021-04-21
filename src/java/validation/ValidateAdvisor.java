@@ -38,11 +38,11 @@ public class ValidateAdvisor {
      */
     public static ArrayList<String> getErrorMapForSignup(String username, String password, String firstName, String lastName, String email) {
         startValidation();
-        put("advisorUsername", validateAdvisorUsername(username));
-        put("advisorPassword", validateAdvisorPassword(password));
-        put("advisorfirstName", validateAdvisorfirstName(firstName));
-        put("advisorlastName", validateAdvisorlastName(lastName));
-        put("advisorEmail", validateAdvisorEmail(email));
+        put(validateAdvisorUsername(username));
+        put(validateAdvisorPassword(password));
+        put(validateAdvisorfirstName(firstName));
+        put(validateAdvisorlastName(lastName));
+        put(validateAdvisorEmail(email));
         return getErrorMap();
     }
 
@@ -50,12 +50,11 @@ public class ValidateAdvisor {
      * Appends the appropriate error message into the errList so long as the
      * value is not null.
      *
-     * @param name name of the parameter
-     * @param value error value
+     * @param errMsg error message
      */
-    private static void put(String name, String value) {
-        if (value != null) {
-            errList.add(value);
+    private static void put(String errMsg) {
+        if (errMsg != null) {
+            errList.add(errMsg);
         }
     }
 
@@ -158,7 +157,7 @@ public class ValidateAdvisor {
     /**
      * Used to check if a specific field is empty or not.
      *
-     * @param field String field to be checked
+     * @param field field to be checked
      * @return Boolean that determines if the field is empty or not
      */
     private final static boolean isEmpty(String field) {

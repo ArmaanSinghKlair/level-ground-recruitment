@@ -17,10 +17,11 @@ import util.PasswordUtil;
 
 /**
  * To use this class, first call the startValidation, do your validation and
- * then call getErrorMap Another alternalte for basic validation is to simply
- * call validateBasicCandidate
+ * then call getErrorMap Another alternate for basic validation is to simply
+ * call validateBasicCandidate.
  *
  * @author 839645
+ * @version 1.0
  */
 public final class ValidateCandidate {
 
@@ -35,28 +36,34 @@ public final class ValidateCandidate {
 
     public static ArrayList<String> getErrorMapForSignup(String username, String password, String firstName, String lastName, String email, String phoneNo) {
         startValidation();
-        put("canUsername", validateCanUsername(username));
-        put("canPassword", validateCanPassword(password));
-        put("canfirstName", validateCanfirstName(firstName));
-        put("canlastName", validateCanlastName(lastName));
-        put("canEmail", validateCanEmail(email));
-        put("canPhoneNo", validateCanPhoneNo(phoneNo));
+        put(validateCanUsername(username));
+        put(validateCanPassword(password));
+        put(validateCanfirstName(firstName));
+        put(validateCanlastName(lastName));
+        put(validateCanEmail(email));
+        put(validateCanPhoneNo(phoneNo));
         return getErrorMap();
     }
 
     public static ArrayList<String> getErrorMapForEdit(String username, String firstName, String lastName, String email, String phoneNo) {
         startValidation();
-        put("canUsername", validateCanUsername(username));
-        put("canfirstName", validateCanfirstName(firstName));
-        put("canlastName", validateCanlastName(lastName));
-        put("canEmail", validateCanEmail(email));
-        put("canPhoneNo", validateCanPhoneNo(phoneNo));
+        put(validateCanUsername(username));
+        put(validateCanfirstName(firstName));
+        put(validateCanlastName(lastName));
+        put(validateCanEmail(email));
+        put(validateCanPhoneNo(phoneNo));
         return getErrorMap();
     }
 
-    private static void put(String name, String value) {
-        if (value != null) {
-            errList.add(value);
+    /**
+     * Appends the appropriate error message into the errList so long as the
+     * value is not null.
+     *
+     * @param errMsg error value
+     */
+    private static void put(String errMsg) {
+        if (errMsg != null) {
+            errList.add(errMsg);
         }
     }
 
@@ -198,7 +205,7 @@ public final class ValidateCandidate {
             if (withPassword) {
                 c.setCanPassword(PasswordUtil.hashPassword(password));
             }
-            
+
             c.setCanUsername(username);
             c.setCanEmail(email);
             c.setCanPhoneNo(phoneNo);

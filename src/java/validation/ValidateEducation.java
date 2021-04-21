@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import problemdomain.Education;
 
 /**
+ * Used to validate Education attributes and ensure that they don't break the
+ * system.
  *
  * @author 839645
+ * @version 1.0
  */
 public class ValidateEducation {
 
@@ -22,19 +25,45 @@ public class ValidateEducation {
     private static Date start = null;
     private static Date end = null;
 
-    public static ArrayList<String> getErrorMapForAllfields(String Institution, String Education_lvl, String Subject, String Start_date, String End_date) {
+    /**
+     * Generates an error map for Education fields.
+     *
+     * @param institution institution of the Education
+     * @param education_lvl education level of the Education
+     * @param subject subject of the Education
+     * @param start_date start date of the Education
+     * @param end_date end date of the Education
+     * @return ArrayList containing any errors that may have occurred
+     */
+    public static ArrayList<String> getErrorMapForAllfields(String institution, String education_lvl, String subject, String start_date, String end_date) {
         errList = new ArrayList<>();
-        put(checkIfEmpty(Institution, Education_lvl, Subject, Start_date));
-        put(checkDates(Start_date, End_date));
+        put(checkIfEmpty(institution, education_lvl, subject, start_date));
+        put(checkDates(start_date, end_date));
         return errList;
     }
 
-    private static void put(String str) {
-        if (str != null) {
-            errList.add(str);
+    /**
+     * Appends the appropriate error message into the errList so long as the
+     * value is not null.
+     *
+     * @param errMsg error value
+     */
+    private static void put(String errMsg) {
+        if (errMsg != null) {
+            errList.add(errMsg);
         }
     }
 
+    /**
+     * Checks if either the institution, education level, subject, or start date
+     * is empty.
+     *
+     * @param institution institution to check
+     * @param education_lvl education level to check
+     * @param subject subject to check
+     * @param start_date start date to check
+     * @return String containing validation results
+     */
     public static String checkIfEmpty(String institution, String education_lvl, String subject, String start_date) {
         // Checking empty fields
         if (isEmpty(institution) || isEmpty(education_lvl) || isEmpty(subject) || isEmpty(start_date)) {
@@ -44,6 +73,13 @@ public class ValidateEducation {
         }
     }
 
+    /**
+     * Used to validate the Education dates.
+     *
+     * @param start_date start date to be checked
+     * @param end_date end date to be checked
+     * @return String containing validation results
+     */
     public static String checkDates(String start_date, String end_date) {
         // Parsing Dates
         try {
@@ -63,6 +99,14 @@ public class ValidateEducation {
 
     }
 
+    /**
+     * Prepares the Education to be added to the Candidate's profile.
+     *
+     * @param request request from the front-end
+     * @param institution institution of the Education
+     * @param education_lvl education level institution of the Education
+     * @param subject subject institution of the Education
+     */
     public static void prepareResponse(HttpServletRequest request, String institution, String education_lvl, String subject) {
 
         Education edu = new Education();
@@ -81,6 +125,14 @@ public class ValidateEducation {
 
     }
 
+    /**
+     * Prepares an existing Education to be modified in the Candidate's profile.
+     *
+     * @param request request from the front-end
+     * @param institution institution of the Education
+     * @param education_lvl education level institution of the Education
+     * @param subject subject institution of the Education
+     */
     public static void prepareResponseForEdit(HttpServletRequest request, String institution, String education_lvl, String subject) {
         Education edu = new Education();
         edu.setInstitution(institution);
@@ -98,6 +150,12 @@ public class ValidateEducation {
 
     }
 
+    /**
+     * Determines if the specific field is empty or not.
+     *
+     * @param field field to check
+     * @return Boolean representing if the field is empty or not
+     */
     private final static boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;
     }

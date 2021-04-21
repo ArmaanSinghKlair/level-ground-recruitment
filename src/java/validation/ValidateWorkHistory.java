@@ -13,8 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import problemdomain.WorkHistory;
 
 /**
+ * Used to validate WorkHistory attributes and ensure that they don't break the
+ * system.
  *
  * @author 839645
+ * @version 1.0
  */
 public final class ValidateWorkHistory {
 
@@ -22,6 +25,16 @@ public final class ValidateWorkHistory {
     private static Date start = null;
     private static Date end = null;
 
+    /**
+     * Generates an error map for WorkHistory attributes.
+     *
+     * @param company company of the WorkHistory
+     * @param title title of the WorkHistory
+     * @param start_date start_date of the WorkHistory
+     * @param end_date end_date of the WorkHistory
+     * @param reference reference of the WorkHistory
+     * @return ArrayList containing any errors that may have occurred
+     */
     public static ArrayList<String> getErrorMapForAllfields(String company, String title, String start_date, String end_date, String reference) {
         errList = new ArrayList<>();
         put(checkEmpty(company, title, start_date));
@@ -29,6 +42,14 @@ public final class ValidateWorkHistory {
         return errList;
     }
 
+    /**
+     * Checks if either the company, title, or start_date are empty.
+     *
+     * @param company company to check
+     * @param title title to check
+     * @param start_date start_date to check
+     * @return String containing validation results
+     */
     public static String checkEmpty(String company, String title, String start_date) {
         // Checking empty fields
         if (isEmpty(company.trim()) || isEmpty(title.trim()) || isEmpty(start_date.trim())) {
@@ -38,12 +59,25 @@ public final class ValidateWorkHistory {
         }
     }
 
-    private static void put(String str) {
-        if (str != null) {
-            errList.add(str);
+    /**
+     * Appends the appropriate error message into the errList so long as the
+     * value is not null.
+     *
+     * @param errMsg error value
+     */
+    private static void put(String errMsg) {
+        if (errMsg != null) {
+            errList.add(errMsg);
         }
     }
 
+    /**
+     * Used to validate the work dates.
+     *
+     * @param start_date start_date to check
+     * @param end_date end_date to check
+     * @return String containing validation results
+     */
     public static String checkDates(String start_date, String end_date) {
         // Parsing Dates
         try {
@@ -63,6 +97,14 @@ public final class ValidateWorkHistory {
 
     }
 
+    /**
+     * Prepares a new WorkHistory to be added to the Candidate's profile.
+     *
+     * @param request request from the front-end
+     * @param company company of the WorkHistory
+     * @param title title of the WorkHistory
+     * @param reference reference of the WorkHistory
+     */
     public static void prepareResponse(HttpServletRequest request, String company, String title, String reference) {
         // Prepare education object here itself, if error then used in jsp if NO ERROR, used in data access class
         WorkHistory wh = new WorkHistory();
@@ -71,15 +113,23 @@ public final class ValidateWorkHistory {
         wh.setStartDate(start);
         wh.setEndDate(end);
         wh.setReference(reference);
-       
-        
+
         // Do this if ANY ERRORS
         if (!errList.isEmpty()) {
             request.setAttribute("currentTab", "add-workHistory-cta");
         }
-            request.setAttribute("workHistory", wh);
+        request.setAttribute("workHistory", wh);
     }
 
+    /**
+     * Prepares an existing WorkHistory to be modified on the Candidate's
+     * profile.
+     *
+     * @param request request from the front-end
+     * @param company company of the WorkHistory
+     * @param title title of the WorkHistory
+     * @param reference reference of the WorkHistory
+     */
     public static void prepareResponseForEdit(HttpServletRequest request, String company, String title, String reference) {
         // Prepare education object here itself, if error then used in jsp if NO ERROR, used in data access class
         WorkHistory wh = new WorkHistory();
@@ -95,6 +145,12 @@ public final class ValidateWorkHistory {
 
     }
 
+    /**
+     * Checks if the specified field is empty.
+     *
+     * @param field field to check
+     * @return Boolean representing if the field is empty or not
+     */
     private final static boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;
     }

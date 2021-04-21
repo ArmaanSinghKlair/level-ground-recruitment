@@ -28,7 +28,7 @@ public final class ValidateRole {
      * Generates an error map for role attributes.
      *
      * @param roleId ID of the Role
-     * @param Username username of the Role
+     * @param Username username of the Candidate
      * @return String Arraylist containing any errors that may have occurred
      */
     public static ArrayList<String> getErrorMapForAllfields(String roleId, String Username) {
@@ -45,11 +45,11 @@ public final class ValidateRole {
      * Appends the appropriate error message into the errList so long as the
      * value is not null.
      *
-     * @param str error value
+     * @param errMsg error value
      */
-    private static void put(String str) {
-        if (str != null) {
-            errList.add(str);
+    private static void put(String errMsg) {
+        if (errMsg != null) {
+            errList.add(errMsg);
         }
     }
 
@@ -112,7 +112,12 @@ public final class ValidateRole {
         }
         return null;
     }
-    
+
+    /**
+     * Prepares a new role to be added to the Candidate's profile.
+     *
+     * @param request Request from the frond-end
+     */
     public static void prepareResponse(HttpServletRequest request) {
         CandidateRole r = new CandidateRole();
         // Do this if ANY ERRORS
@@ -123,6 +128,11 @@ public final class ValidateRole {
         request.setAttribute("canRole", r);
     }
 
+    /**
+     * Prepares an existing role to be modified on the Candidate's profile.
+     *
+     * @param request Request from the front-end
+     */
     public static void prepareResponseForEdit(HttpServletRequest request) {
         CandidateRole r = new CandidateRole();
         r.setCanroleID(Integer.parseInt((String) request.getParameter("id")));
