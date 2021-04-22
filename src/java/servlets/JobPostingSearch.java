@@ -14,8 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import services.SearchServices;
 
 /**
- *
+ * Used to search for job postings
  * @author 839645
+ * @version 1.0
  */
 public class JobPostingSearch extends HttpServlet {
 

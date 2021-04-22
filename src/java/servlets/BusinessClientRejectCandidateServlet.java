@@ -18,8 +18,10 @@ import services.JobPostingServices;
 import services.ProfileServices;
 
 /**
+ * Used to reject the Candidate.
  *
  * @author 756887
+ * @version 1.0
  */
 @WebServlet(name = "BusinessClientRejectCandidateServlet", urlPatterns = {"/reject-candidate"})
 public class BusinessClientRejectCandidateServlet extends HttpServlet {
@@ -34,24 +36,22 @@ public class BusinessClientRejectCandidateServlet extends HttpServlet {
             throws ServletException, IOException {
         ProfileServices ps = new ProfileServices();
         JobPostingServices jps = new JobPostingServices();
-        
+
         int canID = Integer.parseInt(request.getParameter("candidateID"));
         int postID = Integer.parseInt(request.getParameter("postingID"));
-        
+
         // Get application
         Application app = ps.getApplicationByBothID(postID, canID);
         ArrayList<String> errList = ps.deleteApplicationByID(app);
-        if (errList != null)
-        {
+        if (errList != null) {
             request.setAttribute("fail", true);
             request.setAttribute("errList", errList);
-        } else
-        {
+        } else {
             jps.decrementApplicants(postID);
             request.setAttribute("success", true);
             request.setAttribute("sucessMessage", "Candidate rejected");
         }
-        
+
         request.getRequestDispatcher("/business-client-job-posting").forward(request, response);
     }
 }
