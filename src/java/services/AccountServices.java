@@ -31,12 +31,28 @@ public class AccountServices {
     private final AccountServicesDB asdb = new AccountServicesDB();
     private final ArrayList<String> userTypes = new ArrayList<>();
 
+    /**
+     * Default no-args constructor. Appends the user types of our system into
+     * the user types ArrayList.
+     */
     public AccountServices() {
         userTypes.add("admin");
         userTypes.add("candidate");
         userTypes.add("businessClient");
     }
 
+    /**
+     * Used to create a new Candidate Profile in our database.
+     *
+     * @param username username of the Candidate
+     * @param password password of the Candidate
+     * @param password_repeat repeated password of the Candidate
+     * @param firstName first name of the Candidate
+     * @param lastName last name of the Candidate
+     * @param email email of the Candidate
+     * @param phoneNo phone number of the Candidate
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> createCandidateProfile(String username, String password, String password_repeat, String firstName, String lastName, String email, String phoneNo) {
         ArrayList<String> errList;
         errList = ValidateCandidate.getErrorMapForSignup(username, password, firstName, lastName, email, phoneNo);
@@ -54,6 +70,17 @@ public class AccountServices {
         }
     }
 
+    /**
+     * Used to create a new Business Client Profile in our database.
+     *
+     * @param username Username of the Business Client
+     * @param password Password of the Business Client
+     * @param password_repeat Repeated password of the Business Client
+     * @param company Company of the Business Client
+     * @param email Email of the Business Client
+     * @param phoneNo Phone Number of the Business Client
+     * @return String ArrayList of any errors that may have occurred. *
+     */
     public final ArrayList<String> createBusinessClientProfile(String username, String password, String password_repeat, String company, String email, String phoneNo) {
         ArrayList<String> errList;
         errList = ValidateBusinessClient.getErrorMapForAllfields(username, password, company, email, phoneNo);
@@ -71,6 +98,16 @@ public class AccountServices {
         }
     }
 
+    /**
+     * Used to create a new Advisor Profile in our database.
+     *
+     * @param username Username of the Advisor
+     * @param password Password of the Advisor
+     * @param firstName First Name of the Advisor
+     * @param lastName Last Name of the Advisor
+     * @param email Email of the Advisor
+     * @return String ArrayList of any errors that may have occurred.
+     */
     public final ArrayList<String> createAdvisorProfile(String username, String password, String firstName, String lastName, String email) {
         ArrayList<String> errList;
         errList = ValidateAdvisor.getErrorMapForSignup(username, password, firstName, lastName, email);
@@ -86,6 +123,15 @@ public class AccountServices {
         }
     }
 
+    /**
+     * Authenticates a user. The trick here is to hash the input password before
+     * comparing it to the input password.
+     *
+     * @param username Input username
+     * @param password Input password
+     * @param userType Input userType
+     * @return ArrayList of errors
+     */
     public final ArrayList<String> authenticate(String username, String password, String userType) {
         ArrayList<String> errList = new ArrayList<>();
 
@@ -106,6 +152,12 @@ public class AccountServices {
         }
     }
 
+    /**
+     * Used to create a new Skill in our database.
+     *
+     * @param description Skill description.
+     * @return String ArrayList of any errors that may have occurred.
+     */
     public final ArrayList<String> createSkill(String description) {
         ArrayList<String> errList = new ArrayList<>();
         try {
@@ -122,6 +174,12 @@ public class AccountServices {
         return errList;
     }
 
+    /**
+     * Used to create a new Role in our database.
+     *
+     * @param description Role Description.
+     * @return String ArrayList of any errors that may have occurred.
+     */
     public final ArrayList<String> createRole(String description) {
         ArrayList<String> errList = new ArrayList<>();
         try {
@@ -138,6 +196,20 @@ public class AccountServices {
         return errList;
     }
 
+    /**
+     * Used to create a new Job Posting in our database.
+     *
+     * @param title Title of the Job Posting
+     * @param requirements Requirements of the Job Posting
+     * @param sDate Start Date of the Job Posting
+     * @param eDate End Date of the Job Posting
+     * @param status Status of the Job Posting
+     * @param description Description of the Job Posting
+     * @param sWage Wage of the Job Posting
+     * @param location Location of the Job Posting
+     * @param username Username of the Business Client
+     * @return String ArrayList of any errors that may have occurred.
+     */
     public final ArrayList<String> createJobPosting(String title, String requirements, String sDate, String eDate, String status, String description, String sWage, String location, String username) {
         ArrayList<String> errList = new ArrayList<>();
         SimpleDateFormat parser = new SimpleDateFormat("yyyy-MM-dd");
@@ -164,6 +236,14 @@ public class AccountServices {
 
     }
 
+    /**
+     * Authenticates a Business Client. The trick here is to hash the input
+     * password before comparing it to the input password.
+     *
+     * @param username Input username
+     * @param password Input password
+     * @return Arraylist of errors
+     */
     public final ArrayList<String> authenticateBusinessClient(String username, String password) {
         ArrayList<String> errList = new ArrayList<>();
         add(errList, ValidateBusinessClient.validateBusClientUsername(username));       //Validate username and get errors IF ANY
@@ -176,6 +256,14 @@ public class AccountServices {
         }
     }
 
+    /**
+     * Authenticates an Advisor. The trick here is to hash the input password
+     * before comparing it to the input password.
+     *
+     * @param username Input username
+     * @param password Input password
+     * @return Arraylist of errors
+     */
     public final ArrayList<String> authenticateAdvisor(String username, String password) {
         ArrayList<String> errList = new ArrayList<>();
         add(errList, ValidateAdvisor.validateAdvisorUsername(username));       //Validate username and get errors IF ANY
@@ -188,30 +276,72 @@ public class AccountServices {
         }
     }
 
+    /**
+     * Returns a Candidate object that matches the specified username.
+     *
+     * @param username username to search by
+     * @return Candidate object that matches the search criteria
+     */
     public final Candidate getCandidateByUsername(String username) {
         return asdb.getCandidateByUsername(username);
     }
 
+    /**
+     * Returns a Business Client that matches the specified username.
+     *
+     * @param username username to search by
+     * @return Business Client object that matches the search query
+     */
     public final BusinessClient getBusinessClientByUsername(String username) {
         return asdb.getBusinessClientByUsername(username);
     }
 
+    /**
+     * Returns an Advisor that matches the specified username.
+     *
+     * @param username username to search by
+     * @return Advisor object that matches the search query
+     */
     public final Advisor getAdvisorByUsername(String username) {
         return asdb.getAdvisorByUsername(username);
     }
 
+    /**
+     * Returns a JobPosting that matches the specified id.
+     *
+     * @param id id to search by
+     * @return JobPosting that matches the search query
+     */
     public final JobPosting getJobpostingByID(int id) {
         return asdb.getJobpostingByID(id);
     }
 
+    /**
+     * Deletes a Job Posting that matches the specified id.
+     *
+     * @param id id to search by
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> deleteJobPostingByID(int id) {
         return asdb.deleteJobPostingByID(id);
     }
 
+    /**
+     * Determines if the specified field is empty.
+     *
+     * @param field field to check
+     * @return boolean indicating if field is empty or not
+     */
     private final boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;
     }
 
+    /**
+     * Appends a value into the errList.
+     *
+     * @param errList ArrayList of errors
+     * @param value value to be added
+     */
     private final void add(ArrayList<String> errList, String value) {
         if (value != null) {
             errList.add(value);

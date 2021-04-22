@@ -11,18 +11,29 @@ import javax.servlet.http.HttpSession;
 import strategies.search.*;
 
 /**
+ * Contains various methods to perform search related services and actions for
+ * the Candidate. Adheres to the Strategy pattern.
  *
  * @author 839645
+ * @version 1.0
  */
 public class SearchServices {
-    public String search(HttpServletRequest request){
+
+    /**
+     * Used to search for job postings as the Candidate user.
+     *
+     * @param request request from the front-end
+     * @return String containing results of the search
+     */
+    public String search(HttpServletRequest request) {
         HttpSession session = request.getSession();
         String userType = (String) session.getAttribute("userType");
         SearchServicesDB ss = new SearchServicesDB();
-        switch(userType){
+        switch (userType) {
             case "candidate":
-                if(request.getParameter("jpi") != null)
+                if (request.getParameter("jpi") != null) {
                     return ss.search(request, new CandidateSingleJobSearch());
+                }
                 return ss.search(request, new CandidateAllJobsSearch());
             default:
                 return "Not Authorized to view data";

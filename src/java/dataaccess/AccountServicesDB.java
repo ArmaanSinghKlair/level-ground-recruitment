@@ -433,7 +433,7 @@ public class AccountServicesDB {
      * @param username Input username
      * @param password Input password
      * @param userType Input userType
-     * @return Arraylist of errors
+     * @return ArrayList of errors
      */
     public final ArrayList<String> authenticate(String username, String password, String userType) {
         initialize();
@@ -472,7 +472,7 @@ public class AccountServicesDB {
     }
 
     /**
-     * Authenticates a user. The trick here is to hash the input password before
+     * Authenticates a Business Client. The trick here is to hash the input password before
      * comparing it to the input password.
      *
      * @param username Input username
@@ -507,7 +507,7 @@ public class AccountServicesDB {
     }
 
     /**
-     * Authenticates a user. The trick here is to hash the input password before
+     * Authenticates an Advisor. The trick here is to hash the input password before
      * comparing it to the input password.
      *
      * @param username Input username

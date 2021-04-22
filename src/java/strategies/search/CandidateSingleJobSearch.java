@@ -13,22 +13,26 @@ import javax.servlet.http.HttpServletRequest;
 import problemdomain.JobPosting;
 
 /**
+ * Used to search for a single job as the Candidate user type. Implements the
+ * SearchBehaviour interface and adheres to the Strategy Pattern.
  *
  * @author 839645
+ * @version 1.0
  */
-public class CandidateSingleJobSearch implements SearchBehaviour{
+public class CandidateSingleJobSearch implements SearchBehaviour {
+
     private EntityManager em;
 
     @Override
     public String search(HttpServletRequest request) throws Exception {
         String id = request.getParameter("jpi");
-        
+
         // Error checking
         String error = this.validate(id);
-        if(error != null){
+        if (error != null) {
             return error;
         }
-        
+
         // Getting the results
         JobPosting jp = em.find(JobPosting.class, Integer.parseInt(id));
         StringBuilder resultJson = new StringBuilder();
@@ -39,31 +43,34 @@ public class CandidateSingleJobSearch implements SearchBehaviour{
         resultJson.append(new Gson().toJson(jp));
         return resultJson.toString();
     }
-    
-    private String validate(String id){
-       if(this.isEmpty(id) || !isInteger(id))
+
+    /**
+     * Validates the id String specified
+     *
+     * @param id id to validate
+     * @return String containing validation results
+     */
+    private String validate(String id) {
+        if (this.isEmpty(id) || !isInteger(id)) {
             return getError("Invalid information supplied");
-     
-        
+        }
+
         return null;
     }
-    
-    private String getError(String str){
-        return "{\"error:\""+str+"\", \"querySuccessfull\":false}";
+
+    /**
+     * Returns the appropriate error message.
+     *
+     * @param str String to append into the error message
+     * @return String containing error message
+     */
+    private String getError(String str) {
+        return "{\"error:\"" + str + "\", \"querySuccessfull\":false}";
     }
-   
+
     @Override
-    public void setEm(EntityManager em){
+    public void setEm(EntityManager em) {
         this.em = em;
     }
-    
-    
-    
-    
-    
-      
-   
-    
-   
-    
+
 }

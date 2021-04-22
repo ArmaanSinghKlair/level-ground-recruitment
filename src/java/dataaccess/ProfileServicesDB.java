@@ -27,19 +27,30 @@ import problemdomain.WorkHistory;
 import util.DBUtil;
 
 /**
+ * Allows direct access to the database for the different profile services being
+ * performed.
  *
  * @author 839645
+ * @version 1.0
  */
 public final class ProfileServicesDB {
 
     private EntityManager em;
     private EntityTransaction trans;
 
+    /**
+     * Used to initialize the EntityManager.
+     */
     private void initialize() {
         em = DBUtil.getEmFactory().createEntityManager();
         trans = em.getTransaction();
     }
 
+    /**
+     * Return all skills from the database.
+     *
+     * @return ArrayList of Skills that matches the search query
+     */
     public final ArrayList<Skill> getAllSkills() {
         initialize();
         try {
@@ -50,6 +61,11 @@ public final class ProfileServicesDB {
         }
     }
 
+    /**
+     * Return all roles from the database.
+     *
+     * @return ArrayList of Roles that matches the search query
+     */
     public final ArrayList<Role> getAllRoles() {
         initialize();
         try {
@@ -60,6 +76,12 @@ public final class ProfileServicesDB {
         }
     }
 
+    /**
+     * Return a BusinessClient that matches the specified id.
+     *
+     * @param id id to search by
+     * @return BusinessClient that matches the search query
+     */
     public final BusinessClient getBusinessClientByClientID(int id) {
         initialize();
         try {
@@ -72,6 +94,12 @@ public final class ProfileServicesDB {
         }
     }
 
+    /**
+     * Return a Candidate that matches the specified id.
+     *
+     * @param id id to search by
+     * @return Candidate that matches the search query
+     */
     public final Candidate getCandidateByID(int id) {
         initialize();
         try {
@@ -84,6 +112,14 @@ public final class ProfileServicesDB {
         }
     }
 
+    /**
+     * Retrieve the appropriate application for an Advisor that matches the job
+     * id and the candidate id
+     *
+     * @param jobID job posting id
+     * @param canID candidate id
+     * @return Application that matches the search query
+     */
     public final Application getApplicationForAdvisor(int jobID, int canID) {
         initialize();
         try {
@@ -97,6 +133,14 @@ public final class ProfileServicesDB {
         }
     }
 
+    /**
+     * Retrieve a list of job postings for an Advisor that matches the business
+     * client id and the advisor id.
+     *
+     * @param bcID business client id
+     * @param adID advisor id
+     * @return ArrayList of JobPostings that matches the search query
+     */
     public final ArrayList<JobPosting> getJobsForAdvisor(int adID, int bcID) {
         initialize();
         try {
@@ -110,6 +154,13 @@ public final class ProfileServicesDB {
         }
     }
 
+    /**
+     * Retrieve a list of job postings for a business client that matches the
+     * BusinessClient object.
+     *
+     * @param id BusinessClient object to search by
+     * @return ArrayList of JobPostings that match the search query
+     */
     public final ArrayList<JobPosting> getClientJobPostings(BusinessClient id) {
         initialize();
         try {
@@ -122,6 +173,12 @@ public final class ProfileServicesDB {
         }
     }
 
+    /**
+     * Retrieve job postings that match an Advisor object.
+     *
+     * @param id Advisor object to search by
+     * @return ArrayList of JobPostings that match the search query
+     */
     public final ArrayList<JobPosting> getJobpostingsByAdvisorID(Advisor id) {
         initialize();
         try {
@@ -134,6 +191,12 @@ public final class ProfileServicesDB {
         }
     }
 
+    /**
+     * Retrieve applications by the specified JobPosting object.
+     *
+     * @param id JobPosting object to search by
+     * @return ArrayList of Applications that match the search query
+     */
     public final ArrayList<Application> getApplicationsByJobpostingID(JobPosting id) {
         initialize();
         try {
@@ -146,6 +209,14 @@ public final class ProfileServicesDB {
         }
     }
 
+    /**
+     * Retrieves an Application that matches both the job posting id and the
+     * candidate id.
+     *
+     * @param jpID job posting id
+     * @param canID candidate id
+     * @return Application that matches the search query
+     */
     public final Application getApplicationByBothID(int jpID, int canID) {
         initialize();
         try {
@@ -159,6 +230,19 @@ public final class ProfileServicesDB {
         }
     }
 
+    /**
+     * Used to modify an existing BusinessClient profile.
+     *
+     * @param company company of the BusinessClient
+     * @param username username of the BusinessClient
+     * @param email email of the BusinessClient
+     * @param phone phone of the BusinessClient
+     * @param address address of the BusinessClient
+     * @param website website of the BusinessClient
+     * @param description description of the BusinessClient
+     * @param bc BusinessClient
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> editBusinessClientProfile(String company, String username, String email, String phone, String address, String website, String description, BusinessClient bc) {
         initialize();
         ArrayList<String> errList = null;
@@ -185,6 +269,13 @@ public final class ProfileServicesDB {
         return errList;
     }
 
+    /**
+     * Updates the Business Client password.
+     *
+     * @param password new password
+     * @param bc BusinessClient to update
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> setNewClientPassword(String password, BusinessClient bc) {
         initialize();
         ArrayList<String> errList = null;
@@ -205,6 +296,20 @@ public final class ProfileServicesDB {
         return errList;
     }
 
+    /**
+     * Used to modify and existing JobPosting.
+     *
+     * @param title title of the Job Posting
+     * @param status status of the Job Posting
+     * @param description description of the Job Posting
+     * @param requirements requirements of the Job Posting
+     * @param wage wage of the Job Posting
+     * @param location location of the Job Posting
+     * @param startDate start date of the Job Posting
+     * @param endDate end date of the Job Posting
+     * @param jp JobPosting
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> editJobPosting(String title, String status, String description, String requirements, Double wage, String location, Date startDate, Date endDate, JobPosting jp) {
         initialize();
         ArrayList<String> errList = null;
@@ -232,6 +337,13 @@ public final class ProfileServicesDB {
         return errList;
     }
 
+    /**
+     * Add a new entry to the database.
+     *
+     * @param request request from the front-end
+     * @param username username of the logged in user
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> add(HttpServletRequest request, String username) {
         initialize();
         try {
@@ -249,6 +361,13 @@ public final class ProfileServicesDB {
         return null;
     }
 
+    /**
+     * Edit an existing entry in the database.
+     *
+     * @param request request from the front-end
+     * @param username username of the logged in user
+     * @return ArrayList of any errors that occurred
+     */
     public final ArrayList<String> edit(HttpServletRequest request, String username) {
         initialize();
 
@@ -267,6 +386,13 @@ public final class ProfileServicesDB {
         return null;
     }
 
+    /**
+     * Retrieves the appropriate feature to be modified.
+     *
+     * @param request request from the front-end
+     * @param username username of the logged in user
+     * @return Object for the specific feature
+     */
     private Object getNewFeature(HttpServletRequest request, String username) {
         String form_name = request.getParameter("form_name");
         // Required for fetching required data 
@@ -327,7 +453,14 @@ public final class ProfileServicesDB {
         return null;
     }
 
-    // Deletes a profile feature ie. work history, skill etc
+    /**
+     * Deletes a profile feature ie. work history, skill etc.
+     *
+     * @param form_name form containing the information
+     * @param id id to search by
+     * @param username username of the logged in user
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> delete(String form_name, String id, String username) {
         initialize();
         ArrayList<String> errList = new ArrayList<>();
@@ -363,6 +496,12 @@ public final class ProfileServicesDB {
         return errList;
     }
 
+    /**
+     * Used to delete a Candidate.
+     *
+     * @param username username to search by
+     * @return boolean indicating if the operation was successful
+     */
     public final boolean deleteCandidate(String username) {
         initialize();
         try {
@@ -384,6 +523,12 @@ public final class ProfileServicesDB {
         return true;
     }
 
+    /**
+     * Deletes an application that matches the specified Application object.
+     *
+     * @param ap Application object to search by
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> deleteApplicationByID(Application ap) {
         initialize();
         ArrayList<String> errList = new ArrayList<>();
@@ -405,6 +550,12 @@ public final class ProfileServicesDB {
         return null;
     }
 
+    /**
+     * Deletes a business client that matches the specified username.
+     *
+     * @param username username to search by
+     * @return ArrayList containing any errors that occurred
+     */
     public final ArrayList<String> deleteBusinessClient(String username) {
         initialize();
         ArrayList<String> errList = new ArrayList<>();
@@ -464,6 +615,12 @@ public final class ProfileServicesDB {
         return error;
     }
 
+    /**
+     * Gets the appropriate feature class for the specified form name.
+     *
+     * @param form_name form name to get feature by
+     * @return Class of the feature
+     */
     private Class getFeatureClass(String form_name) {
         switch (form_name) {
             case "roles":

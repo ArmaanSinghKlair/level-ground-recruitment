@@ -14,39 +14,52 @@ import strategies.search.SearchBehaviour;
 import util.DBUtil;
 
 /**
+ * Search services for direct access with our database.
  *
  * @author 839645
+ * @version 1.0
  */
 public class SearchServicesDB {
+
     private EntityManager em;
     private EntityTransaction trans;
-    
-    private void initialize(){
-        em =DBUtil.getEmFactory().createEntityManager();
+
+    /**
+     * Used to initialize the EntityManager.
+     */
+    private void initialize() {
+        em = DBUtil.getEmFactory().createEntityManager();
         trans = em.getTransaction();
     }
-    
-    public String search(HttpServletRequest request, SearchBehaviour search){
+
+    /**
+     * Used to search for job postings as the Candidate user.
+     *
+     * @param request request from the front-end
+     * @param search SearchBehaviour object to search with
+     * @return String containing results
+     */
+    public String search(HttpServletRequest request, SearchBehaviour search) {
         initialize();
-        
-        try{
-           search.setEm(em);
+
+        try {
+            search.setEm(em);
             // return search results
             return search.search(request);
-            
-        }catch(NoResultException e){
+
+        } catch (NoResultException e) {
             return "{\"error\":\"No such Job found\"}";
-        }catch(Exception e){
-           return e.getClass()+" "+Arrays.toString(e.getStackTrace());
-            
-        }finally{
+        } catch (Exception e) {
+            return e.getClass() + " " + Arrays.toString(e.getStackTrace());
+
+        } finally {
             em.close();
-            if(trans.isActive())
+            if (trans.isActive()) {
                 trans.rollback();
+            }
         }
-        
+
         // some serious error happens
         //return "";
-        
     }
 }
