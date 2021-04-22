@@ -21,18 +21,31 @@ import util.DBUtil;
 import util.Gmail;
 
 /**
- *
+ * Various services related to job postings and applications.
+ * 
  * @author 839645
  */
 public class JobPostingServicesDB {
     private EntityManager em;
     private EntityTransaction trans;
     
+    /**
+     * Initialize the EntityManager and EntityTransaction for the various
+     * methods within this class.
+     */
     private void initialize(){
         em =DBUtil.getEmFactory().createEntityManager();
         trans = em.getTransaction();
     }
     
+    /**
+     * This method creates an application in the database for the logged in candidate
+     * and the job posting they chose.
+     * 
+     * @param username Candidate username
+     * @param id JobPosting ID
+     * @return ArrayList of errors
+     */
     public ArrayList<String> applyForJob(String username, String id){
         initialize();
         ArrayList<String> errList = new ArrayList<>();
@@ -65,6 +78,12 @@ public class JobPostingServicesDB {
         return errList;
     }
     
+    /**
+     * Selects a candidate for review by the business client.
+     * 
+     * @param applicationID ID of the application to be updated
+     * @return ArrayList of errors
+     */
     public ArrayList<String> selectCandidateForReview(int applicationID){
         initialize();
         ArrayList<String> errList = new ArrayList<>();
@@ -82,6 +101,13 @@ public class JobPostingServicesDB {
         return errList;
     }
     
+    /**
+     * Selects a candidate for interview.
+     * 
+     * @param path The path to the /WEB-INF folder
+     * @param applicationID ID of application to be updated
+     * @return ArrayList of errors
+     */
     public ArrayList<String> selectCandidateForInterview(int applicationID, String path){
         initialize();
         ArrayList<String> errList = new ArrayList<>();
@@ -114,6 +140,11 @@ public class JobPostingServicesDB {
         return errList;
     }
     
+    /**
+     * Decrements applicants in a job posting.
+     * 
+     * @param id JobPosting ID
+     */
     public void decrementApplicants(int id)
     {
         initialize();

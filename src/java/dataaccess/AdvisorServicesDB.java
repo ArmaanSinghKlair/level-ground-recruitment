@@ -14,18 +14,29 @@ import problemdomain.Advisor;
 import util.DBUtil;
 
 /**
- *
+ * Used for various advisor services.
+ * 
  * @author 839645
  */
 public class AdvisorServicesDB {
     private EntityManager em;
     private EntityTransaction trans;
     
+    /**
+     * Initialize the EntityManager and EntityTransaction for the various
+     * methods within this class.
+     */
     public void initialize(){
         this.em = DBUtil.getEmFactory().createEntityManager();
         this.trans = this.em.getTransaction();
     }
     
+    /**
+     * This method gets the next available advisor ID. This method is called 
+     * whenever a new job posting is created.
+     * 
+     * @return Advisor ID
+     */
     public synchronized int getNextAdvisorID(){
         this.initialize();
         try{
@@ -37,7 +48,7 @@ public class AdvisorServicesDB {
         if(!(lastAdvisor == null || lastAdvisor.isEmpty())){
              Advisor nextAdvisor = em.find(Advisor.class, lastAdvisor.get(0).getAdvisorID()+1);
         
-            // If  next advisor available
+            // If next advisor available
             if(nextAdvisor!=null){
                     return nextAdvisor.getAdvisorID();
         }

@@ -16,7 +16,9 @@ import services.ProfileServices;
 import strategies.profile.LoadClientJobPosting;
 
 /**
- *
+ * Used to load the business client's job posting information and then navigate
+ * the business client to the business client job posting page.
+ * 
  * @author 756887
  */
 @WebServlet(name = "BusinessClientJobPostingServlet", urlPatterns = {"/business-client-job-posting"})

@@ -25,8 +25,15 @@ public class JobPostingServices {
 
     private JobPostingServicesDB jpsd = new JobPostingServicesDB();
 
+    /**
+     * This method creates an application in the database for the logged in candidate
+     * and the job posting they chose.
+     * 
+     * @param request servlet request
+     * @param response servlet response
+     */
     public void applyForJob(HttpServletRequest request, HttpServletResponse response) {
-        String username = (String) request.getSession().getAttribute("username");
+        String username = (String) request.getSession().getAttribute("username"); //Candidate username
         ArrayList<String> errList = new ArrayList<String>();
         String id = request.getParameter("jpi");    // Job Posting ID
 
@@ -59,6 +66,13 @@ public class JobPostingServices {
 
     }
 
+    /**
+     * Selects a candidate for review by the business client.
+     * 
+     * @param request servlet request
+     * @param response servlet response
+     * @return ArrayList of errors
+     */
     public ArrayList<String> selectCandidateForReview(HttpServletRequest request, HttpServletResponse response) {
         String applicationID = (String) request.getAttribute("applicationID");
         ArrayList<String> errList = new ArrayList<String>();
@@ -71,6 +85,14 @@ public class JobPostingServices {
         return errList;
     }
 
+    /**
+     * Selects a candidate for interview.
+     * 
+     * @param request servlet request
+     * @param response servlet response
+     * @param applicationID ID of the application to be updated
+     * @return ArrayList of errors
+     */
     public ArrayList<String> selectCandidateForInterview(HttpServletRequest request, HttpServletResponse response, int applicationID) {
 
         ArrayList<String> errList = new ArrayList<String>();
@@ -83,14 +105,31 @@ public class JobPostingServices {
         return errList;
     }
 
+    /**
+     * Decrements applicants in a job posting.
+     * 
+     * @param id JobPosting ID
+     */
     public final void decrementApplicants(int id) {
         jpsd.decrementApplicants(id);
     }
 
+    /**
+     * Used to check if a specific field is empty or not.
+     *
+     * @param field field to be checked
+     * @return boolean that determines if the field is empty or not
+     */
     private final boolean isEmpty(String field) {
         return field == null || field.trim().length() == 0;
     }
 
+    /**
+     * This creates a string out of an input ArrayList
+     * 
+     * @param arr ArrayList to be converted to a String
+     * @return String version of the input array
+     */
     private String getArrayString(ArrayList<String> arr) {
         StringBuilder sb = new StringBuilder("[");
         arr.forEach(str -> {
@@ -101,6 +140,12 @@ public class JobPostingServices {
         return sb.toString();
     }
 
+    /**
+     * Used to check if a string is numeric or not.
+     *
+     * @param str String to be checked
+     * @return boolean that determines if the field is numeric or not
+     */
     private final boolean isNumeric(String str) {
         try {
             Integer.parseInt(str);

@@ -20,12 +20,21 @@ import services.AccountServices;
 import services.ProfileServices;
 
 /**
- *
+ * Navigates the business client to their edit profile page.
+ * 
  * @author 756887
  */
 @WebServlet(name = "BusinessClientEditProfileNavServlet", urlPatterns = {"/edit-client-profile-nav"})
 public class BusinessClientEditProfileNavServlet extends HttpServlet {
 
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     * 
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -44,6 +53,14 @@ public class BusinessClientEditProfileNavServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/business-profile-edit.jsp").forward(request, response);
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     * 
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
