@@ -19,6 +19,6 @@
     <class>problemdomain.Skill</class>
     <class>problemdomain.Application</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <non-jta-data-source>java:/comp/env/jdbc/lgrdb</non-jta-data-source>
+    <non-jta-data-source>jdbc/lgrdb</non-jta-data-source>
   </persistence-unit>
 </persistence>

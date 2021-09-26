@@ -6,6 +6,7 @@
     <class>problemdomain.Application</class>
     <class>problemdomain.BusinessClient</class>
     <class>problemdomain.Candidate</class>
+    <class>problemdomain.CandidateRole</class>
     <class>problemdomain.CandidateSkill</class>
     <class>problemdomain.Education</class>
     <class>problemdomain.JobPosting</class>
@@ -13,13 +14,12 @@
     <class>problemdomain.Role</class>
     <class>problemdomain.Skill</class>
     <class>problemdomain.WorkHistory</class>
-    <class>problemdomain.CandidateRole</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://g84t6zfpijzwx08q.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/qvt0v9the6uowez2"/>
-      <property name="javax.persistence.jdbc.user" value="dtzs5x7cysjy2nk7"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://nnsgluut5mye50or.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/xx73m9tqt70xnxw4"/>
+      <property name="javax.persistence.jdbc.user" value="hnw5bxeabn1o4kz2"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="gl0luucfn2wus8i5"/>
+      <property name="javax.persistence.jdbc.password" value="v3gj86nlecy5f0iq"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>

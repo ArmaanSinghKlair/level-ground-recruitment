@@ -1,15 +1,15 @@
-drop table qvt0v9the6uowez2.application cascade;
-drop table qvt0v9the6uowez2.candidate_role cascade;
-drop table qvt0v9the6uowez2.candidate_skill cascade;
-drop table qvt0v9the6uowez2.education cascade;
-drop table qvt0v9the6uowez2.job_posting cascade;
-drop table qvt0v9the6uowez2.business_client cascade;
-drop table qvt0v9the6uowez2.log cascade;
-drop table qvt0v9the6uowez2.role cascade;
-drop table qvt0v9the6uowez2.skill cascade;
-drop table qvt0v9the6uowez2.work_history cascade;
-drop table qvt0v9the6uowez2.candidate cascade;
-drop table qvt0v9the6uowez2.advisor cascade;
+drop table lgrdb.application cascade;
+drop table lgrdb.candidate_role cascade;
+drop table lgrdb.candidate_skill cascade;
+drop table lgrdb.education cascade;
+drop table lgrdb.job_posting cascade;
+drop table lgrdb.business_client cascade;
+drop table lgrdb.log cascade;
+drop table lgrdb.role cascade;
+drop table lgrdb.skill cascade;
+drop table lgrdb.work_history cascade;
+drop table lgrdb.candidate cascade;
+drop table lgrdb.advisor cascade;
 
 create table advisor
 (
