@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class DBUtil {
 
     private static final EntityManagerFactory emf
-            = Persistence.createEntityManagerFactory("level-ground-recruitmentPU");
+            = Persistence.createEntityManagerFactory("level-ground-recruitmentPU(Local)");
 
     /**
      * Accessor method.

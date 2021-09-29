@@ -1,10 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/level-ground-recruitment">
-        <Resource name="jdbc/lgrdb" auth="Container" 
-        driverClassName="com.mysql.cj.jdbc.Driver"
-        url="jdbc:mysql://hnw5bxeabn1o4kz2:v3gj86nlecy5f0iq@nnsgluut5mye50or.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/xx73m9tqt70xnxw4" 
-        username="root" password="password" 
-        maxActive="100" maxIdle="30" maxWait="10000" 
-        logAbandoned="true" removeAbandoned="true" 
-        removeAbandonedTimeout="60" type="javax.sql.DataSource" />
-</Context>
+<Context path=""/>
