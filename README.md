@@ -1,5 +1,7 @@
 # https://lgr-app.herokuapp.com/
 
+![image](https://user-images.githubusercontent.com/58745400/135784753-e3208e9a-eec1-45ce-a2b4-369a8d7900be.png)
+
 ---
 
 # About
